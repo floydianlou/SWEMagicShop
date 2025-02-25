@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class AccountManager {
     Person person;
-    AccountDAO accountDAO; // TO BE INCLUDED IN METHODS WHEN DAO IS IMPLEMENTED
+    AccountDAO accountDAO; //TODO: TO BE INCLUDED IN METHODS WHEN DAO IS IMPLEMENTED
 
     public AccountManager (Person person, AccountDAO accountDAO) {
         this.person = person;
@@ -16,7 +16,6 @@ public class AccountManager {
     }
 
     // TODO: after DAO, exceptions need to be managed, functions need to be re-checked.
-    // methods
     public Person login (String email, String password) {
         return accountDAO.loginPerson(email, password);
     }
@@ -32,12 +31,39 @@ public class AccountManager {
         accountDAO.createManagerAccount(name, surname, email, password);
     }
 
+    // used by SuperUsern only
     public ArrayList<Customer> showAllCustomers() {
         return accountDAO.viewAllCustomers();
     }
 
+    // usage in ArcaneRequest viewing by SuperUser only
     public Customer viewSingleCustomer(int customerID) {
         return accountDAO.getCustomerByID(customerID);
     }
 
+    // IDEA: we use all the methods below that have been modified by User, we do not call the ones that haven't been touched.
+    public void updateProfileName (String newName) {
+        accountDAO.updateName(person.getPersonID(), newName);
+        person.setName(newName);
+        // interface should print something to confirm
+    }
+
+    public void updateProfileSurname (String newSurname) {
+        accountDAO.updateSurname(person.getPersonID(), newSurname);
+        person.setSurname(newSurname);
+        // interface should print something to confirm
+    }
+
+    public void updatePassword (String newPassword) {
+        accountDAO.updatePassword(person.getPersonID(), newPassword);
+        person.setPassword(newPassword);
+    }
+
+    public void updatePhone(int newPhone) {
+        if (!(person instanceof Customer)) {
+            throw new IllegalStateException("Only customers can update their phone number.");
+        }
+        accountDAO.updatePhone(person.getPersonID(), newPhone);
+        ((Customer) person).setPhoneNumber(newPhone);
+    }
 }

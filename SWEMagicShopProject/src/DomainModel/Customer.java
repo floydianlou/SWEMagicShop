@@ -22,4 +22,7 @@ public class Customer extends Person {
 
     //TODO: getter and setters
 
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }

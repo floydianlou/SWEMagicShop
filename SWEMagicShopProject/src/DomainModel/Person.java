@@ -16,4 +16,24 @@ public class Person {
 
     //TODO: getter and setters
 
+
+    public int getPersonID() {
+        return personID;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
