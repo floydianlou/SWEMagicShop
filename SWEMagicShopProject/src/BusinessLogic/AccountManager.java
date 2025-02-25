@@ -36,4 +36,8 @@ public class AccountManager {
         return accountDAO.viewAllCustomers();
     }
 
+    public Customer viewSingleCustomer(int customerID) {
+        return accountDAO.getCustomerByID(customerID);
+    }
+
 }

@@ -16,5 +16,7 @@ public interface AccountDAO {
 
     public Person loginPerson (String email, String password);
     public ArrayList<Customer> viewAllCustomers();
+    public Customer getCustomerByID (int customerID);
+    // should check if ID exists then return Customer object from data in database.
 
 }
