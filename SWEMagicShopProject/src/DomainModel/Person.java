@@ -1,3 +1,5 @@
+package DomainModel;
+
 public class Person {
 
     private int personID;
@@ -11,5 +13,7 @@ public class Person {
         this.email = email;
         this.password = password;
     }
+
+    //TODO: getter and setters
 
 }

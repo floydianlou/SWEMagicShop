@@ -1,3 +1,5 @@
+package DomainModel;
+
 public class Wallet {
     private int walletID;
     private int GPbalance, SPbalance, CPbalance;
@@ -9,4 +11,6 @@ public class Wallet {
         this.SPbalance = SPbalance;
         this.CPbalance = CPbalance;
     }
+
+    //TODO: getter and setters
 }
