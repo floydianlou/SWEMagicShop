@@ -15,11 +15,6 @@ public interface AccountDAO {
     public ArrayList<Customer> viewAllCustomers();
     public Customer getCustomerByID (int customerID); // should check if ID exists then return Customer object from data in database.
 
-    // methods to update profile
-    public void updateName(int personID, String newName);
-    public void updateSurname (int personID, String newSurname);
-    public void updatePassword (int personID, String password); // this should also check password validity using the utilities class
-    public void updatePhone (int customerID, int newPhone);
-    public void updateEmail (int personID, String newEmail); // could say something like "there's already an account with this email" on conflict.
-
+    public void updateCustomerAccount(); //TODO add parameters
+    public void updateManagerAccount(); //TODO complete this
 }

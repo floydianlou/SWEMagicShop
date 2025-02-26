@@ -2,6 +2,7 @@ package BusinessLogic;
 
 import DAOInterface.AccountDAO;
 import DomainModel.Customer;
+import DomainModel.Manager;
 import DomainModel.Person;
 import DomainModel.Species;
 import java.util.ArrayList;
@@ -41,29 +42,12 @@ public class AccountManager {
         return accountDAO.getCustomerByID(customerID);
     }
 
-    // IDEA: we use all the methods below that have been modified by User, we do not call the ones that haven't been touched.
-    public void updateProfileName (String newName) {
-        accountDAO.updateName(person.getPersonID(), newName);
-        person.setName(newName);
-        // interface should print something to confirm
-    }
-
-    public void updateProfileSurname (String newSurname) {
-        accountDAO.updateSurname(person.getPersonID(), newSurname);
-        person.setSurname(newSurname);
-        // interface should print something to confirm
-    }
-
-    public void updatePassword (String newPassword) {
-        accountDAO.updatePassword(person.getPersonID(), newPassword);
-        person.setPassword(newPassword);
-    }
-
-    public void updatePhone(int newPhone) {
-        if (!(person instanceof Customer)) {
-            throw new IllegalStateException("Only customers can update their phone number.");
+    public void updateCustomerAccount(Customer customer) {
+        // TODO
         }
-        accountDAO.updatePhone(person.getPersonID(), newPhone);
-        ((Customer) person).setPhoneNumber(newPhone);
+
+    public void updateManagerAccount (Manager manager) {
+        // TODO
     }
+
 }
