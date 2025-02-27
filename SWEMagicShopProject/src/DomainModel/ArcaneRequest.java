@@ -9,4 +9,34 @@ public class ArcaneRequest {
         this.requestID = requestID;
         this.requestStatus = requestStatus;
     }
+
+    public String getArcaneRequestData() {
+        return "ArcaneRequestID: " + requestID + "\n ArcaneRequestCustomer: "+ customerID + "\n ArcaneRequestStatus: "+ requestStatus;
+    }
+
+    //GETTER AND SETTER
+
+    public int getRequestID() {
+        return requestID;
+    }
+
+    public void setRequestID(int requestID) {
+        this.requestID = requestID;
+    }
+
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
+    public String getRequestStatus() {
+        return requestStatus;
+    }
+
+    public void setRequestStatus(String requestStatus) {
+        this.requestStatus = requestStatus;
+    }
 }
