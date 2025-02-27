@@ -9,5 +9,18 @@ public class Species {
     String name;
     int legalAge, limitAge;
 
-    //TODO: constructor (if it serves any purpose at all)
+    public Species (int speciesID, String name, int legalAge, int limitAge) {
+        this.legalAge = legalAge;
+        this.name = name;
+        this.limitAge = limitAge;
+        this.speciesID = speciesID;
+    }
+
+    public int getLegalAge() {
+        return this.legalAge;
+    }
+
+    public int getLimitAge() {
+        return limitAge;
+    }
 }

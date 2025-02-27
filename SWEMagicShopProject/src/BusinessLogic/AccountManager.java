@@ -22,8 +22,22 @@ public class AccountManager {
     }
 
     public void createCustomerAccount (String name, String surname, String email, String password, int age,
-                                  int phoneNumber, Species species) {
+                                  String phoneNumber, Species species) throws IllegalArgumentException {
         // WARNING: not exactly sure how to manage this Species object thing yet...so it's probably due to be changed soon.
+        if (!Utilities.checkEmail(email))
+            throw new IllegalArgumentException("Invalid email address!");
+
+        if(!Utilities.checkPassword(password))
+            throw new IllegalArgumentException("Password format is incorrect!");
+
+        if (!Utilities.checkAgeLimit(species, age))
+            throw new IllegalArgumentException("Age invalid for selected species. Remember: you must be of age to create an account.");
+
+        if (!Utilities.checkPhone(phoneNumber))
+            throw new IllegalArgumentException("Invalid phone number");
+
+        //TODO for alice: need to complete this
+
         accountDAO.createCustomerAccount(name, surname, email, password, age, phoneNumber, species);
     }
 
