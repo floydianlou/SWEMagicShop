@@ -20,9 +20,47 @@ public class Customer extends Person {
         this.ownSpecies = ownSpecies;
     }
 
-    //TODO: getter and setters
+    public String getPersonalData() { return "Name: " + getName() + "\nSurname: " + getSurname() + "\nAge: " + age; }
+
+    //GETTER AND SETTER
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Species getOwnSpecies() {
+        return ownSpecies;
+    }
+
+    public void setOwnSpecies(Species ownSpecies) {
+        this.ownSpecies = ownSpecies;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public boolean isArcaneMember() {
+        return isArcaneMember;
+    }
+
+    public void setArcaneMember(boolean arcaneMember) {
+        isArcaneMember = arcaneMember;
+    }
+
+    public Wallet getOwnWallet() {
+        return ownWallet;
+    }
+
+    public void setOwnWallet(Wallet ownWallet) {
+        this.ownWallet = ownWallet;
     }
 }

@@ -12,5 +12,38 @@ public class Wallet {
         this.CPbalance = CPbalance;
     }
 
-    //TODO: getter and setters
+
+    //GETTER AND SETTER
+    public int getWalletID() {
+        return walletID;
+    }
+
+    public void setWalletID(int walletID) {
+        this.walletID = walletID;
+    }
+
+    public int getGPbalance() {
+        return GPbalance;
+    }
+
+    public void setGPbalance(int GPbalance) {
+        this.GPbalance = GPbalance;
+    }
+
+    public int getSPbalance() {
+        return SPbalance;
+    }
+
+    public void setSPbalance(int SPbalance) {
+        this.SPbalance = SPbalance;
+    }
+
+    public int getCPbalance() {
+        return CPbalance;
+    }
+
+    public void setCPbalance(int CPbalance) {
+        this.CPbalance = CPbalance;
+    }
+
 }
