@@ -21,4 +21,9 @@ public class Utilities {
         return number.matches("\\d{10}");
     }
 
+    public boolean validManagerPassword (String inputPassword) {
+        String requiredPassword = "ManagerAccountCreation";
+        return inputPassword.equals(requiredPassword);
+    }
+
 }

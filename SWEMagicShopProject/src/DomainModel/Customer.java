@@ -2,7 +2,7 @@ package DomainModel;
 
 public class Customer extends Person {
 
-    private Species ownSpecies;
+    private Species ownSpecies;  // created by DAO when data is retrieved from db
     private int age;
     private String phoneNumber;
     private boolean isArcaneMember = false;

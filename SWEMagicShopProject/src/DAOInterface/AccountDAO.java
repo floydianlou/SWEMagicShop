@@ -1,5 +1,6 @@
 package DAOInterface;
 
+import DomainModel.Manager;
 import DomainModel.Person;
 import DomainModel.Customer;
 import DomainModel.Species;
@@ -15,6 +16,6 @@ public interface AccountDAO {
     public ArrayList<Customer> viewAllCustomers();
     public Customer getCustomerByID (int customerID); // should check if ID exists then return Customer object from data in database.
 
-    public void updateCustomerAccount(); //TODO add parameters
-    public void updateManagerAccount(); //TODO complete this
+    public void updateCustomerAccount(Customer customer);
+    public void updateManagerAccount(Manager manager);
 }
