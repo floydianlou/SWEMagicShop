@@ -42,11 +42,11 @@ public class AccountManager {
         return accountDAO.getCustomerByID(customerID);
     }
 
-    public void updateCustomerAccount(Customer customer) {
-        // TODO
+    public void updateCustomerAccount(Customer customer, String newName, String newSurname, String newEmail, String newPassword,
+                                      int newPhone) {
         }
 
-    public void updateManagerAccount (Manager manager) {
+    public void updateManagerAccount (Manager manager, String newName, String newSurname, String newEmail, String newPassword) {
         // TODO
     }
 
