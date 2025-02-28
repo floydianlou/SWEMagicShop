@@ -2,16 +2,16 @@ package DomainModel;
 
 public class Customer extends Person {
 
-    private Species ownSpecies;
+    private Species ownSpecies;  // created by DAO when data is retrieved from db
     private int age;
-    private int phoneNumber;
+    private String phoneNumber;
     private boolean isArcaneMember = false;
     private Wallet ownWallet;   // QUESTION: maybe when you log in, the DAO creates a new wallet object
                                 // and associates it to the customer loading its balance etc.?
 
     //TODO: other constructors (in case of optional data when registering)
     public Customer (int personID, String name, String surname, String email, String password, int age,
-                     int phoneNumber, boolean isArcaneMember, Wallet ownWallet, Species ownSpecies) {
+                     String phoneNumber, boolean isArcaneMember, Wallet ownWallet, Species ownSpecies) {
         super(personID, name, surname, email, password);
         this.age = age;
         this.phoneNumber = phoneNumber;
@@ -24,11 +24,11 @@ public class Customer extends Person {
 
     //GETTER AND SETTER
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
