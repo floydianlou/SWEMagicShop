@@ -6,18 +6,18 @@ public class Item {
     private String itemName;
     private String itemDescription;
     private String itemCategory;
-    private int itemQty;
+    private int itemQuantity;
     private boolean isArcane;
     private int itemCP;
     private int itemSP;
     private int itemGP;
 
-    public Item(int itemID, String itemName, String itemDescription, String itemCategory, int itemQty, boolean isArcane, int itemCP, int itemSP, int itemGP) {
+    public Item(int itemID, String itemName, String itemDescription, String itemCategory, int itemQuantity, boolean isArcane, int itemCP, int itemSP, int itemGP) {
         this.itemID = itemID;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemCategory = itemCategory;
-        this.itemQty = itemQty;
+        this.itemQuantity = itemQuantity;
         this.isArcane = isArcane;
         this.itemCP = itemCP;
         this.itemSP = itemSP;
@@ -25,7 +25,7 @@ public class Item {
     }
 
     public String getItemData(){
-        return "ItemID: " + itemID + "\n ItemName: " + itemName + "\n ItemDescription: " + itemDescription + "\n ItemCategory: " + itemCategory + "\n ItemQuantity: " + itemQty + "\n GP: " + itemGP + "\n SP: " + itemSP + "\n CP: " + itemCP + "\n IsArcane: " + isArcane;
+        return "ItemID: " + itemID + "\n ItemName: " + itemName + "\n ItemDescription: " + itemDescription + "\n ItemCategory: " + itemCategory + "\n ItemQuantity: " + itemQuantity + "\n GP: " + itemGP + "\n SP: " + itemSP + "\n CP: " + itemCP + "\n IsArcane: " + isArcane;
     }
 
     //GETTER AND SETTER
@@ -62,12 +62,12 @@ public class Item {
         this.itemCategory = itemCategory;
     }
 
-    public int getItemQty() {
-        return itemQty;
+    public int getItemQuantity() {
+        return itemQuantity;
     }
 
-    public void setItemQty(int itemQty) {
-        this.itemQty = itemQty;
+    public void setItemQuantity(int itemQuantity) {
+        this.itemQuantity = itemQuantity;
     }
 
     public boolean isArcane() {
