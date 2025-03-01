@@ -1,5 +1,6 @@
 package BusinessLogic;
 
+
 import DAOInterface.InventoryDAO;
 import DomainModel.Person;
 import DomainModel.Customer;
@@ -7,9 +8,9 @@ import DomainModel.Item;
 import java.util.List;
 
 public class InventoryManager {
-    public InventoryDAO inventoryDAO;
-    public Item item;
-    public Customer customer;
+    private InventoryDAO inventoryDAO;
+    private Item item;
+    private Customer customer;
 
     public InventoryManager(InventoryDAO inventoryDAO, Item item, Customer customer) {
         this.inventoryDAO = inventoryDAO;
@@ -20,9 +21,10 @@ public class InventoryManager {
 
 
 
-    public void viewInventory(int ClientID) {
+    public List<Item> viewInventory(int ClientID) {
 
-
+        List<Item> items = inventoryDAO.viewInventory(int clientID);
+        return items;
     }
 
     public void updateInventory(int ClientID, int ItemID, int Quantity) {
