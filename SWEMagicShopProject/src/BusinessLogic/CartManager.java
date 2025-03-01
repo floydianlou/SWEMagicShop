@@ -60,7 +60,7 @@ public class CartManager {
     }
 
     public void reduceItemQuantity (Item item) {
-   
+
     }
 
     public void removeItemFromCart (Item item) {
