@@ -42,6 +42,28 @@ public class CartManager {
         cartItems.clear();
     }
 
-    
+    public void addItemToCart (Item item) {
+        for (Item i : cartItems) {
+            if (i.getItemID() == item.getItemID()) {
+                i.setItemQuantity(i.getItemQuantity() + item.getItemQuantity());
+                return; }
+        }
+        cartItems.add(item);
+    }
 
+    public void increaseItemQuantity (Item item) {
+        for (Item i : cartItems) {
+            if (i.getItemID() == item.getItemID()) {
+                i.setItemQuantity(i.getItemQuantity() + 1);
+                return; }
+        }
+    }
+
+    public void reduceItemQuantity (Item item) {
+   
+    }
+
+    public void removeItemFromCart (Item item) {
+
+    }
 }
