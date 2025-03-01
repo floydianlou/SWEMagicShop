@@ -21,13 +21,13 @@ public class InventoryManager {
 
 
 
-    public List<Item> viewInventory(int ClientID) {
+    public List<Item> viewInventory(Customer customer) {
 
         List<Item> items = inventoryDAO.viewInventory(int clientID);
         return items;
     }
 
-    public void updateInventory(int ClientID, int ItemID, int Quantity) {
+    public void updateInventory(Customer Customer, int ItemID, int Quantity) {
         //update dovrà vedere se nell'inventario è già presente un oggetto e nel caso aumentare solo la quantità
     }
 }
