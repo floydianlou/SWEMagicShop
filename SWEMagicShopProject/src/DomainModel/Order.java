@@ -5,16 +5,12 @@ public class Order {
     private int orderID;
     private int orderStatus;
     private int totalCP;
-    private int totalSP;
-    private int totalGP;
     private String orderDate;
 
-    public Order(int orderID, int orderStatus, int totalCP, int totalSP, int totalGP, String orderDate) {
+    public Order(int orderID, int orderStatus, int totalCP, String orderDate) {
         this.orderID = orderID;
         this.orderStatus = orderStatus;
         this.totalCP = totalCP;
-        this.totalSP = totalSP;
-        this.totalGP = totalGP;
         this.orderDate = orderDate;
     }
 
@@ -23,6 +19,11 @@ public class Order {
     }
 
     //GETTER AND SETTER
+
+    public int getTotalCP() {
+        return totalCP;
+    }
+    public void setTotalCP(int newCP) {totalCP = newCP;}
 
     public int getOrderID() {
         return orderID;
@@ -38,30 +39,6 @@ public class Order {
 
     public void setOrderStatus(int orderStatus) {
         this.orderStatus = orderStatus;
-    }
-
-    public int getTotalCP() {
-        return totalCP;
-    }
-
-    public void setTotalCP(int totalCP) {
-        this.totalCP = totalCP;
-    }
-
-    public int getTotalSP() {
-        return totalSP;
-    }
-
-    public void setTotalSP(int totalSP) {
-        this.totalSP = totalSP;
-    }
-
-    public int getTotalGP() {
-        return totalGP;
-    }
-
-    public void setTotalGP(int totalGP) {
-        this.totalGP = totalGP;
     }
 
     public String getOrderDate() {
