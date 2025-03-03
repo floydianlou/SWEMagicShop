@@ -35,4 +35,15 @@ public class Utilities {
         }
     }
 
+    // Money conversion 10CP = 1SP and 10SP = 1GP
+    public static String normalizeCurrency(int copperAmount) {
+        int SPbalance = copperAmount / 10;
+        copperAmount = copperAmount % 10;
+
+        int GPbalance = SPbalance / 10;
+        SPbalance = SPbalance % 10;
+
+        return ("GP:" + GPbalance + "\n SP:" + SPbalance + "\n CP:" + copperAmount);
+    }
+
 }
