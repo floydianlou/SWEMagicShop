@@ -59,7 +59,7 @@ public class CartManager {
         }
     }
 
-    public ArrayList<Item> viewCart() {
+    public ArrayList<Item> getCartItems() {
         return cartItems;
     }
 
