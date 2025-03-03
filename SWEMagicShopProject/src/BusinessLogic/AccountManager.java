@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class AccountManager {
     AccountDAO accountDAO; //TODO: TO BE INCLUDED IN METHODS WHEN DAO IS IMPLEMENTED, CAN'T BE IMPLEMENTED NOW SINCE WE'RE USING AN INTERFACE
 
-    public AccountManager (Person person, AccountDAO accountDAO) {
+    public AccountManager (AccountDAO accountDAO) {
         this.accountDAO = accountDAO;
     }
 
