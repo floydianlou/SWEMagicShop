@@ -3,11 +3,11 @@ package DomainModel;
 public class Order {
 
     private int orderID;
-    private int orderStatus;
+    private String orderStatus;
     private int totalCP;
     private String orderDate;
 
-    public Order(int orderID, int orderStatus, int totalCP, String orderDate) {
+    public Order(int orderID, String orderStatus, int totalCP, String orderDate) {
         this.orderID = orderID;
         this.orderStatus = orderStatus;
         this.totalCP = totalCP;
@@ -33,11 +33,11 @@ public class Order {
         this.orderID = orderID;
     }
 
-    public int getOrderStatus() {
+    public String getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(int orderStatus) {
+    public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 
