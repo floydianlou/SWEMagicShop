@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/CustomerOrderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/CustomerOrderManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAOInterface/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAOInterface/AccountDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DomainModel/ArcaneRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DomainModel/ArcaneRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DomainModel/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DomainModel/Customer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +16,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package-info" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
