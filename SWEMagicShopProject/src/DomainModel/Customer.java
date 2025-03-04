@@ -5,7 +5,7 @@ public class Customer extends Person {
     private Species ownSpecies;  // created by DAO when data is retrieved from db
     private int age;
     private String phoneNumber;
-    private boolean isArcaneMember = false;
+    private boolean isArcaneMember;
     private Wallet ownWallet;   // QUESTION: maybe when you log in, the DAO creates a new wallet object
                                 // and associates it to the customer loading its balance etc.?
 

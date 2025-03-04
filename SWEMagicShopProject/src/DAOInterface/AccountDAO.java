@@ -20,4 +20,5 @@ public interface AccountDAO {
 
     public void updateCustomerAccount(Customer customer);
     public void updateManagerAccount(Manager manager);
+    public boolean updateCustomerArcaneStatus(int customerID, boolean status);
 }
