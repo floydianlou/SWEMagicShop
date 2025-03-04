@@ -14,6 +14,7 @@ public class WalletManager {
 
     //function to add and widthdraw money from the wallet
     public void addFunds(int amountGP, int amountSP, int amountCP, Customer customer) {
+        // WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(customer.getPersonID());
 
         if (wallet == null) {
@@ -30,6 +31,7 @@ public class WalletManager {
 
 
     public boolean withdrawFunds(int amountCP, Customer customer) {
+        // WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(customer.getPersonID());
 
         if (wallet == null) {
