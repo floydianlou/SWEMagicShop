@@ -35,10 +35,9 @@ public class CustomerOrderManager {
         }
 
         int orderTotal = totalCost(cartManager.getCartItems());
-        // if (!walletManager.withdrawFunds(orderTotal)) {
-           // System.out.println("You don't have enough funds to make an order!");
-           // return -2;
-        // }
+        if (!walletManager.withdrawFunds(orderTotal, customer)) {
+            System.out.println("You don't have enough funds to make an order!");
+            return -2; }
 
         LocalDateTime orderDate = LocalDateTime.now();
 
