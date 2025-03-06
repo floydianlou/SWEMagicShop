@@ -1,6 +1,19 @@
--- database structure
+-- reset database file
 
-CREATE TABLE IF NOT EXISTS "Manager" (
+DROP TABLE IF EXISTS "Customer" CASCADE;
+DROP TABLE IF EXISTS "Manager" CASCADE;
+DROP TABLE IF EXISTS "Wallet" CASCADE;
+DROP TABLE IF EXISTS "Species" CASCADE;
+DROP TABLE IF EXISTS "Order" CASCADE;
+DROP TABLE IF EXISTS "OrderStatus" CASCADE;
+DROP TABLE IF EXISTS "OrderItems" CASCADE;
+DROP TABLE IF EXISTS "Item" CASCADE;
+DROP TABLE IF EXISTS "Category" CASCADE;
+DROP TABLE IF EXISTS "Inventory" CASCADE;
+DROP TABLE IF EXISTS "ArcaneRequest" CASCADE;
+DROP TABLE IF EXISTS "RequestStatus" CASCADE;
+
+CREATE TABLE "Manager" (
   managerID SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   surname VARCHAR(50) NOT NULL,
@@ -8,7 +21,7 @@ CREATE TABLE IF NOT EXISTS "Manager" (
   password VARCHAR(50) NOT NULL 
   );
 
-CREATE TABLE IF NOT EXISTS "Customer" (
+CREATE TABLE "Customer" (
   customerID SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   surname VARCHAR(50) NOT NULL,
@@ -21,26 +34,25 @@ CREATE TABLE IF NOT EXISTS "Customer" (
   FOREIGN KEY (speciesID) REFERENCES "Species"(speciesID) ON UPDATE CASCADE
   );
 
-CREATE TABLE IF NOT EXISTS "Wallet" (
+CREATE TABLE "Wallet" (
   customerID INT PRIMARY KEY,
   CPbalance INT DEFAULT 0 CONSTRAINT positiveBalance CHECK (CPbalance >= 0),
   FOREIGN KEY (customerID) REFERENCES "Customer"(customerID) ON UPDATE CASCADE ON DELETE CASCADE
   );
 
-CREATE TABLE IF NOT EXISTS "Species" (
+CREATE TABLE "Species" (
   speciesID SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   adultAge INT NOT NULL,
   limitAge INT NOT NULL
   );
 
-CREATE TABLE IF NOT EXISTS "Order" (
+CREATE TABLE "Order" (
   orderID SERIAL PRIMARY KEY,
   customerID INT,
   orderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   orderStatus INT,
-  totalCP INT NOT NULL,
-  FOREIGN KEY (customerID) REFERENCES "Customer"(customerID) ON UPDATE CASCADE ON DELETE CASCADE
+  totalCP INT NOT NULL
   );
 
 CREATE TABLE IF NOT EXISTS "OrderStatus" (
@@ -48,7 +60,7 @@ CREATE TABLE IF NOT EXISTS "OrderStatus" (
   name VARCHAR(50) NOT NULL
   );
 
-CREATE TABLE IF NOT EXISTS "OrderItems" (
+CREATE TABLE "OrderItems" (
   orderID INT,
   itemID INT,
   quantity INT CONSTRAINT positiveQuantity CHECK (quantity > 0),
@@ -57,7 +69,7 @@ CREATE TABLE IF NOT EXISTS "OrderItems" (
   FOREIGN KEY (itemID) REFERENCES "Item"(itemID) ON UPDATE CASCADE ON DELETE CASCADE
   );
 
-CREATE TABLE IF NOT EXISTS "Item" (
+CREATE TABLE "Item" (
   itemID SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   description VARCHAR(100),
@@ -67,13 +79,13 @@ CREATE TABLE IF NOT EXISTS "Item" (
   FOREIGN KEY (categoryID) REFERENCES "Category"(categoryID) ON UPDATE CASCADE
   );
 
-CREATE TABLE IF NOT EXISTS "Category" (
+CREATE TABLE "Category" (
   categoryID SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   description VARCHAR(100)
   );
 
-CREATE TABLE IF NOT EXISTS "Inventory" (
+CREATE TABLE "Inventory" (
   customerID INT,
   itemID INT,
   quantity INT CONSTRAINT positiveInventory CHECK (quantity > 0),
@@ -82,7 +94,7 @@ CREATE TABLE IF NOT EXISTS "Inventory" (
   FOREIGN KEY (itemID) REFERENCES "Item"(itemID) ON UPDATE CASCADE ON DELETE CASCADE
   );
 
-CREATE TABLE IF NOT EXISTS "ArcaneRequest" (
+CREATE TABLE "ArcaneRequest" (
   requestID SERIAL PRIMARY KEY,
   customerID INT,
   statusID INT,
@@ -90,7 +102,7 @@ CREATE TABLE IF NOT EXISTS "ArcaneRequest" (
   FOREIGN KEY (statusID) REFERENCES "RequestStatus"(statusID) ON UPDATE CASCADE
   );
 
-CREATE TABLE IF NOT EXISTS "RequestStatus" (
+CREATE TABLE "RequestStatus" (
   statusID SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL
   );
