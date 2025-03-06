@@ -27,14 +27,14 @@ public class StoreManager {
         return itemDAO.searchProductByQuery(query);
     }
 
-    private void addProduct(Item item) {
+    private void addProduct(int itemID, String itemName, String description, String category, int copperValue, boolean isArcane) {
         // ItemDao itemDAO= new ItemDao();
-        itemDAO.createItem(item);
+        itemDAO.createItem(itemID, itemName, description, category, copperValue, isArcane);
     }
 
-    private void updateProduct(Item item) {
+    private void updateProduct(int itemID, String itemName, String description, String category, int copperValue, boolean isArcane) {
         // ItemDao itemDAO= new ItemDao();
-        itemDAO.updateItem(item);
+        itemDAO.updateItem(itemID, itemName, description, category, copperValue, isArcane);
     }
 
 }
