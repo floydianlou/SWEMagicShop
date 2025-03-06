@@ -52,7 +52,8 @@ CREATE TABLE "Order" (
   customerID INT,
   orderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   orderStatus INT,
-  totalCP INT NOT NULL
+  totalCP INT NOT NULL,
+  FOREIGN KEY (customerID) REFERENCES "Customer"(customerID) ON UPDATE CASCADE ON DELETE CASCADE
   );
 
 CREATE TABLE IF NOT EXISTS "OrderStatus" (
