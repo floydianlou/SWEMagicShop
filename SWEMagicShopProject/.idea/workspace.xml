@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ORM/connectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/connectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/InventoryManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +66,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "alice",
+    "git-widget-placeholder": "gabriele",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/acgib/SWEMagicShop/sql",
     "node.js.detected.package.eslint": "true",
@@ -90,9 +89,9 @@
     ]
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Database Script.console.sql">
     <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
-      <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/a39b25b2-8d6a-4c11-b329-73e2662cbe08/console.sql" />
+      <script-file value="$PROJECT_DIR$/../sql/schema.sql" />
       <script-mode>FILE</script-mode>
       <data-source id="a39b25b2-8d6a-4c11-b329-73e2662cbe08" />
       <method v="2" />

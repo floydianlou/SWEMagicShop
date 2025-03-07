@@ -22,13 +22,15 @@ public class InventoryManager {
     }
 
     public ArrayList<Item> loadInventory(Customer customer) {
-        // [...]
+        //InventoryDAO inventoryDAO= new InventoryDAO();
         return inventoryItems;
         // TODO this function needs to be implemented
     }
 
     public void viewInventory(int ClientID) {
-        // TODO
+        //InventoryDAO inventoryDAO= new InventoryDAO();
+        inventoryDAO.viewInventory(ClientID);
+
     }
 
     public boolean updateInventory(ArrayList<Item> cartItems, Customer customer) {
