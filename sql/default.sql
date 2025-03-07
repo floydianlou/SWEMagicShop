@@ -1,25 +1,28 @@
 -- Dati per la tabella Manager
 INSERT INTO "Manager" (name, surname, email, password)
 VALUES
-    ('Alice', 'Smith', 'alice.smith@example.com', 'password123'),
-    ('Bob', 'Johnson', 'bob.johnson@example.com', 'securepass456');
+    ('Alice', 'Smith', 'alice.smith@gmail.com', 'password123'),
+    ('Bob', 'Johnson', 'bob.johnson@gmail.com', 'securepass456');
 
 -- Dati per la tabella Species
 INSERT INTO "Species" (name, adultAge, limitAge)
 VALUES
     ('Human', 18, 100),
     ('Elf', 100, 800),
+    ('Half Elf', 18, 180),
     ('Dragon Born', 15, 80),
     ('Gnome', 18, 500),
     ('Halfling', 20, 250),
+    ('Half Orc', 14, 75),
+    ('Tiefling', 18, 120),
     ('Dwarf', 30, 350);
 
 -- Dati per la tabella Customer
 INSERT INTO "Customer" (name, surname, email, password, age, arcaneMembership, phone, speciesID)
 VALUES
-    ('John', 'Doe', 'john.doe@example.com', 'mypassword789', 30, TRUE, '1234567890', 1),
-    ('Jane', 'Roe', 'jane.roe@example.com', 'mypassword123', 25, FALSE, '0987654321', 2),
-    ('Emily', 'Davis', 'emily.davis@example.com', 'strongpassword456', 40, TRUE, '1122334455', 3);
+    ('John', 'Doe', 'john.doe@gmail.com', 'mypassword789', 30, TRUE, '1234567890', 1),
+    ('Jane', 'Roe', 'jane.roe@gmail.com', 'mypassword123', 25, FALSE, '0987654321', 2),
+    ('Emily', 'Davis', 'emily.davis@gmail.com', 'strongpassword456', 40, TRUE, '1122334455', 3);
 
 -- Dati per la tabella Wallet
 INSERT INTO "Wallet" (customerID, CPbalance)
@@ -50,7 +53,7 @@ VALUES
     ('Healing Potion', 'A potion that restores health', 50, 3, TRUE);
 
 -- Dati per la tabella Order
-INSERT INTO "Order" (customerID, orderDate, orderStatus, totalCP)
+INSERT INTO "Order" (customerID, orderDate, statusid, totalCP)
 VALUES
     (1, '2025-03-01 10:00:00', 1, 550),
     (2, '2025-03-02 15:30:00', 2, 350),
