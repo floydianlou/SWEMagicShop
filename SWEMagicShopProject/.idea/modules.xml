@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SWEMagicShopProject.iml" filepath="$PROJECT_DIR$/SWEMagicShopProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../sql/sql.iml" filepath="$PROJECT_DIR$/../sql/sql.iml" />
     </modules>
   </component>
 </project>

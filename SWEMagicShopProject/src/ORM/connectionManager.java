@@ -7,5 +7,5 @@ public class connectionManager {
     private static final String username = "postgres";
     private static final String password = "postgres";
     private static Connection connection = null;
-    
+
 }
