@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw/schema/public.abK9xQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ORM/connectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/connectionManager.java" afterDir="false" />
     </list>
@@ -64,6 +57,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.main.executor": "Run",
     "Database Script.console.sql.executor": "Run",
     "Database Script.default.sql.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
