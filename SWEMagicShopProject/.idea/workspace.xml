@@ -5,26 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SWEMagicShopProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SWEMagicShopProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/CartManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/CartManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ORM/connectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/connectionManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseLocalColorSettings">
+    <colors>
+      <entry key="a39b25b2-8d6a-4c11-b329-73e2662cbe08" value="Violet" />
+    </colors>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package-info" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;floydianlou&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/floydianlou/SWEMagicShop.git&quot;,
+    &quot;accountId&quot;: &quot;2ff06d0e-42e9-4ed8-8382-e27578393a42&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -38,31 +57,58 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.main.executor": "Run",
+    "Database Script.console.sql.executor": "Run",
+    "Database Script.default.sql.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "alice",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/acgib/Desktop/gson-2.12.1.jar",
+    "last_opened_file_path": "C:/Users/acgib/SWEMagicShop/sql",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ],
+    "RunConfigurationTargetLRU": [
+      "a39b25b2-8d6a-4c11-b329-73e2662cbe08"
+    ]
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
+      <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/a39b25b2-8d6a-4c11-b329-73e2662cbe08/console.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="a39b25b2-8d6a-4c11-b329-73e2662cbe08" />
+      <method v="2" />
+    </configuration>
+    <configuration name="default.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/../sql/default.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="a39b25b2-8d6a-4c11-b329-73e2662cbe08" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-22-openjdk-22-4caba194b151-f504ca98" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.39" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.39" />
       </set>
     </attachedChunks>
   </component>
@@ -82,7 +128,8 @@
       <workItem from="1740741450096" duration="3784000" />
       <workItem from="1740765965300" duration="4141000" />
       <workItem from="1740770700238" duration="5765000" />
-      <workItem from="1740839446438" duration="1953000" />
+      <workItem from="1740839446438" duration="6970000" />
+      <workItem from="1740850784895" duration="133000" />
     </task>
     <servers />
   </component>

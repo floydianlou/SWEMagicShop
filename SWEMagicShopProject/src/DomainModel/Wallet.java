@@ -2,16 +2,13 @@ package DomainModel;
 
 public class Wallet {
     private int walletID;
-    private int GPbalance, SPbalance, CPbalance;
+    private int CPbalance;
 
     // constructor
-    public Wallet (int walletID, int GPbalance, int SPbalance, int CPbalance) {
+    public Wallet (int walletID, int CPbalance) {
         this.walletID = walletID;
-        this.GPbalance = GPbalance;
-        this.SPbalance = SPbalance;
         this.CPbalance = CPbalance;
     }
-
 
     //GETTER AND SETTER
     public int getWalletID() {
@@ -22,22 +19,6 @@ public class Wallet {
         this.walletID = walletID;
     }
 
-    public int getGPbalance() {
-        return GPbalance;
-    }
-
-    public void setGPbalance(int GPbalance) {
-        this.GPbalance = GPbalance;
-    }
-
-    public int getSPbalance() {
-        return SPbalance;
-    }
-
-    public void setSPbalance(int SPbalance) {
-        this.SPbalance = SPbalance;
-    }
-
     public int getCPbalance() {
         return CPbalance;
     }
@@ -46,4 +27,10 @@ public class Wallet {
         this.CPbalance = CPbalance;
     }
 
+
+    // Don't know if it will ever be useful, maybe for testing later
+    public void printBalance() {
+        System.out.println("Wallet ID: " + walletID);
+        System.out.println("Copper Pieces: " + CPbalance);
+    }
 }

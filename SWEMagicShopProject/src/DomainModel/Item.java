@@ -8,24 +8,20 @@ public class Item {
     private String itemCategory;
     private int itemQuantity;
     private boolean isArcane;
-    private int itemCP;
-    private int itemSP;
-    private int itemGP;
+    private int copperValue;
 
-    public Item(int itemID, String itemName, String itemDescription, String itemCategory, int itemQuantity, boolean isArcane, int itemCP, int itemSP, int itemGP) {
+    public Item(int itemID, String itemName, String itemDescription, String itemCategory, int itemQuantity, boolean isArcane, int copperValue, int itemSP, int itemGP) {
         this.itemID = itemID;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemCategory = itemCategory;
         this.itemQuantity = itemQuantity;
         this.isArcane = isArcane;
-        this.itemCP = itemCP;
-        this.itemSP = itemSP;
-        this.itemGP = itemGP;
+        this.copperValue = copperValue;
     }
 
     public String getItemData(){
-        return "ItemID: " + itemID + "\n ItemName: " + itemName + "\n ItemDescription: " + itemDescription + "\n ItemCategory: " + itemCategory + "\n ItemQuantity: " + itemQuantity + "\n GP: " + itemGP + "\n SP: " + itemSP + "\n CP: " + itemCP + "\n IsArcane: " + isArcane;
+        return "ItemID: " + itemID + "\n ItemName: " + itemName + "\n ItemDescription: " + itemDescription + "\n ItemCategory: " + itemCategory + "\n ItemQuantity: " + itemQuantity +  "\n IsArcane: " + isArcane;
     }
 
     //GETTER AND SETTER
@@ -78,28 +74,12 @@ public class Item {
         isArcane = arcane;
     }
 
-    public int getItemCP() {
-        return itemCP;
+    public int getCopperValue() {
+        return copperValue;
     }
 
-    public void setItemCP(int itemCP) {
-        this.itemCP = itemCP;
-    }
-
-    public int getItemSP() {
-        return itemSP;
-    }
-
-    public void setItemSP(int itemSP) {
-        this.itemSP = itemSP;
-    }
-
-    public int getItemGP() {
-        return itemGP;
-    }
-
-    public void setItemGP(int itemGP) {
-        this.itemGP = itemGP;
+    public void setCopperValue(int copperValue) {
+        this.copperValue = copperValue;
     }
 
 }
