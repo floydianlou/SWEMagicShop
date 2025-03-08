@@ -5,12 +5,13 @@ import DomainModel.Person;
 import DomainModel.Customer;
 import DomainModel.Species;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 // JUST AN INTERFACE TO MAKE BUSINESS LOGIC FIRST !!
 public interface AccountDAO {
     public void createCustomerAccount (String name, String surname, String email, String password, int age,
-                                       String phoneNumber, Species species);
+                                       String phoneNumber, Species species) throws SQLException;
     // this function should check for existent customer emails (maybe return boolean then??) then create account.
     // this function should also create a line in the Wallet table with the customer ID and set money to 0
     public void createManagerAccount (String name, String surname, String email, String password);

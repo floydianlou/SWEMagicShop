@@ -7,8 +7,12 @@
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ORM/connectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/connectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAOInterface/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAOInterface/AccountDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DomainModel/Species.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DomainModel/Species.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +64,8 @@
     "Application.main.executor": "Run",
     "Database Script.console.sql.executor": "Run",
     "Database Script.default.sql.executor": "Run",
+    "Database Script.reset.sql.executor": "Run",
+    "Database Script.schema.sql.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
@@ -86,10 +92,16 @@
       "postgresql"
     ],
     "RunConfigurationTargetLRU": [
+      "a39b25b2-8d6a-4c11-b329-73e2662cbe08/database/\"otariMagicShop\"",
       "a39b25b2-8d6a-4c11-b329-73e2662cbe08"
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
       <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/a39b25b2-8d6a-4c11-b329-73e2662cbe08/console.sql" />
@@ -99,6 +111,18 @@
     </configuration>
     <configuration name="default.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
       <script-file value="$PROJECT_DIR$/../sql/default.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="a39b25b2-8d6a-4c11-b329-73e2662cbe08" />
+      <method v="2" />
+    </configuration>
+    <configuration name="reset.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/../sql/reset.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="a39b25b2-8d6a-4c11-b329-73e2662cbe08" namespace="database/&quot;otariMagicShop&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="schema.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/../sql/schema.sql" />
       <script-mode>FILE</script-mode>
       <data-source id="a39b25b2-8d6a-4c11-b329-73e2662cbe08" />
       <method v="2" />
