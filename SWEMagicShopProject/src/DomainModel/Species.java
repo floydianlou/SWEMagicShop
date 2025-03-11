@@ -12,8 +12,9 @@ public class Species {
         this.speciesID = speciesID;
     }
 
-    public Species (int speciesID) {
+    public Species (int speciesID, String name) {
         this.speciesID = speciesID;
+        this.name = name;
     }
 
     public int getSpeciesID() {

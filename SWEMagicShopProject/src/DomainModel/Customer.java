@@ -52,6 +52,14 @@ public class Customer extends Person {
         return isArcaneMember;
     }
 
+    public String getSpeciesName() {
+        return this.ownSpecies.name;
+    }
+
+    public int getWalletBalance() {
+        return this.ownWallet.getCPbalance();
+    }
+
     public void setArcaneMember(boolean arcaneMember) {
         isArcaneMember = arcaneMember;
     }

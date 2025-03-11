@@ -31,13 +31,13 @@ public class AccountManager {
         accountDAO.createCustomerAccount(name, surname, email, password, age, phoneNumber, species);
     }
 
-    public void createManagerAccount (String name, String surname, String email, String password) throws IllegalArgumentException {
+    public boolean createManagerAccount (String name, String surname, String email, String password) throws IllegalArgumentException {
         AccountDAO accountDAO = new AccountDAO();
         if (!Utilities.checkEmail(email))
             throw new IllegalArgumentException("Invalid email address!");
         if(!Utilities.checkPassword(password))
             throw new IllegalArgumentException("Password format is incorrect!");
-        accountDAO.createManagerAccount(name, surname, email, password);
+        return accountDAO.createManagerAccount(name, surname, email, password);
     }
 
     // used by SuperUser only

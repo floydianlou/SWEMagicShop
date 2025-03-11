@@ -1,9 +1,6 @@
 package ORM;
 
-import DomainModel.Customer;
-import DomainModel.Manager;
-import DomainModel.Person;
-import DomainModel.Species;
+import DomainModel.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,42 +18,96 @@ public class AccountDAO implements DAOInterface.AccountDAO {
     }
 
     @Override
-    public void createCustomerAccount(String name, String surname, String email, String password, int age, String phoneNumber, Species species) throws SQLException {
+    public boolean createCustomerAccount(String name, String surname, String email, String password, int age, String phoneNumber, Species species) throws SQLException {
         String sqlCustomer = String.format(
                 "INSERT INTO \"Customer\" (name, surname, email, password, age, phone, speciesID) " +
                         "VALUES ('%s', '%s', '%s', '%s', %d, '%s', %d) RETURNING customerID;",
                 name, surname, email, password, age, phoneNumber, species.getSpeciesID());
 
-        Statement stmt = null;
-        ResultSet set  = null;
-        PreparedStatement walletstmt = null;
-        try {
-            stmt = connection.createStatement();
-            set = stmt.executeQuery(sqlCustomer);
-
+        try (Statement stmt = connection.createStatement();
+            ResultSet set = stmt.executeQuery(sqlCustomer)) {
             if (set.next()) {
                 int ID = set.getInt("customerID");
                 String sqlWallet = String.format("INSERT INTO \"Wallet\" (customerID) VALUES (%d);", ID);
-                walletstmt = connection.prepareStatement(sqlWallet);
-                walletstmt.executeUpdate();
-                System.out.println("Customer account created"); }
-
+                try (PreparedStatement walletstmt = connection.prepareStatement(sqlWallet)) {
+                    walletstmt.executeUpdate();
+                    System.out.println("Customer account created");
+                    return true;}
+            }
         } catch (SQLException exception) {
-            System.err.println("Customer account creation failed" + exception.getMessage());
-        } finally {
-            if (stmt != null) stmt.close();
-            if (set != null) set.close();
-            if (walletstmt != null) walletstmt.close();
+            if (exception.getMessage().contains("duplicate key value violates unique constraint")) {
+                System.err.println("❌ Errore: l'email è già registrata. Scegli un'altra email.");
+            } else {
+                System.err.println("❌ Customer account creation failed: " + exception.getMessage());
+            } }
+        return false;
+    }
+
+    @Override
+    public boolean createManagerAccount(String name, String surname, String email, String password) {
+        String sqlManager = String.format("INSERT INTO \"Manager\" (name, surname, email, password) " +
+                "VALUES ('%s', '%s', '%s', '%s');", name, surname, email, password);
+
+        try (Statement stmt = connection.createStatement()) {
+            stmt.executeUpdate(sqlManager);
+            System.out.println("Manager account created");
+            return true;
+        } catch (SQLException e) {
+            if (e.getMessage().contains("duplicate key value violates unique constraint")) {
+                System.err.println("❌ Errore: l'email è già registrata. Scegli un'altra email.");
+            } else {
+                System.err.println("❌ Manager account creation failed: " + e.getMessage());
+            }
+            return false;
         }
     }
 
     @Override
-    public void createManagerAccount(String name, String surname, String email, String password) {
-
-    }
-
-    @Override
     public Person loginPerson(String email, String password) {
+        String sqlManager = String.format("SELECT managerID, name, surname FROM \"Manager\" WHERE email = '%s' and password = '%s'", email, password);
+
+        try (Statement stmt = connection.createStatement()) {
+
+            try (ResultSet set = stmt.executeQuery(sqlManager)) {
+            if (set.next()) {
+                int ID = set.getInt("managerID");
+                String name = set.getString("name");
+                String surname = set.getString("surname");
+                return new Manager(ID, name, surname, email, password); }
+            }
+
+            String sqlCustomer = String.format(
+                    "SELECT c.customerID, c.name AS customerName, c.surname, c.age, c.arcanemembership, c.phone, " +
+                            "       s.speciesID, s.name AS speciesName, w.cpBalance " +
+                            "FROM \"Customer\" c " +
+                            "JOIN \"Wallet\" w ON c.customerID = w.customerID " +
+                            "JOIN \"Species\" s ON c.speciesID = s.speciesID " +
+                            "WHERE c.email = '%s' AND c.password = '%s';",
+                    email, password);
+
+            try (ResultSet newSet = stmt.executeQuery(sqlCustomer)) {
+                if (newSet.next()) {
+                    int ID = newSet.getInt("customerID");
+                    String name = newSet.getString("customerName");
+                    String surname = newSet.getString("surname");
+                    int age = newSet.getInt("age");
+                    boolean arcaneMember = newSet.getBoolean("arcanemembership");
+                    String phone = newSet.getString("phone");
+                    int speciesID = newSet.getInt("speciesID");
+                    String speciesName = newSet.getString("speciesName");
+                    int cpBalance = newSet.getInt("cpBalance");
+
+                    Wallet wallet = new Wallet(ID, cpBalance);
+                    Species species = new Species(speciesID, speciesName);
+                    return new Customer(ID, name, surname, email, password, age, phone, arcaneMember, wallet, species);
+                }
+            }
+
+        } catch (SQLException exception) {
+            System.err.println("Customer account login failed" + exception.getMessage());
+        }
+
+        System.out.println("Email or password doesn't match.");
         return null;
     }
 

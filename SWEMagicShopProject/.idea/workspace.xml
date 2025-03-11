@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08/storage_v2/_src_/database/otariMagicShop.MIEgYw/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/Utilities.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAOInterface/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAOInterface/AccountDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DomainModel/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DomainModel/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DomainModel/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DomainModel/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DomainModel/Species.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DomainModel/Species.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ORM/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/AccountDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/accountTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/accountTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +62,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.accountTests.executor": "Run",
     "Application.main.executor": "Run",
     "Database Script.console.sql.executor": "Run",
     "Database Script.default.sql.executor": "Run",
