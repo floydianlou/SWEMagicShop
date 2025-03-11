@@ -56,16 +56,24 @@ public class AccountManager {
         return accountDAO.getCustomerByID(customerID);
     }
 
-    public void updateCustomerAccount(Customer updatedCustomer) {
-        // data will be checked by GUI, which will update the customer object and pass it to business logic
+    public boolean updateCustomerAccount(Customer updatedCustomer) {
+        if (!Utilities.checkEmail(updatedCustomer.getEmail()))
+            throw new IllegalArgumentException("Invalid email address!");
+        if(!Utilities.checkPassword(updatedCustomer.getPassword()))
+            throw new IllegalArgumentException("Password format is incorrect!");
+        if (!Utilities.checkPhone(updatedCustomer.getPhoneNumber()))
+            throw new IllegalArgumentException("Invalid phone number");
         AccountDAO accountDAO = new AccountDAO();
-        accountDAO.updateCustomerAccount(updatedCustomer);
+        return accountDAO.updateCustomerAccount(updatedCustomer);
         }
 
-    public void updateManagerAccount (Manager updatedManager) {
-        // data will be checked by GUI, which will update the manager object and pass it to business logic
+    public boolean updateManagerAccount (Manager updatedManager) {
+        if (!Utilities.checkEmail(updatedManager.getEmail()))
+            throw new IllegalArgumentException("Invalid email address!");
+        if(!Utilities.checkPassword(updatedManager.getPassword()))
+            throw new IllegalArgumentException("Password format is incorrect!");
         AccountDAO accountDAO = new AccountDAO();
-        accountDAO.updateManagerAccount(updatedManager);
+        return accountDAO.updateManagerAccount(updatedManager);
     }
 
 }

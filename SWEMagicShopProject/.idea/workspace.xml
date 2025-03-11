@@ -7,9 +7,10 @@
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DomainModel/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DomainModel/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/ArcaneRequestManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/ArcaneRequestManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAOInterface/AccountDAO.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ORM/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/AccountDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/accountTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/accountTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/accountTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestSuites/accountDAOTestSuite.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

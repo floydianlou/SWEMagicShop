@@ -5,7 +5,7 @@ import DomainModel.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class AccountDAO implements DAOInterface.AccountDAO {
+public class AccountDAO {
 
     private Connection connection;
 
@@ -17,7 +17,6 @@ public class AccountDAO implements DAOInterface.AccountDAO {
         }
     }
 
-    @Override
     public boolean createCustomerAccount(String name, String surname, String email, String password, int age, String phoneNumber, Species species) throws SQLException {
         String sqlCustomer = String.format(
                 "INSERT INTO \"Customer\" (name, surname, email, password, age, phone, speciesID) " +
@@ -43,7 +42,6 @@ public class AccountDAO implements DAOInterface.AccountDAO {
         return false;
     }
 
-    @Override
     public boolean createManagerAccount(String name, String surname, String email, String password) {
         String sqlManager = String.format("INSERT INTO \"Manager\" (name, surname, email, password) " +
                 "VALUES ('%s', '%s', '%s', '%s');", name, surname, email, password);
@@ -62,7 +60,6 @@ public class AccountDAO implements DAOInterface.AccountDAO {
         }
     }
 
-    @Override
     public Person loginPerson(String email, String password) {
         String sqlManager = String.format("SELECT managerID, name, surname FROM \"Manager\" WHERE email = '%s' and password = '%s'", email, password);
 
@@ -111,7 +108,6 @@ public class AccountDAO implements DAOInterface.AccountDAO {
         return null;
     }
 
-    @Override
     public ArrayList<Customer> viewAllCustomers() {
         ArrayList<Customer> customers = new ArrayList<>();
         String sqlCustomer = String.format("SELECT c.customerID, c.name AS customerName, c.surname, c.email, c.password, c.age, c.arcanemembership, c.phone, s.speciesID, s.name AS speciesName, w.cpBalance " +
@@ -144,7 +140,6 @@ public class AccountDAO implements DAOInterface.AccountDAO {
         return customers;
     }
 
-    @Override
     public Customer getCustomerByID(int customerID) {
         Customer customer = null;
         String sqlCustomer = String.format("SELECT c.customerID, c.name AS customerName, c.surname, c.email, c.password, c.age, c.arcanemembership, c.phone, s.speciesID, s.name AS speciesName, w.cpBalance " +
@@ -177,18 +172,59 @@ public class AccountDAO implements DAOInterface.AccountDAO {
         return customer;
     }
 
-    @Override
-    public void updateCustomerAccount(Customer customer) {
+    public boolean updateCustomerAccount(Customer customer) {
+        String sqlUpdate = String.format("UPDATE \"Customer\" SET name = '%s', surname = '%s', email = '%s', password = '%s', phone = '%s' " +
+                "WHERE customerID = %d", customer.getName(), customer.getSurname(), customer.getEmail(), customer.getPassword(), customer.getPhoneNumber(),
+                customer.getPersonID());
 
+        try (Statement stmt = connection.createStatement()) {
+            int affected = stmt.executeUpdate(sqlUpdate);
+            if (affected > 0) {
+                System.out.println("Customer account updated");
+                return true;
+            } else {
+                System.out.println("No rows were affected.");
+            }
+        } catch (SQLException exception) {
+            System.err.println("Failed to update customer account: " + exception.getMessage());
+        }
+        return false;
     }
 
-    @Override
-    public void updateManagerAccount(Manager manager) {
+    public boolean updateManagerAccount(Manager manager) {
+        String sqlUpdate = String.format("UPDATE \"Manager\" SET name = '%s', surname = '%s', email = '%s', password = '%s' " +
+                        "WHERE managerID = %d", manager.getName(), manager.getSurname(), manager.getEmail(), manager.getPassword(), manager.getPersonID());
 
+        try (Statement stmt = connection.createStatement()) {
+            int affected = stmt.executeUpdate(sqlUpdate);
+            if (affected > 0) {
+                System.out.println("Manager account updated");
+                return true;
+            } else {
+                System.out.println("No rows were affected.");
+            }
+        } catch (SQLException exception) {
+            System.err.println("Failed to update manager account: " + exception.getMessage());
+        }
+        return false;
     }
 
-    @Override
     public boolean updateCustomerArcaneStatus(int customerID, boolean status) {
+        String arcanesql = String.format("UPDATE \"Customer\" SET arcanemembership = %b" +
+                " WHERE customerID = %d;", status, customerID);
+
+        try (Statement stmt = connection.createStatement()) {
+            int affected = stmt.executeUpdate(arcanesql);
+            if (affected > 0) {
+            System.out.println("Customer " + customerID + " arcane status updated to " + status);
+            return true; }
+            else {
+                System.out.println("No rows were affected.");
+            }
+        } catch (SQLException exception) {
+            System.err.println("Failed to update customer arcane status: " + exception.getMessage());
+        }
+
         return false;
     }
 }
