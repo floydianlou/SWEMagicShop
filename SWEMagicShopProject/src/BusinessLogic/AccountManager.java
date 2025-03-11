@@ -47,7 +47,11 @@ public class AccountManager {
     }
 
     // usage in ArcaneRequest viewing by SuperUser only
-    public Customer viewSingleCustomer(int customerID) {
+    public Customer getCustomerByID(int customerID) {
+        if (customerID <= 0) {
+            System.out.println("Invalid customer ID.");
+            return null;
+        }
         AccountDAO accountDAO = new AccountDAO();
         return accountDAO.getCustomerByID(customerID);
     }

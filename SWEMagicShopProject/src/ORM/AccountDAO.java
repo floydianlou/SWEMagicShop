@@ -36,9 +36,9 @@ public class AccountDAO implements DAOInterface.AccountDAO {
             }
         } catch (SQLException exception) {
             if (exception.getMessage().contains("duplicate key value violates unique constraint")) {
-                System.err.println("❌ Errore: l'email è già registrata. Scegli un'altra email.");
+                System.err.println("This mail is already in use for a customer account.");
             } else {
-                System.err.println("❌ Customer account creation failed: " + exception.getMessage());
+                System.err.println("Customer account creation failed: " + exception.getMessage());
             } }
         return false;
     }
@@ -54,9 +54,9 @@ public class AccountDAO implements DAOInterface.AccountDAO {
             return true;
         } catch (SQLException e) {
             if (e.getMessage().contains("duplicate key value violates unique constraint")) {
-                System.err.println("❌ Errore: l'email è già registrata. Scegli un'altra email.");
+                System.err.println("This mail is already in use for a manager account.");
             } else {
-                System.err.println("❌ Manager account creation failed: " + e.getMessage());
+                System.err.println("Manager account creation failed: " + e.getMessage());
             }
             return false;
         }
@@ -113,12 +113,68 @@ public class AccountDAO implements DAOInterface.AccountDAO {
 
     @Override
     public ArrayList<Customer> viewAllCustomers() {
-        return null;
+        ArrayList<Customer> customers = new ArrayList<>();
+        String sqlCustomer = String.format("SELECT c.customerID, c.name AS customerName, c.surname, c.email, c.password, c.age, c.arcanemembership, c.phone, s.speciesID, s.name AS speciesName, w.cpBalance " +
+                        "FROM \"Customer\" c " +
+                        "JOIN \"Wallet\" w ON c.customerID = w.customerID " +
+                        "JOIN \"Species\" s ON c.speciesID = s.speciesID " +
+                        "ORDER BY customerID ASC;");
+
+        try (Statement prp = connection.createStatement();
+            ResultSet set = prp.executeQuery(sqlCustomer)) {
+            while (set.next()) {
+                int ID = set.getInt("customerID");
+                String name = set.getString("customerName");
+                String surname = set.getString("surname");
+                String email = set.getString("email");
+                String password = set.getString("password");
+                int age = set.getInt("age");
+                boolean arcaneMember = set.getBoolean("arcanemembership");
+                String phone = set.getString("phone");
+                int cpBalance = set.getInt("cpBalance");
+                int speciesID = set.getInt("speciesID");
+                String speciesName = set.getString("speciesName");
+                Wallet wallet = new Wallet(ID, cpBalance);
+                Species species = new Species(speciesID, speciesName);
+                customers.add(new Customer(ID, name, surname, email, password, age, phone, arcaneMember, wallet, species));
+            }
+        } catch (SQLException exception) {
+            System.err.println("Failed to load customer accounts: " + exception.getMessage());
+        }
+        return customers;
     }
 
     @Override
     public Customer getCustomerByID(int customerID) {
-        return null;
+        Customer customer = null;
+        String sqlCustomer = String.format("SELECT c.customerID, c.name AS customerName, c.surname, c.email, c.password, c.age, c.arcanemembership, c.phone, s.speciesID, s.name AS speciesName, w.cpBalance " +
+                "FROM \"Customer\" c " +
+                "JOIN \"Wallet\" w ON c.customerID = w.customerID " +
+                "JOIN \"Species\" s ON c.speciesID = s.speciesID " +
+                "WHERE c.customerID = %d;", customerID);
+
+        try (PreparedStatement prp = connection.prepareStatement(sqlCustomer);
+             ResultSet set = prp.executeQuery()) {
+            if (set.next()) {
+                int ID = set.getInt("customerID");
+                String name = set.getString("customerName");
+                String surname = set.getString("surname");
+                String email = set.getString("email");
+                String password = set.getString("password");
+                int age = set.getInt("age");
+                boolean arcaneMember = set.getBoolean("arcanemembership");
+                String phone = set.getString("phone");
+                int cpBalance = set.getInt("cpBalance");
+                int speciesID = set.getInt("speciesID");
+                String speciesName = set.getString("speciesName");
+                Wallet wallet = new Wallet(ID, cpBalance);
+                Species species = new Species(speciesID, speciesName);
+                customer = new Customer(ID, name, surname, email, password, age, phone, arcaneMember, wallet, species);
+            }
+        } catch (SQLException exception) {
+            System.err.println("Failed to load customer account: " + exception.getMessage());
+        }
+        return customer;
     }
 
     @Override

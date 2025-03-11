@@ -4,7 +4,9 @@ import DomainModel.Manager;
 import DomainModel.Person;
 import DomainModel.Species;
 import BusinessLogic.Utilities;
+import jdk.jshell.execution.Util;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -125,12 +127,52 @@ public class accountTests {
                     printCustomerDetails(customer);
                 } else if (person instanceof Manager manager) {
                     System.out.println("🔹 Benvenuto, Manager " + manager.getName() + " " + manager.getSurname());
+                    managerMenu(scanner, accountManager); // ✅ Nuovo menu per i manager
                 }
             } else {
                 System.out.println("❌ Credenziali errate. Riprova.");
             }
         } catch (Exception e) {
             System.err.println("❌ Errore durante il login: " + e.getMessage());
+        }
+    }
+
+    // 🔥 Menu riservato ai Manager
+    private static void managerMenu(Scanner scanner, AccountManager accountManager) {
+        while (true) {
+            System.out.println("\n--- Menu Manager ---");
+            System.out.println("1. Visualizza tutti i clienti");
+            System.out.println("2. Visualizza un cliente con ID");
+            System.out.println("0. Torna al menu principale");
+            System.out.print("Scelta: ");
+
+            int scelta = scanner.nextInt();
+            scanner.nextLine(); // Consuma il newline
+
+            switch (scelta) {
+                case 1 -> viewAllCustomers(accountManager);
+                case 2 -> getCustomerByID(scanner, accountManager);
+                case 0 -> {
+                    System.out.println("🔙 Tornando al menu principale...");
+                    return;
+                }
+                default -> System.out.println("❌ Scelta non valida, riprova.");
+            }
+        }
+    }
+
+    // Metodo per visualizzare tutti i clienti
+    private static void viewAllCustomers(AccountManager accountManager) {
+        System.out.println("\n--- Lista Clienti ---");
+        ArrayList<Customer> customers = accountManager.showAllCustomers();
+
+        if (customers.isEmpty()) {
+            System.out.println("❌ Nessun cliente trovato.");
+        } else {
+            for (Customer customer : customers) {
+                printCustomerDetails(customer);
+                System.out.println("------------------------");
+            }
         }
     }
 
@@ -146,5 +188,18 @@ public class accountTests {
         System.out.println("🔹 Specie: " + customer.getSpeciesName());
         System.out.println("🔹 Bilancio: " + customer.getWalletBalance() + " CP");
     }
+
+    private static void getCustomerByID(Scanner scanner, AccountManager accountManager) {
+        System.out.println("\n--- Recupero Customer per ID ---");
+        System.out.print("Inserisci l'ID del Customer: ");
+        int customerID = scanner.nextInt();
+        scanner.nextLine();
+        Customer customer = accountManager.getCustomerByID(customerID);
+        if (customer != null) {
+            printCustomerDetails(customer);
+        } else {
+            System.out.println("❌ Nessun cliente trovato con questo ID.");
+        }
     }
+}
 

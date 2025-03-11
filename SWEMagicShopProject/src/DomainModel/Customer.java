@@ -20,6 +20,7 @@ public class Customer extends Person {
         this.ownSpecies = ownSpecies;
     }
 
+
     public String getPersonalData() { return "Name: " + getName() + "\nSurname: " + getSurname() + "\nAge: " + age; }
 
     //GETTER AND SETTER
