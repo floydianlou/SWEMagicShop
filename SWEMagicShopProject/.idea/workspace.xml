@@ -6,10 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BusinessLogic/CartManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/CartManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DomainModel/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DomainModel/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/CustomerOrderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/CustomerOrderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/InventoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/WalletManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/WalletManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAOInterface/InventoryDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAOInterface/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAOInterface/OrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DomainModel/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DomainModel/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestSuites/cartManagerTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestSuites/cartManagerTestSuite.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +157,7 @@
       <workItem from="1740770700238" duration="5765000" />
       <workItem from="1740839446438" duration="6970000" />
       <workItem from="1740850784895" duration="133000" />
-      <workItem from="1741794468285" duration="350000" />
+      <workItem from="1741794468285" duration="15768000" />
     </task>
     <servers />
   </component>

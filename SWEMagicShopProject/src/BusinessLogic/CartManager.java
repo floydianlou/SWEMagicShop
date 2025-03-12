@@ -99,6 +99,7 @@ public class CartManager {
     }
 
     public void removeItemFromCart (Item item) {
+        // TODO add check if product is in cart
         for (int i = 0; i < cartItems.size(); i++) {
             if (cartItems.get(i).getItemID() == item.getItemID()) {
                 cartItems.remove(i);

@@ -109,6 +109,7 @@ public class AccountDAO {
     }
 
     public ArrayList<Customer> viewAllCustomers() {
+        // TODO CHECK PREPARED STATEMENT POSSIBILITY
         ArrayList<Customer> customers = new ArrayList<>();
         String sqlCustomer = String.format("SELECT c.customerID, c.name AS customerName, c.surname, c.email, c.password, c.age, c.arcanemembership, c.phone, s.speciesID, s.name AS speciesName, w.cpBalance " +
                         "FROM \"Customer\" c " +
@@ -141,6 +142,7 @@ public class AccountDAO {
     }
 
     public Customer getCustomerByID(int customerID) {
+        // TODO CHECK PREPARED STATEMENT POSSIBILITY
         Customer customer = null;
         String sqlCustomer = String.format("SELECT c.customerID, c.name AS customerName, c.surname, c.email, c.password, c.age, c.arcanemembership, c.phone, s.speciesID, s.name AS speciesName, w.cpBalance " +
                 "FROM \"Customer\" c " +
@@ -173,6 +175,7 @@ public class AccountDAO {
     }
 
     public boolean updateCustomerAccount(Customer customer) {
+        // TODO CHECK PREPARED STATEMENT POSSIBILITY
         String sqlUpdate = String.format("UPDATE \"Customer\" SET name = '%s', surname = '%s', email = '%s', password = '%s', phone = '%s' " +
                 "WHERE customerID = %d", customer.getName(), customer.getSurname(), customer.getEmail(), customer.getPassword(), customer.getPhoneNumber(),
                 customer.getPersonID());
@@ -192,6 +195,7 @@ public class AccountDAO {
     }
 
     public boolean updateManagerAccount(Manager manager) {
+        // TODO CHECK PREPARED STATEMENT POSSIBILITY
         String sqlUpdate = String.format("UPDATE \"Manager\" SET name = '%s', surname = '%s', email = '%s', password = '%s' " +
                         "WHERE managerID = %d", manager.getName(), manager.getSurname(), manager.getEmail(), manager.getPassword(), manager.getPersonID());
 
@@ -210,6 +214,7 @@ public class AccountDAO {
     }
 
     public boolean updateCustomerArcaneStatus(int customerID, boolean status) {
+        // TODO CHECK PREPARED STATEMENT POSSIBILITY
         String arcanesql = String.format("UPDATE \"Customer\" SET arcanemembership = %b" +
                 " WHERE customerID = %d;", status, customerID);
 
