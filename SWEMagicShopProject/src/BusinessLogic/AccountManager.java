@@ -10,8 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AccountManager {
-
-    // TODO: after DAO, exceptions need to be managed, functions need to be re-checked.
+    // TODO: after GUI consider creating specific exceptions
     public Person login (String email, String password) {
         AccountDAO accountDAO = new AccountDAO();
         return accountDAO.loginPerson(email, password);
