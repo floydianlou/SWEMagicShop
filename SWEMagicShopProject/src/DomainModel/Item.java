@@ -10,7 +10,7 @@ public class Item {
     private boolean isArcane;
     private int copperValue;
 
-    public Item(int itemID, String itemName, String itemDescription, String itemCategory, int itemQuantity, boolean isArcane, int copperValue, int itemSP, int itemGP) {
+    public Item(int itemID, String itemName, String itemDescription, String itemCategory, int itemQuantity, boolean isArcane, int copperValue) {
         this.itemID = itemID;
         this.itemName = itemName;
         this.itemDescription = itemDescription;

@@ -1,15 +1,14 @@
 package BusinessLogic;
 
-import DAOInterface.AccountDAO;
 import DAOInterface.ArcaneDAO;
 import DomainModel.ArcaneRequest;
+import ORM.AccountDAO;
 
 import java.util.ArrayList;
 
 public class ArcaneRequestManager {
 
     ArcaneDAO arcaneDAO;
-    AccountDAO accountDAO;
 
     public boolean makeArcaneRequest(int customerID) {
         if (arcaneDAO.countCustomerRequests(customerID) >= 5 || arcaneDAO.pendingArcaneRequest(customerID)) {
@@ -46,6 +45,8 @@ public class ArcaneRequestManager {
     }
 
     public boolean approveRequest(ArcaneRequest arcaneRequest) {
+
+        AccountDAO accountDAO = new AccountDAO();
         if (arcaneRequest == null) {
             System.out.println("There was a problem retrieving the request.");
             return false;

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 public class CartManager {
@@ -17,6 +18,7 @@ public class CartManager {
     String cartSavePath;
 
     public CartManager(Customer customer) {
+        Utilities.initialiseSavesFolder();
         this.cartSavePath = "data/cart_" + customer.getPersonID() + ".json";
         this.cartItems = loadCartItems(cartSavePath);
     }
@@ -25,22 +27,22 @@ public class CartManager {
         ArrayList<Item> loadedCart = new ArrayList<>();
         File cartFile = new File(jsonPath);
 
-        if (!cartFile.exists())
-            return loadedCart;
+        if (!cartFile.exists()) return loadedCart;
         else {
-            try (FileReader reader = new FileReader(jsonPath)){
+            try (FileReader reader = new FileReader(jsonPath)) {
                 Gson gson = new Gson();
                 loadedCart = gson.fromJson(reader, new TypeToken<ArrayList<Item>>() {}.getType());
                 return (loadedCart != null) ? loadedCart : new ArrayList<>();
-            } catch (IOException cartError) {
+            } catch (JsonSyntaxException | IOException cartError) {
                 System.err.println("Something went wrong while loading your cart...");
+                cartFile.delete();
                 return new ArrayList<>();
             }
         }
 
     }
 
-    public void saveCartToJson() {
+    public void closeCartSession() {
         if (cartItems.isEmpty()) {
             File checking = new File(cartSavePath);
             if (checking.exists())
@@ -97,6 +99,7 @@ public class CartManager {
     }
 
     public void removeItemFromCart (Item item) {
+        // TODO add check if product is in cart
         for (int i = 0; i < cartItems.size(); i++) {
             if (cartItems.get(i).getItemID() == item.getItemID()) {
                 cartItems.remove(i);

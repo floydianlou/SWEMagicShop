@@ -11,6 +11,10 @@ public class WalletManager {
         this.walletDAO = walletDAO;
     }
 
+    public WalletManager() {
+        // FOR TESTING ONLY
+    }
+
 
     //function to add and widthdraw money from the wallet
     public void addFunds(int amountGP, int amountSP, int amountCP, Customer customer) {

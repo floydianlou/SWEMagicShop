@@ -20,6 +20,7 @@ public class Customer extends Person {
         this.ownSpecies = ownSpecies;
     }
 
+
     public String getPersonalData() { return "Name: " + getName() + "\nSurname: " + getSurname() + "\nAge: " + age; }
 
     //GETTER AND SETTER
@@ -50,6 +51,14 @@ public class Customer extends Person {
 
     public boolean isArcaneMember() {
         return isArcaneMember;
+    }
+
+    public String getSpeciesName() {
+        return this.ownSpecies.name;
+    }
+
+    public int getWalletBalance() {
+        return this.ownWallet.getCPbalance();
     }
 
     public void setArcaneMember(boolean arcaneMember) {
