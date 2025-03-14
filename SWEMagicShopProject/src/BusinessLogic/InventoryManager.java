@@ -27,9 +27,4 @@ public class InventoryManager {
     public void viewInventory(int ClientID) {
         // TODO
     }
-
-    public boolean updateInventory(ArrayList<Item> cartItems, Customer customer) throws InventoryExceptions.InventoryUpdateException {
-        InventoryDAO inventoryDAO = new InventoryDAO();
-        return inventoryDAO.updateInventory(customer.getPersonID(), cartItems);
-    }
 }

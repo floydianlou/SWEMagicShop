@@ -22,7 +22,7 @@ public class CustomerOrderManager {
         return orderDAO.getCustomerOrders(customer.getPersonID());
     }
 
-    public int createOrder(Customer customer, CartManager cartManager, WalletManager walletManager, InventoryManager inventoryManager) {
+    public int createOrder(Customer customer, CartManager cartManager, WalletManager walletManager) throws OrderExceptions.OrderSaveException {
         // TODO: deactivate "Checkout" button if cart is empty in GUI.
         // TODO: manage exceptions later when GUI implemented
         try {
@@ -38,21 +38,13 @@ public class CustomerOrderManager {
         OrderDAO orderDAO = new OrderDAO();
         int newOrderID = orderDAO.saveNewOrder(orderTotal, customer.getPersonID(), cartManager.getCartItems());
 
-        boolean inventoryUpdated = inventoryManager.updateInventory(cartManager.getCartItems(), customer);
-
-        if (!inventoryUpdated) {
-            System.out.println("Your order could not be saved to inventory!");
-            // orderDAO.deleteOrder(newOrderID);
-        }
-
         System.out.println("Order successful!");
         cartManager.clearCart();
         return newOrderID; }
-        catch (OrderExceptions.EmptyCartException | OrderExceptions.OrderSaveException |
-               InventoryExceptions.InventoryUpdateException e) {
+        catch (OrderExceptions.EmptyCartException | OrderExceptions.OrderSaveException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return 0; // GUI SHOULD KNOW WHAT 0 MEANS
+        return -1; // GUI SHOULD KNOW WHAT -1 MEANS
     }
 
     private int totalCost(ArrayList<Item> cartItems) {

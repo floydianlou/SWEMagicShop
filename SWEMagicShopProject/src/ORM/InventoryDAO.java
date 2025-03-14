@@ -55,34 +55,7 @@ public class InventoryDAO {
     }
 
     public void viewInventory(int ClientID) {
-
+        // TODO
     }
 
-    public boolean updateInventory(int customerID, ArrayList<Item> orderItems) throws InventoryExceptions.InventoryUpdateException {
-        String inventoryQuery = "INSERT INTO \"Inventory\" (customerid, itemid, quantity) " +
-                "VALUES (?, ?, ?) " +
-                "ON CONFLICT (customerID, itemID) " +
-                "DO UPDATE SET quantity = \"Inventory\".quantity + EXCLUDED.quantity;";
-        try (PreparedStatement stmt = connection.prepareStatement(inventoryQuery)) {
-            connection.setAutoCommit(false);
-            for (Item orderItem : orderItems) {
-                stmt.setInt(1, customerID);
-                stmt.setInt(2, orderItem.getItemID());
-                stmt.setInt(3, orderItem.getItemQuantity());
-                stmt.addBatch();
-            }
-            stmt.executeBatch();
-            connection.commit();
-            return true;
-
-        } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                throw new InventoryExceptions.InventoryUpdateException("Failed inventory rollback: " + e1.getMessage());
-            }
-            throw new InventoryExceptions.InventoryUpdateException("Failed to update inventory: " + e.getMessage());
-
-        }
-    }
 }
