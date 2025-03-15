@@ -5,5 +5,4 @@ public class Manager extends Person {
         super(personID, name, surname, email, password);
     }
 
-    // Non servono i getter e setter del manager tanto li eredita da Person
 }

@@ -10,8 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AccountManager {
-
-    // TODO: after DAO, exceptions need to be managed, functions need to be re-checked.
+    // TODO: after GUI consider creating specific exceptions
     public Person login (String email, String password) {
         AccountDAO accountDAO = new AccountDAO();
         return accountDAO.loginPerson(email, password);
@@ -31,13 +30,13 @@ public class AccountManager {
         accountDAO.createCustomerAccount(name, surname, email, password, age, phoneNumber, species);
     }
 
-    public void createManagerAccount (String name, String surname, String email, String password) throws IllegalArgumentException {
+    public boolean createManagerAccount (String name, String surname, String email, String password) throws IllegalArgumentException {
         AccountDAO accountDAO = new AccountDAO();
         if (!Utilities.checkEmail(email))
             throw new IllegalArgumentException("Invalid email address!");
         if(!Utilities.checkPassword(password))
             throw new IllegalArgumentException("Password format is incorrect!");
-        accountDAO.createManagerAccount(name, surname, email, password);
+        return accountDAO.createManagerAccount(name, surname, email, password);
     }
 
     // used by SuperUser only
@@ -47,21 +46,33 @@ public class AccountManager {
     }
 
     // usage in ArcaneRequest viewing by SuperUser only
-    public Customer viewSingleCustomer(int customerID) {
+    public Customer getCustomerByID(int customerID) {
+        if (customerID <= 0) {
+            System.out.println("Invalid customer ID.");
+            return null;
+        }
         AccountDAO accountDAO = new AccountDAO();
         return accountDAO.getCustomerByID(customerID);
     }
 
-    public void updateCustomerAccount(Customer updatedCustomer) {
-        // data will be checked by GUI, which will update the customer object and pass it to business logic
+    public boolean updateCustomerAccount(Customer updatedCustomer) {
+        if (!Utilities.checkEmail(updatedCustomer.getEmail()))
+            throw new IllegalArgumentException("Invalid email address!");
+        if(!Utilities.checkPassword(updatedCustomer.getPassword()))
+            throw new IllegalArgumentException("Password format is incorrect!");
+        if (!Utilities.checkPhone(updatedCustomer.getPhoneNumber()))
+            throw new IllegalArgumentException("Invalid phone number");
         AccountDAO accountDAO = new AccountDAO();
-        accountDAO.updateCustomerAccount(updatedCustomer);
+        return accountDAO.updateCustomerAccount(updatedCustomer);
         }
 
-    public void updateManagerAccount (Manager updatedManager) {
-        // data will be checked by GUI, which will update the manager object and pass it to business logic
+    public boolean updateManagerAccount (Manager updatedManager) {
+        if (!Utilities.checkEmail(updatedManager.getEmail()))
+            throw new IllegalArgumentException("Invalid email address!");
+        if(!Utilities.checkPassword(updatedManager.getPassword()))
+            throw new IllegalArgumentException("Password format is incorrect!");
         AccountDAO accountDAO = new AccountDAO();
-        accountDAO.updateManagerAccount(updatedManager);
+        return accountDAO.updateManagerAccount(updatedManager);
     }
 
 }
