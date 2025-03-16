@@ -2,7 +2,6 @@ package ORM;
 import DomainModel.*;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 
 public class WalletDAO {
@@ -36,7 +35,6 @@ public class WalletDAO {
         }
         return wallet;
     }
-
 
     public boolean updateWallet(Wallet wallet) {
         String query = "UPDATE \"Wallet\" SET CPbalance = ? WHERE customerID = ?";

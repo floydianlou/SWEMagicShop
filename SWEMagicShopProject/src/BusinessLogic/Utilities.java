@@ -1,8 +1,10 @@
 package BusinessLogic;
 
 import DomainModel.Species;
+import ORM.CategoryDAO;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Utilities {
     public static boolean checkEmail (String email) {
@@ -44,6 +46,18 @@ public class Utilities {
         SPbalance = SPbalance % 10;
 
         return ("GP:" + GPbalance + "\n SP:" + SPbalance + "\n CP:" + copperAmount);
+    }
+
+    // to check if the category selected is inside the database
+    public static boolean checkCategory(String category) {
+        CategoryDAO categoryDAO = new CategoryDAO();
+        ArrayList<String> categories = categoryDAO.viewAllCategories();
+        for (String c : categories) {
+            if (c.equalsIgnoreCase(category)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
