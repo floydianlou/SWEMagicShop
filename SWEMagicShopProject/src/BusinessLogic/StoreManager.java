@@ -13,6 +13,10 @@ public class StoreManager {
         this.itemDAO = itemDAO;
     }
 
+    public StoreManager() {
+        //ONLY FOR TESTING
+    }
+
     public ArrayList<Item> listProducts() {
         ItemDAO itemDAO= new ItemDAO();
         return itemDAO.getAllItems();
@@ -27,7 +31,7 @@ public class StoreManager {
         return itemDAO.getItemByID(itemID);
     }
 
-    private void addProduct(int itemID, String itemName, String description, String category, int copperValue, boolean isArcane) throws IllegalArgumentException {
+    public boolean addProduct(int itemID, String itemName, String description, String category, int copperValue, boolean isArcane) throws IllegalArgumentException {
         ItemDAO itemDAO= new ItemDAO();
         if (copperValue <= 0){
             throw new IllegalArgumentException("Price must be greater than zero!");
@@ -35,10 +39,10 @@ public class StoreManager {
         if (!Utilities.checkCategory(category)) {
             throw new IllegalArgumentException("Invalid category!");
         }
-        itemDAO.createItem(itemID, itemName, description, category, copperValue, isArcane);
+        return itemDAO.createItem(itemID, itemName, description, category, copperValue, isArcane);
     }
 
-    private void updateProduct(Item updatedItem) throws IllegalArgumentException {
+    public boolean updateProduct(Item updatedItem) throws IllegalArgumentException {
         ItemDAO itemDAO= new ItemDAO();
         if (updatedItem.getCopperValue() <= 0){
             throw new IllegalArgumentException("Price must be greater than zero!");
@@ -46,7 +50,8 @@ public class StoreManager {
         if (!Utilities.checkCategory(updatedItem.getItemCategory())) {
             throw new IllegalArgumentException("Invalid category!");
         }
-        itemDAO.updateItem(updatedItem);
+
+        return itemDAO.updateItem(updatedItem);
     }
 
     //single function to do the searching in StoreManager

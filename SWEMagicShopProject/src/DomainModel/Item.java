@@ -32,7 +32,11 @@ public class Item {
     }
 
     public String getItemData(){
-        return "ItemID: " + itemID + "\n ItemName: " + itemName + "\n ItemDescription: " + itemDescription + "\n ItemCategory: " + itemCategory + "\n ItemQuantity: " + itemQuantity +  "\n IsArcane: " + isArcane;
+        return "ItemID: " + itemID + "\n ItemName: " + itemName + "\n ItemDescription: " + itemDescription + "\n ItemCategory: " + itemCategory + "\n ItemQuantity: " + itemQuantity +  "\n IsArcane: " + isArcane + "\n CopperValue: " + copperValue;
+    }
+
+    public String getData(){
+        return "ItemID: " + itemID + "\n ItemName: " + itemName + "\n ItemDescription: " + itemDescription + "\n ItemCategory: " + itemCategory +  "\n IsArcane: " + isArcane + "\n CopperValue: " + copperValue;
     }
 
     //GETTER AND SETTER
