@@ -119,6 +119,61 @@ public class ItemDAO {
         return items;
     }
 
+    public ArrayList<Item> getItemsByArcane(boolean isArcane) {
+        ArrayList<Item> items = new ArrayList<>();
+        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane " +
+                "FROM \"Item\" i " +
+                "JOIN \"Category\" c ON i.categoryid = c.categoryid " +
+                "WHERE i.arcane = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setBoolean(1, isArcane);
+            try(ResultSet resultSet = stmt.executeQuery()){
+                while (resultSet.next()) {
+                    int itemID = resultSet.getInt("itemID");
+                    String name = resultSet.getString("name");
+                    String description = resultSet.getString("description");
+                    int CPprice = resultSet.getInt("CPprice");
+                    String category = resultSet.getString("categoryName");
+                    boolean arcane = resultSet.getBoolean("arcane");
+                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice);
+                    items.add(newItem);
+                }
+            };
+        } catch (SQLException e) {
+            System.out.println("Something happened while retrieving your items: " + e.getMessage());
+        }
+        return items;
+    }
+
+    public ArrayList<Item> getItemsByPriceRange(int minPrice, int maxPrice) {
+        ArrayList<Item> items = new ArrayList<>();
+        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane " +
+                "FROM \"Item\" i " +
+                "JOIN \"Category\" c ON i.categoryid = c.categoryid " +
+                "WHERE i.cpprice BETWEEN ? AND ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, minPrice);
+            stmt.setInt(2, maxPrice);
+            try(ResultSet resultSet = stmt.executeQuery()){
+                while (resultSet.next()) {
+                    int itemID = resultSet.getInt("itemID");
+                    String name = resultSet.getString("name");
+                    String description = resultSet.getString("description");
+                    int CPprice = resultSet.getInt("CPprice");
+                    String category = resultSet.getString("categoryName");
+                    boolean arcane = resultSet.getBoolean("arcane");
+                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice);
+                    items.add(newItem);
+                }
+            };
+        } catch (SQLException e) {
+            System.out.println("Something happened while retrieving your items: " + e.getMessage());
+        }
+        return items;
+    }
+
     public ArrayList<Item> getAllItems() {
         ArrayList<Item> items = new ArrayList<>();
         String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane " +

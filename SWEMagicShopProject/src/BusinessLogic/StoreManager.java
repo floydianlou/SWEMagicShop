@@ -73,6 +73,30 @@ public class StoreManager {
         return itemDAO.getItemsByCategory(itemCategory);
     }
 
+    public ArrayList<Item> searchProductsByArcane(String arcane) {
+        ItemDAO itemDAO = new ItemDAO();
+        boolean isArcane;
+
+        if (arcane.equalsIgnoreCase("true")) {
+            isArcane = true;
+        } else if (arcane.equalsIgnoreCase("false")) {
+            isArcane = false;
+        } else {
+            throw new IllegalArgumentException("Invalid arcane value! Use 'true' or 'false'.");
+        }
+
+        return itemDAO.getItemsByArcane(isArcane);
+    }
+
+    public ArrayList<Item> searchProductsByPrice(int minPrice, int maxPrice) {
+        if (minPrice < 0 || maxPrice < 0 || minPrice > maxPrice) {
+            throw new IllegalArgumentException("Invalid price range!");
+        }
+
+        ItemDAO itemDAO = new ItemDAO();
+        return itemDAO.getItemsByPriceRange(minPrice, maxPrice);
+    }
+
     //All In One search function
     public ArrayList<Item> searchProductsBy(String option, String search) {
         ItemDAO itemDAO= new ItemDAO();
@@ -85,6 +109,34 @@ public class StoreManager {
                 }
                 return itemDAO.getItemsByCategory(search);
             }
+            case "arcane": {
+                boolean searchArcane;
+                if (search.equalsIgnoreCase("true")) {
+                    searchArcane = true;
+                } else if (search.equalsIgnoreCase("false")) {
+                    searchArcane = false;
+                } else {
+                    throw new IllegalArgumentException("Invalid arcane value! Use 'true' or 'false'.");
+                }
+                return itemDAO.getItemsByArcane(searchArcane);
+            }
+            case "price":
+                try {
+                    String[] prices = search.split("-");
+                    if (prices.length != 2) {
+                        throw new IllegalArgumentException("Invalid price format! Use 'min-max'.");
+                    }
+                    int minPrice = Integer.parseInt(prices[0].trim());
+                    int maxPrice = Integer.parseInt(prices[1].trim());
+
+                    if (minPrice < 0 || maxPrice < 0 || minPrice > maxPrice) {
+                        throw new IllegalArgumentException("Invalid price range!");
+                    }
+
+                    return itemDAO.getItemsByPriceRange(minPrice, maxPrice);
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("Price range must be in numeric format 'min-max'.");
+                }
             default: return itemDAO.getAllItems();
         }
     }

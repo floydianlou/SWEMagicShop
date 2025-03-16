@@ -21,7 +21,9 @@ public class itemDAOTestSuite {
             System.out.println("5. Ricerca un prodotto del negozio tramite nome");
             System.out.println("6. Ricerca un prodotto del negozio tramite descrizione");
             System.out.println("7. Ricerca un prodotto del negozio tramite categoria");
-            System.out.println("8. Ricerca un prodotto del negozio");
+            System.out.println("8. Ricerca un prodotto del negozio tramite arcane");
+            System.out.println("9. Ricerca un prodotto del negozio tramite prezzo");
+            System.out.println("10. Ricerca un prodotto del negozio");
             System.out.println("0. Esci");
             System.out.print("Scelta: ");
 
@@ -36,7 +38,9 @@ public class itemDAOTestSuite {
                 case 5 -> searchByName(scanner, storeManager);
                 case 6 -> searchByDescription(scanner, storeManager);
                 case 7 -> searchByCategory(scanner, storeManager);
-                case 8 -> search(scanner, storeManager);
+                case 8 -> searchByArcane(scanner, storeManager);
+                case 9 -> searchByPrice(scanner, storeManager);
+                case 10 -> search(scanner, storeManager);
                 case 0 -> {
                     System.out.println("👋 Uscita dal programma.");
                     scanner.close();
@@ -74,7 +78,7 @@ public class itemDAOTestSuite {
             System.err.println("❌ Errore nella creazione dell'item: " + e.getMessage());
         }
     }
-    
+
     //TODO: correggere testing
     private static void updateItemStore(Scanner scanner, StoreManager storeManager) {
         System.out.println("\n--- Modifica Item ---");
@@ -195,6 +199,43 @@ public class itemDAOTestSuite {
             }
         }
     }
+
+    private static void searchByArcane(Scanner scanner, StoreManager storeManager) {
+        System.out.println("\n--- Ricerca per arcane ---");
+
+        System.out.print("Inserisci la arcane del prodotto: ");
+        String arcane = scanner.nextLine();
+        ArrayList<Item> items = storeManager.searchProductsByArcane(arcane);
+
+        if (items.isEmpty()) { System.out.println("❌ Nessun prodotto trovato."); }
+        else {
+            System.out.println("✅ Prodotto trovato:\n");
+            for (Item item : items) {
+                System.out.println(item.getData());
+                System.out.println("------------------------");
+            }
+        }
+    }
+
+    private static void searchByPrice(Scanner scanner, StoreManager storeManager) {
+        System.out.println("\n--- Ricerca per prezzo ---");
+
+        System.out.print("Inserisci il prezzo minimo: ");
+        int minPrice = scanner.nextInt();
+        System.out.print("Inserisci il prezzo massimo: ");
+        int maxPrice = scanner.nextInt();
+        ArrayList<Item> items = storeManager.searchProductsByPrice(minPrice, maxPrice);
+
+        if (items.isEmpty()) { System.out.println("❌ Nessun prodotto trovato."); }
+        else {
+            System.out.println("✅ Prodotto trovato:\n");
+            for (Item item : items) {
+                System.out.println(item.getData());
+                System.out.println("------------------------");
+            }
+        }
+    }
+
     private static void search(Scanner scanner, StoreManager storeManager) {
         System.out.println("\n--- Ricerca Prodotto ---");
 
