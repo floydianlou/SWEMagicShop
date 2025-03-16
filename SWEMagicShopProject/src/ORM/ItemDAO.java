@@ -198,17 +198,16 @@ public class ItemDAO {
         return items;
     }
 
-    public boolean createItem(int itemID, String itemName, String description, String category, int copperValue, boolean isArcane) {
-        String query = "INSERT INTO \"Item\" (itemid, name, description, CPprice, categoryID, arcane) " +
-                "VALUES (?, ?, ?, ?, (SELECT categoryID FROM \"Category\" WHERE name = ?), ?)";
+    public boolean createItem(String itemName, String description, String category, int copperValue, boolean isArcane) {
+        String query = "INSERT INTO \"Item\" ( name, description, CPprice, categoryID, arcane) " +
+                "VALUES ( ?, ?, ?, (SELECT categoryID FROM \"Category\" WHERE name = ?), ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, itemID);
-            stmt.setString(2, itemName);
-            stmt.setString(3, description);
-            stmt.setInt(4, copperValue);
-            stmt.setString(5, category); // Subquery per categoryID
-            stmt.setBoolean(6, isArcane);
+            stmt.setString(1, itemName);
+            stmt.setString(2, description);
+            stmt.setInt(3, copperValue);
+            stmt.setString(4, category); // Subquery per categoryID
+            stmt.setBoolean(5, isArcane);
 
             int rowsInserted = stmt.executeUpdate();
             if( rowsInserted > 0 ){

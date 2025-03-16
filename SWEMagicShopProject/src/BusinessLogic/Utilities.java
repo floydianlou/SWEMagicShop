@@ -60,4 +60,23 @@ public class Utilities {
         return false;
     }
 
+    //to check if arcane is valid
+    public static int checkStringArcane(String arcane) {
+        int Arcane;
+        if (arcane.equalsIgnoreCase("true")) {
+            Arcane = 1;
+        } else if (arcane.equalsIgnoreCase("false")) {
+            Arcane = 1;
+        } else {
+            Arcane = 0;
+        }
+        return Arcane;
+    }
+
+    public static int checkBooleanArcane(boolean arcane) {
+        if(arcane == true || arcane == false){
+            return 1;
+        }
+        else return 0;
+    }
 }

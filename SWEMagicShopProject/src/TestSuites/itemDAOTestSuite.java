@@ -51,26 +51,23 @@ public class itemDAOTestSuite {
         }
     }
 
-    //TODO: correggere testing
     private static void addItemToStore(Scanner scanner, StoreManager storeManager) {
         System.out.println("\n--- Crea un oggetto da aggiungere al negozio ---");
 
-        System.out.print("ID: ");
-        int itemID = scanner.nextInt();
         System.out.print("Nome: ");
         String itemName = scanner.nextLine();
         System.out.print("Descrizione: ");
         String itemDescription = scanner.nextLine();
         System.out.print("Categoria: ");
         String itemCategory = scanner.nextLine();
-        System.out.print("Arcano: ");
+        System.out.print("Arcano (true o false): ");
         boolean arcane = scanner.nextBoolean();
         System.out.print("CP: ");
         int itemPrice = scanner.nextInt();
         scanner.nextLine();
 
         try{
-            boolean success = storeManager.addProduct(itemID, itemName, itemDescription, itemCategory, itemPrice, arcane);
+            boolean success = storeManager.addProduct(itemName, itemDescription, itemCategory, itemPrice, arcane);
             if(success){
                 System.out.println("✅ Item aggiunto con successo!");
             } else { System.err.println("❌ Errore nella creazione dell'item!");}
@@ -79,43 +76,41 @@ public class itemDAOTestSuite {
         }
     }
 
-    //TODO: correggere testing
+
     private static void updateItemStore(Scanner scanner, StoreManager storeManager) {
         System.out.println("\n--- Modifica Item ---");
-        int itemPrice;
-        boolean itemArcane;
 
         System.out.print("Inserisci l'ID del prodotto che vuoi modificare: ");
         int itemID = scanner.nextInt();
+        scanner.nextLine();
+
+        Item item = storeManager.getProductByID(itemID);
+        if (item == null) {
+            System.out.println("❌ Prodotto non trovato.");
+            return;
+        }
 
         System.out.println("Lascia vuoto un campo per non modificarlo.");
-        System.out.print("Nuovo Nome (attuale: " + storeManager.getProductByID(itemID).getItemName() + "): ");
+
+        System.out.print("Nuovo Nome (attuale: " + item.getItemName() + "): ");
         String name = scanner.nextLine();
-        if (name.isEmpty()) name = storeManager.getProductByID(itemID).getItemName();
+        if (name.isEmpty()) name = item.getItemName();
 
-        System.out.print("Nuova Descrizione (attuale: " + storeManager.getProductByID(itemID).getItemDescription() + "): ");
+        System.out.print("Nuova Descrizione (attuale: " + item.getItemDescription() + "): ");
         String description = scanner.nextLine();
-        if (description.isEmpty()) description = storeManager.getProductByID(itemID).getItemDescription();
+        if (description.isEmpty()) description = item.getItemDescription();
 
-        System.out.print("Nuova Categoria (attuale: " + storeManager.getProductByID(itemID).getItemCategory() + "): ");
+        System.out.print("Nuova Categoria (attuale: " + item.getItemCategory() + "): ");
         String category = scanner.nextLine();
-        if (category.isEmpty()) category = storeManager.getProductByID(itemID).getItemCategory();
+        if (category.isEmpty()) category = item.getItemCategory();
 
-        System.out.print("Arcano (attuale: " + storeManager.getProductByID(itemID).isArcane() + "): ");
-        String arcane = scanner.nextLine();
-        if (arcane.isEmpty()){
-            itemArcane = storeManager.getProductByID(itemID).isArcane();
-        } else {
-            itemArcane = Boolean.parseBoolean(arcane);
-        }
+        System.out.print("Arcano (attuale: " + item.isArcane() + "): ");
+        String arcaneInput = scanner.nextLine();
+        boolean itemArcane = arcaneInput.isEmpty() ? item.isArcane() : Boolean.parseBoolean(arcaneInput);
 
-        System.out.print("Nuovo Prezzo (attuale: " + storeManager.getProductByID(itemID).getCopperValue() + "): ");
-        String price = scanner.nextLine();
-        if (price.isEmpty()){
-            itemPrice = storeManager.getProductByID(itemID).getCopperValue();
-        } else {
-            itemPrice = Integer.parseInt(price);
-        }
+        System.out.print("Nuovo Prezzo (attuale: " + item.getCopperValue() + "): ");
+        String priceInput = scanner.nextLine();
+        int itemPrice = priceInput.isEmpty() ? item.getCopperValue() : Integer.parseInt(priceInput);
 
         Item updatedItem = new Item(itemID, name, description, category, itemArcane, itemPrice);
 

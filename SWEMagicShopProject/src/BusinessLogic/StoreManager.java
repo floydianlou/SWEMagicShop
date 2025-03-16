@@ -31,7 +31,7 @@ public class StoreManager {
         return itemDAO.getItemByID(itemID);
     }
 
-    public boolean addProduct(int itemID, String itemName, String description, String category, int copperValue, boolean isArcane) throws IllegalArgumentException {
+    public boolean addProduct(String itemName, String description, String category, int copperValue, boolean isArcane) throws IllegalArgumentException {
         ItemDAO itemDAO= new ItemDAO();
         if (copperValue <= 0){
             throw new IllegalArgumentException("Price must be greater than zero!");
@@ -39,7 +39,10 @@ public class StoreManager {
         if (!Utilities.checkCategory(category)) {
             throw new IllegalArgumentException("Invalid category!");
         }
-        return itemDAO.createItem(itemID, itemName, description, category, copperValue, isArcane);
+        if(Utilities.checkBooleanArcane(isArcane) == 0){
+            throw new IllegalArgumentException("Arcane must be true or false!");
+        }
+        return itemDAO.createItem(itemName, description, category, copperValue, isArcane);
     }
 
     public boolean updateProduct(Item updatedItem) throws IllegalArgumentException {
@@ -50,7 +53,9 @@ public class StoreManager {
         if (!Utilities.checkCategory(updatedItem.getItemCategory())) {
             throw new IllegalArgumentException("Invalid category!");
         }
-
+        if(Utilities.checkBooleanArcane(updatedItem.isArcane()) == 0){
+            throw new IllegalArgumentException("Arcane must be true or false!");
+        }
         return itemDAO.updateItem(updatedItem);
     }
 
