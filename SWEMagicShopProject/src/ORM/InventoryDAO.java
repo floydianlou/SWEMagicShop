@@ -83,45 +83,44 @@ public class InventoryDAO {
             "ORDER BY SUM(ivt.quantity) DESC " +
             "LIMIT 1";
 
-        String cat = "";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet set = stmt.executeQuery()) {
                 if (set.next()) {
-                    cat = set.getString("category");
+                    return set.getString("category");
                 }
             }
         } catch (SQLException e) {
             System.out.println("Something happened while calculating the hot category: " + e.getMessage());
         }
-        return cat;
+        return null;
     }
 
     public String categoryLeastSold() {
         String query = "SELECT c.name AS category " +
-                "FROM \"Inventory\" ivt JOIN \"Item\" i ON ivt.itemID = i.itemID " +
-                "JOIN \"Category\" c ON i.categoryID = c.categoryID " +
+                "FROM \"Category\" c " +
+                "LEFT JOIN \"Item\" i ON c.categoryID = i.categoryID " +
+                "LEFT JOIN \"Inventory\" ivt ON i.itemID = ivt.itemID " +
                 "GROUP BY c.name " +
-                "ORDER BY SUM(ivt.quantity) ASC " +
+                "ORDER BY COALESCE(SUM(ivt.quantity), 0) ASC " +
                 "LIMIT 1";
 
-        String cat = "";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet set = stmt.executeQuery()) {
                 if (set.next()) {
-                    cat = set.getString("category");
+                    return set.getString("category");
                 }
             }
         } catch (SQLException e) {
             System.out.println("Something happened while calculating the ugly category: " + e.getMessage());
         }
-        return cat;
+        return null;
     }
 
     public int numberCategorySold(String category) {
         String query = "SELECT SUM(ivt.quantity) AS total_sold " +
                 "FROM \"Inventory\" ivt JOIN \"Item\" i ON ivt.itemID = i.itemID " +
                 "JOIN \"Category\" c ON i.categoryID = c.categoryID " +
-                "WHERE c.name LIKE ?" +
+                "WHERE c.name = ? " +
                 "GROUP BY c.name ";
 
         int total=0;
@@ -138,8 +137,9 @@ public class InventoryDAO {
         return total;
     }
 
+    //ATTENTION: THIS FUNCTION ONLY GIVES YOU ONE RESULT, IF ONE PRODUCTS HAS THE SAME SALES AS ANOTHER IT WON'T SHOW
     public Item productMostSold() {
-        String query = "SELECT it.itemid, it.name, it.description, c.name, it.arcane, it.cpprice, SUM(i.quantity) AS total_sold " +
+        String query = "SELECT it.itemid, it.name, it.description, c.name as category, it.arcane, it.cpprice, SUM(i.quantity) AS total_sold " +
                 "FROM \"Inventory\" i " +
                 "JOIN \"Item\" it ON i.itemID = it.itemID " +
                 "JOIN \"Category\" c ON it.categoryid = c.categoryid " +
@@ -154,7 +154,7 @@ public class InventoryDAO {
                     String item_name = set.getString("name");
                     String item_description = set.getString("description");
                     String item_category = set.getString("category");
-                    Boolean item_arcane = set.getBoolean("arcane");
+                    boolean item_arcane = set.getBoolean("arcane");
                     int item_cpprice = set.getInt("cpprice");
                     return new Item(item_id, item_name, item_description, item_category, item_arcane, item_cpprice);
                 }
@@ -165,12 +165,14 @@ public class InventoryDAO {
         return null;
     }
 
+    //ATTENTION: THIS FUNCTION ONLY GIVES YOU ONE RESULT, IF ONE PRODUCTS HAS THE SAME SALES AS ANOTHER IT WON'T SHOW
     public Item productLeastSold() {
-        String query = "SELECT it.itemid, it.name, it.description, c.name, it.arcane, it.cpprice, SUM(i.quantity) AS total_sold " +
-                "FROM \"Inventory\" i " +
-                "JOIN \"Item\" it ON i.itemID = it.itemID " +
-                "JOIN \"Category\" c ON it.categoryid = c.categoryid " +
-                "GROUP BY it.itemID, it.name, it.description, c.name, it.arcane, it.cpprice " +
+        String query = "SELECT it.itemID, it.name, it.description, c.name AS category, it.arcane, it.CPprice, " +
+                "COALESCE(SUM(inv.quantity), 0) AS total_sold " +
+                "FROM \"Item\" it " +
+                "LEFT JOIN \"Inventory\" inv ON it.itemID = inv.itemID " +
+                "LEFT JOIN \"Category\" c ON it.categoryID = c.categoryID " +
+                "GROUP BY it.itemID, it.name, it.description, c.name, it.arcane, it.CPprice " +
                 "ORDER BY total_sold ASC " +
                 "LIMIT 1";
 
@@ -181,7 +183,7 @@ public class InventoryDAO {
                     String item_name = set.getString("name");
                     String item_description = set.getString("description");
                     String item_category = set.getString("category");
-                    Boolean item_arcane = set.getBoolean("arcane");
+                    boolean item_arcane = set.getBoolean("arcane");
                     int item_cpprice = set.getInt("cpprice");
                     return new Item(item_id, item_name, item_description, item_category, item_arcane, item_cpprice);
                 }
@@ -193,24 +195,36 @@ public class InventoryDAO {
     }
 
     public int numberProductSold(int item) {
-        String query = "SELECT SUM(i.quantity) AS total_sold " +
-                "FROM \"Inventory\" i " +
-                "JOIN \"Item\" it ON i.itemID = it.itemID " +
-                "WHERE i.itemid = ?" +
-                "GROUP BY it.itemID";
 
-        int numItems = 0;
-        try(PreparedStatement stmt = connection.prepareStatement(query)){
+        String checkExistenceQuery = "SELECT 1 FROM \"Item\" WHERE itemID = ?";
+
+        String salesQuery = "SELECT COALESCE(SUM(i.quantity), 0) AS total_sold " +
+                "FROM \"Inventory\" i " +
+                "WHERE i.itemID = ?";
+
+        try (PreparedStatement checkStmt = connection.prepareStatement(checkExistenceQuery)) {
+            checkStmt.setInt(1, item);
+            try (ResultSet checkSet = checkStmt.executeQuery()) {
+                if (!checkSet.next()) {
+                    return -1;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Something happened while checking item existence: " + e.getMessage());
+            return -1;
+        }
+
+        try (PreparedStatement stmt = connection.prepareStatement(salesQuery)) {
             stmt.setInt(1, item);
-            try(ResultSet set = stmt.executeQuery()){
-                if(set.next()){
-                    numItems = set.getInt("total_sold");
+            try (ResultSet set = stmt.executeQuery()) {
+                if (set.next()) {
+                    return set.getInt("total_sold");
                 }
             }
         } catch (SQLException e) {
             System.out.println("Something happened while calculating the number of product sold: " + e.getMessage());
         }
-        return numItems;
+        return 0;
     }
 
     public Customer biggestSpender() {
@@ -240,25 +254,36 @@ public class InventoryDAO {
     }
 
     public int totalSpentByCustomer(int customer) {
-        String query = "SELECT SUM(i.quantity * it.CPprice) AS total_spent " +
+        String checkQuery = "SELECT 1 FROM \"Customer\" WHERE customerID = ?";
+
+        String sumQuery = "SELECT COALESCE(SUM(i.quantity * it.CPprice), 0) AS total_spent " +
                 "FROM \"Inventory\" i " +
                 "JOIN \"Item\" it ON i.itemID = it.itemID " +
-                "JOIN \"Customer\" c ON i.customerID = c.customerID " +
-                "WHERE c.customerID = ? " +
-                "GROUP BY c.customerID";
+                "WHERE i.customerID = ?";
 
-        int totalSpent = 0; // Inizializza il totale speso a 0
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, customer);
-            try (ResultSet set = stmt.executeQuery()) {
-                if (set.next()) {
-                    totalSpent = set.getInt("total_spent");
+        try (PreparedStatement checkStmt = connection.prepareStatement(checkQuery)) {
+            checkStmt.setInt(1, customer);
+            try (ResultSet checkSet = checkStmt.executeQuery()) {
+                if (!checkSet.next()) {
+                    return -1;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Something happened while checking if the customer exists: " + e.getMessage());
+            return -1;
+        }
+
+        try (PreparedStatement sumStmt = connection.prepareStatement(sumQuery)) {
+            sumStmt.setInt(1, customer);
+            try (ResultSet sumSet = sumStmt.executeQuery()) {
+                if (sumSet.next()) {
+                    return sumSet.getInt("total_spent");
                 }
             }
         } catch (SQLException e) {
             System.out.println("Something happened while calculating the total spent: " + e.getMessage());
         }
-        return totalSpent;
+        return 0;
     }
 
     public Customer smallestSpender() {

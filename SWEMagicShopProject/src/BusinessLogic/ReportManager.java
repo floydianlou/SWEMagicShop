@@ -43,13 +43,20 @@ public class ReportManager {
 
     public Item hotProduct(){
         InventoryDAO inventoryDAO = new InventoryDAO();
-        return inventoryDAO.productMostSold();
+        Item item = inventoryDAO.productMostSold();
+        if(item == null){
+            throw new IllegalArgumentException("Item not found!");
+        }
+        return item;
     }
-
 
     public Item uglyProduct(){
         InventoryDAO inventoryDAO = new InventoryDAO();
-        return inventoryDAO.productLeastSold();
+        Item item = inventoryDAO.productLeastSold();
+        if(item == null){
+            throw new IllegalArgumentException("Item not found!");
+        }
+        return item;
     }
 
     public int productNumById(int itemid){
@@ -57,7 +64,11 @@ public class ReportManager {
         if( itemid <= 0 ){
             throw new IllegalArgumentException("ItemID not valid!");
         }
-        return inventoryDAO.numberProductSold(itemid);
+        int number = inventoryDAO.numberProductSold(itemid);
+        if(number == -1){
+            throw new IllegalArgumentException("ItemID not found!");
+        }
+        return number;
     }
 
     public Customer viewBiggestSpender(){
@@ -74,7 +85,11 @@ public class ReportManager {
         if(customerid <= 0){
             throw new IllegalArgumentException("CustomerID not valid!");
         }
-        return inventoryDAO.totalSpentByCustomer(customerid);
+        int number = inventoryDAO.totalSpentByCustomer(customerid);
+        if(number == -1){
+            throw new IllegalArgumentException("CustomerID not found!");
+        }
+        return number;
     }
 
     public Customer viewSmallestSpender(){
@@ -87,7 +102,11 @@ public class ReportManager {
 
     public int revenue(){
         InventoryDAO inventoryDAO = new InventoryDAO();
-        return inventoryDAO.totalRevenue();
+        int revenue = inventoryDAO.totalRevenue();
+        if(revenue == -1){
+            throw new IllegalArgumentException("Revenue not found!");
+        }
+        return revenue;
     }
 
     public int numberOfArcaneMembers(){
