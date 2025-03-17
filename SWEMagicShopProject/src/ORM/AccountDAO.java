@@ -213,21 +213,4 @@ public class AccountDAO {
         return false;
     }
 
-    public boolean updateCustomerArcaneStatus(int customerID, boolean status) {
-        String arcanesql = String.format("UPDATE \"Customer\" SET arcanemembership = %b" +
-                " WHERE customerID = %d;", status, customerID);
-
-        try (Statement stmt = connection.createStatement()) {
-            int affected = stmt.executeUpdate(arcanesql);
-            if (affected > 0) {
-            System.out.println("Customer " + customerID + " arcane status updated to " + status);
-            return true; }
-            else {
-                System.out.println("No rows were affected.");
-            }
-        } catch (SQLException exception) {
-            System.err.println("Failed to update customer arcane status: " + exception.getMessage());
-        }
-        return false;
-    }
 }

@@ -12,10 +12,9 @@ public class ArcaneRequestManager {
         // if they have already made 5 requests or have a pending one, no need to make a request.
         ORM.ArcaneDAO arcaneDAO = new ORM.ArcaneDAO();
         if (arcaneDAO.canMakeArcaneRequest(customer.getPersonID())) {
-            int requestID = arcaneDAO.createArcaneRequest(customer.getPersonID());
-
+            arcaneDAO.createArcaneRequest(customer.getPersonID());
         } else return false;
-        return false;
+        return true;
     }
 
     public int viewNumberOfArcaneRequests(int customerID) { // for customer GUI

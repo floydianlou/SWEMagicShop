@@ -60,7 +60,6 @@ public class ArcaneDAO {
     }
 
     public boolean canMakeArcaneRequest(int customerID) {
-        // TODO IMPLEMENTATION NOT COMPLETE
         String pendingSql = "SELECT (EXISTS (SELECT 1 FROM \"ArcaneRequest\" WHERE customerID = ? AND statusid = 1)) " +
                 "OR ((SELECT COUNT(*) FROM \"ArcaneRequest\" WHERE customerID = ?) >= 5) AS result";
 
