@@ -21,8 +21,7 @@ public class WalletManager {
         Wallet wallet = walletDAO.getWalletByID(id);
 
         if (wallet == null) {
-            System.out.println("Wallet not found for this customer.");
-            return -1;
+            throw new IllegalArgumentException("Wallet not found for this customer");
         }
 
         return wallet.getCPbalance();
@@ -33,9 +32,12 @@ public class WalletManager {
         WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(customer.getPersonID());
 
+        if(amountGP < 0 || amountSP < 0 || amountCP < 0){
+            throw new IllegalArgumentException("Amount must be positive!");
+        }
+
         if (wallet == null) {
-            System.out.println("Wallet not found for this customer.");
-            return;
+            throw new IllegalArgumentException("Wallet not found for this customer");
         }
 
         int totalAmount = (amountGP*100) + (amountSP*10) + amountCP;
@@ -49,6 +51,10 @@ public class WalletManager {
     public boolean withdrawFunds(int amountCP, Customer customer) {
         WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(customer.getPersonID());
+
+        if( amountCP < 0){
+            throw new IllegalArgumentException("Amount must be positive!");
+        }
 
         if (wallet == null) {
             System.out.println("Wallet not found for this customer.");
@@ -71,9 +77,12 @@ public class WalletManager {
         WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(id);
 
+        if(amountGP < 0 || amountSP < 0 || amountCP < 0){
+            throw new IllegalArgumentException("Amount must be positive!");
+        }
+
         if (wallet == null) {
-            System.out.println("Wallet not found for this customer.");
-            return;
+            throw new IllegalArgumentException("Wallet not found for this customer");
         }
 
         int totalAmount = (amountGP*100) + (amountSP*10) + amountCP;
@@ -86,6 +95,10 @@ public class WalletManager {
     public boolean withdrawFunds(int amountCP, int id) {
         WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(id);
+
+        if( amountCP < 0){
+            throw new IllegalArgumentException("Amount must be positive!");
+        }
 
         if (wallet == null) {
             System.out.println("Wallet not found for this customer.");
