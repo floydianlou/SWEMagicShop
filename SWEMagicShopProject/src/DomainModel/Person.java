@@ -14,6 +14,13 @@ public class Person {
         this.password = password;
     }
 
+    public Person(int personID, String name, String surname, String email) {
+        this.personID = personID;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+    }
+
 
     public String getLoginData() { return "Email: " + email + "\nPassword: " + password; }
     public void updateEmail(String email) { this.email = email; }
