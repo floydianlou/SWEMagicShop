@@ -96,6 +96,7 @@ public class InventoryDAO {
         return cat;
     }
 
+    //TODO: controlla query funzione restiuisci la categoria con prodotti meno venduti senza includere quelle non presenti in inventory
     public String categoryLeastSold() {
         String query = "SELECT c.name AS category " +
                 "FROM \"Inventory\" ivt JOIN \"Item\" i ON ivt.itemID = i.itemID " +
@@ -104,24 +105,23 @@ public class InventoryDAO {
                 "ORDER BY SUM(ivt.quantity) ASC " +
                 "LIMIT 1";
 
-        String cat = "";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet set = stmt.executeQuery()) {
                 if (set.next()) {
-                    cat = set.getString("category");
+                    return set.getString("category");
                 }
             }
         } catch (SQLException e) {
             System.out.println("Something happened while calculating the ugly category: " + e.getMessage());
         }
-        return cat;
+        return null;
     }
 
     public int numberCategorySold(String category) {
         String query = "SELECT SUM(ivt.quantity) AS total_sold " +
                 "FROM \"Inventory\" ivt JOIN \"Item\" i ON ivt.itemID = i.itemID " +
                 "JOIN \"Category\" c ON i.categoryID = c.categoryID " +
-                "WHERE c.name LIKE ?" +
+                "WHERE c.name = ? " +
                 "GROUP BY c.name ";
 
         int total=0;
@@ -139,7 +139,7 @@ public class InventoryDAO {
     }
 
     public Item productMostSold() {
-        String query = "SELECT it.itemid, it.name, it.description, c.name, it.arcane, it.cpprice, SUM(i.quantity) AS total_sold " +
+        String query = "SELECT it.itemid, it.name, it.description, c.name as category, it.arcane, it.cpprice, SUM(i.quantity) AS total_sold " +
                 "FROM \"Inventory\" i " +
                 "JOIN \"Item\" it ON i.itemID = it.itemID " +
                 "JOIN \"Category\" c ON it.categoryid = c.categoryid " +
@@ -166,7 +166,7 @@ public class InventoryDAO {
     }
 
     public Item productLeastSold() {
-        String query = "SELECT it.itemid, it.name, it.description, c.name, it.arcane, it.cpprice, SUM(i.quantity) AS total_sold " +
+        String query = "SELECT it.itemid, it.name, it.description, c.name as category, it.arcane, it.cpprice, SUM(i.quantity) AS total_sold " +
                 "FROM \"Inventory\" i " +
                 "JOIN \"Item\" it ON i.itemID = it.itemID " +
                 "JOIN \"Category\" c ON it.categoryid = c.categoryid " +
@@ -192,11 +192,12 @@ public class InventoryDAO {
         return null;
     }
 
+    //TODO: lanciare errore quando id non presente nel database
     public int numberProductSold(int item) {
         String query = "SELECT SUM(i.quantity) AS total_sold " +
                 "FROM \"Inventory\" i " +
                 "JOIN \"Item\" it ON i.itemID = it.itemID " +
-                "WHERE i.itemid = ?" +
+                "WHERE i.itemid = ? " +
                 "GROUP BY it.itemID";
 
         int numItems = 0;
@@ -239,6 +240,7 @@ public class InventoryDAO {
         return null;
     }
 
+    //TODO: lanciare errore quando id non presente nel database return -1 invece di retunr total_spent
     public int totalSpentByCustomer(int customer) {
         String query = "SELECT SUM(i.quantity * it.CPprice) AS total_spent " +
                 "FROM \"Inventory\" i " +
@@ -247,12 +249,12 @@ public class InventoryDAO {
                 "WHERE c.customerID = ? " +
                 "GROUP BY c.customerID";
 
-        int totalSpent = 0; // Inizializza il totale speso a 0
+        int totalSpent = -1; // Inizializza il totale speso a 0
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, customer);
             try (ResultSet set = stmt.executeQuery()) {
                 if (set.next()) {
-                    totalSpent = set.getInt("total_spent");
+                    return totalSpent = set.getInt("total_spent");
                 }
             }
         } catch (SQLException e) {
