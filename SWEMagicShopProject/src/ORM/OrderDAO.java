@@ -5,7 +5,7 @@ import DomainModel.Item;
 import DomainModel.Order;
 import Exceptions.OrderExceptions;
 
-public class OrderDAO implements DAOInterface.OrderDAO {
+public class OrderDAO {
 
     private Connection connection;
 
@@ -17,7 +17,6 @@ public class OrderDAO implements DAOInterface.OrderDAO {
         }
     }
 
-    @Override
     public ArrayList<Order> viewAllOrders() {
         ArrayList<Order> orders = new ArrayList<>();
         String ordersql = "SELECT o.orderid, o.customerid, c.name, c.email, o.orderdate, s.name AS status_name, o.totalcp " +
@@ -44,7 +43,6 @@ public class OrderDAO implements DAOInterface.OrderDAO {
         return orders;
     }
 
-    @Override
     public ArrayList<Order> getCustomerOrders(int customerID) {
         ArrayList<Order> orders = new ArrayList<>();
         String ordersql = "SELECT o.orderid, o.orderdate, s.name, o.totalcp " +
@@ -68,7 +66,6 @@ public class OrderDAO implements DAOInterface.OrderDAO {
         return orders;
     }
 
-    @Override
     public int saveNewOrder(int orderTotal, int customerID, ArrayList<Item> cartItems) throws OrderExceptions.OrderSaveException {
         String ordersql = "INSERT INTO \"Order\" (customerid, statusid, totalcp) VALUES (?, 1, ?) RETURNING orderid;";
 
@@ -127,8 +124,8 @@ public class OrderDAO implements DAOInterface.OrderDAO {
         }
     }
 
-    @Override
     public void deleteOrder(int orderID) {
         String deletsql = "DELETE FROM \"Order\" WHERE orderid = ?";
+        //TODO is this necessary? should we implement this function?
     }
 }

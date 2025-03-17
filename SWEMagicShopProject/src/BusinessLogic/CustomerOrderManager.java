@@ -50,7 +50,7 @@ public class CustomerOrderManager {
     private int totalCost(ArrayList<Item> cartItems) {
         int total = 0;
         for (Item item : cartItems) {
-            total = total + item.getCopperValue();
+            total = total + item.getCopperValue()*item.getItemQuantity();
         }
         return total;
     }
