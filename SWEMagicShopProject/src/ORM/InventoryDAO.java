@@ -192,7 +192,7 @@ public class InventoryDAO {
         return null;
     }
 
-    public int numberProductSold(Item item) {
+    public int numberProductSold(int item) {
         String query = "SELECT SUM(i.quantity) AS total_sold " +
                 "FROM \"Inventory\" i " +
                 "JOIN \"Item\" it ON i.itemID = it.itemID " +
@@ -201,7 +201,7 @@ public class InventoryDAO {
 
         int numItems = 0;
         try(PreparedStatement stmt = connection.prepareStatement(query)){
-            stmt.setInt(1, item.getItemID());
+            stmt.setInt(1, item);
             try(ResultSet set = stmt.executeQuery()){
                 if(set.next()){
                     numItems = set.getInt("total_sold");
@@ -239,7 +239,7 @@ public class InventoryDAO {
         return null;
     }
 
-    public int totalSpentByCustomer(Customer customer) {
+    public int totalSpentByCustomer(int customer) {
         String query = "SELECT SUM(i.quantity * it.CPprice) AS total_spent " +
                 "FROM \"Inventory\" i " +
                 "JOIN \"Item\" it ON i.itemID = it.itemID " +
@@ -249,7 +249,7 @@ public class InventoryDAO {
 
         int totalSpent = 0; // Inizializza il totale speso a 0
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, customer.getPersonID());
+            stmt.setInt(1, customer);
             try (ResultSet set = stmt.executeQuery()) {
                 if (set.next()) {
                     totalSpent = set.getInt("total_spent");

@@ -52,11 +52,12 @@ public class ReportManager {
         return inventoryDAO.productLeastSold();
     }
 
-    public int productNum(Item item){
+    public int productNumById(int itemid){
         InventoryDAO inventoryDAO = new InventoryDAO();
-        if( item==null ){
-            throw new IllegalArgumentException("Item not found");
-        }else return inventoryDAO.numberProductSold(item);
+        if( itemid <= 0 ){
+            throw new IllegalArgumentException("ItemID not valid!");
+        }
+        return inventoryDAO.numberProductSold(itemid);
     }
 
     public Customer viewBiggestSpender(){
@@ -64,15 +65,16 @@ public class ReportManager {
         Customer customer = inventoryDAO.biggestSpender();
         if(customer == null){
             throw new IllegalArgumentException("Customer not found.");
-        } else return customer;
+        }
+        return customer;
     }
 
-    public int viewTotalSpentByCustomer(Customer customer){
+    public int viewTotalSpentByCustomerId(int customerid){
         InventoryDAO inventoryDAO = new InventoryDAO();
-        if(customer == null){
-            throw new IllegalArgumentException("Customer not found.");
+        if(customerid <= 0){
+            throw new IllegalArgumentException("CustomerID not valid!");
         }
-        return inventoryDAO.totalSpentByCustomer(customer);
+        return inventoryDAO.totalSpentByCustomer(customerid);
     }
 
     public Customer viewSmallestSpender(){
