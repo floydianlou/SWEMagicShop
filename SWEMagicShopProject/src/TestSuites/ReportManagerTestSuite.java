@@ -75,7 +75,7 @@ public class ReportManagerTestSuite {
         try{
             Item product = reportManager.hotProduct();
             System.out.println("Il prodotto più gettonato è " + product.getItemName() + " num: " + reportManager.productNumById(product.getItemID()));
-            System.out.println("✅ Categoria trovata con successo!");
+            System.out.println("✅ Item trovata con successo!");
         } catch(Exception e){
             System.err.println("❌ Errore nella view: " + e.getMessage());
         }
@@ -86,7 +86,7 @@ public class ReportManagerTestSuite {
         try{
             Item product = reportManager.uglyProduct();
             System.out.println("Il prodotto meno gettonato è " + product.getItemName() + " num: " + reportManager.productNumById(product.getItemID()));
-            System.out.println("✅ Categoria trovata con successo!");
+            System.out.println("✅ Item trovata con successo!");
         } catch(Exception e){
             System.err.println("❌ Errore nella view: " + e.getMessage());
         }
@@ -150,6 +150,7 @@ public class ReportManagerTestSuite {
             int number = reportManager.viewTotalSpentByCustomerId(id);
             System.out.println("Il cliente ha speso " + number + " soldi.");
             System.out.println("✅ Numero trovato con successo!");
+
         }catch(Exception e){
             System.err.println("❌ Errore nella view: " + e.getMessage());
         }
