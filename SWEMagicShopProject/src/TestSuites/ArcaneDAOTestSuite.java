@@ -1,4 +1,4 @@
-package BusinessLogicTests;
+package TestSuites;
 
 import BusinessLogic.ArcaneRequestManager;
 import DomainModel.ArcaneRequest;
