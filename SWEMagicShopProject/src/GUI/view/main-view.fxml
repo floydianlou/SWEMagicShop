@@ -4,8 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controller.MainViewController">
-    <Label text="Welcome to Otari Magic Shop"/>
+<VBox spacing="20" alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="GUI.controller.MainViewController">
+    <Label text="Otari's Magic Shop"/>
     <Button text="Login" onAction="#handleButtonClick"/>
 </VBox>

@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/styles/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project/project.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/ArcaneRequestManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/ArcaneRequestManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ORM/ArcaneDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/ArcaneDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestSuites/ReportManagerTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestSuites/ReportManagerTestSuite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/controller/MainViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/view/main-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/styles.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,53 +61,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ArcaneDAOTestSuite.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.UnifiedTestSuite.executor": "Run",
-    "Application.accountDAOTestSuite.executor": "Run",
-    "Application.accountTests.executor": "Run",
-    "Application.cartManagerTestSuite.executor": "Run",
-    "Application.itemDAOTestSuite.executor": "Run",
-    "Application.main.executor": "Run",
-    "Application.walletDAOTestSuite.executor": "Run",
-    "Database Script.console.sql.executor": "Run",
-    "Database Script.default.sql.executor": "Run",
-    "Database Script.reset.sql.executor": "Run",
-    "Database Script.schema.sql.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "alice",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/acgib/SWEMagicShop/jfreechart-1.5.3.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.24712643",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ArcaneDAOTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.UnifiedTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Application.accountDAOTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Application.accountTests.executor&quot;: &quot;Run&quot;,
+    &quot;Application.cartManagerTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Application.itemDAOTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Application.main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.walletDAOTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.console.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.default.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.reset.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.schema.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;alice&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/acgib/SWEMagicShop/jfreechart-1.5.3.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.24712643&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ],
-    "RunConfigurationTargetLRU": [
-      "a39b25b2-8d6a-4c11-b329-73e2662cbe08/database/\"otariMagicShop\"",
-      "a39b25b2-8d6a-4c11-b329-73e2662cbe08"
+    &quot;RunConfigurationTargetLRU&quot;: [
+      &quot;a39b25b2-8d6a-4c11-b329-73e2662cbe08/database/\&quot;otariMagicShop\&quot;&quot;,
+      &quot;a39b25b2-8d6a-4c11-b329-73e2662cbe08&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\acgib\SWEMagicShop\SWEMagicShopProject\src" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
