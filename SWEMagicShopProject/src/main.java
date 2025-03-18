@@ -8,7 +8,8 @@ public class main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/views/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
+        Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setTitle("Magic Shop - Login");
         primaryStage.setScene(scene);

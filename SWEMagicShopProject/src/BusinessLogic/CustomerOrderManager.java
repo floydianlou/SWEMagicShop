@@ -1,5 +1,4 @@
 package BusinessLogic;
-import Exceptions.InventoryExceptions;
 import Exceptions.OrderExceptions;
 import ORM.OrderDAO;
 import DomainModel.Customer;
@@ -22,7 +21,7 @@ public class CustomerOrderManager {
         return orderDAO.getCustomerOrders(customer.getPersonID());
     }
 
-    public int createOrder(Customer customer, CartManager cartManager, WalletManager walletManager) throws OrderExceptions.OrderSaveException {
+    public int createOrder(Customer customer, CartManager cartManager, WalletManager walletManager, InventoryManager inventoryManager) throws OrderExceptions.OrderSaveException {
         // TODO: deactivate "Checkout" button if cart is empty in GUI.
         // TODO: manage exceptions later when GUI implemented
         try {

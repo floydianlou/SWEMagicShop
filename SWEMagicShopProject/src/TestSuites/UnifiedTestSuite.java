@@ -357,8 +357,6 @@ public class UnifiedTestSuite {
 
         if (orders.isEmpty()) {
             System.out.println("❌ Nessun ordine.");
-        } else {
-            orders.forEach(order -> System.out.println(order.getOrderData()));
         }
     }
 
