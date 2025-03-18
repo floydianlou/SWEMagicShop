@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/CartManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/CartManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/CustomerOrderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/CustomerOrderManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/InventoryManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DomainModel/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DomainModel/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exceptions/OrderExceptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/OrderExceptions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ORM/InventoryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/InventoryDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ORM/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/OrderDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestSuites/cartManagerTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestSuites/cartManagerTestSuite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SWEMagicShopProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SWEMagicShopProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,9 +23,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="package-info" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="FxmlFile" />
+        <option value="package-info" />
       </list>
     </option>
   </component>
@@ -62,6 +58,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "Application.accountDAOTestSuite.executor": "Run",
     "Application.accountTests.executor": "Run",
     "Application.cartManagerTestSuite.executor": "Run",
@@ -79,7 +76,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "alice",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/acgib/SWEMagicShop/sql",
+    "last_opened_file_path": "C:/Users/acgib/SWEMagicShop/SWEMagicShopProject",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -87,7 +84,7 @@
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
+    "project.structure.side.proportion": "0.24712643",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   },
@@ -106,7 +103,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
       <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/a39b25b2-8d6a-4c11-b329-73e2662cbe08/console.sql" />
       <script-mode>FILE</script-mode>
@@ -131,6 +128,13 @@
       <data-source id="a39b25b2-8d6a-4c11-b329-73e2662cbe08" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Database Script.console.sql" />
+      <item itemvalue="Database Script.default.sql" />
+      <item itemvalue="Database Script.reset.sql" />
+      <item itemvalue="Database Script.schema.sql" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -158,7 +162,8 @@
       <workItem from="1740770700238" duration="5765000" />
       <workItem from="1740839446438" duration="6970000" />
       <workItem from="1740850784895" duration="133000" />
-      <workItem from="1741794468285" duration="22841000" />
+      <workItem from="1741794468285" duration="40464000" />
+      <workItem from="1742226057561" duration="4387000" />
     </task>
     <servers />
   </component>

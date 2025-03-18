@@ -214,7 +214,6 @@ public class AccountDAO {
     }
 
     public boolean updateCustomerArcaneStatus(int customerID, boolean status) {
-        // TODO CHECK PREPARED STATEMENT POSSIBILITY
         String arcanesql = String.format("UPDATE \"Customer\" SET arcanemembership = %b" +
                 " WHERE customerID = %d;", status, customerID);
 
@@ -229,7 +228,6 @@ public class AccountDAO {
         } catch (SQLException exception) {
             System.err.println("Failed to update customer arcane status: " + exception.getMessage());
         }
-
         return false;
     }
 }

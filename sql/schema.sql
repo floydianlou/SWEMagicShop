@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS "RequestStatus" (
 CREATE TABLE IF NOT EXISTS "ArcaneRequest" (
   requestID SERIAL PRIMARY KEY,
   customerID INT,
-  statusID INT,
+  statusID INT DEFAULT 1,
   FOREIGN KEY (customerID) REFERENCES "Customer"(customerID) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (statusID) REFERENCES "RequestStatus"(statusID) ON UPDATE CASCADE
   );
