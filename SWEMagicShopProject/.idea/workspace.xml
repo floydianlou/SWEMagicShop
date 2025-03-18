@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/CartManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/CartManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/CustomerOrderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/CustomerOrderManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/InventoryManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/WalletManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/WalletManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAOInterface/InventoryDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAOInterface/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAOInterface/OrderDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DomainModel/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DomainModel/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestSuites/cartManagerTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestSuites/cartManagerTestSuite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ORM/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/AccountDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestSuites/ArcaneDAOTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestSuites/ArcaneDAOTestSuite.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +22,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="package-info" />
         <option value="Interface" />
+        <option value="FxmlFile" />
+        <option value="package-info" />
         <option value="Class" />
       </list>
     </option>
@@ -62,9 +57,14 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.ArcaneDAOTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.accountDAOTestSuite.executor&quot;: &quot;Run&quot;,
     &quot;Application.accountTests.executor&quot;: &quot;Run&quot;,
     &quot;Application.cartManagerTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Application.itemDAOTestSuite.executor&quot;: &quot;Run&quot;,
     &quot;Application.main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.walletDAOTestSuite.executor&quot;: &quot;Run&quot;,
     &quot;Database Script.console.sql.executor&quot;: &quot;Run&quot;,
     &quot;Database Script.default.sql.executor&quot;: &quot;Run&quot;,
     &quot;Database Script.reset.sql.executor&quot;: &quot;Run&quot;,
@@ -78,7 +78,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;alice&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/acgib/SWEMagicShop/sql&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/acgib/SWEMagicShop/SWEMagicShopProject&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -86,7 +86,7 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.24712643&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -130,6 +130,13 @@
       <data-source id="a39b25b2-8d6a-4c11-b329-73e2662cbe08" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Database Script.console.sql" />
+      <item itemvalue="Database Script.default.sql" />
+      <item itemvalue="Database Script.reset.sql" />
+      <item itemvalue="Database Script.schema.sql" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -157,7 +164,9 @@
       <workItem from="1740770700238" duration="5765000" />
       <workItem from="1740839446438" duration="6970000" />
       <workItem from="1740850784895" duration="133000" />
-      <workItem from="1741794468285" duration="15768000" />
+      <workItem from="1741794468285" duration="40464000" />
+      <workItem from="1742226057561" duration="4387000" />
+      <workItem from="1742242559133" duration="2580000" />
     </task>
     <servers />
   </component>

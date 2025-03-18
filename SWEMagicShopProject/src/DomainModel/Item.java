@@ -10,6 +10,7 @@ public class Item {
     private boolean isArcane;
     private int copperValue;
 
+    // contructor with attribute quantity for classes Cart and Inventory
     public Item(int itemID, String itemName, String itemDescription, String itemCategory, int itemQuantity, boolean isArcane, int copperValue) {
         this.itemID = itemID;
         this.itemName = itemName;
@@ -20,8 +21,22 @@ public class Item {
         this.copperValue = copperValue;
     }
 
+    // contructor without attribute quantity for DAO
+    public Item(int itemID, String itemName, String itemDescription, String itemCategory, boolean isArcane, int CPprice) {
+        this.itemID = itemID;
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
+        this.itemCategory = itemCategory;
+        this.isArcane = isArcane;
+        this.copperValue = CPprice;
+    }
+
     public String getItemData(){
-        return "ItemID: " + itemID + "\n ItemName: " + itemName + "\n ItemDescription: " + itemDescription + "\n ItemCategory: " + itemCategory + "\n ItemQuantity: " + itemQuantity +  "\n IsArcane: " + isArcane;
+        return "ItemID: " + itemID + "\n ItemName: " + itemName + "\n ItemDescription: " + itemDescription + "\n ItemCategory: " + itemCategory + "\n ItemQuantity: " + itemQuantity +  "\n IsArcane: " + isArcane + "\n CopperValue: " + copperValue;
+    }
+
+    public String getData(){
+        return "ItemID: " + itemID + "\n ItemName: " + itemName + "\n ItemDescription: " + itemDescription + "\n ItemCategory: " + itemCategory +  "\n IsArcane: " + isArcane + "\n CopperValue: " + copperValue;
     }
 
     //GETTER AND SETTER

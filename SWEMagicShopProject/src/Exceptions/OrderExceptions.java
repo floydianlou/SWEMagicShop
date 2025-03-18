@@ -22,6 +22,12 @@ public class OrderExceptions {
             super(message);
         }
     }
+
+    public static class ItemNotInCartException extends Exception {
+        public ItemNotInCartException(String message) {
+            super(message);
+        }
+    }
 }
 
 
