@@ -8,11 +8,12 @@ import DomainModel.Person;
 import ORM.AccountDAO;
 import javafx.scene.shape.Arc;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ArcaneDAOTestSuite {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         ArcaneRequestManager manager = new ArcaneRequestManager();
         AccountDAO accountDAO = new AccountDAO(); // Classe che contiene il metodo loginPerson()

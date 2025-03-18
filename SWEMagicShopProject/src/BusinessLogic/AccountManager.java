@@ -13,7 +13,15 @@ public class AccountManager {
     // TODO: after GUI consider creating specific exceptions
     public Person login (String email, String password) {
         AccountDAO accountDAO = new AccountDAO();
-        return accountDAO.loginPerson(email, password);
+        try {
+            return accountDAO.loginPerson(email, password); }
+        catch (SQLException e) {
+            System.err.println("SQL error while logging Person in : " + e.getMessage());
+            if (e.getMessage().contains("failed to connect")) {
+                throw new RuntimeException("Database is offline, please try again later.");
+            }
+            throw new RuntimeException("A database error occured.");
+        }
     }
 
     public void createCustomerAccount (String name, String surname, String email, String password, int age,
