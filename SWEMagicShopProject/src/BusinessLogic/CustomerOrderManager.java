@@ -31,9 +31,8 @@ public class CustomerOrderManager {
         }
 
         int orderTotal = totalCost(cartManager.getCartItems());
-        // commented for testing
-//        if (!walletManager.withdrawFunds(orderTotal, customer)) {
-//            throw new OrderExceptions.MissingFundsException ("You don't have enough funds to make an order!"); }
+         if (!walletManager.withdrawFunds(orderTotal, customer)) {
+            throw new OrderExceptions.MissingFundsException ("You don't have enough funds to make an order!"); }
 
         OrderDAO orderDAO = new OrderDAO();
         int newOrderID = orderDAO.saveNewOrder(orderTotal, customer.getPersonID(), cartManager.getCartItems());
@@ -43,6 +42,8 @@ public class CustomerOrderManager {
         return newOrderID; }
         catch (OrderExceptions.EmptyCartException | OrderExceptions.OrderSaveException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (OrderExceptions.MissingFundsException e) {
+            throw new RuntimeException(e);
         }
         return -1; // GUI SHOULD KNOW WHAT -1 MEANS
     }
@@ -56,3 +57,4 @@ public class CustomerOrderManager {
     }
 
 }
+

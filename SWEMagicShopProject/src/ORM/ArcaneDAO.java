@@ -39,7 +39,7 @@ public class ArcaneDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new ArcaneExceptions.ArcaneViewException("Something happened while trying to view your data...");
+            throw new ArcaneExceptions.ArcaneViewException("Something happened while trying to GUI.view your data...");
         }
         return arcaneRequests;
     }
@@ -60,7 +60,6 @@ public class ArcaneDAO {
     }
 
     public boolean canMakeArcaneRequest(int customerID) {
-        // TODO IMPLEMENTATION NOT COMPLETE
         String pendingSql = "SELECT (EXISTS (SELECT 1 FROM \"ArcaneRequest\" WHERE customerID = ? AND statusid = 1)) " +
                 "OR ((SELECT COUNT(*) FROM \"ArcaneRequest\" WHERE customerID = ?) >= 5) AS result";
 
@@ -87,7 +86,7 @@ public class ArcaneDAO {
                 if (!set.next()) {
                     throw new SQLException("Failed to create new request: no ID returned.");
                 }
-          return set.getInt("requestid"); // returns request id to view in gui
+          return set.getInt("requestid"); // returns request id to GUI.view in gui
             }
         } catch (SQLException e) {
             throw new ArcaneExceptions.ArcaneCreationException("Something went wrong while creating your request.");
@@ -111,7 +110,7 @@ public class ArcaneDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new ArcaneExceptions.ArcaneViewException("Something happened while trying to view your data...");
+            throw new ArcaneExceptions.ArcaneViewException("Something happened while trying to GUI.view your data...");
         }
         return arcaneRequests;
     }
@@ -133,7 +132,7 @@ public class ArcaneDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new ArcaneExceptions.ArcaneViewException("Something happened while trying to view your data...");
+            throw new ArcaneExceptions.ArcaneViewException("Something happened while trying to GUI.view your data...");
         }
         return arcaneRequests;
     }

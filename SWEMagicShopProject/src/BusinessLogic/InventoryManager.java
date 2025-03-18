@@ -24,7 +24,17 @@ public class InventoryManager {
         return inventoryDAO.getInventory(customer.getPersonID());
     }
 
-    public void viewInventory(int ClientID) {
-        // TODO
+    public ArrayList<Item> viewInventory(int clientID) {
+        if (customer == null || customer.getPersonID() != clientID) {
+
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(inventoryItems);
+    }
+
+
+    public boolean updateInventory(ArrayList<Item> cartItems, Customer customer) throws InventoryExceptions.InventoryUpdateException {
+        InventoryDAO inventoryDAO = new InventoryDAO();
+        return inventoryDAO.updateInventory(customer.getPersonID(), cartItems);
     }
 }

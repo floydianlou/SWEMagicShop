@@ -29,6 +29,10 @@ public class ArcaneRequest {
 
     //GETTER AND SETTER
 
+    public String getCustomerName() {
+        return customerName;
+    }
+
     public int getRequestID() {
         return requestID;
     }
