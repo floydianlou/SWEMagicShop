@@ -2,7 +2,12 @@ package TestSuites;
 import DomainModel.*;
 import BusinessLogic.Utilities;
 import BusinessLogic.ReportManager;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 
+import javax.swing.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ReportManagerTestSuite {
@@ -21,6 +26,8 @@ public class ReportManagerTestSuite {
             System.out.println("8. Visualizza l'utente che ha speso di meno");
             System.out.println("9. Visualizza quanto ha speso un utente per id");
             System.out.println("10. Visualizza l'incasso totale del negozio");
+            System.out.println("11. Crea grafico del categoria");
+            System.out.println("12. Crea grafico del prodotto");
             System.out.println("0. Esci");
             System.out.print("Scelta: ");
 
@@ -38,6 +45,8 @@ public class ReportManagerTestSuite {
                 case 8 -> lowestSpender(scanner, reportManager);
                 case 9 -> viewTotalSpentByCustomerId(scanner, reportManager);
                 case 10 -> viewRevenue(scanner, reportManager);
+                case 11 -> viewCategoryGraph(scanner, reportManager);
+                case 12 -> viewProductGraph(scanner, reportManager);
                 case 0 -> {
                     System.out.println("👋 Uscita dal programma.");
                     scanner.close();
@@ -48,7 +57,7 @@ public class ReportManagerTestSuite {
         }
     }
 
-    public static void hotCategory(Scanner scanner, ReportManager reportManager) {
+    private static void hotCategory(Scanner scanner, ReportManager reportManager) {
         System.out.println("\n--- Hot Categoria ---");
         try{
             String category = reportManager.hotCategory();
@@ -59,7 +68,7 @@ public class ReportManagerTestSuite {
         }
     }
 
-    public static void uglyCategory(Scanner scanner, ReportManager reportManager) {
+    private static void uglyCategory(Scanner scanner, ReportManager reportManager) {
         System.out.println("\n--- Ugly Categoria ---");
         try{
             String category = reportManager.uglyCategory();
@@ -70,7 +79,7 @@ public class ReportManagerTestSuite {
         }
     }
 
-    public static void hotProduct(Scanner scanner, ReportManager reportManager) {
+    private static void hotProduct(Scanner scanner, ReportManager reportManager) {
         System.out.println("\n--- Hot Prodotto ---");
         try{
             Item product = reportManager.hotProduct();
@@ -81,7 +90,7 @@ public class ReportManagerTestSuite {
         }
     }
 
-    public static void uglyProduct(Scanner scanner, ReportManager reportManager) {
+    private static void uglyProduct(Scanner scanner, ReportManager reportManager) {
         System.out.println("\n--- Ugly Prodotto ---");
         try{
             Item product = reportManager.uglyProduct();
@@ -92,7 +101,7 @@ public class ReportManagerTestSuite {
         }
     }
 
-    public static void viewProductNumById(Scanner scanner, ReportManager reportManager) {
+    private static void viewProductNumById(Scanner scanner, ReportManager reportManager) {
         System.out.println("\n--- View Product Num ById ---");
         System.out.print("Inserisci l'ID del prodotto: ");
         int id = scanner.nextInt();
@@ -106,7 +115,7 @@ public class ReportManagerTestSuite {
         }
     }
 
-    public static void viewProductNumByCategory(Scanner scanner, ReportManager reportManager) {
+    private static void viewProductNumByCategory(Scanner scanner, ReportManager reportManager) {
         System.out.println("\n--- View Product Num By Category ---");
         System.out.print("Inserisci la categoria: ");
         String cat = scanner.nextLine();
@@ -119,7 +128,7 @@ public class ReportManagerTestSuite {
         }
     }
 
-    public static void biggestSpender(Scanner scanner, ReportManager reportManager) {
+    private static void biggestSpender(Scanner scanner, ReportManager reportManager) {
         System.out.println("\n--- Biggest Spender ---");
         try{
             Customer c = reportManager.viewBiggestSpender();
@@ -130,7 +139,7 @@ public class ReportManagerTestSuite {
         }
     }
 
-    public static void lowestSpender(Scanner scanner, ReportManager reportManager) {
+    private static void lowestSpender(Scanner scanner, ReportManager reportManager) {
         System.out.println("\n--- Lowest Spender ---");
         try{
             Customer c = reportManager.viewSmallestSpender();
@@ -141,7 +150,7 @@ public class ReportManagerTestSuite {
         }
     }
 
-    public static void viewTotalSpentByCustomerId(Scanner scanner, ReportManager reportManager) {
+    private static void viewTotalSpentByCustomerId(Scanner scanner, ReportManager reportManager) {
         System.out.println("\n--- View Total Spent By Customer Id ---");
         System.out.print("Inserisci la customer ID: ");
         int id = scanner.nextInt();
@@ -156,7 +165,7 @@ public class ReportManagerTestSuite {
         }
     }
 
-    public static void viewRevenue(Scanner scanner, ReportManager reportManager) {
+    private static void viewRevenue(Scanner scanner, ReportManager reportManager) {
         System.out.println("\n--- View Revenue ---");
         try{
             int revenue = reportManager.revenue();
@@ -165,6 +174,37 @@ public class ReportManagerTestSuite {
         }catch(Exception e){
             System.err.println("❌ Errore nella view: " + e.getMessage());
         }
+    }
+
+    //FOR GRAPH
+    private static void viewCategoryGraph(Scanner scanner, ReportManager reportManager) {
+        // Crea il grafico
+        JFreeChart chart = reportManager.createCategorySalesChart();
+
+        // Crea il pannello per visualizzare il grafico
+        ChartPanel chartPanel = reportManager.createChartPanel(chart);
+
+        // Mostra il grafico in una finestra
+        JFrame frame = new JFrame("Test Grafico");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(chartPanel);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    private static void viewProductGraph(Scanner scanner, ReportManager reportManager) {
+        // Crea il grafico
+        JFreeChart chart = reportManager.createProductSalesChart();
+
+        // Crea il pannello per visualizzare il grafico
+        ChartPanel chartPanel = reportManager.createChartPanel(chart);
+
+        // Mostra il grafico in una finestra
+        JFrame frame = new JFrame("Test Grafico");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(chartPanel);
+        frame.pack();
+        frame.setVisible(true);
     }
 
 }
