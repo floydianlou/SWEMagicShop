@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Region?>
 
-<!-- TODO complete layout and design of page and buttons, add full screen view, put fields in normal dimension, modify page design and colours -->
+<!-- TODO complete layout and design of page, add full screen view, put fields in normal dimension, modify page design and colours -->
 
 <VBox spacing="20" alignment="CENTER"
       style = "-fx-background-image: url('/images/shop-background.jpg'); -fx-background-size: cover;"
