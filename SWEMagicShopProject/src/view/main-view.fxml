@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controller.MyController">
+      fx:controller="controller.MainViewController">
     <Label text="Welcome to Otari Magic Shop"/>
     <Button text="Login" onAction="#handleButtonClick"/>
 </VBox>
