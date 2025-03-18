@@ -345,7 +345,7 @@ public class UnifiedTestSuite {
 
     private static void createOrder(Customer customer, CartManager cartManager, WalletManager walletManager, InventoryManager inventoryManager, CustomerOrderManager orderManager) {
         try {
-            int orderId = orderManager.createOrder(customer, cartManager, walletManager, inventoryManager);
+            int orderId = orderManager.createOrder(customer, cartManager, walletManager);
             System.out.println("✅ Ordine creato! ID: " + orderId);
         } catch (Exception e) {
             System.err.println("❌ Errore ordine: " + e.getMessage());
@@ -358,7 +358,9 @@ public class UnifiedTestSuite {
         if (orders.isEmpty()) {
             System.out.println("❌ Nessun ordine.");
         } else {
-            orders.forEach(order -> System.out.println(order.getOrderData()));
+            orders.forEach(order -> System.out.println("ORDER ID: " + order.getOrderID() + " | ACCOUNT: " + order.getCustomerID() + " (name: " + order.getCustomerName()
+                    + " email: " + order.getCustomerEmail() + ") | TOTAL COST: " + order.getTotalCP() + "cp" +
+                    " | ORDER STATUS: " +order.getOrderStatus() + " | ORDER DATE: " + order.getOrderDate()));
         }
     }
 
