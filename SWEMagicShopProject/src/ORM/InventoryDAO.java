@@ -56,8 +56,8 @@ public class InventoryDAO {
         return items;
     }
 
-    public void viewInventory(int ClientID) {
-        // TODO
+    public static void viewInventory(int ClientID) {
+
     }
 
     public int totalRevenue() {
@@ -70,6 +70,8 @@ public class InventoryDAO {
                 if (set.next()) {
                     revenue = set.getInt("totalRevenue");
                 }
+    public boolean updateInventory(int customerID, ArrayList<Item> orderItems) throws InventoryExceptions.InventoryUpdateException {
+        String inventoryQuery = "INSERT INTO \"Inventory\" (customerid, itemid, quantity) " +
             }
         } catch (SQLException e) {
             System.out.println("Something happened while calculating the revenue: " + e.getMessage());
