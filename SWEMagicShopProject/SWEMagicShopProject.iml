@@ -26,5 +26,24 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Desktop/openjfx-23.0.2_windows-x64_bin-sdk.zip!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/Desktop/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$USER_HOME$/Desktop/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/lib" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

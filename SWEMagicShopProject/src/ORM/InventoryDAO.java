@@ -54,7 +54,7 @@ public class InventoryDAO {
         return items;
     }
 
-    public void viewInventory(int ClientID) {
+    public static void viewInventory(int ClientID) {
 
     }
 
