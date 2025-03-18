@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/GUI/styles/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ORM/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/AccountDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestSuites/ArcaneDAOTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestSuites/ArcaneDAOTestSuite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/ArcaneRequestManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/ArcaneRequestManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ORM/ArcaneDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/ArcaneDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestSuites/ReportManagerTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestSuites/ReportManagerTestSuite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/controller/MainViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/view/main-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/styles.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +29,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="FxmlFile" />
         <option value="package-info" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -59,6 +65,7 @@
   &quot;keyToString&quot;: {
     &quot;Application.ArcaneDAOTestSuite.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.UnifiedTestSuite.executor&quot;: &quot;Run&quot;,
     &quot;Application.accountDAOTestSuite.executor&quot;: &quot;Run&quot;,
     &quot;Application.accountTests.executor&quot;: &quot;Run&quot;,
     &quot;Application.cartManagerTestSuite.executor&quot;: &quot;Run&quot;,
@@ -78,7 +85,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;alice&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/acgib/SWEMagicShop/SWEMagicShopProject&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/acgib/SWEMagicShop/jfreechart-1.5.3.jar&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -101,11 +108,14 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\acgib\SWEMagicShop\SWEMagicShopProject\src" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
       <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/a39b25b2-8d6a-4c11-b329-73e2662cbe08/console.sql" />
       <script-mode>FILE</script-mode>

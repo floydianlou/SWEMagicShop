@@ -31,7 +31,6 @@ public class CustomerOrderManager {
         }
 
         int orderTotal = totalCost(cartManager.getCartItems());
-        // commented for testing
          if (!walletManager.withdrawFunds(orderTotal, customer)) {
             throw new OrderExceptions.MissingFundsException ("You don't have enough funds to make an order!"); }
 
@@ -58,3 +57,4 @@ public class CustomerOrderManager {
     }
 
 }
+

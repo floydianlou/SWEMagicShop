@@ -34,7 +34,7 @@ public class ArcaneRequestManager {
     }
 
 
-    // to allow manager to view all requests, including refused and accepted ones.
+    // to allow manager to GUI.view all requests, including refused and accepted ones.
     public ArrayList<ArcaneRequest> viewAllRequests() {
         ORM.ArcaneDAO arcaneDAO = new ORM.ArcaneDAO();
         return arcaneDAO.viewAllArcaneRequests();

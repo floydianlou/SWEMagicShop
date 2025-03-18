@@ -1,16 +1,20 @@
 package BusinessLogic;
 
 import DomainModel.Item;
-import ORM.ItemDAO;
 import ORM.InventoryDAO;
-import BusinessLogic.InventoryManager;
 import ORM.AccountDAO;
 import DomainModel.Customer;
-import ORM.OrderDAO;
-import DomainModel.Order;
+
+//FOR GRAPH
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ReportManager {
     InventoryDAO inventoryDAO;
@@ -147,6 +151,60 @@ public class ReportManager {
         int nonArcanePercent = nonArcane * 100 / total;
         System.out.println("Percentage of Arcane Members: " + arcanePercent);
         System.out.println("Percentage of Non Arcane Members: " + nonArcanePercent);
+    }
+
+    //FOR GRAPH
+    // Metodo che crea il grafico delle vendite per categoria
+    public static JFreeChart createCategorySalesChart() {
+        // Dataset per il grafico a barre
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        InventoryDAO inventoryDAO = new InventoryDAO();
+        Map<String, Integer> categorySales = inventoryDAO.getCategorySales();
+
+        // Aggiungi i dati al dataset
+        for (Map.Entry<String, Integer> entry : categorySales.entrySet()) {
+            dataset.addValue(entry.getValue(), "Vendite", entry.getKey());
+        }
+
+        // Crea il grafico a barre
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Vendite per Categoria",  // Titolo del grafico
+                "Categoria",              // Asse X
+                "Numero di Vendite",      // Asse Y
+                dataset                   // Dataset
+        );
+
+        return chart;
+    }
+
+    // Metodo che crea il grafico delle vendite per prodotto
+    public static JFreeChart createProductSalesChart() {
+        // Dataset per il grafico a barre
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        InventoryDAO inventoryDAO = new InventoryDAO();
+        Map<String, Integer> itemSales = inventoryDAO.getItemSales();
+
+        // Aggiungi i dati al dataset
+        for (Map.Entry<String, Integer> entry : itemSales.entrySet()) {
+            dataset.addValue(entry.getValue(), "Vendite", entry.getKey());
+        }
+
+        // Crea il grafico a barre
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Vendite per Prodotto",  // Titolo del grafico
+                "Prodotto",              // Asse X
+                "Numero di Vendite",      // Asse Y
+                dataset                   // Dataset
+        );
+
+        return chart;
+    }
+
+    // Metodo che crea il pannello per il grafico
+    public static ChartPanel createChartPanel(JFreeChart chart) {
+        return new ChartPanel(chart);
     }
 
 }

@@ -9,8 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InventoryDAO {
+
 
     Connection connection;
 
@@ -54,8 +57,36 @@ public class InventoryDAO {
         return items;
     }
 
-    public void viewInventory(int ClientID) {
-        // TODO
+    public boolean updateInventory(int customerID, ArrayList<Item> orderItems) throws InventoryExceptions.InventoryUpdateException {
+        String inventoryQuery = "INSERT INTO \"Inventory\" (customerid, itemid, quantity) " +
+                "VALUES (?, ?, ?) " +
+                "ON CONFLICT (customerID, itemID) " +
+                "DO UPDATE SET quantity = \"Inventory\".quantity + EXCLUDED.quantity;";
+        try (PreparedStatement stmt = connection.prepareStatement(inventoryQuery)) {
+            connection.setAutoCommit(false);
+            for (Item orderItem : orderItems) {
+                stmt.setInt(1, customerID);
+                stmt.setInt(2, orderItem.getItemID());
+                stmt.setInt(3, orderItem.getItemQuantity());
+                stmt.addBatch();
+            }
+            stmt.executeBatch();
+            connection.commit();
+            return true;
+
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                throw new InventoryExceptions.InventoryUpdateException("Failed inventory rollback: " + e1.getMessage());
+            }
+            throw new InventoryExceptions.InventoryUpdateException("Failed to update inventory: " + e.getMessage());
+
+        }
+    }
+
+    public static void viewInventory(int ClientID) {
+
     }
 
     public int totalRevenue() {
@@ -310,5 +341,56 @@ public class InventoryDAO {
             System.out.println("Something happened while calculating the biggest spender: " + e.getMessage());
         }
         return null;
+    }
+
+    // FOR GRAPHS
+    public Map<String, Integer> getCategorySales() {
+        String query = "SELECT c.name AS category, COALESCE(SUM(ivt.quantity), 0) AS total_sold " +
+                "FROM \"Category\" c " +
+                "LEFT JOIN \"Item\" i ON c.categoryID = i.categoryID " +
+                "LEFT JOIN \"Inventory\" ivt ON i.itemID = ivt.itemID " +
+                "GROUP BY c.name " +
+                "ORDER BY total_sold DESC";
+
+        Map<String, Integer> categorySalesMap = new HashMap<>();
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            try (ResultSet set = stmt.executeQuery()) {
+                while (set.next()) {
+                    String category = set.getString("category");
+                    int totalSold = set.getInt("total_sold");
+                    categorySalesMap.put(category, totalSold);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while retrieving category sales data: " + e.getMessage());
+        }
+
+        return categorySalesMap;
+    }
+
+    public Map<String, Integer> getItemSales() {
+        String query = "SELECT it.name AS item_name, COALESCE(SUM(inv.quantity), 0) AS total_sold " +
+                "FROM \"Item\" it " +
+                "LEFT JOIN \"Inventory\" inv ON it.itemID = inv.itemID " +
+                "LEFT JOIN \"Category\" c ON it.categoryID = c.categoryID " +
+                "GROUP BY it.itemID, it.name " +
+                "ORDER BY total_sold DESC";
+
+        Map<String, Integer> itemSalesMap = new HashMap<>();
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            try (ResultSet set = stmt.executeQuery()) {
+                while (set.next()) {
+                    String itemName = set.getString("item_name");
+                    int totalSold = set.getInt("total_sold");
+                    itemSalesMap.put(itemName, totalSold);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while retrieving item sales data: " + e.getMessage());
+        }
+
+        return itemSalesMap;
     }
 }
