@@ -37,4 +37,5 @@ public class InventoryManager {
         InventoryDAO inventoryDAO = new InventoryDAO();
         return inventoryDAO.updateInventory(customer.getPersonID(), cartItems);
     }
+
 }

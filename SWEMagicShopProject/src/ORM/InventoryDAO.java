@@ -56,9 +56,7 @@ public class InventoryDAO {
         return items;
     }
 
-    public void viewInventory(int ClientID) {
-        // TODO
-    }
+
 
     public int totalRevenue() {
         String query = "SELECT SUM(i.quantity * it.cpprice) as totalRevenue " +

@@ -1,16 +1,16 @@
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-public class main extends Application {
-    @Override
-    public void start(Stage primaryStage) {
-        Label label = new Label("JavaFX è configurato!");
-        StackPane root = new StackPane(label);
-        Scene scene = new Scene(root, 400, 300);
 
-        primaryStage.setTitle("Test JavaFX");
+public class main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/views/login.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Magic Shop - Login");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
