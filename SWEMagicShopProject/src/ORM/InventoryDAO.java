@@ -54,9 +54,7 @@ public class InventoryDAO {
         return items;
     }
 
-    public static void viewInventory(int ClientID) {
 
-    }
 
     public boolean updateInventory(int customerID, ArrayList<Item> orderItems) throws InventoryExceptions.InventoryUpdateException {
         String inventoryQuery = "INSERT INTO \"Inventory\" (customerid, itemid, quantity) " +
