@@ -1,6 +1,8 @@
 package GUI.controller;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,4 +43,27 @@ public class MainViewController {
             e.printStackTrace();
         }
     }
+
+
+    @FXML
+    private void goToRegister(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/UserRegistration.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            // 1) Recuperiamo lo stage dalla sorgente dell'evento
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+            // 2) Impostiamo la nuova scena
+            stage.setScene(scene);
+            stage.setTitle("Otari's Magic Shop - User Registration");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
