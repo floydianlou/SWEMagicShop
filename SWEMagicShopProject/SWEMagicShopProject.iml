@@ -45,5 +45,6 @@
         <jarDirectory url="file://$USER_HOME$/Desktop/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/lib" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="jfreechart-1.5.3" level="project" />
   </component>
 </module>

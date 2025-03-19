@@ -2,7 +2,8 @@ package BusinessLogic;
 
 import DomainModel.Customer;
 import DomainModel.Item;
-
+import Exceptions.OrderExceptions;
+import Exceptions.OrderExceptions.ItemNotInCartException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -98,13 +99,13 @@ public class CartManager {
         }
     }
 
-    public void removeItemFromCart (Item item) {
+    public void removeItemFromCart (Item item) throws ItemNotInCartException {
         // TODO add check if product is in cart
         for (int i = 0; i < cartItems.size(); i++) {
             if (cartItems.get(i).getItemID() == item.getItemID()) {
                 cartItems.remove(i);
                 break;
             }
-        }
+        } throw new ItemNotInCartException("There was no such item in your cart!");
     }
 }
