@@ -86,7 +86,7 @@ public class AccountDAO {
         }
     }
 
-    public Person loginPerson(String email, String password) {
+    public Person loginPerson(String email, String password) throws SQLException {
         String sqlManager = String.format("SELECT managerID, name, surname FROM \"Manager\" WHERE email = '%s' and password = '%s'", email, password);
 
         try (Statement stmt = connection.createStatement()) {
@@ -126,11 +126,7 @@ public class AccountDAO {
                 }
             }
 
-        } catch (SQLException exception) {
-            System.err.println("Customer account login failed" + exception.getMessage());
         }
-
-        System.out.println("Email or password doesn't match.");
         return null;
     }
 
