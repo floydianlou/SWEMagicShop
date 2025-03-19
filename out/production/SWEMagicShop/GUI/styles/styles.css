@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('/fonts/Transcity DEMO.otf');
+}
+
+.label {
+    -fx-font-family: 'OtariShopFont';
+    -fx-font-size: 20px;
+    -fx-text-fill: #460E56;
+}

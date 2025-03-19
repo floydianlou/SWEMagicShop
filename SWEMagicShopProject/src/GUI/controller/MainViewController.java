@@ -27,40 +27,33 @@ public class MainViewController {
         loadScene("/GUI/view/login-view.fxml");
     }
 
+
     @FXML
-    private void handleRegisterButton() {
-        loadScene(""); //TODO
+    public void handleRegisterChoice(ActionEvent actionEvent) { //to choose type of registration button
+        loadScene("/GUI/view/choose-registration-type.fxml");
+    }
+
+    @FXML
+    private void handleRegisterButton() { //User registration button
+        loadScene("/GUI/view/user-registration.fxml");
     }
 
     private void loadScene(String fxmlFile) {
+        System.out.println("Tentativo di caricare: " + fxmlFile);
+        if(getClass().getResource(fxmlFile) == null) {
+            System.out.println("Resource non trovata: " + fxmlFile);
+            return;
+        }
         try {
             Stage stage = (Stage) iconImageView.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    @FXML
-    private void goToRegister(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/UserRegistration.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
-
-            // 1) Recuperiamo lo stage dalla sorgente dell'evento
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-
-            // 2) Impostiamo la nuova scena
             stage.setScene(scene);
-            stage.setTitle("Otari's Magic Shop - User Registration");
             stage.show();
-
+            System.out.println("Scena caricata con successo.");
         } catch (IOException e) {
+            System.out.println("Eccezione durante il caricamento:");
             e.printStackTrace();
         }
     }
