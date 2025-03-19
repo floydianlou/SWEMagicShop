@@ -6,7 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/SWEMagicShopProject/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="corretto-22" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="gson-2.12.1" level="project" />
     <orderEntry type="library" name="postgresql-42.7.5" level="project" />
