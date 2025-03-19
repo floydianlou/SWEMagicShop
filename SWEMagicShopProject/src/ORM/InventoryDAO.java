@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class InventoryDAO {
 
+
     Connection connection;
 
     public InventoryDAO() {

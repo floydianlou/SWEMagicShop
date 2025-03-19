@@ -1,22 +1,34 @@
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class main extends Application {
 
+    private static Stage primaryStage;
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        primaryStage.setTitle("Magic Shop - Login");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void start(Stage primaryStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/main-view.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Otari's Magic Shop");
+            primaryStage.setMaximized(true);
+            primaryStage.setWidth(1200);
+            primaryStage.setHeight(800);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 }

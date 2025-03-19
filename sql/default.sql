@@ -34,7 +34,7 @@ VALUES
 -- Data OrderStatus
 INSERT INTO "OrderStatus" (name)
 VALUES
-    ('Pending'),
+    ('In progress'),
     ('Delivered'),
     ('Cancelled');
 
@@ -78,8 +78,8 @@ VALUES
 -- Data RequestStatus
 INSERT INTO "RequestStatus" (name)
 VALUES
-    ('In Progress'),
-    ('Completed'),
+    ('Pending'),
+    ('Approved'),
     ('Rejected');
 
 -- Data ArcaneRequest
