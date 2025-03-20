@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/view/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/CustomerOrderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/CustomerOrderManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ORM/InventoryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/InventoryDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestSuites/UnifiedTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestSuites/UnifiedTestSuite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestSuites/cartManagerTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestSuites/cartManagerTestSuite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/view/login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/view/login-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/view/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/view/main-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ORM/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/AccountDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestSuites/ArcaneDAOTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestSuites/ArcaneDAOTestSuite.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../production/SWEMagicShopProject/GUI/view/login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../production/SWEMagicShopProject/GUI/view/login-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../production/SWEMagicShopProject/GUI/view/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../production/SWEMagicShopProject/GUI/view/main-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,10 +29,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="package-info" />
         <option value="Interface" />
+        <option value="package-info" />
         <option value="Class" />
-        <option value="CSS File" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -46,7 +48,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/floydianlou/SWEMagicShop.git&quot;,
-    &quot;accountId&quot;: &quot;49278306-a645-4756-a7c4-5e4222e0a21a&quot;
+    &quot;accountId&quot;: &quot;2ff06d0e-42e9-4ed8-8382-e27578393a42&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -60,69 +62,61 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.InventoryTestSuite.executor": "Run",
-    "Application.Main (1).executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.UnifiedTestSuite.executor": "Run",
-    "Application.accountDAOTestSuite.executor": "Run",
-    "Application.accountTests.executor": "Run",
-    "Application.cartManagerTestSuite.executor": "Run",
-    "Application.main.executor": "Run",
-    "Database Script.console.sql.executor": "Run",
-    "Database Script.default.sql.executor": "Run",
-    "Database Script.reset.sql.executor": "Run",
-    "Database Script.schema.sql.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "gabriele",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Gabriele/Desktop/jfreechart-1.5.3.jar",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "database.query.execution",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ArcaneDAOTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.UnifiedTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Application.accountDAOTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Application.accountTests.executor&quot;: &quot;Run&quot;,
+    &quot;Application.cartManagerTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Application.itemDAOTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Application.main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.walletDAOTestSuite.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.console.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.default.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.reset.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.schema.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;alice&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/acgib/SWEMagicShop/jfreechart-1.5.3.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.24712643&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ],
-    "RunConfigurationTargetLRU": [
-      "a39b25b2-8d6a-4c11-b329-73e2662cbe08/database/\"otariMagicShop\"",
-      "a39b25b2-8d6a-4c11-b329-73e2662cbe08"
+    &quot;RunConfigurationTargetLRU&quot;: [
+      &quot;a39b25b2-8d6a-4c11-b329-73e2662cbe08/database/\&quot;otariMagicShop\&quot;&quot;,
+      &quot;a39b25b2-8d6a-4c11-b329-73e2662cbe08&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Gabriele\Documents\SWEMagicShop\SWEMagicShop\SWEMagicShopProject\src\view" />
+      <recent name="C:\Users\acgib\SWEMagicShop\SWEMagicShopProject\src" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.main">
-    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main" />
-      <module name="SWEMagicShopProject" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\Gabriele\Desktop\openjfx-23.0.2_windows-x64_bin-sdk\javafx-sdk-23.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.Main">
     <configuration name="console.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
       <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/a39b25b2-8d6a-4c11-b329-73e2662cbe08/console.sql" />
       <script-mode>FILE</script-mode>
@@ -148,23 +142,18 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.main" />
+      <item itemvalue="Application.Main" />
       <item itemvalue="Database Script.console.sql" />
       <item itemvalue="Database Script.default.sql" />
       <item itemvalue="Database Script.reset.sql" />
       <item itemvalue="Database Script.schema.sql" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
-        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.39" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.39" />
       </set>
     </attachedChunks>
   </component>
@@ -186,13 +175,9 @@
       <workItem from="1740770700238" duration="5765000" />
       <workItem from="1740839446438" duration="6970000" />
       <workItem from="1740850784895" duration="133000" />
-      <workItem from="1741794468285" duration="15768000" />
-      <workItem from="1741887487932" duration="1828000" />
-      <workItem from="1741945672885" duration="613000" />
-      <workItem from="1742044752472" duration="8722000" />
-      <workItem from="1742229262510" duration="6238000" />
-      <workItem from="1742286464558" duration="2354000" />
-      <workItem from="1742326971630" duration="3803000" />
+      <workItem from="1741794468285" duration="40464000" />
+      <workItem from="1742226057561" duration="4387000" />
+      <workItem from="1742242559133" duration="2580000" />
     </task>
     <servers />
   </component>

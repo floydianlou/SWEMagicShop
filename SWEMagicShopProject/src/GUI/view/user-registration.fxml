@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="GUI.controller.UserRegistrationController"
+      spacing="15" alignment="CENTER">
+    <!-- Impostiamo il padding usando un elemento Insets -->
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Titolo -->
+    <Label text="Welcome to Otari's Magic Shop!"
+           style="-fx-font-size: 24; -fx-font-weight: bold;" />
+
+    <!-- Sottotitolo -->
+    <Label text="Register"
+           style="-fx-font-size: 18; -fx-font-weight: bold;" />
+
+    <!-- Riga: Name -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Name:" minWidth="100"/>
+        <TextField fx:id="nameField" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!-- Riga: Surname -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Surname:" minWidth="100"/>
+        <TextField fx:id="surnameField" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!-- Riga: Email Address -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Email Address:" minWidth="100"/>
+        <TextField fx:id="emailField" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!-- Riga: Password -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Password:" minWidth="100"/>
+        <PasswordField fx:id="passwordField" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!-- Riga: Age -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Age:" minWidth="100"/>
+        <TextField fx:id="ageField" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!-- Riga: Phone Number -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Phone Number:" minWidth="100"/>
+        <TextField fx:id="phoneField" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!-- Riga: Species -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Species:" minWidth="100"/>
+        <ComboBox fx:id="speciesComboBox" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!-- Pulsante di Registrazione -->
+    <Button text="Register" fx:id="registerButton"
+            onAction="#handleRegistration"
+            style="-fx-font-weight: bold; -fx-background-color: #7C44C2; -fx-text-fill: white;"
+            maxWidth="200"/>
+</VBox>

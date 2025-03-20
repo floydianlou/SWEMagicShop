@@ -18,27 +18,53 @@ public class AccountDAO {
     }
 
     public boolean createCustomerAccount(String name, String surname, String email, String password, int age, String phoneNumber, Species species) throws SQLException {
-        String sqlCustomer = String.format(
-                "INSERT INTO \"Customer\" (name, surname, email, password, age, phone, speciesID) " +
-                        "VALUES ('%s', '%s', '%s', '%s', %d, '%s', %d) RETURNING customerID;",
-                name, surname, email, password, age, phoneNumber, species.getSpeciesID());
+        String sqlCustomer = "INSERT INTO \"Customer\" (name, surname, email, password, age, phone, speciesID) " +
+                "VALUES (?,?,?,?,?,?,?) RETURNING customerID;";
+        try {
+            connection.setAutoCommit(false);
 
-        try (Statement stmt = connection.createStatement();
-            ResultSet set = stmt.executeQuery(sqlCustomer)) {
-            if (set.next()) {
-                int ID = set.getInt("customerID");
-                String sqlWallet = String.format("INSERT INTO \"Wallet\" (customerID) VALUES (%d);", ID);
-                try (PreparedStatement walletstmt = connection.prepareStatement(sqlWallet)) {
-                    walletstmt.executeUpdate();
-                    System.out.println("Customer account created");
-                    return true;}
+            try (PreparedStatement stmt = connection.prepareStatement(sqlCustomer)) {
+                stmt.setString(1, name);
+                stmt.setString(2, surname);
+                stmt.setString(3, email);
+                stmt.setString(4, password);
+                stmt.setInt(5, age);
+                stmt.setString(6, phoneNumber);
+                stmt.setInt(7, species.getSpeciesID());
+
+                try (ResultSet set = stmt.executeQuery()) {
+                    if (set.next()) {
+                        int ID = set.getInt("customerID");
+                        String sqlWallet = "INSERT INTO \"Wallet\" (customerID) VALUES (?);";
+
+                        try (PreparedStatement walletstmt = connection.prepareStatement(sqlWallet)) {
+                            walletstmt.setInt(1, ID);
+                            walletstmt.executeUpdate();
+                        }
+                        connection.commit();
+                        System.out.println("Customer account created");
+                        return true;
+                    }
+                }
             }
         } catch (SQLException exception) {
+            try {
+                connection.rollback();
+                System.err.println("Transaction rolled back due to error.");
+            } catch (SQLException throwables) {
+                System.out.println("Error while doing rollback: " + throwables.getMessage());
+            }
             if (exception.getMessage().contains("duplicate key value violates unique constraint")) {
                 System.err.println("This mail is already in use for a customer account.");
             } else {
                 System.err.println("Customer account creation failed: " + exception.getMessage());
-            } }
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true); } catch (SQLException e) {
+                System.err.println("Error while reactivating auto commit: " + e.getMessage());
+            }
+        }
         return false;
     }
 
@@ -60,7 +86,7 @@ public class AccountDAO {
         }
     }
 
-    public Person loginPerson(String email, String password) {
+    public Person loginPerson(String email, String password) throws SQLException {
         String sqlManager = String.format("SELECT managerID, name, surname FROM \"Manager\" WHERE email = '%s' and password = '%s'", email, password);
 
         try (Statement stmt = connection.createStatement()) {
@@ -100,11 +126,7 @@ public class AccountDAO {
                 }
             }
 
-        } catch (SQLException exception) {
-            System.err.println("Customer account login failed" + exception.getMessage());
         }
-
-        System.out.println("Email or password doesn't match.");
         return null;
     }
 
@@ -213,23 +235,4 @@ public class AccountDAO {
         return false;
     }
 
-    public boolean updateCustomerArcaneStatus(int customerID, boolean status) {
-        // TODO CHECK PREPARED STATEMENT POSSIBILITY
-        String arcanesql = String.format("UPDATE \"Customer\" SET arcanemembership = %b" +
-                " WHERE customerID = %d;", status, customerID);
-
-        try (Statement stmt = connection.createStatement()) {
-            int affected = stmt.executeUpdate(arcanesql);
-            if (affected > 0) {
-            System.out.println("Customer " + customerID + " arcane status updated to " + status);
-            return true; }
-            else {
-                System.out.println("No rows were affected.");
-            }
-        } catch (SQLException exception) {
-            System.err.println("Failed to update customer arcane status: " + exception.getMessage());
-        }
-
-        return false;
-    }
 }

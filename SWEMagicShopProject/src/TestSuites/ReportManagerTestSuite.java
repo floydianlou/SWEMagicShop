@@ -64,7 +64,7 @@ public class ReportManagerTestSuite {
             System.out.println("La categoria più gettonata è " + category + " num: " + reportManager.categoryNum(category));
             System.out.println("✅ Categoria trovata con successo!");
         } catch(Exception e){
-            System.err.println("❌ Errore nella view: " + e.getMessage());
+            System.err.println("❌ Errore nella GUI.view: " + e.getMessage());
         }
     }
 
@@ -75,7 +75,7 @@ public class ReportManagerTestSuite {
             System.out.println("La categoria meno gettonata è " + category + " num: " + reportManager.categoryNum(category));
             System.out.println("✅ Categoria trovata con successo!");
         } catch(Exception e){
-            System.err.println("❌ Errore nella view: " + e.getMessage());
+            System.err.println("❌ Errore nella GUI.view: " + e.getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ public class ReportManagerTestSuite {
             System.out.println("Il prodotto più gettonato è " + product.getItemName() + " num: " + reportManager.productNumById(product.getItemID()));
             System.out.println("✅ Item trovata con successo!");
         } catch(Exception e){
-            System.err.println("❌ Errore nella view: " + e.getMessage());
+            System.err.println("❌ Errore nella GUI.view: " + e.getMessage());
         }
     }
 
@@ -97,7 +97,7 @@ public class ReportManagerTestSuite {
             System.out.println("Il prodotto meno gettonato è " + product.getItemName() + " num: " + reportManager.productNumById(product.getItemID()));
             System.out.println("✅ Item trovata con successo!");
         } catch(Exception e){
-            System.err.println("❌ Errore nella view: " + e.getMessage());
+            System.err.println("❌ Errore nella GUI.view: " + e.getMessage());
         }
     }
 
@@ -111,7 +111,7 @@ public class ReportManagerTestSuite {
             System.out.println("Il prodotto è stato venduto " + number + " volte.");
             System.out.println("✅ Numero trovato con successo!");
         }catch(Exception e){
-            System.err.println("❌ Errore nella view: " + e.getMessage());
+            System.err.println("❌ Errore nella GUI.view: " + e.getMessage());
         }
     }
 
@@ -124,7 +124,7 @@ public class ReportManagerTestSuite {
             System.out.println("La categoria scelta ha venduto " + number + " prodotti.");
             System.out.println("✅ Numero trovato con successo!");
         }catch(Exception e){
-            System.err.println("❌ Errore nella view: " + e.getMessage());
+            System.err.println("❌ Errore nella GUI.view: " + e.getMessage());
         }
     }
 
@@ -135,7 +135,7 @@ public class ReportManagerTestSuite {
             System.out.println("Il cliente che ha pagato di più è " + c.getName() + " " + c.getSurname() + " num: " + reportManager.viewTotalSpentByCustomerId(c.getPersonID()));
             System.out.println("✅ Cliente trovato con successo!");
         } catch(Exception e){
-            System.err.println("❌ Errore nella view: " + e.getMessage());
+            System.err.println("❌ Errore nella GUI.view: " + e.getMessage());
         }
     }
 
@@ -146,7 +146,7 @@ public class ReportManagerTestSuite {
             System.out.println("Il cliente che ha pagato di meno è " + c.getName() + " " + c.getSurname() + " num: " + reportManager.viewTotalSpentByCustomerId(c.getPersonID()));
             System.out.println("✅ Cliente trovato con successo!");
         } catch(Exception e){
-            System.err.println("❌ Errore nella view: " + e.getMessage());
+            System.err.println("❌ Errore nella GUI.view: " + e.getMessage());
         }
     }
 
@@ -161,7 +161,7 @@ public class ReportManagerTestSuite {
             System.out.println("✅ Numero trovato con successo!");
 
         }catch(Exception e){
-            System.err.println("❌ Errore nella view: " + e.getMessage());
+            System.err.println("❌ Errore nella GUI.view: " + e.getMessage());
         }
     }
 
@@ -172,7 +172,7 @@ public class ReportManagerTestSuite {
             System.out.println("L'incasso del negozio è: " + revenue);
             System.out.println("✅ Numero trovato con successo!");
         }catch(Exception e){
-            System.err.println("❌ Errore nella view: " + e.getMessage());
+            System.err.println("❌ Errore nella GUI.view: " + e.getMessage());
         }
     }
 

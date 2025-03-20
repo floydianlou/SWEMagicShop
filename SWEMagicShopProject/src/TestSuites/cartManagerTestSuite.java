@@ -108,7 +108,7 @@ public class cartManagerTestSuite {
                 int orderID = 0;
                 System.out.println("Creazione ordine in corso...");
                 try {
-                    orderID = orderManager.createOrder(customer, cartManager, walletManager, inventoryManager);
+                    orderID = orderManager.createOrder(customer, cartManager, walletManager);
                 } catch (Exception e) {
                     System.out.println("Errore nella creazione dell'ordine: " + e.getMessage());
                 }

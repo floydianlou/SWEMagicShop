@@ -126,5 +126,6 @@ public class OrderDAO {
 
     public void deleteOrder(int orderID) {
         String deletsql = "DELETE FROM \"Order\" WHERE orderid = ?";
+        //TODO is this necessary? should we implement this function?
     }
 }
