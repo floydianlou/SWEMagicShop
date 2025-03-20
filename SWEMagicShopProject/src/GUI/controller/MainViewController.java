@@ -24,38 +24,13 @@ public class MainViewController {
 
     @FXML
     private void handleLoginButton() {
-        loadScene("/GUI/view/login-view.fxml");
+        SceneController.loadScene("login-view.fxml");
     }
 
 
     @FXML
-    public void handleRegisterChoice(ActionEvent actionEvent) { //to choose type of registration button
-        loadScene("/GUI/view/choose-registration-type.fxml");
-    }
-
-    @FXML
-    private void handleRegisterButton() { //User registration button
-        loadScene("/GUI/view/user-registration.fxml");
-    }
-
-    private void loadScene(String fxmlFile) {
-        System.out.println("Tentativo di caricare: " + fxmlFile);
-        if(getClass().getResource(fxmlFile) == null) {
-            System.out.println("Resource non trovata: " + fxmlFile);
-            return;
-        }
-        try {
-            Stage stage = (Stage) iconImageView.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-            System.out.println("Scena caricata con successo.");
-        } catch (IOException e) {
-            System.out.println("Eccezione durante il caricamento:");
-            e.printStackTrace();
-        }
+    public void handleRegisterChoice() {
+        SceneController.loadScene("choose-registration-type.fxml");
     }
 
 

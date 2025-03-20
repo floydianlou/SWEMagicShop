@@ -5,12 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.event.ActionEvent;
 import BusinessLogic.AccountManager;
 import DomainModel.Species;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
 public class UserRegistrationController {
 
@@ -20,71 +19,103 @@ public class UserRegistrationController {
     @FXML private PasswordField passwordField;
     @FXML private TextField ageField;
     @FXML private TextField phoneField;
-    @FXML private ComboBox<String> speciesComboBox;
+    @FXML private ComboBox<String> speciesDropdown;
     @FXML private Button registerButton;
+    @FXML private Label errorLabel;
+    private ArrayList<Species> allSpecies;
 
     private AccountManager accountManager;
 
     public UserRegistrationController() {
-        // Inizializziamo l'AccountManager
         accountManager = new AccountManager();
     }
 
     @FXML
     public void initialize() {
-        // Popoliamo la ComboBox con alcuni valori
-        speciesComboBox.getItems().addAll("Human", "Elf", "Dwarf", "Orc");
-        speciesComboBox.getSelectionModel().selectFirst();
+        loadSpeciesInDropdown();
+        speciesDropdown.getSelectionModel().selectFirst();
+        ageField.setTextFormatter(new TextFormatter<>(change ->
+                (change.getControlNewText().matches("\\d*")) ? change : null));
+    }
+
+    public void loadSpeciesInDropdown() {
+        try {
+        allSpecies = accountManager.getAllSpecies(); }
+        catch (RuntimeException e) {
+            errorLabel.setText(e.getMessage());
+        }
+        for (Species species : allSpecies) {
+            speciesDropdown.getItems().add(species.getName());
+        }
     }
 
     @FXML
-    private void handleRegistration(ActionEvent event) {
-        String name = nameField.getText().trim();
-        String surname = surnameField.getText().trim();
-        String email = emailField.getText().trim();
-        String password = passwordField.getText().trim();
-        String ageText = ageField.getText().trim();
-        String phone = phoneField.getText().trim();
-        String speciesStr = speciesComboBox.getSelectionModel().getSelectedItem();
+    private void handleRegistration() {
+        String name = nameField.getText();
+        String surname = surnameField.getText();
+        String email = emailField.getText();
+        String password = passwordField.getText();
+        String phone = phoneField.getText();
+        String selectedSpeciesName = speciesDropdown.getValue();
 
-        int age;
-        try {
-            age = Integer.parseInt(ageText);
-        } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Invalid age", "Please enter a valid number for age.");
+        if (email.isEmpty() || password.isEmpty()||name.isEmpty()||surname.isEmpty()||phone.isEmpty()) {
+            errorLabel.setText("Insert all your data to create an account");
             return;
         }
 
-        // Creiamo un oggetto Species (valori d'esempio: ID=1, legalAge=18, limitAge=100)
-        Species species = new Species(1, speciesStr, 18, 100);
+        int age;
+        try {
+            age = Integer.parseInt(ageField.getText().trim());
+        } catch (NumberFormatException e) {
+            errorLabel.setText("Invalid age. Please enter a valid number.");
+            return;
+        }
+
+        if (selectedSpeciesName == null) {
+            errorLabel.setText("Please select a species.");
+            return;
+        }
+
+        Species selected = null;
+        for (Species species : allSpecies) {
+            if (species.getName().equals(selectedSpeciesName)) {
+                selected = species;
+            }
+        }
 
         try {
-            accountManager.createCustomerAccount(name, surname, email, password, age, phone, species);
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Registration Completed", "Your account has been created successfully.");
-        } catch (Exception ex) {
-            showAlert(Alert.AlertType.ERROR, "Registration Failed", "Error creating account", ex.getMessage());
+            accountManager.createCustomerAccount(name, surname, email, password, age, phone, selected);
+            popupAccountComplete();
+
+        }
+        catch (RuntimeException e){
+            errorLabel.setText(e.getMessage());
+        }
+        catch (Exception ex) {
+            errorLabel.setText("An unexpected error happened. Please try again.");
+            ex.printStackTrace();
         }
     }
 
-    private void showAlert(Alert.AlertType alertType, String title, String header, String content) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
-
-    private void loadScene(String fxmlFile) {
+    private void popupAccountComplete() {
         try {
-            Stage stage = (Stage) registerButton.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/popup.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
+
+            PopupController popupController = loader.getController();
+            popupController.setPopupContent("Account Created", "Your account has been created successfully.");
+
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Account Created");
+            popupStage.setScene(new Scene(root));
+            popupStage.setResizable(false);
+            popupStage.showAndWait();
+            SceneController.loadScene("main-view.fxml");
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }
 
