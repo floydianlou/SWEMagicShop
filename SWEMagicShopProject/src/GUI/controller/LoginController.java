@@ -20,6 +20,8 @@ import java.io.IOException;
 public class LoginController {
 
     @FXML private TextField emailField;
+    @FXML private ImageView emailIcon;
+    @FXML private ImageView passwordIcon;
     @FXML private PasswordField passwordField;
     @FXML private Label errorLabel;
     @FXML private ImageView shopIcon;
@@ -28,6 +30,8 @@ public class LoginController {
     @FXML
     public void initialize() {
         Image image = new Image(getClass().getResource("/images/shop-icon.png").toExternalForm());
+        emailIcon.setImage(new Image(getClass().getResource("/images/emailIcon.png").toExternalForm()));
+        passwordIcon.setImage(new Image(getClass().getResource("/images/passwordIcon.png").toExternalForm()));
         shopIcon.setImage(image);
     }
 
