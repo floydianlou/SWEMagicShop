@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="GUI.controller.ChooseRegistrationTypeController"
+      alignment="CENTER" spacing="20">
+    <!-- Padding -->
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Titolo -->
+    <Label text="Welcome to Otari's Magic Shop!"
+           style="-fx-font-size: 40; -fx-font-weight: bold; -fx-text-fill: #4A0D67;"/>
+
+    <!-- Sottotitolo -->
+    <Label text="CHOOSE REGISTRATION TYPE"
+           style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #4A0D67;"/>
+
+    <Region prefHeight="20"/>
+
+    <!-- Pulsanti per il tipo di registrazione -->
+    <HBox alignment="CENTER" spacing="30">
+        <Button text="CLIENT"
+                onAction="#handleClientRegistration"
+                style="-fx-font-size: 18; -fx-font-weight: bold; -fx-background-color: #7C44C2; -fx-text-fill: white;"
+                prefWidth="150" prefHeight="60"/>
+        <Button text="MANAGER"
+                onAction="#handleManagerRegistration"
+                style="-fx-font-size: 18; -fx-font-weight: bold; -fx-background-color: #cccccc; -fx-text-fill: #333;"
+                prefWidth="150" prefHeight="60"/>
+    </HBox>
+
+    <Region prefHeight="30"/>
+
+    <!-- Pulsante per tornare al Main Menu -->
+    <Button text="Back to Welcome Menu"
+            onAction="#handleBackToMenu"
+            style="-fx-font-size: 16; -fx-background-color: #7C44C2; -fx-text-fill: white;"
+            prefWidth="200"/>
+</VBox>
