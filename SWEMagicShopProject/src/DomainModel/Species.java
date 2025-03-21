@@ -17,6 +17,9 @@ public class Species {
         this.name = name;
     }
 
+    public String getName () {
+        return name;
+    }
     public int getSpeciesID() {
         return speciesID;
     }

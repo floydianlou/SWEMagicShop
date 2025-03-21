@@ -1,6 +1,8 @@
 package GUI.controller;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,23 +24,14 @@ public class MainViewController {
 
     @FXML
     private void handleLoginButton() {
-        loadScene("/GUI/view/login-view.fxml");
+        SceneController.loadScene("login-view.fxml");
     }
+
 
     @FXML
-    private void handleRegisterButton() {
-        loadScene(""); //TODO
+    public void handleRegisterChoice() {
+        SceneController.loadScene("choose-registration-type.fxml");
     }
 
-    private void loadScene(String fxmlFile) {
-        try {
-            Stage stage = (Stage) iconImageView.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 }

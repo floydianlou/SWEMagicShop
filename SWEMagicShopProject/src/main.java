@@ -1,3 +1,4 @@
+import GUI.controller.SceneController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,9 +11,10 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+            main.primaryStage = primaryStage;
+            SceneController.setPrimaryStage(primaryStage);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/main-view.fxml"));
             Scene scene = new Scene(loader.load());
-
             primaryStage.setScene(scene);
             primaryStage.setTitle("Otari's Magic Shop");
             primaryStage.setMaximized(true);
