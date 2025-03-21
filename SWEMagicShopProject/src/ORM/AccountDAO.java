@@ -18,11 +18,35 @@ public class AccountDAO {
     }
 
     public boolean createCustomerAccount(String name, String surname, String email, String password, int age, String phoneNumber, Species species) throws SQLException {
+        String checkEmailSql = "SELECT 1 FROM \"Customer\" WHERE email = ?;";
+        String checkPhoneSql = "SELECT 1 FROM \"Customer\" WHERE phone = ?;";
         String sqlCustomer = "INSERT INTO \"Customer\" (name, surname, email, password, age, phone, speciesID) " +
                 "VALUES (?,?,?,?,?,?,?) RETURNING customerID;";
+
         try {
             connection.setAutoCommit(false);
 
+            // Check if email already exists
+            try (PreparedStatement checkEmailStmt = connection.prepareStatement(checkEmailSql)) {
+                checkEmailStmt.setString(1, email);
+                try (ResultSet emailSet = checkEmailStmt.executeQuery()) {
+                    if (emailSet.next()) {
+                        throw new SQLException("This email is already in use.");
+                    }
+                }
+            }
+
+            // Check if phone number already exists
+            try (PreparedStatement checkPhoneStmt = connection.prepareStatement(checkPhoneSql)) {
+                checkPhoneStmt.setString(1, phoneNumber);
+                try (ResultSet phoneSet = checkPhoneStmt.executeQuery()) {
+                    if (phoneSet.next()) {
+                        throw new SQLException("This phone number is already in use.");
+                    }
+                }
+            }
+
+            // Insert new customer
             try (PreparedStatement stmt = connection.prepareStatement(sqlCustomer)) {
                 stmt.setString(1, name);
                 stmt.setString(2, surname);
@@ -37,9 +61,9 @@ public class AccountDAO {
                         int ID = set.getInt("customerID");
                         String sqlWallet = "INSERT INTO \"Wallet\" (customerID) VALUES (?);";
 
-                        try (PreparedStatement walletstmt = connection.prepareStatement(sqlWallet)) {
-                            walletstmt.setInt(1, ID);
-                            walletstmt.executeUpdate();
+                        try (PreparedStatement walletStmt = connection.prepareStatement(sqlWallet)) {
+                            walletStmt.setInt(1, ID);
+                            walletStmt.executeUpdate();
                         }
                         connection.commit();
                         System.out.println("Customer account created");
@@ -54,12 +78,7 @@ public class AccountDAO {
             } catch (SQLException rollbackException) {
                 System.err.println("Error while doing rollback: " + rollbackException.getMessage());
             }
-
-            if (exception.getMessage().contains("duplicate key value violates unique constraint")) {
-                throw new SQLException("This email is already in use.");
-            } else {
-                throw new SQLException("Customer account creation failed due to a database error.");
-            }
+            throw exception;
         } finally {
             try {
                 connection.setAutoCommit(true);
@@ -69,6 +88,7 @@ public class AccountDAO {
         }
         return false;
     }
+
 
     public boolean createManagerAccount(String name, String surname, String email, String password) {
         String sqlManager = String.format("INSERT INTO \"Manager\" (name, surname, email, password) " +
