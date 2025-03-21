@@ -5,15 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="608358f7-1430-495e-af0e-644b9093af46" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/GUI/styles/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a39b25b2-8d6a-4c11-b329-73e2662cbe08.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/ArcaneRequestManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/ArcaneRequestManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ORM/ArcaneDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/ArcaneDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestSuites/ReportManagerTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestSuites/ReportManagerTestSuite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/controller/MainViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/view/main-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BusinessLogic/AccountManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/view/login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/view/login-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/view/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/view/main-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ORM/AccountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ORM/AccountDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestSuites/ArcaneDAOTestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestSuites/ArcaneDAOTestSuite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../production/SWEMagicShopProject/GUI/view/login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../production/SWEMagicShopProject/GUI/view/login-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../production/SWEMagicShopProject/GUI/view/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../production/SWEMagicShopProject/GUI/view/main-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

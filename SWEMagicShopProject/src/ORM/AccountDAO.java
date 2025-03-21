@@ -51,17 +51,19 @@ public class AccountDAO {
             try {
                 connection.rollback();
                 System.err.println("Transaction rolled back due to error.");
-            } catch (SQLException throwables) {
-                System.out.println("Error while doing rollback: " + throwables.getMessage());
+            } catch (SQLException rollbackException) {
+                System.err.println("Error while doing rollback: " + rollbackException.getMessage());
             }
+
             if (exception.getMessage().contains("duplicate key value violates unique constraint")) {
-                System.err.println("This mail is already in use for a customer account.");
+                throw new SQLException("This email is already in use.");
             } else {
-                System.err.println("Customer account creation failed: " + exception.getMessage());
+                throw new SQLException("Customer account creation failed due to a database error.");
             }
         } finally {
             try {
-                connection.setAutoCommit(true); } catch (SQLException e) {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
                 System.err.println("Error while reactivating auto commit: " + e.getMessage());
             }
         }
@@ -86,7 +88,7 @@ public class AccountDAO {
         }
     }
 
-    public Person loginPerson(String email, String password) {
+    public Person loginPerson(String email, String password) throws SQLException {
         String sqlManager = String.format("SELECT managerID, name, surname FROM \"Manager\" WHERE email = '%s' and password = '%s'", email, password);
 
         try (Statement stmt = connection.createStatement()) {
@@ -126,11 +128,7 @@ public class AccountDAO {
                 }
             }
 
-        } catch (SQLException exception) {
-            System.err.println("Customer account login failed" + exception.getMessage());
         }
-
-        System.out.println("Email or password doesn't match.");
         return null;
     }
 
@@ -237,6 +235,24 @@ public class AccountDAO {
             System.err.println("Failed to update manager account: " + exception.getMessage());
         }
         return false;
+    }
+
+    public ArrayList<Species> getAllSpecies () throws SQLException {
+        String  speciesSql = "SELECT speciesid, name, adultage, limitage" +
+                " FROM \"Species\"";
+        ArrayList<Species> species = new ArrayList<>();
+        try (PreparedStatement stmt = connection.prepareStatement(speciesSql)) {
+            try (ResultSet set = stmt.executeQuery()) {
+                while (set.next()) {
+                    int speciesID = set.getInt("speciesid");
+                    String name = set.getString("name");
+                    int adultage = set.getInt("adultage");
+                    int limitage = set.getInt("limitage");
+                    species.add(new Species(speciesID, name, adultage, limitage));
+                }
+            }
+        }
+        return species;
     }
 
 }
