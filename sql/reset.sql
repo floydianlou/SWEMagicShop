@@ -22,17 +22,19 @@ CREATE TABLE "Manager" (
   );
 
 CREATE TABLE "Customer" (
-  customerID SERIAL PRIMARY KEY,
-  name VARCHAR(50) NOT NULL,
-  surname VARCHAR(50) NOT NULL,
-  email VARCHAR(80) UNIQUE NOT NULL,
-  password VARCHAR(50) NOT NULL,
-  age INTEGER CONSTRAINT agePositive CHECK (age >= 0),
-  arcaneMembership BOOLEAN DEFAULT FALSE,
-  phone VARCHAR(10) UNIQUE,
-  speciesID INT,
-  FOREIGN KEY (speciesID) REFERENCES "Species"(speciesID) ON UPDATE CASCADE
-  );
+    customerID SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    surname VARCHAR(50) NOT NULL,
+    email VARCHAR(80) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    age INTEGER CONSTRAINT agePositive CHECK (age >= 0),
+    arcaneMembership BOOLEAN DEFAULT FALSE,
+    phone VARCHAR(10),
+    speciesID INT,
+    CONSTRAINT unique_email UNIQUE (email),
+    CONSTRAINT unique_phone UNIQUE (phone),
+    FOREIGN KEY (speciesID) REFERENCES "Species"(speciesID) ON UPDATE CASCADE
+);
 
 CREATE TABLE "Wallet" (
   customerID INT PRIMARY KEY,
