@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
@@ -15,17 +16,25 @@ import java.util.ArrayList;
 public class CustomerShopViewController {
 
     @FXML private TextField searchBar;
-    @FXML private TextField minprice;
-    @FXML private TextField maxprice;
+    @FXML private TextField minpriceGP;
+    @FXML private TextField maxpriceGP;
+
+
     @FXML private ComboBox<String> filterDropDown;
     @FXML private ComboBox<String> filterArcane;
     @FXML private ComboBox<String> filterCategory;
+
     @FXML private Label errorLabel;
+
     @FXML private ImageView cartIcon;
     @FXML private ImageView accountIcon;
     @FXML private ImageView productIcon;
     @FXML private ImageView searchIcon;
+
     @FXML private GridPane gridPane;
+    @FXML private VBox filterContainer;
+    @FXML private HBox priceFilterBox;
+
     private ArrayList<String> allCategories;
     private ArrayList<Item> allProductsSearched;
     private ArrayList<Item> allProducts;
@@ -42,7 +51,7 @@ public class CustomerShopViewController {
         loadCategoryInDropdown();
         loadFilterInDropdown();
         loadFilterArcane();
-        filterDropDown.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updateSearchField(newValue));
+        filterDropDown.valueProperty().addListener((observable, oldValue, newValue) -> updateSearchField(newValue));
         cartIcon.setImage(new Image(getClass().getResource("/images/cart.png").toExternalForm()));
         accountIcon.setImage(new Image(getClass().getResource("/images/account.png").toExternalForm()));
         searchIcon.setImage(new Image(getClass().getResource("/images/searchIcon.png").toExternalForm()));
@@ -75,58 +84,57 @@ public class CustomerShopViewController {
     }
 
     private void updateSearchField(String filterType) {
-        // Nascondi o mostra i campi in base al filtro selezionato
         switch (filterType) {
             case "Category":
                 searchBar.setPromptText("Select a category...");
                 searchBar.setDisable(true);
-                minprice.setVisible(false);
-                maxprice.setVisible(false);
+                minpriceGP.setVisible(false);
+                maxpriceGP.setVisible(false);
                 filterCategory.setVisible(true);
                 filterArcane.setVisible(false);
                 break;
             case "Name":
                 searchBar.setPromptText("Enter product name...");
                 searchBar.setDisable(false);
-                minprice.setVisible(false);
-                maxprice.setVisible(false);
+                minpriceGP.setVisible(false);
+                maxpriceGP.setVisible(false);
                 filterCategory.setVisible(false);
                 filterArcane.setVisible(false);
                 break;
             case "Description":
                 searchBar.setPromptText("Enter product description...");
                 searchBar.setDisable(false);
-                minprice.setVisible(false);
-                maxprice.setVisible(false);
+                minpriceGP.setVisible(false);
+                maxpriceGP.setVisible(false);
                 filterCategory.setVisible(false);
                 filterArcane.setVisible(false);
                 break;
             case "Price":
                 searchBar.setPromptText("Enter price range...");
                 searchBar.setDisable(true);
-                minprice.setVisible(true);
-                maxprice.setVisible(true);
+                minpriceGP.setVisible(true);
+                maxpriceGP.setVisible(true);
                 filterCategory.setVisible(false);
                 filterArcane.setVisible(false);
                 break;
             case "Arcane":
                 searchBar.setPromptText("Select Arcane (true/false)...");
                 searchBar.setDisable(true);
-                minprice.setVisible(false);
-                maxprice.setVisible(false);
+                minpriceGP.setVisible(false);
+                maxpriceGP.setVisible(false);
                 filterCategory.setVisible(false);
                 filterArcane.setVisible(true);
                 break;
             case "All":
                 searchBar.setPromptText("All products...");
                 searchBar.setDisable(true);
-                minprice.setVisible(false);
-                maxprice.setVisible(false);
+                minpriceGP.setVisible(false);
+                maxpriceGP.setVisible(false);
                 filterCategory.setVisible(false);
                 filterArcane.setVisible(false);
                 break;
         }
-        addProductsToGrid(allProductsSearched);
+
     }
 
     private void loadProducts() {
@@ -135,7 +143,6 @@ public class CustomerShopViewController {
         } catch (RuntimeException e) {
             errorLabel.setText(e.getMessage());
         }
-
         addProductsToGrid(allProducts);
     }
 
@@ -147,8 +154,13 @@ public class CustomerShopViewController {
                 errorLabel.setText("Please select a filter.");
                 return;
             }
+            allProductsSearched = new ArrayList<>();
             switch (filterDropDown.getValue()) {
                 case "Category":
+                    if (filterCategory.getValue() == null) {
+                        errorLabel.setText("Please select a category.");
+                        return;
+                    }
                     allProductsSearched = storeManager.searchProductsByCategory(filterCategory.getValue());
                     break;
                 case "Name":
@@ -157,7 +169,11 @@ public class CustomerShopViewController {
                         errorLabel.setText("Enter product name.");
                         return;
                     }
-                    allProductsSearched = storeManager.searchProducsByName(searchBar.getText().trim());
+                    try{
+                        allProductsSearched = storeManager.searchProducsByName(searchBar.getText().trim());
+                    }catch (RuntimeException e) {
+                        errorLabel.setText(e.getMessage());
+                    }
                     break;
                 case "Description":
                     String description = searchBar.getText();
@@ -165,54 +181,97 @@ public class CustomerShopViewController {
                         errorLabel.setText("Enter product description.");
                         return;
                     }
-                    allProductsSearched = storeManager.searchProductsByDescription(searchBar.getText().trim());
+                    try{
+                        allProductsSearched = storeManager.searchProductsByDescription(searchBar.getText().trim());
+                    }catch (RuntimeException e) {
+                        errorLabel.setText(e.getMessage());
+                    }
                     break;
                 case "Price":
                     int minPriceValue = 0;
                     int maxPriceValue = 0;
+                    int minPriceGP = 0;
+                    int maxPriceGP = 0;
+
                     try {
-                        minPriceValue = Integer.parseInt(minprice.getText().trim());
-                        maxPriceValue = Integer.parseInt(maxprice.getText().trim());
+                        minPriceGP = Integer.parseInt(minpriceGP.getText().trim());
+                        maxPriceGP = Integer.parseInt(maxpriceGP.getText().trim());
+
+                        minPriceValue = minPriceGP*100;
+                        maxPriceValue = maxPriceGP*100;
+
                     } catch (NumberFormatException e) {
                         errorLabel.setText("Select a valid price.");
+                        return;
                     }
-                    allProductsSearched = storeManager.searchProductsByPrice(minPriceValue, maxPriceValue);
+                    try{
+                        allProductsSearched = storeManager.searchProductsByPrice(minPriceValue, maxPriceValue);
+                    }catch (IllegalArgumentException e){
+                        errorLabel.setText(e.getMessage());
+                        return;
+                    }
+                    catch (RuntimeException e) {
+                        errorLabel.setText(e.getMessage());
+                    }
                     break;
                 case "Arcane":
+                    if(filterArcane.getValue() == null){
+                        errorLabel.setText("Please select an arcane.");
+                        return;
+                    }
                     allProductsSearched = storeManager.searchProductsByArcane(filterArcane.getValue().trim());
                     break;
                 case "All":
-                    allProductsSearched = storeManager.listProducts();
+                    try{
+                        allProductsSearched = storeManager.listProducts();
+                    }catch (RuntimeException e) {
+                        errorLabel.setText(e.getMessage());
+                    }
                     break;
             }
-        } catch (RuntimeException e) {
-            errorLabel.setText(e.getMessage());
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             errorLabel.setText("An unexpected error happened. Please try again.");
             ex.printStackTrace();
         }
 
+        if (allProductsSearched.isEmpty()) {
+            errorLabel.setText("No products found.");
+        } else {
+            errorLabel.setText("");
+        }
         addProductsToGrid(allProductsSearched);
-        allProducts.clear();
     }
 
     private void addProductsToGrid(ArrayList<Item> products) {
+        // 🔥 Pulisce la griglia prima di aggiungere nuovi prodotti
+        gridPane.getChildren().clear();
+
+        int row = 0; // Gestione righe
+        int col = 0; // Gestione colonne
+        int maxCols = 3; // Numero massimo di colonne per riga
+
         for (Item product : products) {
             VBox productBox = new VBox();
 
-            // Crea ImageView per visualizzare l'immagine del prodotto
-            //TODO
-
+            // Crea le Label per il prodotto
             Label productName = new Label(product.getItemName());
             productName.setStyle("-fx-font-weight: bold;");
             Label productDescription = new Label(product.getItemDescription());
             productDescription.setStyle("-fx-font-weight: bold;");
             Label productPrice = new Label(String.format("$%d", product.getCopperValue()));
 
+            // Aggiunge gli elementi alla VBox
             productBox.getChildren().addAll(productName, productDescription, productPrice);
 
-            gridPane.add(productBox, 0, gridPane.getRowCount());
+            // Aggiunge il prodotto alla griglia
+            gridPane.add(productBox, col, row);
+
+            // Gestisce la posizione per creare una griglia
+            col++;
+            if (col == maxCols) {
+                col = 0;
+                row++;
+            }
         }
     }
 
