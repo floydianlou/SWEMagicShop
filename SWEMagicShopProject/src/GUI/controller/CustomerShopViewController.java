@@ -45,7 +45,7 @@ public class CustomerShopViewController {
         filterDropDown.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updateSearchField(newValue));
         cartIcon.setImage(new Image(getClass().getResource("/images/cart.png").toExternalForm()));
         accountIcon.setImage(new Image(getClass().getResource("/images/account.png").toExternalForm()));
-        searchIcon.setImage(new Image("file:src/images/searchIcon.png"));
+        searchIcon.setImage(new Image(getClass().getResource("/images/searchIcon.png").toExternalForm()));
     }
 
 
@@ -55,6 +55,7 @@ public class CustomerShopViewController {
         filterDropDown.getItems().add("Description");
         filterDropDown.getItems().add("Price");
         filterDropDown.getItems().add("Arcane");
+        filterDropDown.getItems().add("All");
     }
 
     public void loadCategoryInDropdown() {
@@ -116,15 +117,16 @@ public class CustomerShopViewController {
                 filterCategory.setVisible(false);
                 filterArcane.setVisible(true);
                 break;
-            default:
-                searchBar.setPromptText("Enter product name...");
-                searchBar.setDisable(false);
+            case "All":
+                searchBar.setPromptText("All products...");
+                searchBar.setDisable(true);
                 minprice.setVisible(false);
                 maxprice.setVisible(false);
                 filterCategory.setVisible(false);
                 filterArcane.setVisible(false);
                 break;
         }
+        addProductsToGrid(allProductsSearched);
     }
 
     private void loadProducts() {
@@ -134,31 +136,17 @@ public class CustomerShopViewController {
             errorLabel.setText(e.getMessage());
         }
 
-        // Aggiungi i prodotti alla GridPane
-        for (Item product : allProducts) {
-            VBox productBox = new VBox();
-
-            // Crea ImageView per visualizzare l'immagine del prodotto
-            //TODO
-
-            // Crea le label per il nome e il prezzo del prodotto
-            Label productName = new Label(product.getItemName());
-            productName.setStyle("-fx-font-weight: bold;");
-            Label productDescription = new Label(product.getItemDescription());
-            productDescription.setStyle("-fx-font-weight: bold;");
-            Label productPrice = new Label(String.format("$%d", product.getCopperValue()));
-
-            // Aggiungi le informazioni del prodotto alla VBox
-            productBox.getChildren().addAll(productName, productDescription, productPrice);
-
-            // Aggiungi la VBox al GridPane
-            gridPane.add(productBox, 0, gridPane.getRowCount());  // Aggiungi il prodotto nella grid
-        }
+        addProductsToGrid(allProducts);
     }
 
     @FXML
     private void handleSearch() {
         try {
+            gridPane.getChildren().clear();
+            if (filterDropDown.getValue() == null) {
+                errorLabel.setText("Please select a filter.");
+                return;
+            }
             switch (filterDropDown.getValue()) {
                 case "Category":
                     allProductsSearched = storeManager.searchProductsByCategory(filterCategory.getValue());
@@ -193,8 +181,8 @@ public class CustomerShopViewController {
                 case "Arcane":
                     allProductsSearched = storeManager.searchProductsByArcane(filterArcane.getValue().trim());
                     break;
-                default:
-                    allProductsSearched = storeManager.searchProducsByName(searchBar.getText().trim());
+                case "All":
+                    allProductsSearched = storeManager.listProducts();
                     break;
             }
         } catch (RuntimeException e) {
@@ -203,6 +191,28 @@ public class CustomerShopViewController {
         catch (Exception ex) {
             errorLabel.setText("An unexpected error happened. Please try again.");
             ex.printStackTrace();
+        }
+
+        addProductsToGrid(allProductsSearched);
+        allProducts.clear();
+    }
+
+    private void addProductsToGrid(ArrayList<Item> products) {
+        for (Item product : products) {
+            VBox productBox = new VBox();
+
+            // Crea ImageView per visualizzare l'immagine del prodotto
+            //TODO
+
+            Label productName = new Label(product.getItemName());
+            productName.setStyle("-fx-font-weight: bold;");
+            Label productDescription = new Label(product.getItemDescription());
+            productDescription.setStyle("-fx-font-weight: bold;");
+            Label productPrice = new Label(String.format("$%d", product.getCopperValue()));
+
+            productBox.getChildren().addAll(productName, productDescription, productPrice);
+
+            gridPane.add(productBox, 0, gridPane.getRowCount());
         }
     }
 
