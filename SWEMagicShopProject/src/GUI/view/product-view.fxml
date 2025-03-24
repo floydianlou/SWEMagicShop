@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1"
+            stylesheets="@../styles/styles.css"
+            fx:controller="GUI.controller.ProductViewController">
+
+
+    <top>
+        <HBox alignment="CENTER_RIGHT" spacing="20" padding="10">
+            <Button style="-fx-background-color: transparent;" onAction="#handleCartButton">
+                <graphic>
+                    <ImageView fx:id="cartIcon" fitHeight="30" fitWidth="30"/>
+                </graphic>
+            </Button>
+
+            <Button style="-fx-background-color: transparent;" onAction="#handleAccountButton">
+                <graphic>
+                    <ImageView fx:id="accountIcon" fitHeight="30" fitWidth="30"/>
+                </graphic>
+            </Button>
+        </HBox>
+        <HBox alignment="CENTER_LEFT">
+            <Button text="Back to Home Page" styleClass="back-button" onAction="#handleBack" />
+        </HBox>
+    </top>
+
+
+    <center>
+        <HBox spacing="20" alignment="CENTER" padding="20">
+
+            <VBox spacing="10" alignment="TOP_LEFT" maxWidth="300">
+                <Label fx:id="productName"  />
+                <Label fx:id="productDescription"  />
+                <Label fx:id="productCategory"  />
+                <Label fx:id="productArcane"  />
+                <Label fx:id="productPrice"  />
+                <Button text="Add to Cart" fx:id="addToCartButton"
+                styleClass="add-to-cart-button"/>
+            </VBox>
+
+
+            <ImageView fx:id="productImage" fitWidth="200" fitHeight="200" />
+        </HBox>
+    </center>
+
+</BorderPane>

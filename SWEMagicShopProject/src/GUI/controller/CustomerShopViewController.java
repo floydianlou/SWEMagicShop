@@ -1,10 +1,12 @@
 package GUI.controller;
 
 import BusinessLogic.StoreManager;
+import BusinessLogic.CartManager;
 import DomainModel.Customer;
 import DomainModel.Item;
 import BusinessLogic.Utilities;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -32,21 +34,20 @@ public class CustomerShopViewController {
 
     @FXML private ImageView cartIcon;
     @FXML private ImageView accountIcon;
-    @FXML private ImageView productIcon;
     @FXML private ImageView searchIcon;
 
     @FXML private GridPane gridPane;
-    @FXML private VBox filterContainer;
-    @FXML private HBox priceFilterBox;
 
     private ArrayList<String> allCategories;
     private ArrayList<Item> allProductsSearched;
     private ArrayList<Item> allProducts;
 
     private StoreManager storeManager;
+    private CartManager cartManager;
 
     public CustomerShopViewController() {
         storeManager = new StoreManager();
+        cartManager = new CartManager((Customer) LoggedUserManager.getInstance().getLoggedUser());
     }
 
     @FXML
@@ -249,6 +250,8 @@ public class CustomerShopViewController {
 
     private void addProductsToGrid(ArrayList<Item> products) {
         gridPane.getChildren().clear();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
 
         int row = 0;
         int col = 0;
@@ -256,19 +259,28 @@ public class CustomerShopViewController {
 
         for (Item product : products) {
             VBox productBox = new VBox();
+            productBox.setSpacing(5);
 
             ImageView productImage = new ImageView();
             productImage.setImage(new Image(getClass().getResource(product.getImagePath()).toExternalForm()));
             productImage.setFitWidth(300);
             productImage.setFitHeight(300);
 
-            Label productName = new Label(product.getItemName());
-            productName.setStyle("-fx-font-weight: bold;");
+            Button productName = new Button(product.getItemName());
+            productName.getStyleClass().add("product-name");
+            productName.setOnMouseClicked(event -> {viewProductButton();});
             int[] price = Utilities.normalizeCurrencyArray(product.getCopperValue());
 
-            Label productPrice = new Label(String.format("GP: %d, SP: %d, CP: %d", price[0], price[1], price[2]));
+            Label productPrice = new Label(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
 
-            productBox.getChildren().addAll(productImage, productName, productPrice);
+            Button addToCartButton = new Button("Add to Cart");
+            addToCartButton.getStyleClass().add("add-to-cart-button");
+            addToCartButton.setOnMouseClicked(event -> {cartManager.addItemToCart(product);});
+
+            HBox buttonContainer = new HBox(addToCartButton);
+            buttonContainer.setAlignment(Pos.BOTTOM_RIGHT);
+
+            productBox.getChildren().addAll(productImage, productName, productPrice, buttonContainer);
 
             gridPane.add(productBox, col, row);
 
@@ -291,7 +303,7 @@ public class CustomerShopViewController {
     }
 
     @FXML
-    private void handleProductButton() {
+    private void viewProductButton() {
         SceneController.loadScene("product-view.fxml");
     }
 
