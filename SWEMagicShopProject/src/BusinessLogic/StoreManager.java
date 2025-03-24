@@ -34,7 +34,7 @@ public class StoreManager {
         return itemDAO.getItemByID(itemID);
     }
 
-    public boolean addProduct(String itemName, String description, String category, int copperValue, boolean isArcane) throws IllegalArgumentException {
+    public boolean addProduct(String itemName, String description, String category, int copperValue, boolean isArcane, String imagePath) throws IllegalArgumentException {
         ItemDAO itemDAO= new ItemDAO();
         if (copperValue <= 0){
             throw new IllegalArgumentException("Price must be greater than zero!");
@@ -45,7 +45,7 @@ public class StoreManager {
         if(Utilities.checkBooleanArcane(isArcane) == 0){
             throw new IllegalArgumentException("Arcane must be true or false!");
         }
-        return itemDAO.createItem(itemName, description, category, copperValue, isArcane);
+        return itemDAO.createItem(itemName, description, category, copperValue, isArcane, imagePath);
     }
 
     public boolean updateProduct(Item updatedItem) throws IllegalArgumentException {
