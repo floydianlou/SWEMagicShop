@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import BusinessLogic.StoreManager;
+import DomainModel.Customer;
 import DomainModel.Item;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -14,6 +15,8 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 
 public class CustomerShopViewController {
+
+    private Customer loggedCustomer;
 
     @FXML private TextField searchBar;
     @FXML private TextField minpriceGP;
@@ -55,6 +58,10 @@ public class CustomerShopViewController {
         cartIcon.setImage(new Image(getClass().getResource("/images/cart.png").toExternalForm()));
         accountIcon.setImage(new Image(getClass().getResource("/images/account.png").toExternalForm()));
         searchIcon.setImage(new Image(getClass().getResource("/images/searchIcon.png").toExternalForm()));
+    }
+
+    public void setLoggedCustomer(Customer loggedCustomer) {
+        this.loggedCustomer = loggedCustomer;
     }
 
 
@@ -277,12 +284,12 @@ public class CustomerShopViewController {
 
     @FXML
     private void handleAccountButton() {
-        SceneController.loadScene("account-view.fxml");
+        SceneController.loadSceneWithCustomer("account-view.fxml", loggedCustomer);
     }
 
     @FXML
     private void handleCartButton() {
-        SceneController.loadScene("cart-view.fxml");
+        SceneController.loadSceneWithCustomer("cart-view.fxml", loggedCustomer);
     }
 
     @FXML

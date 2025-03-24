@@ -1,5 +1,6 @@
 package GUI.controller;
 
+import DomainModel.Customer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,4 +23,20 @@ public class SceneController {
             e.printStackTrace();
         }
     }
+
+    public static void loadSceneWithCustomer (String fxmlFile, Customer loggedCustomer) {
+        try {
+        FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/GUI/view/" + fxmlFile));
+        Parent root = loader.load();
+
+        CustomerShopViewController controller = loader.getController();
+        controller.setLoggedCustomer(loggedCustomer);
+
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show(); }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

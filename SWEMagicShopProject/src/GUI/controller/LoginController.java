@@ -55,8 +55,7 @@ public class LoginController {
                     System.out.println("Accesso come Manager.");
                     SceneController.loadScene("manager-shop-view.fxml"); //TODO
                 } else if (loggedUser instanceof Customer) {
-                    System.out.println("Accesso come Cliente.");
-                    SceneController.loadScene("customer-shop-view.fxml"); //TODO
+                    SceneController.loadSceneWithCustomer("customer-shop-view.fxml", (Customer) loggedUser);
                 }
             } else {
                 errorLabel.setText("Email or password doesn't match!"); //TODO with exceptions
