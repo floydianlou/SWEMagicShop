@@ -1,6 +1,7 @@
 package BusinessLogic;
 
 import DomainModel.Item;
+import ORM.CategoryDAO;
 import ORM.ItemDAO;
 
 import java.sql.SQLException;
@@ -8,9 +9,11 @@ import java.util.ArrayList;
 
 public class StoreManager {
     ItemDAO itemDAO;
+    CategoryDAO categoryDAO;
 
-    public StoreManager(ItemDAO itemDAO) {
+    public StoreManager(ItemDAO itemDAO, CategoryDAO categoryDAO) {
         this.itemDAO = itemDAO;
+        this.categoryDAO = categoryDAO;
     }
 
     public StoreManager() {
@@ -144,5 +147,11 @@ public class StoreManager {
                 }
             default: return itemDAO.getAllItems();
         }
+    }
+
+    public ArrayList<String> getAllCategories() {
+        CategoryDAO categoryDAO= new CategoryDAO();
+        ArrayList<String> categories = categoryDAO.viewAllCategories();
+        return categories;
     }
 }
