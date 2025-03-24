@@ -7,19 +7,16 @@ import DomainModel.Item;
 import BusinessLogic.Utilities;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 import java.util.ArrayList;
 
 public class CustomerShopViewController {
 
-    private Customer loggedCustomer;
 
     @FXML private TextField searchBar;
     @FXML private TextField minpriceGP;
@@ -52,7 +49,6 @@ public class CustomerShopViewController {
 
     @FXML
     public void initialize() {
-        loggedCustomer = (Customer) LoggedUserManager.getInstance().getLoggedUser();
         loadProducts();
         loadCategoryInDropdown();
         loadFilterInDropdown();
@@ -268,7 +264,7 @@ public class CustomerShopViewController {
 
             Button productName = new Button(product.getItemName());
             productName.getStyleClass().add("product-name");
-            productName.setOnMouseClicked(event -> {viewProductButton();});
+            productName.setOnMouseClicked(event -> {viewProductButton(product);});
             int[] price = Utilities.normalizeCurrencyArray(product.getCopperValue());
 
             Label productPrice = new Label(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
@@ -303,7 +299,8 @@ public class CustomerShopViewController {
     }
 
     @FXML
-    private void viewProductButton() {
+    private void viewProductButton(Item selectedProduct) {
+        ItemViewManager.getInstance().setProductSelected(selectedProduct);
         SceneController.loadScene("product-view.fxml");
     }
 
