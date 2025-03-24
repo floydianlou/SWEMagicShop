@@ -13,6 +13,17 @@ DROP TABLE IF EXISTS "Inventory" CASCADE;
 DROP TABLE IF EXISTS "ArcaneRequest" CASCADE;
 DROP TABLE IF EXISTS "RequestStatus" CASCADE;
 
+DROP SEQUENCE IF EXISTS "Species_speciesid_seq" CASCADE;
+DROP SEQUENCE IF EXISTS "Customer_customerid_seq" CASCADE;
+DROP SEQUENCE IF EXISTS "Manager_managerid_seq" CASCADE;
+DROP SEQUENCE IF EXISTS "Order_orderid_seq" CASCADE;
+DROP SEQUENCE IF EXISTS "Item_itemid_seq" CASCADE;
+DROP SEQUENCE IF EXISTS "Category_categoryid_seq" CASCADE;
+DROP SEQUENCE IF EXISTS "ArcaneRequest_requestid_seq" CASCADE;
+DROP SEQUENCE IF EXISTS "RequestStatus_statusid_seq" CASCADE;
+DROP SEQUENCE IF EXISTS "OrderStatus_statusid_seq" CASCADE;
+
+
 CREATE TABLE IF NOT EXISTS "Manager" (
     managerID SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
