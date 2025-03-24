@@ -21,6 +21,7 @@ public class LoginController {
     @FXML private PasswordField passwordField;
     @FXML private Label errorLabel;
     @FXML private ImageView shopIcon;
+    private LoggedUserManager loggedUserManager;
     private AccountManager accountManager = new AccountManager();
 
     @FXML
@@ -47,18 +48,15 @@ public class LoginController {
 
         try {
             Person loggedUser = accountManager.login(email, password);
-
+            LoggedUserManager.getInstance().setLoggedUser(loggedUser);
             if (loggedUser != null) {
-                System.out.println("Login completed."); //TODO this is only on console not GUI
-
                 if (loggedUser instanceof Manager) {
-                    System.out.println("Accesso come Manager.");
                     SceneController.loadScene("manager-shop-view.fxml"); //TODO
                 } else if (loggedUser instanceof Customer) {
-                    SceneController.loadSceneWithCustomer("customer-shop-view.fxml", (Customer) loggedUser);
+                    SceneController.loadScene("customer-shop-view.fxml");
                 }
             } else {
-                errorLabel.setText("Email or password doesn't match!"); //TODO with exceptions
+                errorLabel.setText("Email or password doesn't match!");
             }
         } catch (RuntimeException e) {
             errorLabel.setText(e.getMessage());
@@ -70,6 +68,6 @@ public class LoginController {
 
     @FXML
     private void handleBack() {
-        SceneController.loadScene("main-view.fxml");
+        SceneController.loadScene("welcome-view.fxml");
     }
 }

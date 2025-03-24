@@ -51,6 +51,7 @@ public class CustomerShopViewController {
 
     @FXML
     public void initialize() {
+        loggedCustomer = (Customer) LoggedUserManager.getInstance().getLoggedUser();
         loadProducts();
         loadCategoryInDropdown();
         loadFilterInDropdown();
@@ -59,10 +60,6 @@ public class CustomerShopViewController {
         cartIcon.setImage(new Image(getClass().getResource("/images/cart.png").toExternalForm()));
         accountIcon.setImage(new Image(getClass().getResource("/images/account.png").toExternalForm()));
         searchIcon.setImage(new Image(getClass().getResource("/images/searchIcon.png").toExternalForm()));
-    }
-
-    public void setLoggedCustomer(Customer loggedCustomer) {
-        this.loggedCustomer = loggedCustomer;
     }
 
 
@@ -285,12 +282,12 @@ public class CustomerShopViewController {
 
     @FXML
     private void handleAccountButton() {
-        SceneController.loadSceneWithCustomer("account-view.fxml", loggedCustomer);
+        SceneController.loadScene("account-view.fxml");
     }
 
     @FXML
     private void handleCartButton() {
-        SceneController.loadSceneWithCustomer("cart-view.fxml", loggedCustomer);
+        SceneController.loadScene("cart-view.fxml");
     }
 
     @FXML
