@@ -3,6 +3,7 @@ package GUI.controller;
 import BusinessLogic.StoreManager;
 import DomainModel.Customer;
 import DomainModel.Item;
+import BusinessLogic.Utilities;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -250,30 +251,30 @@ public class CustomerShopViewController {
     }
 
     private void addProductsToGrid(ArrayList<Item> products) {
-        // 🔥 Pulisce la griglia prima di aggiungere nuovi prodotti
         gridPane.getChildren().clear();
 
-        int row = 0; // Gestione righe
-        int col = 0; // Gestione colonne
-        int maxCols = 3; // Numero massimo di colonne per riga
+        int row = 0;
+        int col = 0;
+        int maxCols = 4;
 
         for (Item product : products) {
             VBox productBox = new VBox();
 
-            // Crea le Label per il prodotto
+            ImageView productImage = new ImageView();
+            productImage.setImage(new Image(getClass().getResource(product.getImagePath()).toExternalForm()));
+            productImage.setFitWidth(300);
+            productImage.setFitHeight(300);
+
             Label productName = new Label(product.getItemName());
             productName.setStyle("-fx-font-weight: bold;");
-            Label productDescription = new Label(product.getItemDescription());
-            productDescription.setStyle("-fx-font-weight: bold;");
-            Label productPrice = new Label(String.format("$%d", product.getCopperValue()));
+            int[] price = Utilities.normalizeCurrencyArray(product.getCopperValue());
 
-            // Aggiunge gli elementi alla VBox
-            productBox.getChildren().addAll(productName, productDescription, productPrice);
+            Label productPrice = new Label(String.format("GP: %d, SP: %d, CP: %d", price[0], price[1], price[2]));
 
-            // Aggiunge il prodotto alla griglia
+            productBox.getChildren().addAll(productImage, productName, productPrice);
+
             gridPane.add(productBox, col, row);
 
-            // Gestisce la posizione per creare una griglia
             col++;
             if (col == maxCols) {
                 col = 0;
