@@ -24,3 +24,8 @@ hs_err_pid*
 replay_pid*
 SWEMagicShopProject/.idea/misc.xml
 SWEMagicShopProject/.idea/workspace.xml
+.idea
+javafx-sdk-21.0.6
+lib
+SWEMagicShop.iml
+/.idea/
