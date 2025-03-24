@@ -77,8 +77,7 @@
         </VBox>
 
 
-        <HBox alignment="BOTTOM_LEFT"
-              style="-fx-padding: 0 0 0 50px;">
+        <HBox alignment="BOTTOM_CENTER">
             <Button text="Back to Welcome menu" onAction="#handleBack"
                     styleClass="back-button"/>
         </HBox>

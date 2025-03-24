@@ -71,6 +71,35 @@
     -fx-font-family: 'Arimo', Arial, sans-serif;
 }
 
+/* for back to home buttons */
+.back-button {
+    -fx-background-color: #D2B4DE;
+    -fx-border-color: #D2B4DE;
+    -fx-text-fill: #460E56;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 20px;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+    -fx-min-width: 180px;
+    -fx-min-height: 45px;
+    -fx-translate-y: 20;
+}
+
+.back-button:hover {
+    -fx-background-color: #B999CC;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.back-button:pressed {
+    -fx-background-color: #A17EBB;
+}
+
+/* END BACK BUTTON */
+
 /* for purple buttons */
 .choice-button {
     -fx-font-family: "Arimo", Arial, sans-serif;
@@ -85,30 +114,14 @@
     -fx-cursor: hand;
 }
 
-/* for back to home buttons */
-.back-button {
-    -fx-background-color: #460E56;
-    -fx-border-color: #460E56;
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-padding: 8px 20px;
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
-    -fx-cursor: hand;
-    -fx-min-width: 180px;
-    -fx-min-height: 45px;
-    -fx-translate-y: 20;
-}
-
-.choice-button:hover, .back-button:hover {
+.choice-button:hover {
     -fx-background-color: #320A3E;
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
     -fx-transition: all 0.2s ease-in-out;
 }
 
-.choice-button:pressed, .back-button:pressed {
+.choice-button:pressed {
     -fx-background-color: #25072D;
 }
 
