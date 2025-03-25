@@ -57,8 +57,8 @@ public class CustomerShopViewController {
         loadFilterInDropdown();
         loadFilterArcane();
         filterDropDown.valueProperty().addListener((observable, oldValue, newValue) -> updateSearchField(newValue));
-        cartIcon.setImage(new Image(getClass().getResource("/images/cart.png").toExternalForm()));
-        accountIcon.setImage(new Image(getClass().getResource("/images/account.png").toExternalForm()));
+//        cartIcon.setImage(new Image(getClass().getResource("/images/cart.png").toExternalForm()));
+//        accountIcon.setImage(new Image(getClass().getResource("/images/account.png").toExternalForm()));
         searchIcon.setImage(new Image(getClass().getResource("/images/searchIcon.png").toExternalForm()));
     }
 
@@ -261,9 +261,10 @@ public class CustomerShopViewController {
             productImage.setImage(new Image(getClass().getResource(product.getImagePath()).toExternalForm()));
             productImage.setFitWidth(300);
             productImage.setFitHeight(300);
+            productBox.getStyleClass().add("product-card");
 
             Label productName = new Label(product.getItemName());
-            productName.setStyle("-fx-font-weight: bold;");
+            productName.setStyle("-fx-font-weight: bold;"); //TODO add to css
             int[] price = Utilities.normalizeCurrencyArray(product.getCopperValue());
 
             Label productPrice = new Label(String.format("GP: %d, SP: %d, CP: %d", price[0], price[1], price[2]));
@@ -280,19 +281,18 @@ public class CustomerShopViewController {
         }
     }
 
-    @FXML
-    private void handleAccountButton() {
-        SceneController.loadScene("account-view.fxml");
-    }
-
-    @FXML
-    private void handleCartButton() {
-        SceneController.loadScene("cart-view.fxml");
-    }
-
-    @FXML
-    private void handleProductButton() {
-        SceneController.loadScene("product-view.fxml");
-    }
+//    private void handleAccountButton() {
+//        SceneController.loadScene("account-view.fxml");
+//    }
+//
+//    @FXML
+//    private void handleCartButton() {
+//        SceneController.loadScene("cart-view.fxml");
+//    }
+//
+//    @FXML
+//    private void handleProductButton() {
+//        SceneController.loadScene("product-view.fxml");
+//    }
 
 }

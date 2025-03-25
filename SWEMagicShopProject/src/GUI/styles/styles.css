@@ -159,6 +159,23 @@
     -fx-max-width: 260px;
 }
 
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.grid-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 20;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+}
+
 .search-bar {
     -fx-max-width: 300px;
     -fx-background-color: transparent;
@@ -178,6 +195,62 @@
     -fx-padding: 10px;
     -fx-max-width: 250px;
 }
+
+.product-card {
+    -fx-background-color: transparent;
+    -fx-padding: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, gray, 8, 0.2, 0, 2);
+}
+
+/* TOOLBAR ITEMS, BUTTONS, TEXT */
+
+.tool-bar {
+    -fx-background-color: linear-gradient(to bottom, #5E0B78, #460E56);
+    -fx-min-height: 50px;
+    -fx-padding: 0 0 0 15;
+}
+
+.shop-label {
+    -fx-text-fill: #F6E9FF;
+    -fx-font-size: 22px;
+    -fx-font-weight: 900;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+}
+
+.welcome-label {
+    -fx-text-fill: #F6E9FF;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 10 0 0;
+}
+
+.tool-bar-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-padding: 5;
+    -fx-background-radius: 10;
+}
+
+.tool-bar-button:hover {
+    fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.tooltip {
+    -fx-background-color: #7A44A1;
+    -fx-text-fill: #F6E9FF;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-padding: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: #E4CFFF;
+    -fx-opacity: 0.95;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 6, 0.1, 0, 1);
+}
+
+/* END TOOLBAR */
 
 .input-field-2 {
     -fx-background-color: transparent;

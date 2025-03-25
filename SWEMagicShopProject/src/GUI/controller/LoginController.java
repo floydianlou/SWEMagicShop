@@ -53,7 +53,7 @@ public class LoginController {
                 if (loggedUser instanceof Manager) {
                     SceneController.loadScene("manager-shop-view.fxml"); //TODO
                 } else if (loggedUser instanceof Customer) {
-                    SceneController.loadScene("customer-shop-view.fxml");
+                    SceneController.loadScene("main-view.fxml");
                 }
             } else {
                 errorLabel.setText("Email or password doesn't match!");
