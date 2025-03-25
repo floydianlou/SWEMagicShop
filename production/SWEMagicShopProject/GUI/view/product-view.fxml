@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1"
+            stylesheets="@../styles/styles.css"
+            fx:controller="GUI.controller.ProductViewController">
+
+    <!-- Toolbar -->
+    <top>
+        <VBox style="-fx-background-color: #25072D">
+            <HBox alignment="TOP_LEFT">
+                <Button text="Back to Home Page" styleClass="back-button" onAction="#handleBack"/>
+            </HBox>
+
+            <HBox alignment="TOP_RIGHT" spacing="20">
+                <Button style="-fx-background-color: transparent" onAction="#handleCartButton">
+                    <graphic>
+                        <ImageView fx:id="cartIcon" fitHeight="30" fitWidth="30"/>
+                    </graphic>
+                </Button>
+
+                <Button style="-fx-background-color: transparent" onAction="#handleAccountButton">
+                    <graphic>
+                        <ImageView fx:id="accountIcon" fitHeight="30" fitWidth="30"/>
+                    </graphic>
+                </Button>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <HBox spacing="20" alignment="CENTER">
+            <VBox spacing="10" alignment="CENTER_LEFT" >
+                <Label fx:id="productName"/>
+                <Label fx:id="productDescription" maxWidth="1000" wrapText="true"/>
+                <Label fx:id="productCategory"/>
+                <Label fx:id="productArcane"/>
+                <Label fx:id="productPrice"/>
+                <Button text="Add to Cart" fx:id="addToCartButton" styleClass="add-to-cart-button"/>
+            </VBox>
+
+            <Region prefHeight="800"/>
+
+            <VBox alignment="CENTER_RIGHT">
+                <ImageView fx:id="productImage" fitWidth="400" fitHeight="400"/>
+            </VBox>
+        </HBox>
+    </center>
+
+</BorderPane>
