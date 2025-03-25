@@ -1,10 +1,12 @@
 package GUI.controller;
 
+import BusinessLogic.CartManager;
 import BusinessLogic.StoreManager;
 import DomainModel.Customer;
 import DomainModel.Item;
 import BusinessLogic.Utilities;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -30,14 +32,9 @@ public class CustomerShopViewController {
 
     @FXML private Label errorLabel;
 
-    @FXML private ImageView cartIcon;
-    @FXML private ImageView accountIcon;
-    @FXML private ImageView productIcon;
     @FXML private ImageView searchIcon;
 
     @FXML private GridPane gridPane;
-    @FXML private VBox filterContainer;
-    @FXML private HBox priceFilterBox;
 
     private ArrayList<String> allCategories;
     private ArrayList<Item> allProductsSearched;
@@ -57,8 +54,6 @@ public class CustomerShopViewController {
         loadFilterInDropdown();
         loadFilterArcane();
         filterDropDown.valueProperty().addListener((observable, oldValue, newValue) -> updateSearchField(newValue));
-//        cartIcon.setImage(new Image(getClass().getResource("/images/cart.png").toExternalForm()));
-//        accountIcon.setImage(new Image(getClass().getResource("/images/account.png").toExternalForm()));
         searchIcon.setImage(new Image(getClass().getResource("/images/searchIcon.png").toExternalForm()));
     }
 
@@ -249,6 +244,8 @@ public class CustomerShopViewController {
 
     private void addProductsToGrid(ArrayList<Item> products) {
         gridPane.getChildren().clear();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
 
         int row = 0;
         int col = 0;
@@ -256,20 +253,29 @@ public class CustomerShopViewController {
 
         for (Item product : products) {
             VBox productBox = new VBox();
+            productBox.setSpacing(5);
 
             ImageView productImage = new ImageView();
             productImage.setImage(new Image(getClass().getResource(product.getImagePath()).toExternalForm()));
             productImage.setFitWidth(300);
             productImage.setFitHeight(300);
-            productBox.getStyleClass().add("product-card");
 
-            Label productName = new Label(product.getItemName());
-            productName.setStyle("-fx-font-weight: bold;"); //TODO add to css
+            Button productName = new Button(product.getItemName());
+            productName.getStyleClass().add("product-name");
+            productName.setOnMouseClicked(event -> {viewProductButton(product);});
             int[] price = Utilities.normalizeCurrencyArray(product.getCopperValue());
 
-            Label productPrice = new Label(String.format("GP: %d, SP: %d, CP: %d", price[0], price[1], price[2]));
+            Label productPrice = new Label(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
 
-            productBox.getChildren().addAll(productImage, productName, productPrice);
+            Button addToCartButton = new Button("Add to Cart");
+            addToCartButton.getStyleClass().add("add-to-cart-button");
+            addToCartButton.setOnMouseClicked(event -> {
+                CartManager.getInstance().addItemToCart(product);});
+
+            HBox buttonContainer = new HBox(addToCartButton);
+            buttonContainer.setAlignment(Pos.BOTTOM_RIGHT);
+
+            productBox.getChildren().addAll(productImage, productName, productPrice, buttonContainer);
 
             gridPane.add(productBox, col, row);
 
@@ -281,18 +287,10 @@ public class CustomerShopViewController {
         }
     }
 
-//    private void handleAccountButton() {
-//        SceneController.loadScene("account-view.fxml");
-//    }
-//
-//    @FXML
-//    private void handleCartButton() {
-//        SceneController.loadScene("cart-view.fxml");
-//    }
-//
-//    @FXML
-//    private void handleProductButton() {
-//        SceneController.loadScene("product-view.fxml");
-//    }
+    @FXML
+    private void viewProductButton(Item selectedProduct) {
+        ItemViewManager.getInstance().setProductSelected(selectedProduct);
+        SceneController.loadScene("product-view.fxml");
+    }
 
 }

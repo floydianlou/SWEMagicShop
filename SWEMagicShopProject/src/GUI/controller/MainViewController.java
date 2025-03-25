@@ -77,7 +77,7 @@ public class MainViewController {
                 toolBar.getChildren().addAll(createWelcomeLabel(), cartButton, accountButton, logoutButton);
             }
 
-            case "manager" -> {
+            case "manager" -> { // TODO
                 Button accountButton = createButton("/images/accountIcon.png", "Account", _ -> {
                     loadContent("account-view.fxml");
                     updateTopBar("account");
@@ -120,6 +120,11 @@ public class MainViewController {
 
                 toolBar.getChildren().addAll(backButton, logoutButton);
             }
+
+            case "product" -> {
+
+            }
+
         }
     }
 
