@@ -11,29 +11,6 @@
             stylesheets="@../styles/styles.css"
             fx:controller="GUI.controller.ProductViewController">
 
-    <!-- Toolbar -->
-    <top>
-        <VBox style="-fx-background-color: #25072D">
-            <HBox alignment="TOP_LEFT">
-                <Button text="Back to Home Page" styleClass="back-button" onAction="#handleBack"/>
-            </HBox>
-
-            <HBox alignment="TOP_RIGHT" spacing="20">
-                <Button style="-fx-background-color: transparent" onAction="#handleCartButton">
-                    <graphic>
-                        <ImageView fx:id="cartIcon" fitHeight="30" fitWidth="30"/>
-                    </graphic>
-                </Button>
-
-                <Button style="-fx-background-color: transparent" onAction="#handleAccountButton">
-                    <graphic>
-                        <ImageView fx:id="accountIcon" fitHeight="30" fitWidth="30"/>
-                    </graphic>
-                </Button>
-            </HBox>
-        </VBox>
-    </top>
-
     <center>
         <HBox spacing="20" alignment="CENTER">
             <VBox spacing="10" alignment="CENTER_LEFT" >

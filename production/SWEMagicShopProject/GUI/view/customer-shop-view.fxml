@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.image.ImageView?>
+
+<!--TODO remake errorlabel-->
 
 <VBox xmlns="http://javafx.com/javafx/8.0.171"
       xmlns:fx="http://javafx.com/fxml/1"
@@ -36,6 +34,9 @@
         <Region HBox.hgrow="ALWAYS"/>
     </HBox>
 
+    <HBox alignment="BOTTOM_CENTER">
+        <Label fx:id="errorLabel" text="" styleClass="error-label" />
+    </HBox>
 
     <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="scroll-pane">
         <GridPane fx:id="gridPane"
@@ -44,10 +45,5 @@
                   styleClass="grid-pane">
         </GridPane>
     </ScrollPane>
-
-
-    <HBox alignment="BOTTOM_CENTER">
-        <Label fx:id="errorLabel" text="" styleClass="error-label" />
-    </HBox>
 
 </VBox>

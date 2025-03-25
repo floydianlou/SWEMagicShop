@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -12,19 +8,15 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="GUI.controller.CustomerShopViewController"
       stylesheets="@../styles/styles.css"
-      spacing="10"
-      fillWidth="true"
-      style="-fx-background-color: #FBEBFF;"
-      prefHeight="Infinity"
-      prefWidth="Infinity">
+      spacing="10" prefHeight="Infinity" prefWidth="Infinity">
 
-    <!-- BARRA DI RICERCA FISSA -->
+
     <HBox spacing="5" alignment="CENTER_LEFT" style="-fx-background-color: #460E56; -fx-padding: 10;">
         <ComboBox fx:id="filterDropDown" promptText="Filter" styleClass="transparent-combobox"/>
         <HBox styleClass="search-bar">
             <Button style="-fx-background-color: transparent;" onAction="#handleSearch">
                 <graphic>
-                    <ImageView fx:id="searchIcon" fitHeight="30" fitWidth="30"/>
+                    <ImageView fx:id="searchIcon" fitHeight="27" fitWidth="27"/>
                 </graphic>
             </Button>
             <TextField fx:id="searchBar" promptText="Search products..." styleClass="search-bar-input"/>
@@ -36,18 +28,14 @@
         <Region HBox.hgrow="ALWAYS"/>
     </HBox>
 
+    <HBox alignment="BOTTOM_CENTER">
+        <Label fx:id="errorLabel" styleClass="error-label" />
+    </HBox>
 
     <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="scroll-pane">
         <GridPane fx:id="gridPane"
-                  hgap="10" vgap="10"
-                  alignment="TOP_CENTER"
-                  styleClass="grid-pane">
+                  hgap="10" vgap="10" alignment="TOP_CENTER" styleClass="grid-pane">
         </GridPane>
     </ScrollPane>
-
-
-    <HBox alignment="BOTTOM_CENTER">
-        <Label fx:id="errorLabel" text="" styleClass="error-label" />
-    </HBox>
 
 </VBox>
