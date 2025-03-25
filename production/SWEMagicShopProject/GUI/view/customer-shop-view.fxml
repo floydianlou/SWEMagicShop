@@ -14,17 +14,16 @@
       stylesheets="@../styles/styles.css"
       spacing="10"
       fillWidth="true"
-      style="-fx-background-color: #FBEBFF;"
       prefHeight="Infinity"
       prefWidth="Infinity">
 
-    <!-- BARRA DI RICERCA FISSA -->
+
     <HBox spacing="5" alignment="CENTER_LEFT" style="-fx-background-color: #460E56; -fx-padding: 10;">
         <ComboBox fx:id="filterDropDown" promptText="Filter" styleClass="transparent-combobox"/>
         <HBox styleClass="search-bar">
             <Button style="-fx-background-color: transparent;" onAction="#handleSearch">
                 <graphic>
-                    <ImageView fx:id="searchIcon" fitHeight="30" fitWidth="30"/>
+                    <ImageView fx:id="searchIcon" fitHeight="27" fitWidth="27"/>
                 </graphic>
             </Button>
             <TextField fx:id="searchBar" promptText="Search products..." styleClass="search-bar-input"/>

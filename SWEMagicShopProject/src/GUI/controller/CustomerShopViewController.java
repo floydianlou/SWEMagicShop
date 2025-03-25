@@ -30,14 +30,9 @@ public class CustomerShopViewController {
 
     @FXML private Label errorLabel;
 
-    @FXML private ImageView cartIcon;
-    @FXML private ImageView accountIcon;
-    @FXML private ImageView productIcon;
     @FXML private ImageView searchIcon;
 
     @FXML private GridPane gridPane;
-    @FXML private VBox filterContainer;
-    @FXML private HBox priceFilterBox;
 
     private ArrayList<String> allCategories;
     private ArrayList<Item> allProductsSearched;
@@ -57,8 +52,6 @@ public class CustomerShopViewController {
         loadFilterInDropdown();
         loadFilterArcane();
         filterDropDown.valueProperty().addListener((observable, oldValue, newValue) -> updateSearchField(newValue));
-//        cartIcon.setImage(new Image(getClass().getResource("/images/cart.png").toExternalForm()));
-//        accountIcon.setImage(new Image(getClass().getResource("/images/account.png").toExternalForm()));
         searchIcon.setImage(new Image(getClass().getResource("/images/searchIcon.png").toExternalForm()));
     }
 
@@ -280,19 +273,5 @@ public class CustomerShopViewController {
             }
         }
     }
-
-//    private void handleAccountButton() {
-//        SceneController.loadScene("account-view.fxml");
-//    }
-//
-//    @FXML
-//    private void handleCartButton() {
-//        SceneController.loadScene("cart-view.fxml");
-//    }
-//
-//    @FXML
-//    private void handleProductButton() {
-//        SceneController.loadScene("product-view.fxml");
-//    }
 
 }
