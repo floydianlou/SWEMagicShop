@@ -1,9 +1,7 @@
 package GUI.controller;
 
 
-import BusinessLogic.CartManager;
 import DomainModel.Customer;
-import DomainModel.Person;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -73,7 +71,7 @@ public class MainViewController {
                 });
 
                 Button logoutButton = createButton("/images/logoutIcon.png", "Logout", _ -> {
-                    handleLogout();
+                    SceneController.loadScene("welcome-view.fxml");
                 });
 
                 toolBar.getChildren().addAll(createWelcomeLabel(), cartButton, accountButton, logoutButton);
@@ -86,7 +84,7 @@ public class MainViewController {
                 });
 
                 Button logoutButton = createButton("/images/logoutIcon.png", "Logout", _ -> {
-                    handleLogout();
+                    SceneController.loadScene("welcome-view.fxml");
                 });
 
                 toolBar.getChildren().addAll(createWelcomeLabel(), accountButton, logoutButton);
@@ -104,7 +102,7 @@ public class MainViewController {
                 });
 
                 Button logoutButton = createButton("/images/logoutIcon.png", "Logout", _ -> {
-                    handleLogout();
+                    SceneController.loadScene("welcome-view.fxml");
                 });
 
                 toolBar.getChildren().addAll(backButton, accountButton, logoutButton);
@@ -117,7 +115,7 @@ public class MainViewController {
                 });
 
                 Button logoutButton = createButton("/images/logoutIcon.png", "Logout", _ -> {
-                    handleLogout();
+                    SceneController.loadScene("welcome-view.fxml");
                 });
 
                 toolBar.getChildren().addAll(backButton, logoutButton);
@@ -145,18 +143,6 @@ public class MainViewController {
         Label welcomeLabel = new Label("Welcome, " + LoggedUserManager.getInstance().getLoggedUser().getName() + "!");
         welcomeLabel.getStyleClass().add("welcome-label");
         return welcomeLabel;
-    }
-
-    private void handleLogout() {
-        Person loggedUser = LoggedUserManager.getInstance().getLoggedUser();
-        if (loggedUser instanceof Customer) {
-            CartManager.getInstance().closeCartSession();
-        }
-
-        LoggedUserManager.getInstance().clearSession();
-
-
-        SceneController.loadScene("welcome-view.fxml");
     }
 
     }

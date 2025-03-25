@@ -33,7 +33,7 @@
 
 /* END MAIN PAGE STYLE */
 
-/* GENERAL FEATURES */
+
 
 /* for big titles */
 .main-title {
@@ -63,7 +63,7 @@
     -fx-font-weight: bold;
 }
 
-/* to give instructions */
+
 .instructions-label {
     -fx-text-fill: #460E56;
     -fx-font-size: 16px;
@@ -125,8 +125,6 @@
     -fx-background-color: #25072D;
 }
 
-/* REGISTRATION CONTAINERS AND FIELDS */
-
 .input-container {
     -fx-background-color: linear-gradient(
             from 0% 0% to 100% 100%,
@@ -160,8 +158,6 @@
     -fx-padding: 10px;
     -fx-max-width: 260px;
 }
-
-/* ITEMS SCROLL PANE */
 
 .scroll-pane {
     -fx-background-color: transparent;
@@ -211,7 +207,7 @@
 
 .tool-bar {
     -fx-background-color: linear-gradient(to bottom, #5E0B78, #460E56);
-    -fx-min-height: 62px;
+    -fx-min-height: 50px;
     -fx-padding: 0 0 0 15;
 }
 
@@ -304,7 +300,7 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-text-fill: #460E56;
-    -fx-prompt-text-fill: #6C3483;
+    -fx-prompt-text-fill: #460E56;
     -fx-font-size: 16px;
     -fx-padding: 0 10 0 10;
     -fx-background-insets: 0;
@@ -336,31 +332,5 @@
 .input-combobox .list-cell:hover {
     -fx-background-color: rgba(255, 255, 255, 0.5);
     -fx-text-fill: #460E56;
-}
-
-/* CART PAGE STYLES */
-
-.cart-text {
-    -fx-font-weight: 900;
-    -fx-font-family: 'Arimo', Arial, sans-serif;
-    -fx-text-fill: #460E56;
-    -fx-font-size: 25px;
-    -fx-padding: 20 0 0 0;
-}
-
-.cart-box {
-    -fx-background-color: #D9C3E7;
-    -fx-border-width: 1px;
-    -fx-border-color: #6C3483;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-}
-
-.cart-item-box {
-    -fx-background-color: transparent;
-    -fx-border-color: #D9C3E7;
-    -fx-border-width: 1px;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
 }
 

@@ -3,42 +3,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
 
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.StackPane?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="GUI.controller.CartController"
+      spacing="20"
+      alignment="CENTER"
+      style="-fx-padding: 40;">
 
+    <Label fx:id="cartLabel" style="-fx-font-size: 18px; -fx-text-fill: #333;" />
 
-<?import javafx.scene.layout.HBox?>
-<StackPane xmlns="http://javafx.com/javafx"
-           xmlns:fx="http://javafx.com/fxml"
-           fx:controller="GUI.controller.CartController"
-           style="-fx-padding: 40;">
-
-    <HBox spacing="30" alignment="CENTER">
-
-        <!-- this is the box containing order items -->
-        <VBox styleClass="cart-box" prefWidth="900" prefHeight="600" spacing="15" alignment="TOP_CENTER">
-
-            <HBox style="-fx-padding: 16 0 0 20;">
-                <Label text="Your current order:" styleClass="cart-text"/>
-            </HBox>
-
-            <ScrollPane fitToWidth="true" prefHeight="550">
-                <VBox fx:id="cartContainer" spacing="15" alignment="TOP_LEFT" prefWidth="680">
-                    <padding>
-                        <Insets top="20" right="20" bottom="20" left="20"/>
-                    </padding>
-                </VBox>
-            </ScrollPane>
-        </VBox>
-
-
-        <VBox spacing="20" alignment="TOP_CENTER" prefWidth="250" prefHeight="600" styleClass="cart-box">
-            <Label text="ORDER TOTAL:" styleClass="cart-text"/>
-            <Label fx:id="totalLabel" text="0g" style="-fx-font-size: 16px;" />
-            <!-- TODO define style class-->
-        </VBox>
-
-    </HBox>
-</StackPane>
+</VBox>

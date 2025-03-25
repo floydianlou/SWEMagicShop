@@ -15,7 +15,6 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 public class CartManager {
-    private static CartManager instance;
     ArrayList<Item> cartItems;
     String cartSavePath;
 
@@ -23,15 +22,6 @@ public class CartManager {
         Utilities.initialiseSavesFolder();
         this.cartSavePath = "data/cart_" + customer.getPersonID() + ".json";
         this.cartItems = loadCartItems(cartSavePath);
-    }
-
-    public static void init(Customer customer) {
-        if (instance == null)
-            instance = new CartManager(customer);
-    }
-
-    public static CartManager getInstance() {
-        return instance;
     }
 
     public ArrayList<Item> loadCartItems (String jsonPath) {
@@ -114,16 +104,8 @@ public class CartManager {
         for (int i = 0; i < cartItems.size(); i++) {
             if (cartItems.get(i).getItemID() == item.getItemID()) {
                 cartItems.remove(i);
-                return;
+                break;
             }
         } throw new ItemNotInCartException("There was no such item in your cart!");
-    }
-
-    public void setItemQuantity(Item item, int quantity) {
-        for (Item i : cartItems) {
-            if (i.getItemID() == item.getItemID()) {
-                i.setItemQuantity(quantity);
-                return; }
-        }
     }
 }
