@@ -194,7 +194,6 @@
     -fx-font-size: 14px;
     -fx-padding: 10px;
     -fx-max-width: 250px;
-    -fx-font-family: 'Arimo', Arial, sans-serif;
 }
 
 .product-card {
@@ -263,7 +262,6 @@
     -fx-font-size: 14px;
     -fx-padding: 1px;
     -fx-max-width: 120px;
-    -fx-font-family: 'Arimo', Arial, sans-serif;
 }
 
 .transparent-combobox {
@@ -334,30 +332,5 @@
 .input-combobox .list-cell:hover {
     -fx-background-color: rgba(255, 255, 255, 0.5);
     -fx-text-fill: #460E56;
-}
-
-.add-to-cart-button {
-    -fx-background-color: #4CAF50;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-border-radius: 5px;
-    -fx-padding: 5px 10px;
-    -fx-cursor: hand;
-}
-.add-to-cart-button:hover {
-    -fx-background-color: #45a049;
-}
-
-.product-name {
-    -fx-background-color: transparent;
-    -fx-text-fill: #6C3483;
-    -fx-font-size: 30px;
-    -fx-font-weight: 100;
-    -fx-font-family: 'Arimo', Arial, sans-serif;
-}
-
-.product-name:hover {
-    -fx-text-fill: #25072D;
 }
 
