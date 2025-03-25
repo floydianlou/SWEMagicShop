@@ -2,7 +2,6 @@ package GUI.controller;
 
 import BusinessLogic.CartManager;
 import BusinessLogic.Utilities;
-import DomainModel.Customer;
 import DomainModel.Item;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,9 +16,6 @@ public class ProductViewController {
     @FXML private Label productCategory;
     @FXML private Label productArcane;
     @FXML private Label productPrice;
-
-    @FXML private ImageView cartIcon;
-    @FXML private ImageView accountIcon;
     @FXML private ImageView productImage;
 
     @FXML private Button addToCartButton;
@@ -34,8 +30,6 @@ public class ProductViewController {
     public void initialize() {
         selectedProduct = ItemViewManager.getInstance().getProductSelected();
         loadItem();
-        cartIcon.setImage(new Image(getClass().getResource("/images/cart.png").toExternalForm()));
-        accountIcon.setImage(new Image(getClass().getResource("/images/account.png").toExternalForm()));
     }
 
     private void loadItem(){
@@ -47,22 +41,6 @@ public class ProductViewController {
         productPrice.setText(String.format("Price: %d GP, %d SP, %d CP", price[0], price[1], price[2]));
         productImage.setImage(new Image(getClass().getResource(selectedProduct.getImagePath()).toExternalForm()));
         addToCartButton.setOnAction(event -> CartManager.getInstance().addItemToCart(selectedProduct));
-    }
-
-    @FXML
-    private void handleAccountButton() {
-        SceneController.loadScene("account-view.fxml");
-    }
-
-    @FXML
-    private void handleCartButton() {
-        SceneController.loadScene("cart-view.fxml");
-    }
-
-    @FXML
-    private void handleBack() {
-        ItemViewManager.getInstance().clearProductSelected();
-        SceneController.loadScene("customer-shop-view.fxml");
     }
 
 }

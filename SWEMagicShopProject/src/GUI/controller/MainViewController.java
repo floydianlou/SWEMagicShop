@@ -43,6 +43,11 @@ public class MainViewController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/" + fxmlFile));
             Node content = loader.load();
 
+            if (fxmlFile.equals("customer-shop-view.fxml")) { //TODO manage for other pages
+                CustomerShopViewController controller = loader.getController();
+                controller.setMainViewController(this);
+            }
+
             AnchorPane wrapper = new AnchorPane(content);
             AnchorPane.setTopAnchor(content, 0.0);
             AnchorPane.setBottomAnchor(content, 0.0);
@@ -92,7 +97,7 @@ public class MainViewController {
                 toolBar.getChildren().addAll(createWelcomeLabel(), accountButton, logoutButton);
             }
 
-            case "cart" -> {
+            case "cart", "product" -> {
                 Button backButton = createButton("/images/homeIcon.png", "Shop home", _ -> {
                     loadContent("customer-shop-view.fxml");
                     updateTopBar("customer");
@@ -121,10 +126,6 @@ public class MainViewController {
                 });
 
                 toolBar.getChildren().addAll(backButton, logoutButton);
-            }
-
-            case "product" -> {
-
             }
 
         }

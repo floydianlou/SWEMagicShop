@@ -364,3 +364,34 @@
     -fx-background-radius: 10;
 }
 
+/* END CART PAGE STYLES */
+
+/* PRODUCT VIEW STYLES */
+
+.add-to-cart-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-cursor: hand;
+}
+.add-to-cart-button:hover {
+    -fx-background-color: #45a049;
+}
+
+.product-name {
+    -fx-background-color: transparent;
+    -fx-text-fill: #6C3483;
+    -fx-font-size: 30px;
+    -fx-font-weight: 100;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+}
+
+.product-name:hover {
+    -fx-text-fill:#25072D;
+}
+
+/* END PRODUCT VIEW STYLES */
+

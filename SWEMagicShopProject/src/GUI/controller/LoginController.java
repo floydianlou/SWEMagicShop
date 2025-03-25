@@ -22,7 +22,6 @@ public class LoginController {
     @FXML private PasswordField passwordField;
     @FXML private Label errorLabel;
     @FXML private ImageView shopIcon;
-    private LoggedUserManager loggedUserManager;
     private AccountManager accountManager = new AccountManager();
 
     @FXML

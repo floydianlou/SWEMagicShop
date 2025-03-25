@@ -41,6 +41,7 @@ public class CustomerShopViewController {
     private ArrayList<Item> allProducts;
 
     private StoreManager storeManager;
+    private MainViewController mainViewController;
 
     public CustomerShopViewController() {
         storeManager = new StoreManager();
@@ -269,7 +270,8 @@ public class CustomerShopViewController {
 
             Button addToCartButton = new Button("Add to Cart");
             addToCartButton.getStyleClass().add("add-to-cart-button");
-            addToCartButton.setOnMouseClicked(event -> {
+            addToCartButton.setOnMouseClicked(_ -> {
+                product.setItemQuantity(1);
                 CartManager.getInstance().addItemToCart(product);});
 
             HBox buttonContainer = new HBox(addToCartButton);
@@ -289,8 +291,14 @@ public class CustomerShopViewController {
 
     @FXML
     private void viewProductButton(Item selectedProduct) {
+        selectedProduct.setItemQuantity(1);
         ItemViewManager.getInstance().setProductSelected(selectedProduct);
-        SceneController.loadScene("product-view.fxml");
+        mainViewController.loadContent("product-view.fxml");
+        mainViewController.updateTopBar("product");
+    }
+
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
     }
 
 }

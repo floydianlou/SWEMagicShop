@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import BusinessLogic.CartManager;
+import BusinessLogic.Utilities;
 import DomainModel.Item;
 import Exceptions.OrderExceptions;
 import javafx.fxml.FXML;
@@ -44,11 +45,11 @@ public class CartController {
             Label name = new Label(cartItem.getItemName());
             name.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
+            int[] price = Utilities.normalizeCurrencyArray(cartItem.getCopperValue());
+            Label productPrice = new Label(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
+            // TODO css styles
 
-            Label price = new Label(cartItem.getCopperValue() + "CP");
-            price.setStyle("-fx-font-size: 13px;");
-
-            VBox textBox = new VBox(5, name, price);
+            VBox textBox = new VBox(5, name, productPrice);
             TextField quantityField = createQuantityField(cartItem, itemBox);
 
             // decrease button definition
