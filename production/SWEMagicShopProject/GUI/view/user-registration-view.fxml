@@ -13,7 +13,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.StackPane?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="GUI.controller.UserRegistrationController"
       spacing="25" alignment="CENTER"
       stylesheets="@../styles/styles.css">
@@ -45,8 +44,7 @@
            alignment="CENTER"
            styleClass="instructions-label"/>
 
-    <!-- Contenitore centrale -->
-    <HBox spacing="40" alignment="CENTER" styleClass="input-container">
+    <HBox spacing="40" alignment="CENTER" styleClass="input-container" maxWidth="800">
 
 
     <VBox spacing="15" alignment="CENTER_LEFT">
@@ -96,7 +94,7 @@
             <HBox styleClass="input-box" spacing="5" alignment="CENTER_LEFT" prefHeight="50" maxWidth="310">
                 <Region prefWidth="5"/>
                 <ImageView fx:id="ageIcon" fitHeight="27" fitWidth="27"/>
-                <TextField fx:id="ageField" promptText="50" styleClass="input-field" prefHeight="40"/>
+                <TextField fx:id="ageField" promptText="Age" styleClass="input-field" prefHeight="40"/>
             </HBox>
 
             <HBox styleClass="input-box" spacing="5" alignment="CENTER_LEFT" prefHeight="50" maxWidth="310">
@@ -117,7 +115,7 @@
 <Label fx:id="errorLabel" text=""
        styleClass="error-label"/>
 
-    <HBox alignment="BOTTOM_LEFT">
+    <HBox alignment="BOTTOM_CENTER">
     <Button text="Back to choice menu" onAction="#handleBack"
             styleClass="back-button"/>
 </HBox>

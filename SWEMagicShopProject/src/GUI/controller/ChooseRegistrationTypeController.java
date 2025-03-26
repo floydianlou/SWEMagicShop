@@ -29,7 +29,7 @@ public class ChooseRegistrationTypeController {
 
     @FXML
     private void handleBack() {
-        SceneController.loadScene("main-view.fxml");
+        SceneController.loadScene("welcome-view.fxml");
     }
 
 }

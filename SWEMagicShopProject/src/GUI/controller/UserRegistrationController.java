@@ -133,7 +133,7 @@ public class UserRegistrationController {
             popupStage.setScene(new Scene(root));
             popupStage.setResizable(false);
             popupStage.showAndWait();
-            SceneController.loadScene("main-view.fxml");
+            SceneController.loadScene("welcome-view.fxml");
 
         } catch (Exception e) {
             e.printStackTrace();

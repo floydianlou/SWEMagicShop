@@ -1,3 +1,7 @@
+import BusinessLogic.CartManager;
+import DomainModel.Customer;
+import DomainModel.Person;
+import GUI.controller.LoggedUserManager;
 import GUI.controller.SceneController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,13 +17,22 @@ public class main extends Application {
         try {
             main.primaryStage = primaryStage;
             SceneController.setPrimaryStage(primaryStage);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/main-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/welcome-view.fxml"));
             Scene scene = new Scene(loader.load());
             primaryStage.setScene(scene);
             primaryStage.setTitle("Otari's Magic Shop");
             primaryStage.setMaximized(true);
             primaryStage.setWidth(1200);
             primaryStage.setHeight(800);
+
+            primaryStage.setOnCloseRequest(_ -> {
+                Person loggedUser = LoggedUserManager.getInstance().getLoggedUser();
+                if (loggedUser instanceof Customer) {
+                    CartManager.getInstance().closeCartSession();
+                    System.out.println("Cart saved automatically on app close.");
+                }
+            });
+
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();

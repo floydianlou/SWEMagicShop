@@ -1,43 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.shape.Rectangle?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="GUI.controller.MainViewController"
+            stylesheets="@../styles/styles.css">
 
-<!-- TODO complete layout and design of page and buttons, add full screen view, put fields in normal dimension, modify page design and colours -->
+    <top>
+        <HBox fx:id="toolBar" spacing="20" alignment="CENTER_LEFT" styleClass="tool-bar">
 
-<VBox spacing="20" alignment="CENTER"
-      style="-fx-background-image: url('/images/shop-background.jpg'); -fx-background-size: cover;"
-      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="GUI.controller.MainViewController">
+            <ImageView fx:id="shopIcon"
+                       fitHeight="40" fitWidth="40"
+                       preserveRatio="true"
+                       pickOnBounds="true"/>
 
-    <HBox alignment="TOP_CENTER" spacing="15">
-        <ImageView fx:id="iconImageView" fitHeight="50" fitWidth="50"/>
-        <Label text="Welcome to Otari's Magic Shop!"
-               style="-fx-font-size: 50px; -fx-font-weight: bold; -fx-font-family: 'Arimo'; -fx-text-fill: white;"/>
-    </HBox>
+            <Label fx:id="shoplabel" text="Otari's Magic Shop"
+                   styleClass="shop-label"/>
 
-    <Region prefHeight="5"/>
+            <Region HBox.hgrow="ALWAYS"/>
 
-    <HBox alignment="CENTER">
-        <Rectangle width="300" height="5" fill="white" arcWidth="10" arcHeight="10"
-                   style="-fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.8), 10, 0, 0, 5);"/>
-    </HBox>
+        </HBox>
 
-    <Region prefHeight="5"/>
+    </top>
 
-    <Label text="Please create an account or login to access our shop."
-           style="-fx-font-size: 20px; -fx-font-style: italic; -fx-text-fill: white; -fx-font-family: Arimo"/>
 
-    <HBox alignment="CENTER" spacing="15">
-        <Button text="Login" onAction="#handleLoginButton" prefWidth="270" prefHeight="50"
-                style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-font-family: 'Arimo'; -fx-font-style: italic;"/>
-        <Button text="Create account" onAction="#handleRegisterButton" prefWidth="270" prefHeight="50"
-                style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-font-family: 'Arimo'; -fx-font-style: italic;"/>
-    </HBox>
+    <center>
+        <AnchorPane fx:id="contentArea"/>
+    </center>
 
-</VBox>
+</BorderPane>

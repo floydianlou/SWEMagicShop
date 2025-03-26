@@ -64,10 +64,12 @@ public class itemDAOTestSuite {
         boolean arcane = scanner.nextBoolean();
         System.out.print("CP: ");
         int itemPrice = scanner.nextInt();
+        System.out.print("Percorso dell'immagine: ");
+        String image = scanner.nextLine();
         scanner.nextLine();
 
         try{
-            boolean success = storeManager.addProduct(itemName, itemDescription, itemCategory, itemPrice, arcane);
+            boolean success = storeManager.addProduct(itemName, itemDescription, itemCategory, itemPrice, arcane, image);
             if(success){
                 System.out.println("✅ Item aggiunto con successo!");
             } else { System.err.println("❌ Errore nella creazione dell'item!");}
@@ -112,7 +114,11 @@ public class itemDAOTestSuite {
         String priceInput = scanner.nextLine();
         int itemPrice = priceInput.isEmpty() ? item.getCopperValue() : Integer.parseInt(priceInput);
 
-        Item updatedItem = new Item(itemID, name, description, category, itemArcane, itemPrice);
+        System.out.print("Nuova immagine (attuale: " + item.getImagePath() + "): ");
+        String image = scanner.nextLine();
+        if (image.isEmpty()) image = item.getImagePath();
+
+        Item updatedItem = new Item(itemID, name, description, category, itemArcane, itemPrice, image);
 
         boolean success = storeManager.updateProduct(updatedItem);
         if (success) {

@@ -65,8 +65,7 @@
                 <Region prefWidth="5"/>
                 <ImageView fx:id="passwordIcon" fitHeight="27" fitWidth="27"/>
                 <PasswordField fx:id="passwordField" promptText="Password"
-                               maxWidth="260"
-                               styleClass="input-field"/>
+                               maxWidth="260" styleClass="input-field"/>
             </HBox>
 
             <Button text="Login" onAction="#handleLogin"
@@ -77,8 +76,7 @@
         </VBox>
 
 
-        <HBox alignment="BOTTOM_LEFT"
-              style="-fx-padding: 0 0 0 50px;">
+        <HBox alignment="BOTTOM_CENTER">
             <Button text="Back to Welcome menu" onAction="#handleBack"
                     styleClass="back-button"/>
         </HBox>
