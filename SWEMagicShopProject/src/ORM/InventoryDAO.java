@@ -170,11 +170,11 @@ public class InventoryDAO {
 
     //ATTENTION: THIS FUNCTION ONLY GIVES YOU ONE RESULT, IF ONE PRODUCTS HAS THE SAME SALES AS ANOTHER IT WON'T SHOW
     public Item productMostSold() {
-        String query = "SELECT it.itemid, it.name, it.description, c.name as category, it.arcane, it.cpprice, SUM(i.quantity) AS total_sold " +
+        String query = "SELECT it.itemid, it.name, it.description, c.name as category, it.arcane, it.cpprice, it.imagepath, SUM(i.quantity) AS total_sold " +
                 "FROM \"Inventory\" i " +
                 "JOIN \"Item\" it ON i.itemID = it.itemID " +
                 "JOIN \"Category\" c ON it.categoryid = c.categoryid " +
-                "GROUP BY it.itemID, it.name, it.description, c.name, it.arcane, it.cpprice " +
+                "GROUP BY it.itemID, it.name, it.description, c.name, it.arcane, it.cpprice, it.imagepath " +
                 "ORDER BY total_sold DESC " +
                 "LIMIT 1";
 
@@ -187,7 +187,8 @@ public class InventoryDAO {
                     String item_category = set.getString("category");
                     boolean item_arcane = set.getBoolean("arcane");
                     int item_cpprice = set.getInt("cpprice");
-                    return new Item(item_id, item_name, item_description, item_category, item_arcane, item_cpprice);
+                    String item_imagepath = set.getString("imagepath");
+                    return new Item(item_id, item_name, item_description, item_category, item_arcane, item_cpprice, item_imagepath);
                 }
             }
         } catch (SQLException e) {
@@ -198,12 +199,12 @@ public class InventoryDAO {
 
     //ATTENTION: THIS FUNCTION ONLY GIVES YOU ONE RESULT, IF ONE PRODUCTS HAS THE SAME SALES AS ANOTHER IT WON'T SHOW
     public Item productLeastSold() {
-        String query = "SELECT it.itemID, it.name, it.description, c.name AS category, it.arcane, it.CPprice, " +
+        String query = "SELECT it.itemID, it.name, it.description, c.name AS category, it.arcane, it.CPprice, it.imagepath, " +
                 "COALESCE(SUM(inv.quantity), 0) AS total_sold " +
                 "FROM \"Item\" it " +
                 "LEFT JOIN \"Inventory\" inv ON it.itemID = inv.itemID " +
                 "LEFT JOIN \"Category\" c ON it.categoryID = c.categoryID " +
-                "GROUP BY it.itemID, it.name, it.description, c.name, it.arcane, it.CPprice " +
+                "GROUP BY it.itemID, it.name, it.description, c.name, it.arcane, it.CPprice, it.imagepath " +
                 "ORDER BY total_sold ASC " +
                 "LIMIT 1";
 
@@ -216,7 +217,8 @@ public class InventoryDAO {
                     String item_category = set.getString("category");
                     boolean item_arcane = set.getBoolean("arcane");
                     int item_cpprice = set.getInt("cpprice");
-                    return new Item(item_id, item_name, item_description, item_category, item_arcane, item_cpprice);
+                    String item_imagepath = set.getString("imagepath");
+                    return new Item(item_id, item_name, item_description, item_category, item_arcane, item_cpprice, item_imagepath);
                 }
             }
         } catch (SQLException e) {

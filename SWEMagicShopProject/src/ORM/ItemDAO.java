@@ -18,7 +18,7 @@ public class ItemDAO {
 
     public Item getItemByID(int ID) {
         Item item = null;
-        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane  " +
+        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane, i.imagepath  " +
                 "FROM \"Item\" i JOIN \"Category\" c ON i.categoryid = c.categoryid " +
                 "WHERE i.itemid = ?";
 
@@ -32,7 +32,8 @@ public class ItemDAO {
                     int CPprice = resultSet.getInt("CPprice");
                     String category = resultSet.getString("categoryName");
                     boolean arcane = resultSet.getBoolean("arcane");
-                    item = new Item(itemID, name, description, category, arcane, CPprice);
+                    String imagePath = resultSet.getString("imagepath");
+                    item = new Item(itemID, name, description, category, arcane, CPprice, imagePath);
                 }
             }
         } catch (SQLException e) {
@@ -43,7 +44,7 @@ public class ItemDAO {
 
     public ArrayList<Item> getItemsByName(String itemName) {
         ArrayList<Item> items = new ArrayList<>();
-        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane " +
+        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane, i.imagepath " +
                 "FROM \"Item\" i " +
                 "JOIN \"Category\" c ON i.categoryid = c.categoryid " +
                 "WHERE i.name = ?";
@@ -57,7 +58,8 @@ public class ItemDAO {
                     int CPprice = resultSet.getInt("CPprice");
                     String category = resultSet.getString("categoryName");
                     boolean arcane = resultSet.getBoolean("arcane");
-                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice);
+                    String imagePath = resultSet.getString("imagepath");
+                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice, imagePath);
                     items.add(newItem);
                 }
             }
@@ -69,7 +71,7 @@ public class ItemDAO {
 
     public ArrayList<Item> getItemsByDescription(String itemDescription) {
         ArrayList<Item> items = new ArrayList<>();
-        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane " +
+        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane, i.imagepath " +
                 "FROM \"Item\" i " +
                 "JOIN \"Category\" c ON i.categoryid = c.categoryid " +
                 "WHERE i.description = ?";
@@ -83,7 +85,8 @@ public class ItemDAO {
                     int CPprice = resultSet.getInt("CPprice");
                     String category = resultSet.getString("categoryName");
                     boolean arcane = resultSet.getBoolean("arcane");
-                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice);
+                    String imagePath = resultSet.getString("imagepath");
+                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice, imagePath);
                     items.add(newItem);
                 }
             }
@@ -95,7 +98,7 @@ public class ItemDAO {
 
     public ArrayList<Item> getItemsByCategory(String cat) {
         ArrayList<Item> items = new ArrayList<>();
-        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane " +
+        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane, i.imagepath " +
                 "FROM \"Item\" i " +
                 "JOIN \"Category\" c ON i.categoryid = c.categoryid " +
                 "WHERE c.name = ?";
@@ -109,7 +112,8 @@ public class ItemDAO {
                     int CPprice = resultSet.getInt("CPprice");
                     String category = resultSet.getString("categoryName");
                     boolean arcane = resultSet.getBoolean("arcane");
-                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice);
+                    String imagePath = resultSet.getString("imagepath");
+                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice, imagePath);
                     items.add(newItem);
                 }
             }
@@ -121,7 +125,7 @@ public class ItemDAO {
 
     public ArrayList<Item> getItemsByArcane(boolean isArcane) {
         ArrayList<Item> items = new ArrayList<>();
-        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane " +
+        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane, i.imagepath " +
                 "FROM \"Item\" i " +
                 "JOIN \"Category\" c ON i.categoryid = c.categoryid " +
                 "WHERE i.arcane = ?";
@@ -136,7 +140,8 @@ public class ItemDAO {
                     int CPprice = resultSet.getInt("CPprice");
                     String category = resultSet.getString("categoryName");
                     boolean arcane = resultSet.getBoolean("arcane");
-                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice);
+                    String imagePath = resultSet.getString("imagepath");
+                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice, imagePath);
                     items.add(newItem);
                 }
             };
@@ -148,7 +153,7 @@ public class ItemDAO {
 
     public ArrayList<Item> getItemsByPriceRange(int minPrice, int maxPrice) {
         ArrayList<Item> items = new ArrayList<>();
-        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane " +
+        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane, i.imagepath " +
                 "FROM \"Item\" i " +
                 "JOIN \"Category\" c ON i.categoryid = c.categoryid " +
                 "WHERE i.cpprice BETWEEN ? AND ?";
@@ -164,7 +169,8 @@ public class ItemDAO {
                     int CPprice = resultSet.getInt("CPprice");
                     String category = resultSet.getString("categoryName");
                     boolean arcane = resultSet.getBoolean("arcane");
-                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice);
+                    String imagePath = resultSet.getString("imagepath");
+                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice, imagePath);
                     items.add(newItem);
                 }
             };
@@ -176,7 +182,7 @@ public class ItemDAO {
 
     public ArrayList<Item> getAllItems() {
         ArrayList<Item> items = new ArrayList<>();
-        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane " +
+        String query = "SELECT i.itemid, i.name, i.description, i.cpprice, c.name as categoryName, i.arcane, i.imagepath " +
                 "FROM \"Item\" i " +
                 "JOIN \"Category\" c ON i.categoryid = c.categoryid ";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -188,7 +194,8 @@ public class ItemDAO {
                     int CPprice = resultSet.getInt("CPprice");
                     String category = resultSet.getString("categoryName");
                     boolean arcane = resultSet.getBoolean("arcane");
-                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice);
+                    String imagePath = resultSet.getString("imagepath");
+                    Item newItem = new Item(itemID, name, description, category, arcane, CPprice, imagePath);
                     items.add(newItem);
                 }
             }
@@ -198,9 +205,9 @@ public class ItemDAO {
         return items;
     }
 
-    public boolean createItem(String itemName, String description, String category, int copperValue, boolean isArcane) {
-        String query = "INSERT INTO \"Item\" ( name, description, CPprice, categoryID, arcane) " +
-                "VALUES ( ?, ?, ?, (SELECT categoryID FROM \"Category\" WHERE name = ?), ?)";
+    public boolean createItem(String itemName, String description, String category, int copperValue, boolean isArcane, String imagePath) {
+        String query = "INSERT INTO \"Item\" ( name, description, CPprice, categoryID, arcane, imagepath) " +
+                "VALUES ( ?, ?, ?, (SELECT categoryID FROM \"Category\" WHERE name = ?), ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, itemName);
@@ -208,6 +215,7 @@ public class ItemDAO {
             stmt.setInt(3, copperValue);
             stmt.setString(4, category); // Subquery per categoryID
             stmt.setBoolean(5, isArcane);
+            stmt.setString(6, imagePath);
 
             int rowsInserted = stmt.executeUpdate();
             if( rowsInserted > 0 ){
@@ -223,7 +231,7 @@ public class ItemDAO {
     }
 
     public boolean updateItem(Item item) {
-        String query = "UPDATE \"Item\" SET name = ?, description = ?, CPprice = ?, categoryID = (SELECT categoryID FROM \"Category\" WHERE name = ?), arcane = ? " +
+        String query = "UPDATE \"Item\" SET name = ?, description = ?, CPprice = ?, categoryID = (SELECT categoryID FROM \"Category\" WHERE name = ?), arcane = ?, imagepath = ? " +
                 "WHERE itemid = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -233,6 +241,7 @@ public class ItemDAO {
             stmt.setString(4, item.getItemCategory());
             stmt.setBoolean(5, item.isArcane());
             stmt.setInt(6, item.getItemID());
+            stmt.setString(7, item.getImagePath());
 
             int rowsAffected = stmt.executeUpdate();
             if( rowsAffected > 0 ){
