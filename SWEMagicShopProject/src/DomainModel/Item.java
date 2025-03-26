@@ -9,6 +9,7 @@ public class Item {
     private int itemQuantity;
     private boolean isArcane;
     private int copperValue;
+    private String imagePath;
 
     // contructor with attribute quantity for classes Cart and Inventory
     public Item(int itemID, String itemName, String itemDescription, String itemCategory, int itemQuantity, boolean isArcane, int copperValue) {
@@ -22,13 +23,14 @@ public class Item {
     }
 
     // contructor without attribute quantity for DAO
-    public Item(int itemID, String itemName, String itemDescription, String itemCategory, boolean isArcane, int CPprice) {
+    public Item(int itemID, String itemName, String itemDescription, String itemCategory, boolean isArcane, int CPprice, String imagePath) {
         this.itemID = itemID;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemCategory = itemCategory;
         this.isArcane = isArcane;
         this.copperValue = CPprice;
+        this.imagePath = imagePath;
     }
 
     public String getItemData(){
@@ -97,4 +99,11 @@ public class Item {
         this.copperValue = copperValue;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 }

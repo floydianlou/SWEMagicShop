@@ -1,5 +1,6 @@
 package GUI.controller;
 
+import DomainModel.Customer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
