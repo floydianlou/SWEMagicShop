@@ -19,7 +19,7 @@ public class ChooseRegistrationTypeController {
 
     @FXML
     private void handleClientRegistration() {
-        SceneController.loadScene("user-registration.fxml");
+        SceneController.loadScene("user-registration-view.fxml");
     }
 
     @FXML
@@ -28,8 +28,8 @@ public class ChooseRegistrationTypeController {
     }
 
     @FXML
-    private void handleBackToMenu() {
-        SceneController.loadScene("main-view.fxml");
+    private void handleBack() {
+        SceneController.loadScene("welcome-view.fxml");
     }
 
 }

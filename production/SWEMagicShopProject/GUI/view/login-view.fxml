@@ -11,8 +11,8 @@
             stylesheets="@../styles/styles.css">
 
     <VBox alignment="CENTER" spacing="15"
-          prefWidth="400" maxWidth="400"
-          AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="50.0"
+          prefWidth="600" maxWidth="600"
+          AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
           style="-fx-padding: 30;">
 
@@ -23,8 +23,15 @@
         </HBox>
 
 
-        <HBox alignment="CENTER">
-            <Rectangle width="250" height="3" fill="#460E56" arcWidth="10" arcHeight="10"/>
+        <HBox alignment="CENTER" spacing="10">
+            <Rectangle width="150" height="3"
+                       styleClass="divider"/>
+
+            <Label text="✦"
+                   styleClass="divider-star"/>
+
+            <Rectangle width="150" height="3"
+                       styleClass="divider"/>
         </HBox>
 
         <Label text="LOGIN"
@@ -38,16 +45,11 @@
 
 
         <VBox spacing="15" alignment="CENTER"
-              prefWidth="400" maxWidth="400"
-              prefHeight="450" maxHeight="450"
+              prefWidth="600" maxWidth="600"
               styleClass="input-container">
 
-            <HBox alignment="CENTER_LEFT" spacing="5" maxWidth="300"
-                  style="-fx-background-color: rgba(255, 255, 255, 0.3);
-             -fx-background-radius: 10;
-             -fx-border-radius: 10;
-             -fx-border-color: #6C3483;
-             -fx-padding: 5px;">
+            <HBox alignment="CENTER_LEFT" spacing="5" maxWidth="310"
+                  styleClass="input-box">
 
                 <Region prefWidth="5"/>
                 <ImageView fx:id="emailIcon" fitHeight="27" fitWidth="27"/>
@@ -57,37 +59,24 @@
             </HBox>
 
 
-            <HBox alignment="CENTER_LEFT" spacing="5" maxWidth="300"
-                  style="-fx-background-color: rgba(255, 255, 255, 0.3);
-             -fx-background-radius: 10;
-             -fx-border-radius: 10;
-             -fx-border-color: #6C3483;
-             -fx-padding: 5px;">
+            <HBox alignment="CENTER_LEFT" spacing="5" maxWidth="310"
+                  styleClass="input-box">
 
                 <Region prefWidth="5"/>
-
                 <ImageView fx:id="passwordIcon" fitHeight="27" fitWidth="27"/>
-
                 <PasswordField fx:id="passwordField" promptText="Password"
-                               maxWidth="260"
-                               style="-fx-background-color: transparent;
-                          -fx-border-color: transparent;
-                          -fx-text-fill: #460E56;
-                          -fx-prompt-text-fill: #460E56;
-                          -fx-font-size: 16px;
-                          -fx-padding: 10px;"/>
+                               maxWidth="260" styleClass="input-field"/>
             </HBox>
 
             <Button text="Login" onAction="#handleLogin"
                     styleClass="choice-button"/>
 
             <Label fx:id="errorLabel" text=""
-                   style="-fx-text-fill: #460E56; -fx-font-size: 16px;"/>
+                   styleClass="error-label"/>
         </VBox>
 
 
-        <HBox alignment="BOTTOM_LEFT"
-              style="-fx-padding: 0 0 0 50px;">
+        <HBox alignment="BOTTOM_CENTER">
             <Button text="Back to Welcome menu" onAction="#handleBack"
                     styleClass="back-button"/>
         </HBox>

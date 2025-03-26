@@ -78,7 +78,21 @@ public class AccountDAO {
             } catch (SQLException rollbackException) {
                 System.err.println("Error while doing rollback: " + rollbackException.getMessage());
             }
-            throw exception;
+
+            if ("23505".equals(exception.getSQLState())) {
+                String msg = exception.getMessage();
+
+                if (msg.contains("unique_email")) {
+                    throw new SQLException("This email is already in use.");
+                } else if (msg.contains("unique_phone")) {
+                    throw new SQLException("This phone number is already in use.");
+                } else {
+                    throw new SQLException("A unique constraint was violated.");
+                }
+            } else {
+                throw new SQLException("Customer account creation failed due to a database error.");
+            }
+
         } finally {
             try {
                 connection.setAutoCommit(true);
@@ -86,6 +100,7 @@ public class AccountDAO {
                 System.err.println("Error while reactivating auto commit: " + e.getMessage());
             }
         }
+
         return false;
     }
 
