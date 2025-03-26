@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import BusinessLogic.AccountManager;
+import BusinessLogic.CartManager;
 import DomainModel.Customer;
 import DomainModel.Manager;
 import DomainModel.Person;
@@ -52,6 +53,7 @@ public class LoginController {
                 if (loggedUser instanceof Manager) {
                     SceneController.loadScene("manager-shop-view.fxml"); //TODO
                 } else if (loggedUser instanceof Customer) {
+                    CartManager.init((Customer) loggedUser);
                     SceneController.loadScene("main-view.fxml");
                 }
             } else {
