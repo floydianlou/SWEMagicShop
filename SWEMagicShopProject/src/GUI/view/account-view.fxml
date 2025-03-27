@@ -25,35 +25,39 @@
             </VBox>
 
             <Label text="NAME" styleClass="instructions-label"/>
-            <HBox spacing="5" prefWidth="250" styleClass="cart-box">
-                <Region prefWidth="20"/>
+            <HBox spacing="5" prefWidth="250" styleClass="cart-box" alignment="CENTER_LEFT">
+                <Region prefWidth="10"/>
+                <ImageView fx:id="penIcon1" fitWidth="27" fitHeight="27" visible="false"/>
                 <StackPane>
-                    <TextField fx:id="accountName" maxWidth="260" styleClass="input-field"/>
+                    <TextField fx:id="accountName" promptText="Enter your new name..." maxWidth="350" styleClass="input-field"/>
                 </StackPane>
             </HBox>
 
             <Label text="SURNAME" styleClass="instructions-label"/>
-            <HBox spacing="5" prefWidth="250" styleClass="cart-box">
-                <Region prefWidth="20"/>
+            <HBox spacing="5" prefWidth="250" styleClass="cart-box" alignment="CENTER_LEFT">
+                <Region prefWidth="10"/>
+                <ImageView fx:id="penIcon2" fitWidth="27" fitHeight="27" visible="false"/>
                 <StackPane>
-                    <TextField fx:id="accountSurname" maxWidth="260" styleClass="input-field"/>
+                    <TextField fx:id="accountSurname" promptText="Enter your new surname..." maxWidth="350" styleClass="input-field"/>
                 </StackPane>
             </HBox>
 
             <Label text="EMAIL ADDRESS" styleClass="instructions-label"/>
-            <HBox spacing="5" prefWidth="250" styleClass="cart-box">
-                <Region prefWidth="20"/>
+            <HBox spacing="5" prefWidth="250" styleClass="cart-box" alignment="CENTER_LEFT">
+                <Region prefWidth="10"/>
+                <ImageView fx:id="penIcon3" fitWidth="27" fitHeight="27" visible="false"/>
                 <StackPane>
-                    <TextField fx:id="accountEmail" maxWidth="260" styleClass="input-field"/>
+                    <TextField fx:id="accountEmail" promptText="Enter your new e-mail..." maxWidth="350" styleClass="input-field"/>
                 </StackPane>
             </HBox>
 
             <Label text="PASSWORD" styleClass="instructions-label"/>
-            <HBox spacing="5" prefWidth="250" styleClass="cart-box">
-                <Region prefWidth="20"/>
+            <HBox spacing="5" prefWidth="250" styleClass="cart-box" alignment="CENTER_LEFT">
+                <Region prefWidth="10"/>
+                <ImageView fx:id="penIcon4" fitWidth="27" fitHeight="27" visible="false"/>
                 <StackPane>
                     <PasswordField fx:id="accountPasswordField" styleClass="input-field"/>
-                    <TextField fx:id="accountPassword" styleClass="input-field" visible="false"/>
+                    <TextField fx:id="accountPassword" promptText="Enter your new password..." maxWidth="350" styleClass="input-field" visible="false"/>
                 </StackPane>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Button style="-fx-background-color: transparent" onAction="#togglePassword" >
@@ -64,10 +68,11 @@
             </HBox>
 
             <Label text="PHONE NUMBER" styleClass="instructions-label"/>
-            <HBox spacing="5" prefWidth="250" styleClass="cart-box">
-                <Region prefWidth="20"/>
+            <HBox spacing="5" prefWidth="250" styleClass="cart-box" alignment="CENTER_LEFT">
+                <Region prefWidth="10"/>
+                <ImageView fx:id="penIcon5" fitWidth="27" fitHeight="27" visible="false"/>
                 <StackPane>
-                    <TextField fx:id="accountPhone" maxWidth="260" styleClass="input-field"/>
+                    <TextField fx:id="accountPhone" promptText="Enter your new phone number..." maxWidth="500" styleClass="input-field"/>
                 </StackPane>
             </HBox>
 
@@ -76,7 +81,7 @@
                     <Label text="SPECIES" styleClass="instructions-label"/>
                     <HBox spacing="5" prefWidth="250" styleClass="cart-box">
                         <Region prefWidth="20"/>
-                        <Label fx:id="accountSpecies" maxWidth="260" styleClass="input-field"/>
+                        <Label fx:id="accountSpecies" maxWidth="350" styleClass="input-field"/>
                     </HBox>
                 </VBox>
 
@@ -84,7 +89,7 @@
                     <Label text="AGE" styleClass="instructions-label"/>
                     <HBox spacing="5" prefWidth="250" styleClass="cart-box">
                         <Region prefWidth="20"/>
-                        <Label fx:id="accountAge" maxWidth="260" styleClass="input-field"/>
+                        <Label fx:id="accountAge" maxWidth="350" styleClass="input-field"/>
                     </HBox>
                 </VBox>
             </HBox>
@@ -93,13 +98,19 @@
         <Region prefWidth="200"/>
 
         <VBox alignment="CENTER_RIGHT" spacing="20">
+            <padding>
+                <Insets top="20" right="10"/>
+            </padding>
             <VBox alignment="TOP_RIGHT">
                 <Button fx:id="edit" styleClass="choice-button" onAction="#handleEditAccount" text="Edit"/>
-                <HBox spacing="20">
+                <HBox spacing="20" alignment="TOP_RIGHT">
                     <Button fx:id="confirmEdit" styleClass="confirm-button" onAction="#editAccount" text="Confirm" visible="false"/>
                     <Button fx:id="cancelEdit" styleClass="cancel-button" onAction="#cancelEdit" text="Cancel" visible="false"/>
                 </HBox>
             </VBox>
+
+            <Region prefHeight="20"/>
+
             <HBox alignment="CENTER" spacing="20">
                 <VBox alignment="CENTER" spacing="10" prefHeight="200" prefWidth="200" styleClass="cart-box">
                     <Button styleClass="tool-bar-button" onAction="#goToArcaneRequest">

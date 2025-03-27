@@ -30,6 +30,11 @@ public class AccountViewController {
     @FXML private ImageView eyeIcon;
     @FXML private Image openEyeIcon;
     @FXML private Image closedEyeIcon;
+    @FXML private ImageView penIcon1;
+    @FXML private ImageView penIcon2;
+    @FXML private ImageView penIcon3;
+    @FXML private ImageView penIcon4;
+    @FXML private ImageView penIcon5;
 
     @FXML private Button cancelEdit;
     @FXML private Button confirmEdit;
@@ -48,6 +53,11 @@ public class AccountViewController {
         openEyeIcon = new Image(getClass().getResource("/images/openEyeIcon.png").toExternalForm());
         closedEyeIcon = new Image(getClass().getResource("/images/closedEyeIcon.png").toExternalForm());
         eyeIcon.setImage(closedEyeIcon);
+        penIcon1.setImage(new Image(getClass().getResource("/images/penIcon.png").toExternalForm()));
+        penIcon2.setImage(new Image(getClass().getResource("/images/penIcon.png").toExternalForm()));
+        penIcon3.setImage(new Image(getClass().getResource("/images/penIcon.png").toExternalForm()));
+        penIcon4.setImage(new Image(getClass().getResource("/images/penIcon.png").toExternalForm()));
+        penIcon5.setImage(new Image(getClass().getResource("/images/penIcon.png").toExternalForm()));
     }
 
     public void loadCustomer(){
@@ -84,18 +94,21 @@ public class AccountViewController {
 
     @FXML
     private void handleEditAccount() {
-        boolean isEditing = accountName.isEditable(); // accountName not edible then isEditing is false
-
-        accountName.setEditable(!isEditing);  //therefore i make everything edible
-        accountSurname.setEditable(!isEditing);
-        accountEmail.setEditable(!isEditing);
-        accountPhone.setEditable(!isEditing);
-        accountPassword.setEditable(!isEditing);
-        accountPassword.setVisible(!isEditing); //i make visible the password field and eyeicon
-        accountPasswordField.setVisible(isEditing); //i make invisible the password field and eyeicon
-        eyeIcon.setVisible(isEditing);
+        accountName.setEditable(true);  //therefore i make everything edible
+        accountSurname.setEditable(true);
+        accountEmail.setEditable(true);
+        accountPhone.setEditable(true);
+        accountPassword.setEditable(true);
+        accountPassword.setVisible(true); //i make visible the password text field
+        accountPasswordField.setVisible(false); //i make invisible the password field and eyeicon
+        eyeIcon.setVisible(false);
 
         edit.setVisible(false);
+        penIcon1.setVisible(true);
+        penIcon2.setVisible(true);
+        penIcon3.setVisible(true);
+        penIcon4.setVisible(true);
+        penIcon5.setVisible(true);
         confirmEdit.setVisible(true);
         cancelEdit.setVisible(true);
 
@@ -116,23 +129,20 @@ public class AccountViewController {
         updatedCustomer.setAge(loggedCustomer.getAge());
         updatedCustomer.setOwnSpecies(loggedCustomer.getOwnSpecies());
         try{
-            if(accountManager.updateCustomerAccount(updatedCustomer)){
-                LoggedUserManager.getInstance().setLoggedUser(updatedCustomer);
-                loggedCustomer = (Customer) LoggedUserManager.getInstance().getLoggedUser();
-            }
+            accountManager.updateCustomerAccount(updatedCustomer);
+            LoggedUserManager.getInstance().setLoggedUser(updatedCustomer);
+            loggedCustomer = (Customer) LoggedUserManager.getInstance().getLoggedUser();
         } catch (RuntimeException e) {
             errorLabel.setText(e.getMessage());
-            cancelEdit();
         }
-
-        loadCustomer();
-        resetEditButton();
+        cancelEdit();
     }
 
     @FXML
     private void cancelEdit() {
         loadCustomer();
         resetEditButton();
+        errorLabel.setText("");
     }
 
     private void resetEditButton(){
@@ -147,6 +157,11 @@ public class AccountViewController {
         accountPasswordField.setVisible(true);
         accountPassword.setVisible(false);
         eyeIcon.setVisible(true);
+        penIcon1.setVisible(false);
+        penIcon2.setVisible(false);
+        penIcon3.setVisible(false);
+        penIcon4.setVisible(false);
+        penIcon5.setVisible(false);
     }
 
     @FXML

@@ -208,7 +208,7 @@ public class AccountDAO {
         return customer;
     }
 
-    public boolean updateCustomerAccount(Customer customer) {
+    public void updateCustomerAccount(Customer customer) throws SQLException {
         // TODO CHECK PREPARED STATEMENT POSSIBILITY
         String sqlUpdate = String.format("UPDATE \"Customer\" SET name = '%s', surname = '%s', email = '%s', password = '%s', phone = '%s' " +
                 "WHERE customerID = %d", customer.getName(), customer.getSurname(), customer.getEmail(), customer.getPassword(), customer.getPhoneNumber(),
@@ -218,14 +218,10 @@ public class AccountDAO {
             int affected = stmt.executeUpdate(sqlUpdate);
             if (affected > 0) {
                 System.out.println("Customer account updated");
-                return true;
             } else {
                 System.out.println("No rows were affected.");
             }
-        } catch (SQLException exception) {
-            System.err.println("Failed to update customer account: " + exception.getMessage());
         }
-        return false;
     }
 
     public boolean updateManagerAccount(Manager manager) {
