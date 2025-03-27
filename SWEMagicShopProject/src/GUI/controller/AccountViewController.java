@@ -95,9 +95,9 @@ public class AccountViewController {
         accountPasswordField.setVisible(isEditing); //i make invisible the password field and eyeicon
         eyeIcon.setVisible(isEditing);
 
-        edit.setVisible(isEditing);
-        confirmEdit.setVisible(!isEditing);
-        cancelEdit.setVisible(!isEditing);
+        edit.setVisible(false);
+        confirmEdit.setVisible(true);
+        cancelEdit.setVisible(true);
 
     }
 
@@ -122,19 +122,31 @@ public class AccountViewController {
             }
         } catch (RuntimeException e) {
             errorLabel.setText(e.getMessage());
+            cancelEdit();
         }
 
-        edit.setVisible(true);
-        handleEditAccount();
+        resetEditButton();
     }
 
     @FXML
     private void cancelEdit() {
         loadCustomer();
-        edit.setVisible(true);
-        handleEditAccount();
+        resetEditButton();
     }
 
+    private void resetEditButton(){
+        edit.setVisible(true);
+        confirmEdit.setVisible(false);
+        cancelEdit.setVisible(false);
+        accountName.setEditable(false);
+        accountSurname.setEditable(false);
+        accountEmail.setEditable(false);
+        accountPhone.setEditable(false);
+        accountPassword.setEditable(false);
+        accountPasswordField.setVisible(true);
+        accountPassword.setVisible(false);
+        eyeIcon.setVisible(true);
+    }
 
     @FXML
     private void goToOrders(){
