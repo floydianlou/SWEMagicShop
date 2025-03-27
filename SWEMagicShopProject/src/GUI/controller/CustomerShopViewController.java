@@ -272,7 +272,8 @@ public class CustomerShopViewController {
             addToCartButton.getStyleClass().add("add-to-cart-button");
             addToCartButton.setOnMouseClicked(_ -> {
                 product.setItemQuantity(1);
-                CartManager.getInstance().addItemToCart(product);});
+                CartManager.getInstance().addItemToCart(product);
+                mainViewController.updateCartIcon();});
 
             HBox buttonContainer = new HBox(addToCartButton);
             buttonContainer.setAlignment(Pos.BOTTOM_RIGHT);

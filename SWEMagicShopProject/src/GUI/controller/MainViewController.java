@@ -28,11 +28,16 @@ public class MainViewController {
     private AnchorPane contentArea;
     @FXML
     private ImageView shopIcon;
+    @FXML
+    private Image emptyCartIcon= new Image(getClass().getResource("/images/cartIcon.png").toExternalForm());;
+    @FXML
+    private Image fullCartIcon= new Image(getClass().getResource("/images/cartNotificationIcon.png").toExternalForm());;
+    @FXML
+    private ImageView cartIcon= new ImageView(emptyCartIcon);
 
     @FXML
     public void initialize() {
         shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm()));
-
         loadContent("customer-shop-view.fxml");
         updateTopBar("customer");
 
@@ -72,7 +77,7 @@ public class MainViewController {
                     updateTopBar("account");
                 });
 
-                Button cartButton = createButton("/images/cartIcon.png", "Cart", _ -> {
+                Button cartButton = createButton(cartIcon, "Cart", _ -> {
                     loadContent("cart-view.fxml");
                     updateTopBar("cart");
                 });
@@ -129,6 +134,7 @@ public class MainViewController {
             }
 
         }
+        updateCartIcon();
     }
 
     private Button createButton(String iconPath, String hoverText, EventHandler<ActionEvent> handler) {
@@ -145,6 +151,33 @@ public class MainViewController {
         button.setOnAction(handler);
 
         return button;
+    }
+
+    private Button createButton(ImageView icon, String hoverText, EventHandler<ActionEvent> handler) {
+        icon.setFitWidth(30);
+        icon.setFitHeight(30);
+
+        Button button = new Button();
+        button.setGraphic(icon);
+        button.getStyleClass().add("tool-bar-button");
+        Tooltip tooltip = new Tooltip(hoverText);
+        Tooltip.install(button, tooltip);
+        tooltip.getStyleClass().add("tooltip");
+        button.setOnAction(handler);
+
+        return button;
+    }
+
+    public void updateCartIcon() {
+        if (CartManager.getInstance().getCartItems().isEmpty()) {
+            cartIcon.setImage(emptyCartIcon);
+            cartIcon.setFitWidth(30);
+            cartIcon.setFitHeight(30);
+        } else {
+            cartIcon.setImage(fullCartIcon);
+            cartIcon.setFitWidth(30);
+            cartIcon.setFitHeight(30);
+        }
     }
 
     public Label createWelcomeLabel() {
