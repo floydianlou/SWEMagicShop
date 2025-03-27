@@ -125,6 +125,7 @@ public class AccountViewController {
             cancelEdit();
         }
 
+        loadCustomer();
         resetEditButton();
     }
 
