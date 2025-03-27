@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="GUI.controller.AccountViewController"
+            stylesheets="@../styles/styles.css">
+
+    <HBox spacing="20">
+
+        <VBox alignment="TOP_LEFT" spacing="10" >
+            <padding>
+                <Insets top="40" right="10" bottom="10" left="100"/>
+            </padding>
+            <VBox alignment="CENTER">
+                <Label text="ACCOUNT DETAILS"  styleClass="account-title-lable"/>
+            </VBox>
+
+            <Label text="NAME" styleClass="instructions-label"/>
+            <HBox spacing="5" prefWidth="250" styleClass="cart-box">
+                <Region prefWidth="20"/>
+                <Label fx:id="accountName" maxWidth="260" styleClass="input-field"/>
+            </HBox>
+
+            <Label text="SURNAME" styleClass="instructions-label"/>
+            <HBox spacing="5" prefWidth="250" styleClass="cart-box">
+                <Region prefWidth="20"/>
+                <Label fx:id="accountSurname" maxWidth="260" styleClass="input-field"/>
+            </HBox>
+
+            <Label text="EMAIL ADDRESS" styleClass="instructions-label"/>
+            <HBox spacing="5" prefWidth="250" styleClass="cart-box">
+                <Region prefWidth="20"/>
+                <Label fx:id="accountEmail" maxWidth="260" styleClass="input-field"/>
+            </HBox>
+
+            <Label text="PASSWORD" styleClass="instructions-label"/>
+            <HBox spacing="5" prefWidth="250" styleClass="cart-box">
+                <Region prefWidth="20"/>
+                <StackPane>
+                    <PasswordField fx:id="accountPasswordField" styleClass="input-field"/>
+                    <TextField fx:id="accountPassword" styleClass="input-field" visible="false"/>
+                </StackPane>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="togglePasswordButton" style="-fx-background-color: transparent" onAction="#togglePassword" >
+                    <graphic>
+                        <ImageView fx:id="eyeIcon" fitHeight="20" fitWidth="20"/>
+                    </graphic>
+                </Button>
+            </HBox>
+
+            <Label text="PHONE NUMBER" styleClass="instructions-label"/>
+            <HBox spacing="5" prefWidth="250" styleClass="cart-box">
+                <Region prefWidth="20"/>
+                <Label fx:id="accountPhone" maxWidth="260" styleClass="input-field"/>
+            </HBox>
+
+            <HBox spacing="50">
+                <VBox spacing="5">
+                    <Label text="SPECIES" styleClass="instructions-label"/>
+                    <HBox spacing="5" prefWidth="250" styleClass="cart-box">
+                        <Region prefWidth="20"/>
+                        <Label fx:id="accountSpecies" maxWidth="260" styleClass="input-field"/>
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="AGE" styleClass="instructions-label"/>
+                    <HBox spacing="5" prefWidth="250" styleClass="cart-box">
+                        <Region prefWidth="20"/>
+                        <Label fx:id="accountAge" maxWidth="260" styleClass="input-field"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+        </VBox>
+
+        <Region prefWidth="200"/>
+
+        <VBox alignment="CENTER_RIGHT" spacing="20">
+            <HBox alignment="CENTER" spacing="20">
+                <VBox alignment="CENTER" spacing="10" prefHeight="200" prefWidth="200" styleClass="cart-box">
+                    <Button styleClass="tool-bar-button" onAction="#goToArcaneRequest">
+                        <graphic>
+                            <ImageView fx:id="arcaneIcon" fitHeight="100" fitWidth="100"/>
+                        </graphic>
+                        <tooltip>
+                            <Tooltip text="Go to Arcane Request"/>
+                        </tooltip>
+                    </Button>
+                    <Label text="Arcane Membership" styleClass="instructions-label"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="10" prefHeight="200" prefWidth="200" styleClass="cart-box">
+                    <Button styleClass="tool-bar-button" onAction="#goToWallet">
+                        <graphic>
+                            <ImageView fx:id="walletIcon" fitHeight="100" fitWidth="100"/>
+                        </graphic>
+                        <tooltip>
+                            <Tooltip text="Go to Wallet"/>
+                        </tooltip>
+                    </Button>
+                    <Label text="Wallet" styleClass="instructions-label"/>
+                </VBox>
+
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="20">
+                <VBox alignment="CENTER" spacing="10" prefHeight="200" prefWidth="200" styleClass="cart-box">
+                    <Button styleClass="tool-bar-button" onAction="#goToOrders">
+                        <graphic>
+                            <ImageView fx:id="orderIcon" fitHeight="100" fitWidth="100"/>
+                        </graphic>
+                        <tooltip>
+                            <Tooltip text="Go To Orders"/>
+                        </tooltip>
+                    </Button>
+                    <Label text="Order History" styleClass="instructions-label"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="10" prefHeight="200" prefWidth="200" styleClass="cart-box">
+                    <Button styleClass="tool-bar-button" onAction="#goToInventory">
+                        <graphic>
+                            <ImageView fx:id="inventoryIcon" fitHeight="100" fitWidth="100"/>
+                        </graphic>
+                        <tooltip>
+                            <Tooltip text="Go To Inventory"/>
+                        </tooltip>
+                    </Button>
+                    <Label text="Inventory" styleClass="instructions-label"/>
+                </VBox>
+            </HBox>
+        </VBox>
+
+    </HBox>
+</AnchorPane>

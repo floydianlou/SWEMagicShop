@@ -161,6 +161,8 @@
     -fx-max-width: 260px;
 }
 
+/* END REGISTRATION CONTAINERS AND FIELDS */
+
 /* ITEMS SCROLL PANE */
 
 .scroll-pane {
@@ -206,6 +208,8 @@
     -fx-background-radius: 10;
     -fx-effect: dropshadow(gaussian, gray, 8, 0.2, 0, 2);
 }
+
+/* END ITEMS SCROLL PANE */
 
 /* TOOLBAR ITEMS, BUTTONS, TEXT */
 
@@ -391,7 +395,17 @@
 
 .product-name:hover {
     -fx-text-fill:#25072D;
+    -fx-cursor: hand;
 }
 
 /* END PRODUCT VIEW STYLES */
 
+/* ACCOUNT VIEW STYLES */
+.account-title-lable {
+    -fx-text-fill: #460E56;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+}
+
+/* END ACCOUNT VIEW STYLES */
