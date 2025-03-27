@@ -27,19 +27,25 @@
             <Label text="NAME" styleClass="instructions-label"/>
             <HBox spacing="5" prefWidth="250" styleClass="cart-box">
                 <Region prefWidth="20"/>
-                <Label fx:id="accountName" maxWidth="260" styleClass="input-field"/>
+                <StackPane>
+                    <TextField fx:id="accountName" maxWidth="260" styleClass="input-field"/>
+                </StackPane>
             </HBox>
 
             <Label text="SURNAME" styleClass="instructions-label"/>
             <HBox spacing="5" prefWidth="250" styleClass="cart-box">
                 <Region prefWidth="20"/>
-                <Label fx:id="accountSurname" maxWidth="260" styleClass="input-field"/>
+                <StackPane>
+                    <TextField fx:id="accountSurname" maxWidth="260" styleClass="input-field"/>
+                </StackPane>
             </HBox>
 
             <Label text="EMAIL ADDRESS" styleClass="instructions-label"/>
             <HBox spacing="5" prefWidth="250" styleClass="cart-box">
                 <Region prefWidth="20"/>
-                <Label fx:id="accountEmail" maxWidth="260" styleClass="input-field"/>
+                <StackPane>
+                    <TextField fx:id="accountEmail" maxWidth="260" styleClass="input-field"/>
+                </StackPane>
             </HBox>
 
             <Label text="PASSWORD" styleClass="instructions-label"/>
@@ -50,7 +56,7 @@
                     <TextField fx:id="accountPassword" styleClass="input-field" visible="false"/>
                 </StackPane>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Button fx:id="togglePasswordButton" style="-fx-background-color: transparent" onAction="#togglePassword" >
+                <Button style="-fx-background-color: transparent" onAction="#togglePassword" >
                     <graphic>
                         <ImageView fx:id="eyeIcon" fitHeight="20" fitWidth="20"/>
                     </graphic>
@@ -60,7 +66,9 @@
             <Label text="PHONE NUMBER" styleClass="instructions-label"/>
             <HBox spacing="5" prefWidth="250" styleClass="cart-box">
                 <Region prefWidth="20"/>
-                <Label fx:id="accountPhone" maxWidth="260" styleClass="input-field"/>
+                <StackPane>
+                    <TextField fx:id="accountPhone" maxWidth="260" styleClass="input-field"/>
+                </StackPane>
             </HBox>
 
             <HBox spacing="50">
@@ -85,6 +93,13 @@
         <Region prefWidth="200"/>
 
         <VBox alignment="CENTER_RIGHT" spacing="20">
+            <VBox alignment="TOP_RIGHT">
+                <Button fx:id="edit" styleClass="choice-button" onAction="#handleEditAccount" text="Edit"/>
+                <HBox spacing="20">
+                    <Button fx:id="confirmEdit" styleClass="confirm-button" onAction="#editAccount" text="Confirm" visible="false"/>
+                    <Button fx:id="cancelEdit" styleClass="cancel-button" onAction="#cancelEdit" text="Cancel" visible="false"/>
+                </HBox>
+            </VBox>
             <HBox alignment="CENTER" spacing="20">
                 <VBox alignment="CENTER" spacing="10" prefHeight="200" prefWidth="200" styleClass="cart-box">
                     <Button styleClass="tool-bar-button" onAction="#goToArcaneRequest">
@@ -137,6 +152,11 @@
                     <Label text="Inventory" styleClass="instructions-label"/>
                 </VBox>
             </HBox>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Label fx:id="errorLabel" styleClass="error-label" />
+
         </VBox>
 
     </HBox>

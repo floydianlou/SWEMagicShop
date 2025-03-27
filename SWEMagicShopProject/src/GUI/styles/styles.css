@@ -408,4 +408,30 @@
     -fx-font-family: 'Arimo', Arial, sans-serif;
 }
 
+.cnfirm-button {
+    -fx-background-color: #4CAF50; /* Verde */
+    -fx-text-fill: white; /* Testo bianco */
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.confirm-button:hover {
+    -fx-background-color: #45a049; /* Verde scuro */
+}
+
+.cancel-button {
+    -fx-background-color: #f44336; /* Rosso */
+    -fx-text-fill: white; /* Testo bianco */
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #d32f2f; /* Rosso scuro */
+}
+
 /* END ACCOUNT VIEW STYLES */

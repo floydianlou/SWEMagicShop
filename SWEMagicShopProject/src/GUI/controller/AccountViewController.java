@@ -1,23 +1,27 @@
 package GUI.controller;
 
+import BusinessLogic.AccountManager;
 import DomainModel.Customer;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 public class AccountViewController {
 
     private Customer loggedCustomer;
 
-    @FXML private Label accountName;
-    @FXML private Label accountSurname;
-    @FXML private Label accountEmail;
-    @FXML private Label accountPhone;
+    @FXML private TextField accountName;
+    @FXML private TextField accountSurname;
+    @FXML private TextField accountEmail;
+    @FXML private TextField accountPhone;
     @FXML private PasswordField accountPasswordField;
     @FXML private TextField accountPassword;
     @FXML private Label accountAge;
     @FXML private Label accountSpecies;
+
+    @FXML private Label errorLabel;
 
     @FXML private ImageView orderIcon;
     @FXML private ImageView walletIcon;
@@ -27,11 +31,16 @@ public class AccountViewController {
     @FXML private Image openEyeIcon;
     @FXML private Image closedEyeIcon;
 
-    @FXML private Button togglePasswordButton;
+    @FXML private Button cancelEdit;
+    @FXML private Button confirmEdit;
+    @FXML private Button edit;
+
+    private AccountManager accountManager;
 
     public void initialize(){
         loggedCustomer = (Customer) LoggedUserManager.getInstance().getLoggedUser();
         loadCustomer();
+        accountManager = new AccountManager();
         orderIcon.setImage(new Image(getClass().getResource("/images/ordersIcon.png").toExternalForm()));
         walletIcon.setImage(new Image(getClass().getResource("/images/walletIcon.png").toExternalForm()));
         inventoryIcon.setImage(new Image(getClass().getResource("/images/inventoryIcon.png").toExternalForm()));
@@ -43,11 +52,17 @@ public class AccountViewController {
 
     public void loadCustomer(){
         accountName.setText(loggedCustomer.getName());
+        accountName.setEditable(false);
         accountSurname.setText(loggedCustomer.getSurname());
+        accountSurname.setEditable(false);
         accountEmail.setText(loggedCustomer.getEmail());
+        accountEmail.setEditable(false);
         accountPhone.setText(loggedCustomer.getPhoneNumber());
+        accountPhone.setEditable(false);
         accountPassword.setText(loggedCustomer.getPassword());
+        accountPassword.setEditable(false);
         accountPasswordField.setText(loggedCustomer.getPassword());
+        accountPasswordField.setEditable(false);
         accountAge.setText(String.valueOf(loggedCustomer.getAge()));
         accountSpecies.setText(loggedCustomer.getSpeciesName());
     }
@@ -66,6 +81,60 @@ public class AccountViewController {
             eyeIcon.setImage(closedEyeIcon);
         }
     }
+
+    @FXML
+    private void handleEditAccount() {
+        boolean isEditing = accountName.isEditable(); // accountName not edible then isEditing is false
+
+        accountName.setEditable(!isEditing);  //therefore i make everything edible
+        accountSurname.setEditable(!isEditing);
+        accountEmail.setEditable(!isEditing);
+        accountPhone.setEditable(!isEditing);
+        accountPassword.setEditable(!isEditing);
+        accountPassword.setVisible(!isEditing); //i make visible the password field and eyeicon
+        accountPasswordField.setVisible(isEditing); //i make invisible the password field and eyeicon
+        eyeIcon.setVisible(isEditing);
+
+        edit.setVisible(isEditing);
+        confirmEdit.setVisible(!isEditing);
+        cancelEdit.setVisible(!isEditing);
+
+    }
+
+    @FXML
+    private void editAccount(){
+        Customer updatedCustomer = new Customer(loggedCustomer.getPersonID());
+        if(accountName.getText().isEmpty() || accountSurname.getText().isEmpty() || accountEmail.getText().isEmpty() || accountPhone.getText().isEmpty() || accountPassword.getText().isEmpty()){
+            errorLabel.setText("Please fill all the fields");
+            return;
+        }
+        updatedCustomer.setName(accountName.getText());
+        updatedCustomer.setSurname(accountSurname.getText());
+        updatedCustomer.setEmail(accountEmail.getText());
+        updatedCustomer.setPhoneNumber(accountPhone.getText());
+        updatedCustomer.setPassword(accountPassword.getText());
+        updatedCustomer.setAge(loggedCustomer.getAge());
+        updatedCustomer.setOwnSpecies(loggedCustomer.getOwnSpecies());
+        try{
+            if(accountManager.updateCustomerAccount(updatedCustomer)){
+                LoggedUserManager.getInstance().setLoggedUser(updatedCustomer);
+                loggedCustomer = (Customer) LoggedUserManager.getInstance().getLoggedUser();
+            }
+        } catch (RuntimeException e) {
+            errorLabel.setText(e.getMessage());
+        }
+
+        edit.setVisible(true);
+        handleEditAccount();
+    }
+
+    @FXML
+    private void cancelEdit() {
+        loadCustomer();
+        edit.setVisible(true);
+        handleEditAccount();
+    }
+
 
     @FXML
     private void goToOrders(){
