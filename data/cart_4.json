@@ -1,0 +1,12 @@
+[
+  {
+    "itemID": 3,
+    "itemName": "Healing Potion",
+    "itemDescription": "A potion that restores health",
+    "itemCategory": "Potions",
+    "itemQuantity": 5,
+    "isArcane": false,
+    "copperValue": 50,
+    "imagePath": "/images/products/healing_potion.jpg"
+  }
+]
