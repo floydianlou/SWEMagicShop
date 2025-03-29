@@ -38,14 +38,19 @@ public class MainViewController {
 
     }
 
+    // TODO when all pages are connected, better make this function work without all these ifs
     public void loadContent(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/" + fxmlFile));
             Node content = loader.load();
 
-            if (fxmlFile.equals("customer-shop-view.fxml")) { //TODO manage for other pages
+            if (fxmlFile.equals("customer-shop-view.fxml")) {
                 CustomerShopViewController controller = loader.getController();
                 controller.setMainViewController(this);
+            }
+            if (fxmlFile.equals("cart-view.fxml")) {
+                CartController cartController = loader.getController();
+                cartController.setMainViewController(this);
             }
 
             AnchorPane wrapper = new AnchorPane(content);
@@ -97,7 +102,7 @@ public class MainViewController {
                 toolBar.getChildren().addAll(createWelcomeLabel(), accountButton, logoutButton);
             }
 
-            case "cart", "product" -> {
+            case "cart" -> {
                 Button backButton = createButton("/images/homeIcon.png", "Shop home", _ -> {
                     loadContent("customer-shop-view.fxml");
                     updateTopBar("customer");
@@ -126,6 +131,29 @@ public class MainViewController {
                 });
 
                 toolBar.getChildren().addAll(backButton, logoutButton);
+            }
+
+            case "product" -> {
+                Button backButton = createButton("/images/homeIcon.png", "Shop home", _ -> {
+                    loadContent("customer-shop-view.fxml");
+                    updateTopBar("customer");
+                });
+
+                Button accountButton = createButton("/images/accountIcon.png", "Account", _ -> {
+                    loadContent("account-view.fxml");
+                    updateTopBar("account");
+                });
+
+                Button cartButton = createButton("/images/cartIcon.png", "Cart", _ -> {
+                    loadContent("cart-view.fxml");
+                    updateTopBar("cart");
+                });
+
+                Button logoutButton = createButton("/images/logoutIcon.png", "Logout", _ -> {
+                    handleLogout();
+                });
+
+                toolBar.getChildren().addAll(createWelcomeLabel(), backButton, cartButton, accountButton, logoutButton);
             }
 
         }

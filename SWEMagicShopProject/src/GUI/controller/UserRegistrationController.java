@@ -9,7 +9,9 @@ import BusinessLogic.AccountManager;
 import DomainModel.Species;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
 
@@ -126,12 +128,15 @@ public class UserRegistrationController {
             Parent root = loader.load();
 
             PopupController popupController = loader.getController();
-            popupController.setPopupContent("Account Created", "Your account has been created successfully.");
+            popupController.setPopupContent("Account Created", "Your account has been created successfully.", "Back to welcome page");
 
             Stage popupStage = new Stage();
-            popupStage.setTitle("Account Created");
-            popupStage.setScene(new Scene(root));
+            popupStage.initStyle(StageStyle.TRANSPARENT);
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+            popupStage.setScene(scene);
             popupStage.setResizable(false);
+            popupStage.setTitle("Account Created");
             popupStage.showAndWait();
             SceneController.loadScene("welcome-view.fxml");
 
