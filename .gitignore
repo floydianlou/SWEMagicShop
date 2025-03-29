@@ -24,3 +24,6 @@ hs_err_pid*
 replay_pid*
 SWEMagicShopProject/.idea/misc.xml
 SWEMagicShopProject/.idea/workspace.xml
+.idea
+data
+sql/sql.iml
