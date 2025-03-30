@@ -47,7 +47,7 @@
                 <Region prefWidth="10"/>
                 <ImageView fx:id="penIcon3" fitWidth="27" fitHeight="27" visible="false"/>
                 <StackPane>
-                    <TextField fx:id="accountEmail" promptText="Enter your new e-mail..." maxWidth="350" styleClass="input-field"/>
+                    <TextField fx:id="accountEmail" promptText="Enter your new e-mail..." maxWidth="700" styleClass="input-field"/>
                 </StackPane>
             </HBox>
 
@@ -109,10 +109,8 @@
                 </HBox>
             </VBox>
 
-            <Region prefHeight="20"/>
-
             <HBox alignment="CENTER" spacing="20">
-                <VBox alignment="CENTER" spacing="10" prefHeight="200" prefWidth="200" styleClass="cart-box">
+                <VBox alignment="CENTER" spacing="10" prefHeight="250" prefWidth="250" styleClass="cart-box" style="-fx-padding: 10;">
                     <Button styleClass="tool-bar-button" onAction="#goToArcaneRequest">
                         <graphic>
                             <ImageView fx:id="arcaneIcon" fitHeight="100" fitWidth="100"/>
@@ -122,9 +120,11 @@
                         </tooltip>
                     </Button>
                     <Label text="Arcane Membership" styleClass="instructions-label"/>
+                    <Label text="Discover exclusive benefits and special offers for Members. Learn how to get your membership card."
+                            styleClass="small-text" wrapText="true" textAlignment="CENTER"/>
                 </VBox>
 
-                <VBox alignment="CENTER" spacing="10" prefHeight="200" prefWidth="200" styleClass="cart-box">
+                <VBox alignment="CENTER" spacing="10" prefHeight="250" prefWidth="250" styleClass="cart-box" style="-fx-padding: 10;">
                     <Button styleClass="tool-bar-button" onAction="#goToWallet">
                         <graphic>
                             <ImageView fx:id="walletIcon" fitHeight="100" fitWidth="100"/>
@@ -134,12 +134,14 @@
                         </tooltip>
                     </Button>
                     <Label text="Wallet" styleClass="instructions-label"/>
+                    <Label text="An easy and accessible way to recharge and view your credit card directly from our shop."
+                           styleClass="small-text" wrapText="true" textAlignment="CENTER"/>
                 </VBox>
 
             </HBox>
 
             <HBox alignment="CENTER" spacing="20">
-                <VBox alignment="CENTER" spacing="10" prefHeight="200" prefWidth="200" styleClass="cart-box">
+                <VBox alignment="CENTER" spacing="10" prefHeight="250" prefWidth="250" styleClass="cart-box" style="-fx-padding: 10;">
                     <Button styleClass="tool-bar-button" onAction="#goToOrders">
                         <graphic>
                             <ImageView fx:id="orderIcon" fitHeight="100" fitWidth="100"/>
@@ -149,9 +151,11 @@
                         </tooltip>
                     </Button>
                     <Label text="Order History" styleClass="instructions-label"/>
+                    <Label text="Learn about shipping methods and policies. Check out your own order history and their status."
+                           styleClass="small-text" wrapText="true" textAlignment="CENTER"/>
                 </VBox>
 
-                <VBox alignment="CENTER" spacing="10" prefHeight="200" prefWidth="200" styleClass="cart-box">
+                <VBox alignment="CENTER" spacing="10" prefHeight="250" prefWidth="250" styleClass="cart-box" style="-fx-padding: 10;">
                     <Button styleClass="tool-bar-button" onAction="#goToInventory">
                         <graphic>
                             <ImageView fx:id="inventoryIcon" fitHeight="100" fitWidth="100"/>
@@ -161,10 +165,10 @@
                         </tooltip>
                     </Button>
                     <Label text="Inventory" styleClass="instructions-label"/>
+                    <Label text="Here you'll be able to access and view all the products you've purchesed from our store."
+                           styleClass="small-text" wrapText="true" textAlignment="CENTER"/>
                 </VBox>
             </HBox>
-
-            <Region VBox.vgrow="ALWAYS"/>
 
             <Label fx:id="errorLabel" styleClass="error-label" />
 

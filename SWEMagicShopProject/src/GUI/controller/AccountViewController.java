@@ -3,10 +3,16 @@ package GUI.controller;
 import BusinessLogic.AccountManager;
 import DomainModel.Customer;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
+import java.sql.SQLException;
 
 public class AccountViewController {
 
@@ -116,6 +122,7 @@ public class AccountViewController {
 
     @FXML
     private void editAccount(){
+        errorLabel.setText("");
         Customer updatedCustomer = new Customer(loggedCustomer.getPersonID());
         if(accountName.getText().isEmpty() || accountSurname.getText().isEmpty() || accountEmail.getText().isEmpty() || accountPhone.getText().isEmpty() || accountPassword.getText().isEmpty()){
             errorLabel.setText("Please fill all the fields");
@@ -132,10 +139,13 @@ public class AccountViewController {
             accountManager.updateCustomerAccount(updatedCustomer);
             LoggedUserManager.getInstance().setLoggedUser(updatedCustomer);
             loggedCustomer = (Customer) LoggedUserManager.getInstance().getLoggedUser();
+            popupAccountEdited();
+
         } catch (RuntimeException e) {
             errorLabel.setText(e.getMessage());
         }
-        cancelEdit();
+        loadCustomer();
+        resetEditButton();
     }
 
     @FXML
@@ -162,6 +172,25 @@ public class AccountViewController {
         penIcon3.setVisible(false);
         penIcon4.setVisible(false);
         penIcon5.setVisible(false);
+    }
+
+    private void popupAccountEdited() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/popup.fxml"));
+            Parent root = loader.load();
+
+            PopupController popupController = loader.getController();
+            popupController.setPopupContent("Account Updated", "Your account has been updated successfully.");
+
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Account Updated");
+            popupStage.setScene(new Scene(root));
+            popupStage.setResizable(false);
+            popupStage.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

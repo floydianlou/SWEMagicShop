@@ -208,7 +208,7 @@ public class AccountDAO {
         return customer;
     }
 
-    public void updateCustomerAccount(Customer customer) throws SQLException {
+    public void updateCustomerAccount(Customer customer) throws RuntimeException {
         // TODO CHECK PREPARED STATEMENT POSSIBILITY
         String sqlUpdate = String.format("UPDATE \"Customer\" SET name = '%s', surname = '%s', email = '%s', password = '%s', phone = '%s' " +
                 "WHERE customerID = %d", customer.getName(), customer.getSurname(), customer.getEmail(), customer.getPassword(), customer.getPhoneNumber(),
@@ -220,6 +220,19 @@ public class AccountDAO {
                 System.out.println("Customer account updated");
             } else {
                 System.out.println("No rows were affected.");
+            }
+        }catch (SQLException e){
+            System.err.println("SQL error while updating the customer : " + e.getMessage());
+            if (e.getMessage().contains("failed to connect")) {
+                throw new RuntimeException("Database is offline, please try again later.");
+            }else if("23505".equals(e.getSQLState())) {
+                if (e.getMessage().contains("unique_email")) {
+                    throw new IllegalArgumentException("Email already in use.");
+                } else if (e.getMessage().contains("unique_phone")) {
+                    throw new IllegalArgumentException("Phone number already in use.");
+                } else {
+                    throw new RuntimeException("A database error occurred.");
+                }
             }
         }
     }

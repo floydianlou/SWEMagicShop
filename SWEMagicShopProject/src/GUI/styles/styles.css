@@ -408,6 +408,12 @@
     -fx-font-family: 'Arimo', Arial, sans-serif;
 }
 
+.small-text{
+    -fx-text-fill: #696969;
+    -fx-font-size: 12px;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+}
+
 .confirm-button {
     -fx-background-color: #4CAF50; /* Verde */
     -fx-text-fill: white; /* Testo bianco */

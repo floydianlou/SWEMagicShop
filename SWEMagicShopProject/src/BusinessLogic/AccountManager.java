@@ -66,7 +66,7 @@ public class AccountManager {
         return accountDAO.getCustomerByID(customerID);
     }
 
-    public void updateCustomerAccount(Customer updatedCustomer) {
+    public void updateCustomerAccount(Customer updatedCustomer) throws IllegalArgumentException{
         if (!Utilities.checkEmail(updatedCustomer.getEmail()))
             throw new IllegalArgumentException("Invalid email address!");
         if(!Utilities.checkPassword(updatedCustomer.getPassword()))
@@ -74,22 +74,7 @@ public class AccountManager {
         if (!Utilities.checkPhone(updatedCustomer.getPhoneNumber()))
             throw new IllegalArgumentException("Invalid phone number!");
         AccountDAO accountDAO = new AccountDAO();
-        try{
-            accountDAO.updateCustomerAccount(updatedCustomer);
-        }catch(SQLException e){
-            System.err.println("SQL error while updating the customer : " + e.getMessage());
-            if (e.getMessage().contains("failed to connect")) {
-                throw new RuntimeException("Database is offline, please try again later.");
-            }else if("23505".equals(e.getSQLState())) {
-                if (e.getMessage().contains("unique_email")) {
-                    throw new IllegalArgumentException("Email already in use.");
-                } else if (e.getMessage().contains("unique_phone")) {
-                    throw new IllegalArgumentException("Phone number already in use.");
-                } else {
-                    throw new RuntimeException("A database error occurred.");
-                }
-            }
-        }
+        accountDAO.updateCustomerAccount(updatedCustomer);
     }
 
     public boolean updateManagerAccount (Manager updatedManager) {
