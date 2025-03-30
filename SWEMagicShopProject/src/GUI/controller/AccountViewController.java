@@ -180,7 +180,7 @@ public class AccountViewController {
             Parent root = loader.load();
 
             PopupController popupController = loader.getController();
-            popupController.setPopupContent("Account Updated", "Your account has been updated successfully.");
+            popupController.setPopupContent("Account Updated", "Your account has been updated successfully.", "OK");
 
             Stage popupStage = new Stage();
             popupStage.setTitle("Account Updated");
