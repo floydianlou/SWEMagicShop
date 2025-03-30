@@ -10,7 +10,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.sql.SQLException;
 
@@ -183,8 +185,11 @@ public class AccountViewController {
             popupController.setPopupContent("Account Updated", "Your account has been updated successfully.", "OK");
 
             Stage popupStage = new Stage();
+            popupStage.initStyle(StageStyle.TRANSPARENT);
             popupStage.setTitle("Account Updated");
-            popupStage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+            popupStage.setScene(scene);
             popupStage.setResizable(false);
             popupStage.showAndWait();
 
