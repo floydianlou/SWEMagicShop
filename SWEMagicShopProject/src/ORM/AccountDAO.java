@@ -80,6 +80,7 @@ public class AccountDAO {
         return false;
     }
 
+    // TODO put number of exception and manage exceptions
     public boolean createManagerAccount(String name, String surname, String email, String password) {
         String sqlManager = String.format("INSERT INTO \"Manager\" (name, surname, email, password) " +
                 "VALUES ('%s', '%s', '%s', '%s');", name, surname, email, password);
@@ -137,6 +138,8 @@ public class AccountDAO {
                     return new Customer(ID, name, surname, email, password, age, phone, arcaneMember, wallet, species);
                 }
             }
+
+        } catch (SQLException exception) {
 
         }
         return null;

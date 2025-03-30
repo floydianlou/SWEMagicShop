@@ -1,12 +1,17 @@
 package GUI.controller;
-
 import BusinessLogic.CartManager;
+import BusinessLogic.CustomerOrderManager;
 import BusinessLogic.Utilities;
+import BusinessLogic.WalletManager;
+import DomainModel.Customer;
 import DomainModel.Item;
 import Exceptions.OrderExceptions;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -14,17 +19,29 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class CartController {
 
-    @FXML
-    private VBox cartContainer;
+    @FXML private VBox cartContainer;
+    @FXML private Label totalLabel;
+    @FXML private Button payButton;
+    @FXML private Label errorLabel;
     private CartManager cartManager;
+    CustomerOrderManager customerOrderManager;
+    private MainViewController mainViewController;
 
     @FXML
     public void initialize() {
         cartManager = CartManager.getInstance();
         displayCartItems();
+    }
+
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
     }
 
     public void displayCartItems() {
@@ -33,6 +50,7 @@ public class CartController {
                 HBox itemBox = createItemBox(item);
                 cartContainer.getChildren().add(itemBox);
             }
+        updateTotal();
         }
 
         public HBox createItemBox(Item cartItem) {
@@ -58,9 +76,11 @@ public class CartController {
                 if (cartItem.getItemQuantity() > 1) {
                     cartManager.reduceItemQuantity(cartItem);
                     quantityField.setText(String.valueOf(cartItem.getItemQuantity()));
+                    updateTotal();
                 } else {
                     try {
                         cartManager.removeItemFromCart(cartItem);
+                        updateTotal();
                     } catch (OrderExceptions.ItemNotInCartException e) {
                         throw new RuntimeException(e);
                     }
@@ -72,6 +92,7 @@ public class CartController {
             increaseButton.setOnAction(e -> {
                 cartManager.increaseItemQuantity(cartItem);
                 quantityField.setText(String.valueOf(cartItem.getItemQuantity()));
+                updateTotal();
             });
 
             // remove button definition
@@ -79,10 +100,12 @@ public class CartController {
             removeButton.setOnAction(_ -> {
                 try {
                     cartManager.removeItemFromCart(cartItem);
+                    updateTotal();
                 } catch (OrderExceptions.ItemNotInCartException e) {
                     throw new RuntimeException(e);
                 }
                 cartContainer.getChildren().remove(itemBox);
+                updateTotal();
             });
 
 
@@ -113,13 +136,15 @@ public class CartController {
                         if (newQuantity == 0) {
                             try {
                                 cartManager.removeItemFromCart(cartItem);
+                                updateTotal();
                             } catch (OrderExceptions.ItemNotInCartException e) {
                                 throw new RuntimeException(e);
                             }
                             cartContainer.getChildren().remove(itemBox);
                         } else {
                         cartManager.setItemQuantity(cartItem, newQuantity);
-                        quantityField.setText(String.valueOf(cartItem.getItemQuantity())); }
+                        quantityField.setText(String.valueOf(cartItem.getItemQuantity()));
+                        updateTotal();}
                     } else {
                         quantityField.setText(String.valueOf(cartItem.getItemQuantity()));
                     }
@@ -127,5 +152,63 @@ public class CartController {
             });
             return quantityField;
         }
+
+    public void updateTotal() {
+        int totalCopper = 0;
+        for (Item item : cartManager.getCartItems()) {
+            totalCopper += item.getCopperValue() * item.getItemQuantity();
+        }
+
+        int[] price = Utilities.normalizeCurrencyArray(totalCopper);
+        totalLabel.setText(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
+    }
+
+    @FXML
+    public void handlePlaceOrder() {
+        try {
+            customerOrderManager = new CustomerOrderManager();
+            WalletManager currentCustomerWallet = new WalletManager();
+            int orderID = customerOrderManager.createOrder((Customer) LoggedUserManager.getInstance().getLoggedUser(), CartManager.getInstance(), currentCustomerWallet);
+
+            popupOrderComplete(orderID);
+
+        } catch (OrderExceptions.EmptyCartException e) {
+           errorLabel.setText(e.getMessage());
+            errorLabel.setVisible(true);
+        } catch (OrderExceptions.MissingFundsException ex) {
+            errorLabel.setText(ex.getMessage());
+            errorLabel.setVisible(true);
+            // TODO REDIRECT TO WALLET RECHARGE PAGE WITH POPUP
+        } catch (OrderExceptions.OrderSaveException exception) {
+            errorLabel.setText(exception.getMessage());
+            errorLabel.setVisible(true);
+        }
+    }
+
+    private void popupOrderComplete(int orderID) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/popup.fxml"));
+            Parent root = loader.load();
+
+            PopupController popupController = loader.getController();
+            popupController.setPopupContent("Order Successful!", "Your order (ID: " + orderID + ") was submitted successfully!", "Back to shopping");
+
+            popupController.setMainViewController(mainViewController);
+
+            Stage popupStage = new Stage();
+            popupStage.initStyle(StageStyle.TRANSPARENT);
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+            popupStage.setScene(scene);
+            popupStage.setResizable(false);
+            popupStage.setTitle("Order Successful!");
+            popupStage.initOwner(cartContainer.getScene().getWindow());
+            popupStage.initModality(Modality.WINDOW_MODAL);
+            popupStage.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     }

@@ -5,14 +5,8 @@ import DomainModel.Customer;
 import DomainModel.Wallet;
 
 public class WalletManager {
-    WalletDAO walletDAO;
-
-    public WalletManager(WalletDAO walletDAO) {
-        this.walletDAO = walletDAO;
-    }
 
     public WalletManager() {
-        // FOR TESTING ONLY
     }
 
     //function to see balance

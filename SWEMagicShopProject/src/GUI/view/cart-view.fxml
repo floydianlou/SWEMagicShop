@@ -10,10 +10,10 @@
 
 
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
-           fx:controller="GUI.controller.CartController"
-           style="-fx-padding: 40;">
+           fx:controller="GUI.controller.CartController" style="-fx-padding: 40;">
 
     <HBox spacing="30" alignment="CENTER">
 
@@ -37,8 +37,13 @@
         <VBox spacing="20" alignment="TOP_CENTER" prefWidth="250" prefHeight="600" styleClass="cart-box">
             <Label text="ORDER TOTAL:" styleClass="cart-text"/>
             <Label fx:id="totalLabel" text="0g" style="-fx-font-size: 16px;" />
-            <!-- TODO define style class-->
+
+            <Button fx:id="payButton" text="Place Order" onAction="#handlePlaceOrder"
+                    styleClass="choice-button" prefWidth="200" prefHeight="50"/>
+
+            <Label fx:id="errorLabel" text="" visible="false" styleClass="error-label" wrapText="true" maxWidth="200" style="-fx-padding: 0 20 0 0"/>
         </VBox>
+
 
     </HBox>
 </StackPane>

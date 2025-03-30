@@ -110,11 +110,10 @@ public class OrderDAO {
             return orderid;
         } catch (SQLException e) {
             try {
-                connection.rollback(); // ...or we make a rollback
-            } catch (SQLException e1) {
-                System.out.println("Error while doing rollback: " + e1.getMessage());
-            }
-            throw new OrderExceptions.OrderSaveException("There was an error in managing the database: " + e.getMessage());
+                connection.rollback();
+            } catch (SQLException rollbackError) {
+                System.err.println("Rollback failed!" + rollbackError.getMessage()); }
+            throw new OrderExceptions.OrderSaveException("Failed to save order because of a database error.");
         } finally {
             try {
                 connection.setAutoCommit(true);
