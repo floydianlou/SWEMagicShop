@@ -1,19 +1,16 @@
 package GUI.controller;
 
 import BusinessLogic.AccountManager;
+import BusinessLogic.CartManager;
 import DomainModel.Customer;
 import DomainModel.Manager;
 import DomainModel.Person;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-import java.io.IOException;
 
 // TODO complete this class to manage exceptions in GUI
 
@@ -29,15 +26,13 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        Image image = new Image(getClass().getResource("/images/shop-icon.png").toExternalForm());
+        shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm()));
         emailIcon.setImage(new Image(getClass().getResource("/images/emailIcon.png").toExternalForm()));
         passwordIcon.setImage(new Image(getClass().getResource("/images/passwordIcon.png").toExternalForm()));
-        shopIcon.setImage(image);
     }
 
     @FXML
     private void handleLogin() {
-        // TODO not completed: manage exceptions from accountmanager
         String email = emailField.getText();
         String password = passwordField.getText();
 
@@ -53,19 +48,16 @@ public class LoginController {
 
         try {
             Person loggedUser = accountManager.login(email, password);
-
+            LoggedUserManager.getInstance().setLoggedUser(loggedUser);
             if (loggedUser != null) {
-                System.out.println("Login riuscito! 🎉 Benvenuto, " + loggedUser.getName()); //TODO this is only on console not GUI
-
                 if (loggedUser instanceof Manager) {
-                    System.out.println("Accesso come Manager.");
-                    loadScene("/views/manager-shop-view.fxml"); //TODO
+                    SceneController.loadScene("manager-shop-view.fxml"); //TODO
                 } else if (loggedUser instanceof Customer) {
-                    System.out.println("Accesso come Cliente.");
-                    loadScene("/views/customer-shop-view.fxml"); //TODO
+                    CartManager.init((Customer) loggedUser);
+                    SceneController.loadScene("main-view.fxml");
                 }
             } else {
-                errorLabel.setText("Email or password doesn't match!"); //TODO with exceptions
+                errorLabel.setText("Email or password doesn't match!");
             }
         } catch (RuntimeException e) {
             errorLabel.setText(e.getMessage());
@@ -77,26 +69,6 @@ public class LoginController {
 
     @FXML
     private void handleBack() {
-        loadScene("/GUI/view/main-view.fxml");
+        SceneController.loadScene("welcome-view.fxml");
     }
-
-    private void loadScene(String fxmlFile) {
-        try {
-            Stage stage = (Stage) emailField.getScene().getWindow();
-            double width = stage.getWidth();
-            double height = stage.getHeight();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Scene scene = new Scene(loader.load());
-
-            stage.setScene(scene);
-            stage.setWidth(width);
-            stage.setHeight(height);
-            stage.setMaximized(true);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

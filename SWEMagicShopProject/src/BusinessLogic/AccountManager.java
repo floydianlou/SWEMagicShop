@@ -20,7 +20,7 @@ public class AccountManager {
             if (e.getMessage().contains("failed to connect")) {
                 throw new RuntimeException("Database is offline, please try again later.");
             }
-            throw new RuntimeException("A database error occured.");
+            throw new RuntimeException("A database error occurred.");
         }
     }
 
@@ -35,7 +35,10 @@ public class AccountManager {
             throw new IllegalArgumentException("Age invalid for selected species. Remember: you must be of age to create an account.");
         if (!Utilities.checkPhone(phoneNumber))
             throw new IllegalArgumentException("Invalid phone number");
-        accountDAO.createCustomerAccount(name, surname, email, password, age, phoneNumber, species);
+        try {
+            accountDAO.createCustomerAccount(name, surname, email, password, age, phoneNumber, species);
+        } catch (SQLException e) {
+        throw new IllegalArgumentException(e.getMessage()); }
     }
 
     public boolean createManagerAccount (String name, String surname, String email, String password) throws IllegalArgumentException {
@@ -83,4 +86,16 @@ public class AccountManager {
         return accountDAO.updateManagerAccount(updatedManager);
     }
 
+    public ArrayList<Species> getAllSpecies () {
+        AccountDAO accountDAO = new AccountDAO();
+        try {
+            return accountDAO.getAllSpecies(); }
+        catch (SQLException e) {
+            System.err.println("SQL error while gathering Species: " + e.getMessage());
+            if (e.getMessage().contains("failed to connect")) {
+                throw new RuntimeException("Database is offline, please try again later.");
+            }
+            throw new RuntimeException("A database error occured.");
+        }
+    }
 }

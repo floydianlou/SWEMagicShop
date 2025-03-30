@@ -48,6 +48,17 @@ public class Utilities {
         return ("GP:" + GPbalance + "\n SP:" + SPbalance + "\n CP:" + copperAmount);
     }
 
+    public static int[] normalizeCurrencyArray(int copperAmount) {
+        int SPbalance = copperAmount / 10;
+        copperAmount = copperAmount % 10;
+
+        int GPbalance = SPbalance / 10;
+        SPbalance = SPbalance % 10;
+
+        return new int[]{GPbalance, SPbalance, copperAmount};
+
+    }
+
     // to check if the category selected is inside the database
     public static boolean checkCategory(String category) {
         CategoryDAO categoryDAO = new CategoryDAO();

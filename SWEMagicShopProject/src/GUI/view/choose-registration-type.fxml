@@ -1,47 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="GUI.controller.ChooseRegistrationTypeController"
-      alignment="CENTER" spacing="20">
-    <!-- Padding -->
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
+<?import javafx.scene.shape.Rectangle?>
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="GUI.controller.ChooseRegistrationTypeController"
+           stylesheets="@../styles/styles.css">
 
-    <!-- Titolo -->
-    <Label text="Welcome to Otari's Magic Shop!"
-           style="-fx-font-size: 40; -fx-font-weight: bold; -fx-text-fill: #4A0D67;"/>
+    <VBox alignment="CENTER" spacing="20"
+          style="-fx-padding: 30;">
 
-    <!-- Sottotitolo -->
-    <Label text="CHOOSE REGISTRATION TYPE"
-           style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #4A0D67;"/>
+        <HBox alignment="CENTER" spacing="10">
+            <ImageView fx:id="shopIcon" fitHeight="50" fitWidth="50"/>
+            <Label text="Welcome to Otari's Magic Shop!"
+                   styleClass="main-title"/>
+        </HBox>
 
-    <Region prefHeight="20"/>
+        <HBox alignment="CENTER" spacing="10">
+            <Rectangle width="150" height="3" styleClass="divider"/>
+            <Label text="✦" styleClass="divider-star"/>
+            <Rectangle width="150" height="3" styleClass="divider"/>
+        </HBox>
 
-    <!-- Pulsanti per il tipo di registrazione -->
-    <HBox alignment="CENTER" spacing="30">
-        <Button text="CLIENT"
-                onAction="#handleClientRegistration"
-                style="-fx-font-size: 18; -fx-font-weight: bold; -fx-background-color: #7C44C2; -fx-text-fill: white;"
-                prefWidth="150" prefHeight="60"/>
-        <Button text="MANAGER"
-                onAction="#handleManagerRegistration"
-                style="-fx-font-size: 18; -fx-font-weight: bold; -fx-background-color: #cccccc; -fx-text-fill: #333;"
-                prefWidth="150" prefHeight="60"/>
-    </HBox>
+        <Label text="REGISTRATION" styleClass="subtitle-label"/>
 
-    <Region prefHeight="30"/>
+        <Label text="Please select which kind of account you would like to create."
+               wrapText="true" maxWidth="500"
+               alignment="CENTER"
+               styleClass="instructions-label"/>
 
-    <!-- Pulsante per tornare al Main Menu -->
-    <Button text="Back to Welcome Menu"
-            onAction="#handleBackToMenu"
-            style="-fx-font-size: 16; -fx-background-color: #7C44C2; -fx-text-fill: white;"
-            prefWidth="200"/>
-</VBox>
+        <HBox alignment="CENTER" spacing="30">
+            <Button text="CUSTOMER"
+                    onAction="#handleClientRegistration"
+                    styleClass="choice-button"
+                    prefWidth="160" prefHeight="60"/>
+            <Button text="MANAGER"
+                    onAction="#handleManagerRegistration"
+                    styleClass="choice-button"
+                    prefWidth="160" prefHeight="60"/>
+        </HBox>
+
+        <Region prefHeight="40"/>
+
+        <Button text="Back to Welcome Menu"
+                onAction="#handleBack"
+                styleClass="back-button"
+                prefHeight="40"/>
+    </VBox>
+
+</StackPane>
