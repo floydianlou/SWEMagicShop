@@ -66,7 +66,7 @@ public class CartController {
             itemBox.getStyleClass().add("cart-item-box");
 
             // ITEM IMAGE CONTAINER AND LOADING
-            StackPane imageContainer = createRoundedImageBox(cartItem.getImagePath(), 60, 80);
+            StackPane imageContainer = Utilities.createRoundedImageBox(cartItem.getImagePath(), 60, 80);
 
             Label name = new Label(cartItem.getItemName());
             name.getStyleClass().add("item-name");
@@ -132,45 +132,7 @@ public class CartController {
 
         }
 
-    public StackPane createRoundedImageBox(String imagePath, double width, double height) {
-        StackPane container = new StackPane();
-        container.setPrefSize(width, height);
-        container.getStyleClass().add("item-image-box");
 
-        Image image = null;
-        try {
-            image = new Image(getClass().getResource(imagePath).toExternalForm());
-        } catch (Exception e) {
-            System.err.println("Errore caricamento immagine: " + e.getMessage());
-        }
-
-        ImageView imageView = new ImageView(image);
-        imageView.setSmooth(true);
-        imageView.setPreserveRatio(false);
-
-        double imageWidth = image.getWidth();
-        double imageHeight = image.getHeight();
-
-        double cropWidth = Math.min(imageWidth, imageHeight * (width / height));
-        double cropHeight = Math.min(imageHeight, imageWidth * (height / width));
-
-        double x = (imageWidth - cropWidth) / 2;
-        double y = (imageHeight - cropHeight) / 2;
-
-        Rectangle2D viewport = new Rectangle2D(x, y, cropWidth, cropHeight);
-        imageView.setViewport(viewport);
-        imageView.setFitWidth(width);
-        imageView.setFitHeight(height);
-
-        container.getChildren().add(imageView);
-
-        Rectangle clip = new Rectangle(width, height);
-        clip.setArcWidth(15);
-        clip.setArcHeight(15);
-        container.setClip(clip);
-
-        return container;
-    }
         public TextField createQuantityField(Item cartItem, HBox itemBox) {
             TextField quantityField = new TextField(String.valueOf(cartItem.getItemQuantity()));
             quantityField.setPrefWidth(40);

@@ -12,7 +12,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="GUI.controller.AccountViewController"
-            stylesheets="@../styles/styles.css">
+            stylesheets="@../styles/styles.css, @../styles/cart-styles.css">
 
     <HBox spacing="20">
 

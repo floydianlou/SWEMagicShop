@@ -19,6 +19,7 @@ import java.sql.SQLException;
 public class AccountViewController {
 
     private Customer loggedCustomer;
+    private MainViewController mainViewController;
 
     @FXML private TextField accountName;
     @FXML private TextField accountSurname;
@@ -198,11 +199,14 @@ public class AccountViewController {
         }
     }
 
+
     @FXML
     private void goToOrders(){
-        SceneController.loadScene("orders-view.fxml");
+        mainViewController.loadContent("order-history-view.fxml");
+        mainViewController.updateTopBar("orderhistory");
     }
 
+    // TODO add MainViewController
     @FXML
     private void goToWallet(){
         SceneController.loadScene("wallet-view.fxml");
@@ -218,4 +222,10 @@ public class AccountViewController {
         SceneController.loadScene("arcane-request-view.fxml");
     }
 
+    public void setMainViewController(MainViewController controller) {
+        this.mainViewController = controller;
+    }
+
 }
+
+

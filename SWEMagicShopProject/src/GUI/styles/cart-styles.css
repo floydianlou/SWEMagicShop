@@ -135,4 +135,12 @@
     -fx-background-color: #460E56;
 }
 
+.order-writing {
+    -fx-font-size: 15px;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-text-fill: #320A3E;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+}
+
 /* END CART STYLES PAGE */

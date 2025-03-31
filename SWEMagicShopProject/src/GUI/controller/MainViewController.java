@@ -61,6 +61,10 @@ public class MainViewController {
                 ProductViewController productController = loader.getController();
                 productController.setMainViewController(this);
             }
+            if (fxmlFile.equals("account-view.fxml")) {
+                AccountViewController controller = loader.getController();
+                controller.setMainViewController(this);
+            }
 
             AnchorPane wrapper = new AnchorPane(content);
             AnchorPane.setTopAnchor(content, 0.0);
@@ -163,6 +167,19 @@ public class MainViewController {
                 });
 
                 toolBar.getChildren().addAll(createWelcomeLabel(), backButton, cartButton, accountButton, logoutButton);
+            }
+
+            case "orderhistory" -> {
+                Button backButton = createButton("/images/accountIcon.png", "Back to Account", _ -> {
+                    loadContent("account-view.fxml");
+                    updateTopBar("account");
+                });
+
+                Button logoutButton = createButton("/images/logoutIcon.png", "Logout", _ -> {
+                    handleLogout();
+                });
+
+                toolBar.getChildren().addAll(backButton, logoutButton);
             }
 
         }

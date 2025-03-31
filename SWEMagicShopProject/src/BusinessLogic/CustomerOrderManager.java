@@ -22,8 +22,6 @@ public class CustomerOrderManager {
     }
 
     public int createOrder(Customer customer, CartManager cartManager, WalletManager walletManager) throws OrderExceptions.OrderSaveException, OrderExceptions.EmptyCartException, OrderExceptions.MissingFundsException {
-        // TODO: deactivate "Checkout" button if cart is empty in GUI.
-        // TODO: manage exceptions later when GUI implemented
             if (cartManager.getCartItems().isEmpty()) {
                 throw new OrderExceptions.EmptyCartException("Your cart is empty.");
             }

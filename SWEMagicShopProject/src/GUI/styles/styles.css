@@ -61,6 +61,7 @@
     -fx-font-size: 45px;
     -fx-text-fill: #460E56;
     -fx-font-weight: bold;
+    -fx-font-family: 'Compacta Black', sans-serif;
 }
 
 /* to give instructions */
@@ -68,7 +69,6 @@
     -fx-text-fill: #460E56;
     -fx-font-size: 16px;
     -fx-font-weight: 900;
-    -fx-font-family: 'Arimo', Arial, sans-serif;
 }
 
 /* for back to home buttons */
@@ -210,7 +210,6 @@
 }
 
 /* END ITEMS SCROLL PANE */
-/* POPUP STYLE */
 
 /* TOOLBAR ITEMS, BUTTONS, TEXT */
 
@@ -224,7 +223,7 @@
     -fx-text-fill: #F6E9FF;
     -fx-font-size: 22px;
     -fx-font-weight: 900;
-    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-font-family: 'Belwe Bd BT';
 }
 
 .welcome-label {
@@ -362,8 +361,8 @@
     -fx-background-color: transparent;
     -fx-text-fill: #6C3483;
     -fx-font-size: 30px;
-    -fx-font-weight: 100;
-    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-font-weight: 900;
+    -fx-font-family: 'Belwe Bd BT';
 }
 
 .product-name:hover {
