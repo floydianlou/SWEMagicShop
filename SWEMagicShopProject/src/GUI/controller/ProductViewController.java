@@ -21,6 +21,7 @@ public class ProductViewController {
     @FXML private Button addToCartButton;
 
     private Item selectedProduct;
+    private MainViewController mainViewController;
 
     public ProductViewController() {
     }
@@ -29,6 +30,7 @@ public class ProductViewController {
     @FXML
     public void initialize() {
         selectedProduct = ItemViewManager.getInstance().getProductSelected();
+        ItemViewManager.getInstance().clearProductSelected();
         loadItem();
     }
 
@@ -51,7 +53,13 @@ public class ProductViewController {
                     selectedProduct.isArcane(),
                     selectedProduct.getCopperValue(),
                     selectedProduct.getImagePath());
-            CartManager.getInstance().addItemToCart(i); });
+            CartManager.getInstance().addItemToCart(i);
+            mainViewController.updateCartIcon();});
     }
+
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
+    }
+
 
 }

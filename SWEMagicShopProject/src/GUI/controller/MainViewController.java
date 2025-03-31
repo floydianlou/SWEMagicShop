@@ -57,6 +57,10 @@ public class MainViewController {
                 CartController cartController = loader.getController();
                 cartController.setMainViewController(this);
             }
+            if (fxmlFile.equals("product-view.fxml")) {
+                ProductViewController productController = loader.getController();
+                productController.setMainViewController(this);
+            }
 
             AnchorPane wrapper = new AnchorPane(content);
             AnchorPane.setTopAnchor(content, 0.0);
@@ -149,7 +153,7 @@ public class MainViewController {
                     updateTopBar("account");
                 });
 
-                Button cartButton = createButton("/images/cartIcon.png", "Cart", _ -> {
+                Button cartButton = createButton(cartIcon, "Cart", _ -> {
                     loadContent("cart-view.fxml");
                     updateTopBar("cart");
                 });
