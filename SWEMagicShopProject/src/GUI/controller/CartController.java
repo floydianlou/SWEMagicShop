@@ -10,16 +10,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -33,9 +35,13 @@ public class CartController {
     private CartManager cartManager;
     CustomerOrderManager customerOrderManager;
     private MainViewController mainViewController;
+    @FXML private ImageView leftStar;
+    @FXML private ImageView rightStar;
 
     @FXML
     public void initialize() {
+        leftStar.setImage(new Image(getClass().getResource("/images/shoppingCartStars.png").toExternalForm()));
+        rightStar.setImage(new Image(getClass().getResource("/images/shoppingCartStarsFlipped.png").toExternalForm()));
         cartManager = CartManager.getInstance();
         displayCartItems();
     }
@@ -59,19 +65,22 @@ public class CartController {
             itemBox.setPrefHeight(100);
             itemBox.getStyleClass().add("cart-item-box");
 
+            // ITEM IMAGE CONTAINER AND LOADING
+            StackPane imageContainer = createRoundedImageBox(cartItem.getImagePath(), 60, 80);
 
             Label name = new Label(cartItem.getItemName());
-            name.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+            name.getStyleClass().add("item-name");
 
             int[] price = Utilities.normalizeCurrencyArray(cartItem.getCopperValue());
             Label productPrice = new Label(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
-            // TODO css styles
+            productPrice.getStyleClass().add("item-price");
 
             VBox textBox = new VBox(5, name, productPrice);
             TextField quantityField = createQuantityField(cartItem, itemBox);
 
             // decrease button definition
             Button decreaseButton = new Button("-");
+            decreaseButton.getStyleClass().add("quantity-button");
             decreaseButton.setOnAction(_ -> {
                 if (cartItem.getItemQuantity() > 1) {
                     cartManager.reduceItemQuantity(cartItem);
@@ -89,6 +98,7 @@ public class CartController {
 
             // increase button definition
             Button increaseButton = new Button("+");
+            increaseButton.getStyleClass().add("quantity-button");
             increaseButton.setOnAction(e -> {
                 cartManager.increaseItemQuantity(cartItem);
                 quantityField.setText(String.valueOf(cartItem.getItemQuantity()));
@@ -97,6 +107,7 @@ public class CartController {
 
             // remove button definition
             Button removeButton= new Button("🗑");
+            removeButton.getStyleClass().add("remove-button");
             removeButton.setOnAction(_ -> {
                 try {
                     cartManager.removeItemFromCart(cartItem);
@@ -116,11 +127,50 @@ public class CartController {
             Region spacer = new Region();
             HBox.setHgrow(spacer, Priority.ALWAYS);
 
-            itemBox.getChildren().addAll(textBox, spacer, quantityBox);
+            itemBox.getChildren().addAll(imageContainer, textBox, spacer, quantityBox);
             return itemBox;
 
         }
 
+    public StackPane createRoundedImageBox(String imagePath, double width, double height) {
+        StackPane container = new StackPane();
+        container.setPrefSize(width, height);
+        container.getStyleClass().add("item-image-box");
+
+        Image image = null;
+        try {
+            image = new Image(getClass().getResource(imagePath).toExternalForm());
+        } catch (Exception e) {
+            System.err.println("Errore caricamento immagine: " + e.getMessage());
+        }
+
+        ImageView imageView = new ImageView(image);
+        imageView.setSmooth(true);
+        imageView.setPreserveRatio(false);
+
+        double imageWidth = image.getWidth();
+        double imageHeight = image.getHeight();
+
+        double cropWidth = Math.min(imageWidth, imageHeight * (width / height));
+        double cropHeight = Math.min(imageHeight, imageWidth * (height / width));
+
+        double x = (imageWidth - cropWidth) / 2;
+        double y = (imageHeight - cropHeight) / 2;
+
+        Rectangle2D viewport = new Rectangle2D(x, y, cropWidth, cropHeight);
+        imageView.setViewport(viewport);
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+
+        container.getChildren().add(imageView);
+
+        Rectangle clip = new Rectangle(width, height);
+        clip.setArcWidth(15);
+        clip.setArcHeight(15);
+        container.setClip(clip);
+
+        return container;
+    }
         public TextField createQuantityField(Item cartItem, HBox itemBox) {
             TextField quantityField = new TextField(String.valueOf(cartItem.getItemQuantity()));
             quantityField.setPrefWidth(40);
