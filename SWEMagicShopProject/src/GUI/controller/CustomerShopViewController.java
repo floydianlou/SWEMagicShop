@@ -271,8 +271,18 @@ public class CustomerShopViewController {
             Button addToCartButton = new Button("Add to Cart");
             addToCartButton.getStyleClass().add("add-to-cart-button");
             addToCartButton.setOnMouseClicked(_ -> {
-                product.setItemQuantity(1);
-                CartManager.getInstance().addItemToCart(product);
+                //TODO: temporary fix for mistaken quantity when added to cart
+                Item itemToAdd = new Item(
+                        product.getItemID(),
+                        product.getItemName(),
+                        product.getItemDescription(),
+                        product.getItemCategory(),
+                        1,
+                        product.isArcane(),
+                        product.getCopperValue(),
+                        product.getImagePath()
+                );
+                CartManager.getInstance().addItemToCart(itemToAdd);
                 mainViewController.updateCartIcon();});
 
             HBox buttonContainer = new HBox(addToCartButton);
@@ -292,7 +302,6 @@ public class CustomerShopViewController {
 
     @FXML
     private void viewProductButton(Item selectedProduct) {
-        selectedProduct.setItemQuantity(1);
         ItemViewManager.getInstance().setProductSelected(selectedProduct);
         mainViewController.loadContent("product-view.fxml");
         mainViewController.updateTopBar("product");
