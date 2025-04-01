@@ -66,16 +66,16 @@ public class AccountManager {
         return accountDAO.getCustomerByID(customerID);
     }
 
-    public boolean updateCustomerAccount(Customer updatedCustomer) {
+    public void updateCustomerAccount(Customer updatedCustomer) throws IllegalArgumentException{
         if (!Utilities.checkEmail(updatedCustomer.getEmail()))
             throw new IllegalArgumentException("Invalid email address!");
         if(!Utilities.checkPassword(updatedCustomer.getPassword()))
             throw new IllegalArgumentException("Password format is incorrect!");
         if (!Utilities.checkPhone(updatedCustomer.getPhoneNumber()))
-            throw new IllegalArgumentException("Invalid phone number");
+            throw new IllegalArgumentException("Invalid phone number!");
         AccountDAO accountDAO = new AccountDAO();
-        return accountDAO.updateCustomerAccount(updatedCustomer);
-        }
+        accountDAO.updateCustomerAccount(updatedCustomer);
+    }
 
     public boolean updateManagerAccount (Manager updatedManager) {
         if (!Utilities.checkEmail(updatedManager.getEmail()))

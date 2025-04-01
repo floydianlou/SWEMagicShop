@@ -21,10 +21,14 @@
             </Button>
             <TextField fx:id="searchBar" promptText="Search products..." styleClass="search-bar-input"/>
         </HBox>
-        <ComboBox fx:id="filterCategory" promptText="Category" visible="false" styleClass="transparent-combobox"/>
-        <ComboBox fx:id="filterArcane" promptText="Arcane" visible="false" styleClass="transparent-combobox"/>
-        <TextField fx:id="minpriceGP" promptText="Min GP" visible="false" maxWidth="100" styleClass="input-field-2"/>
-        <TextField fx:id="maxpriceGP" promptText="Max GP" visible="false" maxWidth="100" styleClass="input-field-2"/>
+        <StackPane>
+            <ComboBox fx:id="filterCategory" promptText="Category" visible="false" styleClass="transparent-combobox"/>
+            <ComboBox fx:id="filterArcane" promptText="Arcane" visible="false" styleClass="transparent-combobox"/>
+            <VBox spacing="8">
+                <TextField fx:id="minpriceGP" promptText="Min GP" visible="false" maxWidth="100" styleClass="input-field-2"/>
+                <TextField fx:id="maxpriceGP" promptText="Max GP" visible="false" maxWidth="100" styleClass="input-field-2"/>
+            </VBox>
+        </StackPane>
         <Region HBox.hgrow="ALWAYS"/>
     </HBox>
 
