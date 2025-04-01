@@ -28,23 +28,41 @@ public class MainViewController {
     private AnchorPane contentArea;
     @FXML
     private ImageView shopIcon;
+    @FXML
+    private Image emptyCartIcon= new Image(getClass().getResource("/images/cartIcon.png").toExternalForm());;
+    @FXML
+    private Image fullCartIcon= new Image(getClass().getResource("/images/cartNotificationIcon.png").toExternalForm());;
+    @FXML
+    private ImageView cartIcon= new ImageView(emptyCartIcon);
 
     @FXML
     public void initialize() {
         shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm()));
-
         loadContent("customer-shop-view.fxml");
         updateTopBar("customer");
 
     }
 
+    // TODO when all pages are connected, better make this function work without all these ifs
     public void loadContent(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/" + fxmlFile));
             Node content = loader.load();
 
-            if (fxmlFile.equals("customer-shop-view.fxml")) { //TODO manage for other pages
+            if (fxmlFile.equals("customer-shop-view.fxml")) {
                 CustomerShopViewController controller = loader.getController();
+                controller.setMainViewController(this);
+            }
+            if (fxmlFile.equals("cart-view.fxml")) {
+                CartController cartController = loader.getController();
+                cartController.setMainViewController(this);
+            }
+            if (fxmlFile.equals("product-view.fxml")) {
+                ProductViewController productController = loader.getController();
+                productController.setMainViewController(this);
+            }
+            if (fxmlFile.equals("account-view.fxml")) {
+                AccountViewController controller = loader.getController();
                 controller.setMainViewController(this);
             }
 
@@ -72,7 +90,7 @@ public class MainViewController {
                     updateTopBar("account");
                 });
 
-                Button cartButton = createButton("/images/cartIcon.png", "Cart", _ -> {
+                Button cartButton = createButton(cartIcon, "Cart", _ -> {
                     loadContent("cart-view.fxml");
                     updateTopBar("cart");
                 });
@@ -97,7 +115,7 @@ public class MainViewController {
                 toolBar.getChildren().addAll(createWelcomeLabel(), accountButton, logoutButton);
             }
 
-            case "cart", "product" -> {
+            case "cart" -> {
                 Button backButton = createButton("/images/homeIcon.png", "Shop home", _ -> {
                     loadContent("customer-shop-view.fxml");
                     updateTopBar("customer");
@@ -128,7 +146,44 @@ public class MainViewController {
                 toolBar.getChildren().addAll(backButton, logoutButton);
             }
 
+            case "product" -> {
+                Button backButton = createButton("/images/homeIcon.png", "Shop home", _ -> {
+                    loadContent("customer-shop-view.fxml");
+                    updateTopBar("customer");
+                });
+
+                Button accountButton = createButton("/images/accountIcon.png", "Account", _ -> {
+                    loadContent("account-view.fxml");
+                    updateTopBar("account");
+                });
+
+                Button cartButton = createButton(cartIcon, "Cart", _ -> {
+                    loadContent("cart-view.fxml");
+                    updateTopBar("cart");
+                });
+
+                Button logoutButton = createButton("/images/logoutIcon.png", "Logout", _ -> {
+                    handleLogout();
+                });
+
+                toolBar.getChildren().addAll(createWelcomeLabel(), backButton, cartButton, accountButton, logoutButton);
+            }
+
+            case "orderhistory" -> {
+                Button backButton = createButton("/images/accountIcon.png", "Back to Account", _ -> {
+                    loadContent("account-view.fxml");
+                    updateTopBar("account");
+                });
+
+                Button logoutButton = createButton("/images/logoutIcon.png", "Logout", _ -> {
+                    handleLogout();
+                });
+
+                toolBar.getChildren().addAll(backButton, logoutButton);
+            }
+
         }
+        updateCartIcon();
     }
 
     private Button createButton(String iconPath, String hoverText, EventHandler<ActionEvent> handler) {
@@ -145,6 +200,33 @@ public class MainViewController {
         button.setOnAction(handler);
 
         return button;
+    }
+
+    private Button createButton(ImageView icon, String hoverText, EventHandler<ActionEvent> handler) {
+        icon.setFitWidth(30);
+        icon.setFitHeight(30);
+
+        Button button = new Button();
+        button.setGraphic(icon);
+        button.getStyleClass().add("tool-bar-button");
+        Tooltip tooltip = new Tooltip(hoverText);
+        Tooltip.install(button, tooltip);
+        tooltip.getStyleClass().add("tooltip");
+        button.setOnAction(handler);
+
+        return button;
+    }
+
+    public void updateCartIcon() {
+        if (CartManager.getInstance().getCartItems().isEmpty()) {
+            cartIcon.setImage(emptyCartIcon);
+            cartIcon.setFitWidth(30);
+            cartIcon.setFitHeight(30);
+        } else {
+            cartIcon.setImage(fullCartIcon);
+            cartIcon.setFitWidth(30);
+            cartIcon.setFitHeight(30);
+        }
     }
 
     public Label createWelcomeLabel() {
@@ -165,4 +247,4 @@ public class MainViewController {
         SceneController.loadScene("welcome-view.fxml");
     }
 
-    }
+}
