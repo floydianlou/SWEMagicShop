@@ -104,7 +104,7 @@ public class MainViewController {
 
             case "manager" -> { // TODO
                 Button accountButton = createButton("/images/accountIcon.png", "Account", _ -> {
-                    loadContent("account-view.fxml");
+                    loadContent("manager-account-view.fxml"); // TODO
                     updateTopBar("account");
                 });
 
@@ -186,6 +186,7 @@ public class MainViewController {
         updateCartIcon();
     }
 
+    // to add red dot on cart icon
     private Button createButton(String iconPath, String hoverText, EventHandler<ActionEvent> handler) {
         ImageView icon = new ImageView(getClass().getResource(iconPath).toExternalForm());
         icon.setFitWidth(30);
@@ -202,6 +203,7 @@ public class MainViewController {
         return button;
     }
 
+    // TODO check if it can be made an if-case
     private Button createButton(ImageView icon, String hoverText, EventHandler<ActionEvent> handler) {
         icon.setFitWidth(30);
         icon.setFitHeight(30);

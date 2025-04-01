@@ -6,15 +6,25 @@ import DomainModel.Customer;
 import DomainModel.Item;
 import DomainModel.Order;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static BusinessLogic.Utilities.createRoundedImageBox;
@@ -45,7 +55,7 @@ public class OrderHistoryController {
         HBox orderBox = new HBox(20);
         orderBox.setPadding(new Insets(15));
         orderBox.setPrefHeight(100);
-        orderBox.getStyleClass().add("cart-item-box"); // stesso stile del carrello!
+        orderBox.getStyleClass().add("cart-item-box");
 
         ImageView icon = new ImageView(new Image(getClass().getResource("/images/orderIcon.png").toExternalForm()));
         icon.setFitWidth(60);
@@ -66,8 +76,50 @@ public class OrderHistoryController {
         total.getStyleClass().add("item-price");
 
         VBox textBox = new VBox(5, title, status, date, total);
+        textBox.setAlignment(Pos.CENTER_LEFT);
 
-        orderBox.getChildren().addAll(icon, textBox);
+        HBox leftBox = new HBox(20, icon, textBox);
+        leftBox.setAlignment(Pos.CENTER_LEFT);
+        HBox.setHgrow(leftBox, Priority.ALWAYS);
+
+        Button detailsButton = new Button("Order details");
+        detailsButton.getStyleClass().add("choice-button");
+        detailsButton.setOnAction(e -> popupOrderDetails(order));
+
+        VBox buttonBox = new VBox(detailsButton);
+        buttonBox.setAlignment(Pos.CENTER_RIGHT);
+
+
+        orderBox.getChildren().addAll(leftBox, buttonBox);
         return orderBox;
     }
+
+    private void popupOrderDetails(Order order) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/order-details-popup.fxml"));
+            Parent root = loader.load();
+
+            OrderDetailsPopupController controller = loader.getController();
+            Stage popupStage = new Stage();
+
+            controller.setStage(popupStage);
+            controller.setCustomerOrderManager(customerOrderManager);
+            controller.setOrder(order);
+
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+
+            popupStage.initStyle(StageStyle.TRANSPARENT);
+            popupStage.initModality(Modality.WINDOW_MODAL);
+            popupStage.initOwner(ordersContainer.getScene().getWindow());
+            popupStage.setScene(scene);
+            popupStage.setResizable(false);
+            popupStage.setTitle("Order Details");
+            popupStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

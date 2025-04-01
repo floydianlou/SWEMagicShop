@@ -16,6 +16,11 @@ public class CustomerOrderManager {
         return orderDAO.viewAllOrders();
     }
 
+    public ArrayList<Item> viewOrderItems(int orderID) {
+        OrderDAO orderDAO = new OrderDAO();
+        return orderDAO.viewOrderItems(orderID);
+    }
+
     public ArrayList<Order> viewCustomerOrders(Customer customer) {
         OrderDAO orderDAO = new OrderDAO();
         return orderDAO.getCustomerOrders(customer.getPersonID());

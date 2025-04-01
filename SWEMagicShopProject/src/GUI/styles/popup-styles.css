@@ -10,6 +10,16 @@
     -fx-pref-height: 240;
 }
 
+.popup-background {
+    -fx-background-color: #D2B4DE;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #460E56;
+    -fx-border-width: 3;
+    -fx-padding: 40;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0.3, 0, 5);
+}
+
 
 .popup-title {
     -fx-font-family: "Belwe Bd BT";
@@ -55,4 +65,43 @@
 
 .popup-close-button:pressed {
     -fx-background-color: #25072D;
+}
+
+.popup-item-box {
+    -fx-background-color: transparent;
+}
+
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 13px;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: #F6E9FF;
+    -fx-background-radius: 13px;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #6C3483;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(108, 52, 131, 0.2), 5, 0.3, 0, 0);
+}
+
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #9B59B6;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(155, 89, 182, 0.4), 10, 0.3, 0, 0);
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow,
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
 }
