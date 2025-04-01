@@ -17,7 +17,7 @@ public class StoreManager {
     }
 
     public StoreManager() {
-        //ONLY FOR TESTING
+
     }
 
     public ArrayList<Item> listProducts() {
@@ -25,11 +25,10 @@ public class StoreManager {
         return itemDAO.getAllItems();
     }
 
-    public Item getProductByID(int itemID) {
+    public Item getProductByID(int itemID) throws IllegalArgumentException {
         ItemDAO itemDAO= new ItemDAO();
         if(itemID <= 0){
-            System.out.println("Invalid item ID!");
-            return null;
+            throw new IllegalArgumentException("Invalid item ID!");
         }
         return itemDAO.getItemByID(itemID);
     }
@@ -63,9 +62,14 @@ public class StoreManager {
     }
 
     //single function to do the searching in StoreManager
-    public ArrayList<Item> searchProducsByName(String itemName) {
+    public ArrayList<Item> searchProductsByName(String itemName) {
         ItemDAO itemDAO= new ItemDAO();
         return itemDAO.getItemsByName(itemName);
+    }
+
+    public ArrayList<Item> searchProductsByNameNonArcane(String itemName) {
+        ItemDAO itemDAO= new ItemDAO();
+        return itemDAO.getItemsByNameNonArcane(itemName);
     }
 
     public ArrayList<Item> searchProductsByDescription(String itemDescription) {
@@ -73,7 +77,12 @@ public class StoreManager {
         return itemDAO.getItemsByDescription(itemDescription);
     }
 
-    public ArrayList<Item> searchProductsByCategory(String itemCategory) {
+    public ArrayList<Item> searchProductsByDescriptionNonArcane(String itemName) {
+        ItemDAO itemDAO= new ItemDAO();
+        return itemDAO.getItemsByDescriptionNonArcane(itemName);
+    }
+
+    public ArrayList<Item> searchProductsByCategory(String itemCategory) throws IllegalArgumentException {
         if(!Utilities.checkCategory(itemCategory)){
             throw new IllegalArgumentException("Invalid category!");
         }
@@ -81,7 +90,15 @@ public class StoreManager {
         return itemDAO.getItemsByCategory(itemCategory);
     }
 
-    public ArrayList<Item> searchProductsByArcane(String arcane) {
+    public ArrayList<Item> searchProductsByCategoryNonArcane(String itemCategory) throws IllegalArgumentException {
+        if(!Utilities.checkCategory(itemCategory)){
+            throw new IllegalArgumentException("Invalid category!");
+        }
+        ItemDAO itemDAO= new ItemDAO();
+        return itemDAO.getItemsByCategoryNonArcane(itemCategory);
+    }
+
+    public ArrayList<Item> searchProductsByArcane(String arcane) throws IllegalArgumentException {
         ItemDAO itemDAO = new ItemDAO();
         boolean isArcane;
 
@@ -96,7 +113,7 @@ public class StoreManager {
         return itemDAO.getItemsByArcane(isArcane);
     }
 
-    public ArrayList<Item> searchProductsByPrice(int minPrice, int maxPrice) {
+    public ArrayList<Item> searchProductsByPrice(int minPrice, int maxPrice) throws IllegalArgumentException {
         if (minPrice < 0 || maxPrice < 0 || minPrice > maxPrice) {
             throw new IllegalArgumentException("Invalid price range!");
         }
@@ -105,8 +122,17 @@ public class StoreManager {
         return itemDAO.getItemsByPriceRange(minPrice, maxPrice);
     }
 
+    public ArrayList<Item> searchProductsByPriceNonArcane(int minPrice, int maxPrice) throws IllegalArgumentException {
+        if (minPrice < 0 || maxPrice < 0 || minPrice > maxPrice) {
+            throw new IllegalArgumentException("Invalid price range!");
+        }
+
+        ItemDAO itemDAO = new ItemDAO();
+        return itemDAO.getItemsByPriceRangeNonArcane(minPrice, maxPrice);
+    }
+
     //All In One search function
-    public ArrayList<Item> searchProductsBy(String option, String search) {
+    public ArrayList<Item> searchProductsBy(String option, String search) throws IllegalArgumentException {
         ItemDAO itemDAO= new ItemDAO();
         switch (option) {
             case "name": return itemDAO.getItemsByName(search);

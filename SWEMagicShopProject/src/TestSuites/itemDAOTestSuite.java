@@ -62,10 +62,10 @@ public class itemDAOTestSuite {
         String itemCategory = scanner.nextLine();
         System.out.print("Arcano (true o false): ");
         boolean arcane = scanner.nextBoolean();
+        System.out.print("Percorso dell'immagine: "); //TODO: controllare perchè qui non prende il percorso
+        String image = scanner.nextLine();
         System.out.print("CP: ");
         int itemPrice = scanner.nextInt();
-        System.out.print("Percorso dell'immagine: ");
-        String image = scanner.nextLine();
         scanner.nextLine();
 
         try{
@@ -157,7 +157,7 @@ public class itemDAOTestSuite {
 
         System.out.print("Inserisci il nome del prodotto: ");
         String name = scanner.nextLine();
-        ArrayList<Item> items = storeManager.searchProducsByName(name);
+        ArrayList<Item> items = storeManager.searchProductsByName(name);
 
         if (items.isEmpty()) { System.out.println("❌ Nessun prodotto trovato."); }
         else {

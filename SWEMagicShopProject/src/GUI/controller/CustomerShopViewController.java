@@ -142,7 +142,11 @@ public class CustomerShopViewController {
 
     private void loadProducts() {
         try{
-            allProducts = storeManager.listProducts();
+            if(loggedCustomer.isArcaneMember()){
+                allProducts = storeManager.listProducts();
+            }else{
+                allProducts = storeManager.searchProductsByArcane("false");
+            }
         } catch (RuntimeException e) {
             errorLabel.setText(e.getMessage());
         }
@@ -164,7 +168,11 @@ public class CustomerShopViewController {
                         errorLabel.setText("Please select a category.");
                         return;
                     }
-                    allProductsSearched = storeManager.searchProductsByCategory(filterCategory.getValue());
+                    if(loggedCustomer.isArcaneMember()){
+                        allProductsSearched = storeManager.searchProductsByCategory(filterCategory.getValue());
+                    }else{
+                        allProductsSearched = storeManager.searchProductsByCategoryNonArcane(filterCategory.getValue());
+                    }
                     break;
                 case "Name":
                     String name = searchBar.getText();
@@ -173,7 +181,11 @@ public class CustomerShopViewController {
                         return;
                     }
                     try{
-                        allProductsSearched = storeManager.searchProducsByName(searchBar.getText().trim());
+                        if(loggedCustomer.isArcaneMember()){
+                            allProductsSearched = storeManager.searchProductsByName(searchBar.getText().trim());
+                        } else{
+                            allProductsSearched = storeManager.searchProductsByNameNonArcane(searchBar.getText().trim());
+                        }
                     }catch (RuntimeException e) {
                         errorLabel.setText(e.getMessage());
                     }
@@ -185,7 +197,11 @@ public class CustomerShopViewController {
                         return;
                     }
                     try{
-                        allProductsSearched = storeManager.searchProductsByDescription(searchBar.getText().trim());
+                        if(loggedCustomer.isArcaneMember()){
+                            allProductsSearched = storeManager.searchProductsByDescription(searchBar.getText().trim());
+                        } else{
+                            allProductsSearched = storeManager.searchProductsByDescriptionNonArcane(searchBar.getText().trim());
+                        }
                     }catch (RuntimeException e) {
                         errorLabel.setText(e.getMessage());
                     }
@@ -208,7 +224,11 @@ public class CustomerShopViewController {
                         return;
                     }
                     try{
-                        allProductsSearched = storeManager.searchProductsByPrice(minPriceValue, maxPriceValue);
+                        if(loggedCustomer.isArcaneMember()){
+                            allProductsSearched = storeManager.searchProductsByPrice(minPriceValue, maxPriceValue);
+                        } else{
+                            allProductsSearched = storeManager.searchProductsByPriceNonArcane(minPriceValue, maxPriceValue);
+                        }
                     }catch (IllegalArgumentException e){
                         errorLabel.setText(e.getMessage());
                         return;
@@ -222,12 +242,23 @@ public class CustomerShopViewController {
                         errorLabel.setText("Please select an arcane.");
                         return;
                     }
-                    allProductsSearched = storeManager.searchProductsByArcane(filterArcane.getValue().trim());
+                    if(loggedCustomer.isArcaneMember()){
+                        allProductsSearched = storeManager.searchProductsByArcane(filterArcane.getValue().trim());
+                    }else if(filterArcane.getValue().equals("true")){
+                        errorLabel.setText("Arcane Items cannot be seen by a non-Arcane member.");
+                        return;
+                    }else{
+                        allProductsSearched = storeManager.searchProductsByArcane("false");
+                    }
                     break;
                 case "All":
                     try{
-                        allProductsSearched = storeManager.listProducts();
-                    }catch (RuntimeException e) {
+                        if(loggedCustomer.isArcaneMember()) {
+                            allProductsSearched = storeManager.listProducts();
+                        } else {
+                            allProductsSearched = storeManager.searchProductsByArcane("false");
+                        }
+                    } catch (RuntimeException e) {
                         errorLabel.setText(e.getMessage());
                     }
                     break;

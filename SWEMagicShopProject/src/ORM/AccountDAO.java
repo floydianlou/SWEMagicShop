@@ -212,7 +212,7 @@ public class AccountDAO {
     }
 
     public void updateCustomerAccount(Customer customer) throws RuntimeException {
-        // TODO CHECK PREPARED STATEMENT POSSIBILITY
+        //TODO CHECK PREPARED STATEMENT POSSIBILITY
         String sqlUpdate = String.format("UPDATE \"Customer\" SET name = '%s', surname = '%s', email = '%s', password = '%s', phone = '%s' " +
                 "WHERE customerID = %d", customer.getName(), customer.getSurname(), customer.getEmail(), customer.getPassword(), customer.getPhoneNumber(),
                 customer.getPersonID());
