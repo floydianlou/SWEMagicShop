@@ -92,6 +92,7 @@ public class CustomerShopViewController {
                 minpriceGP.setVisible(false);
                 maxpriceGP.setVisible(false);
                 filterCategory.setVisible(true);
+                filterCategory.toFront();
                 filterArcane.setVisible(false);
                 break;
             case "Name":
@@ -125,6 +126,7 @@ public class CustomerShopViewController {
                 maxpriceGP.setVisible(false);
                 filterCategory.setVisible(false);
                 filterArcane.setVisible(true);
+                filterArcane.toFront();
                 break;
             case "All":
                 searchBar.setPromptText("All products...");

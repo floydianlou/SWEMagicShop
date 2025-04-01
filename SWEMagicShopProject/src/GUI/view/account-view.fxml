@@ -47,7 +47,7 @@
                 <Region prefWidth="10"/>
                 <ImageView fx:id="penIcon3" fitWidth="27" fitHeight="27" visible="false"/>
                 <StackPane>
-                    <TextField fx:id="accountEmail" promptText="Enter your new e-mail..." maxWidth="700" styleClass="input-field"/>
+                    <TextField fx:id="accountEmail" promptText="Enter your new e-mail..." prefWidth="200" styleClass="input-field"/>
                 </StackPane>
             </HBox>
 

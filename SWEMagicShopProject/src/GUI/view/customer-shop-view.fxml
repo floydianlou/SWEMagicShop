@@ -13,13 +13,13 @@
 
     <HBox spacing="5" alignment="CENTER_LEFT" style="-fx-background-color: #460E56; -fx-padding: 10;">
         <ComboBox fx:id="filterDropDown" promptText="Filter" styleClass="transparent-combobox"/>
-        <HBox styleClass="search-bar">
+        <HBox styleClass="search-bar" prefWidth="500">
             <Button style="-fx-background-color: transparent;" onAction="#handleSearch">
                 <graphic>
                     <ImageView fx:id="searchIcon" fitHeight="27" fitWidth="27"/>
                 </graphic>
             </Button>
-            <TextField fx:id="searchBar" promptText="Search products..." styleClass="search-bar-input"/>
+            <TextField fx:id="searchBar" promptText="Search products..." prefWidth="500" styleClass="search-bar-input"/>
         </HBox>
         <StackPane>
             <ComboBox fx:id="filterCategory" promptText="Category" visible="false" styleClass="transparent-combobox"/>
@@ -29,7 +29,6 @@
                 <TextField fx:id="maxpriceGP" promptText="Max GP" visible="false" maxWidth="100" styleClass="input-field-2"/>
             </VBox>
         </StackPane>
-        <Region HBox.hgrow="ALWAYS"/>
     </HBox>
 
     <HBox alignment="BOTTOM_CENTER">

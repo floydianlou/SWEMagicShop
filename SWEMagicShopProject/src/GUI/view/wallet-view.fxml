@@ -41,11 +41,11 @@
 
             <HBox styleClass="balance-rettangle" spacing="20" alignment="CENTER">
                 <Label text="GP:" styleClass="main-title" maxWidth="100"/>
-                <Label fx:id="GPwallet" styleClass="main-title" maxWidth="20" />
+                <Label fx:id="GPwallet" styleClass="main-title"/>
                 <Label text="SP:" styleClass="main-title" maxWidth="100"/>
-                <Label fx:id="SPwallet" styleClass="main-title" maxWidth="20"/>
+                <Label fx:id="SPwallet" styleClass="main-title"/>
                 <Label text="CP:" styleClass="main-title" maxWidth="100"/>
-                <Label fx:id="CPwallet" styleClass="main-title" maxWidth="20"/>
+                <Label fx:id="CPwallet" styleClass="main-title"/>
             </HBox>
 
         </VBox>
