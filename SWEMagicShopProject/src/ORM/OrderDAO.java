@@ -127,4 +127,32 @@ public class OrderDAO {
         String deletsql = "DELETE FROM \"Order\" WHERE orderid = ?";
         //TODO is this necessary? should we implement this function?
     }
+
+    public ArrayList<Item> viewOrderItems(int orderID) {
+        ArrayList<Item> orderItems = new ArrayList<>();
+        String itemsquery = "SELECT i.itemid, i.name as itemname, i.description, i.cpprice, c.name as category, i.arcane, i.imagepath, o.quantity " +
+                "FROM \"OrderItems\" o JOIN \"Item\" i ON (o.itemid = i.itemid) JOIN \"Category\" c ON (i.categoryid = c.categoryid) " +
+                "WHERE o.orderid = ? ORDER BY itemid ASC;";
+
+        try (PreparedStatement stmt = connection.prepareStatement(itemsquery)) {
+            stmt.setInt(1, orderID);
+            try (ResultSet set = stmt.executeQuery()) {
+                while (set.next()) {
+                    int itemid = set.getInt("itemid");
+                    String name = set.getString("itemname");
+                    String description = set.getString("description");
+                    int cpprice = set.getInt("cpprice");
+                    String category = set.getString("category");
+                    boolean arcane = set.getBoolean("arcane");
+                    String imagepath = set.getString("imagepath");
+                    int quantity = set.getInt("quantity");
+                    orderItems.add(new Item(itemid, name, description, category, quantity, arcane, cpprice, imagepath));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Something happened while retrieving your order items: " + e.getMessage());
+        }
+        return orderItems;
+    }
+
 }

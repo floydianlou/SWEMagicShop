@@ -48,9 +48,9 @@ VALUES
 -- Data Item
 INSERT INTO "Item" (name, description, CPprice, categoryID, arcane, imagepath)
 VALUES
-    ('Sword of Flames', 'A sword imbued with the power of fire', 500, 1, FALSE, '/images/products/fire_sword.jpg'),
-    ('Dragon Shield', 'A shield made from dragon scales', 300, 2, FALSE, '/images/products/dragon_shield.jpg'),
-    ('Healing Potion', 'A potion that restores health', 50, 3, FALSE, '/images/products/healing_potion.jpg');
+    ('Sword of Flames', 'A sword imbued with the power of fire', 500, 1, FALSE, '/images/products/fire_sword.png'),
+    ('Dragon Shield', 'A shield made from dragon scales', 300, 2, FALSE, '/images/products/dragon_shield.png'),
+    ('Healing Potion', 'A potion that restores health', 50, 3, FALSE, '/images/products/healing_potion.png');
 
 -- Data Order
 INSERT INTO "Order" (customerID, orderDate, statusid, totalCP)

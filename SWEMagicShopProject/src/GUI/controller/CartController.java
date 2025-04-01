@@ -138,7 +138,7 @@ public class CartController {
             quantityField.setPrefWidth(40);
             quantityField.setPrefHeight(30);
             quantityField.setAlignment(Pos.CENTER);
-            quantityField.setStyle("-fx-border-radius: 5; -fx-background-radius: 5; -fx-font-size: 14px;");
+            quantityField.setStyle("-fx-border-radius: 5; -fx-background-radius: 5; -fx-font-size: 14px;"); //TODO css not here !!
 
             quantityField.focusedProperty().addListener((_, _, newValue) -> {
                 if (!newValue) {
@@ -222,5 +222,7 @@ public class CartController {
             e.printStackTrace();
         }
     }
+
+    // TODO not enough funds redirect
 
     }
