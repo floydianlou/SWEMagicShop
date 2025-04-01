@@ -21,8 +21,20 @@ public class WalletManager {
         return wallet.getCPbalance();
     }
 
+    //function to get wallet by customer
+    public Wallet getWalletByCustomer(Customer customer) throws IllegalArgumentException {
+        WalletDAO walletDAO = new WalletDAO();
+        Wallet wallet = walletDAO.getWalletByID(customer.getPersonID());
+
+        if (wallet == null) {
+            throw new IllegalArgumentException("Wallet not found for this customer");
+        }
+
+        return wallet;
+    }
+
     //function to add and widthdraw money from the wallet
-    public void addFunds(int amountGP, int amountSP, int amountCP, Customer customer) {
+    public void addFunds(int amountGP, int amountSP, int amountCP, Customer customer) throws IllegalArgumentException {
         WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(customer.getPersonID());
 
@@ -37,37 +49,41 @@ public class WalletManager {
         int totalAmount = (amountGP*100) + (amountSP*10) + amountCP;
 
         wallet.setCPbalance(wallet.getCPbalance() + totalAmount);
-        customer.setOwnWallet(wallet);
         walletDAO.updateWallet(wallet);
+        customer.setOwnWallet(wallet);
     }
 
 
-    public boolean withdrawFunds(int amountCP, Customer customer) {
+    public boolean withdrawFunds(int amountCP, Customer customer) throws IllegalArgumentException {
         WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(customer.getPersonID());
 
-        if( amountCP < 0){
-            throw new IllegalArgumentException("Amount must be positive!");
-        }
+        try{
+            if( amountCP < 0){
+                throw new IllegalArgumentException("Amount must be positive!");
+            }
 
-        if (wallet == null) {
-            System.out.println("Wallet not found for this customer.");
+            if (wallet == null) {
+                throw new IllegalArgumentException("Wallet not found for this customer.");
+            }
+
+            if (amountCP > wallet.getCPbalance()) {
+                throw new IllegalArgumentException("You don't have enough funds to withdraw this amount.");
+            }
+
+            wallet.setCPbalance(wallet.getCPbalance() - amountCP);
+            walletDAO.updateWallet(wallet);
+            customer.setOwnWallet(wallet);
+            return true;
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
             return false;
         }
 
-        if (amountCP > wallet.getCPbalance()) {
-            System.out.println("You don't have enough funds to withdraw this amount.");
-            return false;
-        }
-
-        wallet.setCPbalance(wallet.getCPbalance() - amountCP);
-        customer.setOwnWallet(wallet);
-        walletDAO.updateWallet(wallet);
-        return true;
     }
 
     //functions for testing
-    public void addFunds(int amountGP, int amountSP, int amountCP, int id) {
+    public void addFunds(int amountGP, int amountSP, int amountCP, int id) throws IllegalArgumentException {
         WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(id);
 
@@ -86,7 +102,7 @@ public class WalletManager {
     }
 
 
-    public boolean withdrawFunds(int amountCP, int id) {
+    public void withdrawFunds(int amountCP, int id) throws IllegalArgumentException {
         WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(id);
 
@@ -95,17 +111,14 @@ public class WalletManager {
         }
 
         if (wallet == null) {
-            System.out.println("Wallet not found for this customer.");
-            return false;
+            throw new IllegalArgumentException("Wallet not found for this customer.");
         }
 
         if (amountCP > wallet.getCPbalance()) {
-            System.out.println("You don't have enough funds to withdraw this amount.");
-            return false;
+            throw new IllegalArgumentException("You don't have enough funds to withdraw this amount.");
         }
 
         wallet.setCPbalance(wallet.getCPbalance() - amountCP);
         walletDAO.updateWallet(wallet);
-        return true;
     }
 }

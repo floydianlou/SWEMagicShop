@@ -17,7 +17,7 @@ public class WalletDAO {
         }
     }
 
-    public Wallet getWalletByID(int ID) {
+    public Wallet getWalletByID(int ID) throws RuntimeException{
         Wallet wallet = null;
         String query = "SELECT * FROM \"Wallet\" WHERE customerID = ?";
 
@@ -28,15 +28,20 @@ public class WalletDAO {
                     int walletID = resultSet.getInt("customerID");
                     int balanceCP = resultSet.getInt("CPbalance");
                     wallet = new Wallet(walletID, balanceCP);
+                }else {
+                    throw new RuntimeException("Customer ID not found: " + ID);
                 }
             }
         } catch (SQLException e) {
             System.out.println("Something happened while retrieving your wallet: " + e.getMessage());
+            if (e.getMessage().contains("failed to connect")) {
+                throw new RuntimeException("Database is offline, please try again later.");
+            }
         }
         return wallet;
     }
 
-    public boolean updateWallet(Wallet wallet) {
+    public void updateWallet(Wallet wallet) throws RuntimeException {
         String query = "UPDATE \"Wallet\" SET CPbalance = ? WHERE customerID = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -45,13 +50,14 @@ public class WalletDAO {
             int rowsAffected = stmt.executeUpdate();
             if( rowsAffected > 0 ){
                 System.out.println("Wallet updated");
-                return true;
             } else {
-                System.out.println("No rows were affected.");
+                throw new RuntimeException("Customer ID not found: " + wallet.getWalletID());
             }
         } catch (SQLException e) {
             System.err.println("Something happened while updating your wallet: " + e.getMessage());
+            if (e.getMessage().contains("failed to connect")) {
+                throw new RuntimeException("Database is offline, please try again later.");
+            }
         }
-        return false;
     }
 }

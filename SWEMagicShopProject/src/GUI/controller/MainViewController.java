@@ -65,6 +65,10 @@ public class MainViewController {
                 AccountViewController controller = loader.getController();
                 controller.setMainViewController(this);
             }
+            if (fxmlFile.equals("wallet-view.fxml")) {
+                WalletController controller = loader.getController();
+                controller.setMainViewController(this);
+            }
 
             AnchorPane wrapper = new AnchorPane(content);
             AnchorPane.setTopAnchor(content, 0.0);
@@ -169,7 +173,7 @@ public class MainViewController {
                 toolBar.getChildren().addAll(createWelcomeLabel(), backButton, cartButton, accountButton, logoutButton);
             }
 
-            case "orderhistory" -> {
+            case "orderhistory", "wallet" -> {
                 Button backButton = createButton("/images/accountIcon.png", "Back to Account", _ -> {
                     loadContent("account-view.fxml");
                     updateTopBar("account");

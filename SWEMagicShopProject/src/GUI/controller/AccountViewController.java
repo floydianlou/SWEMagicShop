@@ -209,7 +209,8 @@ public class AccountViewController {
     // TODO add MainViewController
     @FXML
     private void goToWallet(){
-        SceneController.loadScene("wallet-view.fxml");
+        mainViewController.loadContent("wallet-view.fxml");
+        mainViewController.updateTopBar("wallet");
     }
 
     @FXML
@@ -227,5 +228,3 @@ public class AccountViewController {
     }
 
 }
-
-
