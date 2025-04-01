@@ -1,0 +1,146 @@
+/* CART PAGE STYLES */
+.cart-title {
+    -fx-font-weight: 900;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-text-fill: #460E56;
+    -fx-font-size: 50px;
+}
+
+.cart-text {
+    -fx-font-weight: 900;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-text-fill: #460E56;
+    -fx-font-size: 25px;
+    -fx-padding: 20 0 0 0;
+}
+
+.cart-box {
+    -fx-background-color: #D9C3E7;
+    -fx-border-width: 1px;
+    -fx-border-color: #6C3483;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.cart-item-box {
+    -fx-background-color: transparent;
+    -fx-border-color: #D9C3E7;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.item-name {
+    -fx-font-size: 21px;
+    -fx-font-weight: 900;
+    -fx-font-family: 'Belwe Bd BT';
+    -fx-text-fill: #460E56;
+    -fx-padding: 0 0 5 0;
+}
+
+.item-price {
+    -fx-font-size: 15px;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-text-fill: #320A3E;
+    -fx-font-weight: bold;
+}
+
+.item-image-box {
+    -fx-background-color: #a26de2;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 4, 0.3, 0, 1);
+    -fx-alignment: center;
+}
+
+.item-image-box:hover {
+    -fx-scale-x: 1.08;
+    -fx-scale-y: 1.08;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(162, 109, 226, 0.4), 8, 0.4, 0, 3);
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 13px;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: #F6E9FF;
+    -fx-background-radius: 13px;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #6C3483;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(108, 52, 131, 0.2), 5, 0.3, 0, 0);
+}
+
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #9B59B6;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(155, 89, 182, 0.4), 10, 0.3, 0, 0);
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow,
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.quantity-button {
+    -fx-background-color: #a26de2;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: 900;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-pref-width: 35px;
+    -fx-pref-height: 35px;
+    -fx-effect: dropshadow(gaussian, rgba(162, 109, 226, 0.4), 5, 0.3, 0, 1);
+}
+
+.quantity-button:hover {
+    -fx-background-color: #b88ef0;
+    -fx-effect: dropshadow(gaussian, rgba(185, 142, 240, 0.6), 8, 0.3, 0, 2);
+}
+
+.quantity-button:pressed {
+    -fx-background-color: #8b4cc7;
+}
+
+.remove-button {
+    -fx-background-color: #8b4cc7;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-pref-width: 35px;
+    -fx-pref-height: 35px;
+    -fx-effect: dropshadow(gaussian, rgba(162, 109, 226, 0.4), 5, 0.3, 0, 1);
+}
+
+.remove-button:hover {
+    -fx-background-color: #b88ef0;
+    -fx-effect: dropshadow(gaussian, rgba(185, 142, 240, 0.6), 8, 0.3, 0, 2);
+}
+
+.remove-button:pressed {
+    -fx-background-color: #460E56;
+}
+
+.order-writing {
+    -fx-font-size: 15px;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-text-fill: #320A3E;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+}
+
+/* END CART STYLES PAGE */

@@ -21,6 +21,10 @@ public class Person {
         this.email = email;
     }
 
+    public Person (int personID) {
+        this.personID = personID;
+    }
+
 
     public String getLoginData() { return "Email: " + email + "\nPassword: " + password; }
     public void updateEmail(String email) { this.email = email; }

@@ -21,6 +21,7 @@ public class ProductViewController {
     @FXML private Button addToCartButton;
 
     private Item selectedProduct;
+    private MainViewController mainViewController;
 
     public ProductViewController() {
     }
@@ -29,6 +30,7 @@ public class ProductViewController {
     @FXML
     public void initialize() {
         selectedProduct = ItemViewManager.getInstance().getProductSelected();
+        ItemViewManager.getInstance().clearProductSelected();
         loadItem();
     }
 
@@ -40,7 +42,24 @@ public class ProductViewController {
         int[] price = Utilities.normalizeCurrencyArray(selectedProduct.getCopperValue());
         productPrice.setText(String.format("Price: %d GP, %d SP, %d CP", price[0], price[1], price[2]));
         productImage.setImage(new Image(getClass().getResource(selectedProduct.getImagePath()).toExternalForm()));
-        addToCartButton.setOnAction(event -> CartManager.getInstance().addItemToCart(selectedProduct));
+        // TODO temporary fix for mistaken quantity when added to cart
+        addToCartButton.setOnAction(event -> {
+            Item i = new Item(
+                    selectedProduct.getItemID(),
+                    selectedProduct.getItemName(),
+                    selectedProduct.getItemDescription(),
+                    selectedProduct.getItemCategory(),
+                    1,
+                    selectedProduct.isArcane(),
+                    selectedProduct.getCopperValue(),
+                    selectedProduct.getImagePath());
+            CartManager.getInstance().addItemToCart(i);
+            mainViewController.updateCartIcon();});
     }
+
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
+    }
+
 
 }
