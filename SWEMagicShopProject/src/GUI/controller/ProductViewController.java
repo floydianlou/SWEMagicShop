@@ -17,12 +17,12 @@ public class ProductViewController {
     @FXML private Label productName;
     @FXML private Label productDescription;
     @FXML private Label productCategory;
-    @FXML private Label productArcane;
     @FXML private Label productPrice;
     @FXML private ImageView productImage;
 
     @FXML private Button addToCartButton;
     @FXML private HBox itemBox;
+    @FXML private HBox arcaneBox;
 
     private Item selectedProduct;
     private MainViewController mainViewController;
@@ -56,8 +56,18 @@ public class ProductViewController {
         productCategory.setText(selectedProduct.getItemCategory());
         productCategory.getStyleClass().add("order-writing");
 
-        productArcane.setText("Arcane: " + (selectedProduct.isArcane() ? "Yes" : "No"));
-        productArcane.getStyleClass().add("order-writing");
+        if (selectedProduct.isArcane()) {
+            ImageView arcaneIcon = new ImageView(new Image(getClass().getResource("/images/arcaneItem.png").toExternalForm()));
+            arcaneIcon.setFitWidth(20);
+            arcaneIcon.setFitHeight(20);
+
+            Label arcaneLabel = new Label("Arcane");
+            arcaneLabel.getStyleClass().add("order-writing");
+            arcaneLabel.setStyle("-fx-font-size: 20px;");
+
+            arcaneBox.getChildren().addAll(arcaneIcon, arcaneLabel);
+            arcaneBox.setAlignment(Pos.CENTER_LEFT);
+        }
 
         int[] price = Utilities.normalizeCurrencyArray(selectedProduct.getCopperValue());
         productPrice.setText(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));

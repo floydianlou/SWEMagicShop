@@ -61,15 +61,27 @@ public class InventoryViewController {
         Label category = new Label(item.getItemCategory());
         category.getStyleClass().add("order-writing");
 
-        String arcaneValue = item.isArcane() ? "Yes" : "No";
-        Label arcane = new Label("Arcane: " + arcaneValue);
-        arcane.getStyleClass().add("order-writing");
+        HBox arcaneRow = null;
+        if (item.isArcane()) {
+            ImageView arcaneIcon = new ImageView(new Image(getClass().getResource("/images/arcaneItem.png").toExternalForm()));
+            arcaneIcon.setFitWidth(18);
+            arcaneIcon.setFitHeight(18);
+
+            Label arcaneLabel = new Label("Arcane");
+            arcaneLabel.getStyleClass().add("order-writing");
+
+            arcaneRow = new HBox(5, arcaneIcon, arcaneLabel);
+            arcaneRow.setAlignment(Pos.CENTER_LEFT);
+        }
 
         int[] price = Utilities.normalizeCurrencyArray(item.getCopperValue());
-        Label total = new Label(String.format("Total: %d GP, %d SP, %d CP", price[0], price[1], price[2]));
+        Label total = new Label(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
         total.getStyleClass().add("item-price");
 
-        VBox textBox = new VBox(5, itemName, itemDescripion, category, arcane, total);
+        VBox textBox = new VBox(5, itemName, itemDescripion, category, total);
+        if (arcaneRow != null) {
+            textBox.getChildren().add(arcaneRow);
+        }
         textBox.setAlignment(Pos.CENTER_LEFT);
 
         HBox leftBox = new HBox(20, icon, textBox);
