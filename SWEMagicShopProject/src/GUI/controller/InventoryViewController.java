@@ -6,7 +6,6 @@ import DomainModel.Item;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -57,6 +56,7 @@ public class InventoryViewController {
 
         Label itemDescripion = new Label("Description: " + item.getItemDescription());
         itemDescripion.getStyleClass().add("order-writing");
+        itemDescripion.wrapTextProperty().setValue(true);
 
         Label category = new Label(item.getItemCategory());
         category.getStyleClass().add("order-writing");

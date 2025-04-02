@@ -21,7 +21,7 @@
                 <Insets top="40" right="10" bottom="10" left="100"/>
             </padding>
             <VBox alignment="CENTER">
-                <Label text="ACCOUNT DETAILS"  styleClass="account-title-lable"/>
+                <Label text="ACCOUNT DETAILS"  styleClass="item-name"/>
             </VBox>
 
             <Label text="NAME" styleClass="instructions-label"/>
@@ -111,7 +111,7 @@
                             <Tooltip text="Go to Arcane Request"/>
                         </tooltip>
                     </Button>
-                    <Label text="Arcane Membership" styleClass="instructions-label"/>
+                    <Label text="Arcane Membership" styleClass="item-name"/>
                     <Label text="Discover exclusive benefits and special offers for Members. Learn how to get your membership card."
                             styleClass="small-text" wrapText="true" textAlignment="CENTER"/>
                 </VBox>
@@ -125,7 +125,7 @@
                             <Tooltip text="Go to Wallet"/>
                         </tooltip>
                     </Button>
-                    <Label text="Wallet" styleClass="instructions-label"/>
+                    <Label text="Wallet" styleClass="item-name"/>
                     <Label text="An easy and accessible way to recharge and view your credit card directly from our shop."
                            styleClass="small-text" wrapText="true" textAlignment="CENTER"/>
                 </VBox>
@@ -142,7 +142,7 @@
                             <Tooltip text="Go To Orders"/>
                         </tooltip>
                     </Button>
-                    <Label text="Order History" styleClass="instructions-label"/>
+                    <Label text="Order History" styleClass="item-name"/>
                     <Label text="Learn about shipping methods and policies. Check out your own order history and their status."
                            styleClass="small-text" wrapText="true" textAlignment="CENTER"/>
                 </VBox>
@@ -156,7 +156,7 @@
                             <Tooltip text="Go To Inventory"/>
                         </tooltip>
                     </Button>
-                    <Label text="Inventory" styleClass="instructions-label"/>
+                    <Label text="Inventory" styleClass="item-name"/>
                     <Label text="Here you'll be able to access and view all the products you've purchesed from our store."
                            styleClass="small-text" wrapText="true" textAlignment="CENTER"/>
                 </VBox>

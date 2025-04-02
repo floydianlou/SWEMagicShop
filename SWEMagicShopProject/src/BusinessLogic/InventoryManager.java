@@ -20,6 +20,10 @@ public class InventoryManager {
         this.inventoryItems = loadInventory(customer);
     }
 
+    public InventoryManager(InventoryDAO inventoryDAO) {
+        this.inventoryDAO = inventoryDAO;
+    }
+
     public InventoryManager() {}
 
     public ArrayList<Item> loadInventory(Customer customer) {
