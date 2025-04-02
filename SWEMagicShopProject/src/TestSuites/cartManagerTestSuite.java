@@ -18,7 +18,7 @@ public class cartManagerTestSuite {
 
                 CartManager cartManager = new CartManager(suiteCustomer);
                 WalletManager walletManager = new WalletManager();
-                InventoryManager inventoryManager = new InventoryManager(suiteCustomer);
+                InventoryManager inventoryManager = new InventoryManager();
                 CustomerOrderManager orderManager = new CustomerOrderManager();
 
                 boolean running = true;

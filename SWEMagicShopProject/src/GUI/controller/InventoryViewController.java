@@ -6,6 +6,7 @@ import DomainModel.Item;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,16 +31,15 @@ public class InventoryViewController {
         loggedCustomer = (Customer) LoggedUserManager.getInstance().getLoggedUser();
         sunIcon.setImage(new Image(getClass().getResource("/images/sunIcon.png").toExternalForm()));
         reversedSunIcon.setImage(new Image(getClass().getResource("/images/sunIconFlipped.png").toExternalForm()));
-        inventoryManager = new InventoryManager(loggedCustomer);
-        ArrayList<Item> inventory = inventoryManager.viewInventory(loggedCustomer.getPersonID());
-        if (inventory.isEmpty()) {
-            System.out.println("Inventory is empty");
-        }
+        inventoryManager = new InventoryManager();
+        loadInventory();
+    }
 
+    private void loadInventory() {
+        ArrayList<Item> inventory = inventoryManager.viewInventory(loggedCustomer);
         for (Item item : inventory) {
             itemsContainer.getChildren().add(createItemCard(item));
         }
-
     }
 
     public HBox createItemCard(Item item) {
@@ -48,19 +48,11 @@ public class InventoryViewController {
         itemBox.setPrefHeight(100);
         itemBox.getStyleClass().add("cart-item-box");
 
-        //ImageView icon = new ImageView(new Image(getClass().getResource(item.getImagePath()).toExternalForm()));
-        ImageView icon = new ImageView();
-        String imagePath = item.getImagePath();
-        if (imagePath != null) {
-            icon.setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
-        } else {
-            // Gestisci il caso in cui l'immagine non viene trovata
-            icon.setImage(new Image(getClass().getResource("/images/products/default_armor.png").toExternalForm()));
-        }
-        icon.setFitWidth(60);
-        icon.setFitHeight(80);
+        ImageView icon = new ImageView(new Image(getClass().getResource(item.getImagePath()).toExternalForm()));
+        icon.setFitWidth(75);
+        icon.setFitHeight(100);
 
-        Label itemName = new Label("Name: " + item.getItemName());
+        Label itemName = new Label(item.getItemName());
         itemName.getStyleClass().add("item-name");
 
         Label itemDescripion = new Label("Description: " + item.getItemDescription());
@@ -84,6 +76,18 @@ public class InventoryViewController {
         leftBox.setAlignment(Pos.CENTER_LEFT);
         HBox.setHgrow(leftBox, Priority.ALWAYS);
 
+        Label quantityText = new Label("Quantity:");
+        quantityText.getStyleClass().add("order-writing");
+        Label quantity = new Label(String.valueOf(item.getItemQuantity()));
+        quantity.getStyleClass().add("order-writing");
+
+        VBox quantityBox = new VBox(5, quantityText, quantity);
+        quantityBox.setAlignment(Pos.CENTER);
+
+        HBox rightBox = new HBox(20, quantityBox);
+        rightBox.setAlignment(Pos.CENTER_RIGHT);
+
+        itemBox.getChildren().addAll(leftBox, rightBox);
 
         return itemBox;
     }

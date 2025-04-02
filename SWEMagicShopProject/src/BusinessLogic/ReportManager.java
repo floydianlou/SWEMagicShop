@@ -24,7 +24,6 @@ public class ReportManager {
     }
 
     public ReportManager() {
-        //FOR TESTING
     }
 
     public String hotCategory(){

@@ -248,7 +248,7 @@ public class ItemDAO {
                     Item newItem = new Item(itemID, name, description, category, arcane, CPprice, imagePath);
                     items.add(newItem);
                 }
-            };
+            }
         } catch (SQLException e) {
             System.out.println("Something happened while retrieving your items: " + e.getMessage());
             if (e.getMessage().contains("failed to connect")) {
@@ -280,7 +280,7 @@ public class ItemDAO {
                     Item newItem = new Item(itemID, name, description, category, arcane, CPprice, imagePath);
                     items.add(newItem);
                 }
-            };
+            }
         } catch (SQLException e) {
             System.out.println("Something happened while retrieving your items: " + e.getMessage());
             if (e.getMessage().contains("failed to connect")) {
@@ -312,7 +312,7 @@ public class ItemDAO {
                     Item newItem = new Item(itemID, name, description, category, arcane, CPprice, imagePath);
                     items.add(newItem);
                 }
-            };
+            }
         } catch (SQLException e) {
             System.out.println("Something happened while retrieving your items: " + e.getMessage());
             if (e.getMessage().contains("failed to connect")) {

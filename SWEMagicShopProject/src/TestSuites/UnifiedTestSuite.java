@@ -157,7 +157,7 @@ public class UnifiedTestSuite {
     private static void customerMenu(Scanner scanner, AccountManager accountManager, Customer customer) {
         CartManager cartManager = new CartManager(customer);
         WalletManager walletManager = new WalletManager();
-        InventoryManager inventoryManager = new InventoryManager(customer);
+        InventoryManager inventoryManager = new InventoryManager();
         CustomerOrderManager orderManager = new CustomerOrderManager();
 
         boolean running = true;
@@ -258,7 +258,7 @@ public class UnifiedTestSuite {
 
     // === UTILITY METHODS ===
     private static void viewInventory(InventoryManager inventoryManager, Customer customer) {
-        ArrayList<Item> items = inventoryManager.viewInventory(customer.getPersonID());
+        ArrayList<Item> items = inventoryManager.viewInventory(customer);
 
         if (items.isEmpty()) {
             System.out.println("❌ Inventario vuoto.");
@@ -294,10 +294,11 @@ public class UnifiedTestSuite {
         Item newItem = new Item(id, name, description, category, quantity, isArcane, cpValue);
 
         // Aggiunta
-        inventoryManager.inventoryItems.add(newItem);
+        ArrayList<Item> inventoryItem = new ArrayList<>();
+        inventoryItem.add(newItem);
 
         try {
-            inventoryManager.updateInventory(inventoryManager.inventoryItems, customer);
+            inventoryManager.updateInventory(inventoryItem, customer);
             System.out.println("✅ Item aggiunto!");
         } catch (Exception e) {
             System.err.println("❌ Errore update: " + e.getMessage());
@@ -308,10 +309,12 @@ public class UnifiedTestSuite {
         System.out.print("ID Item da rimuovere: ");
         int id = scanner.nextInt();
 
-        inventoryManager.inventoryItems.removeIf(item -> item.getItemID() == id);
+        ArrayList<Item> inventoryItem = inventoryManager.viewInventory(customer);
+
+        inventoryItem.removeIf(item -> item.getItemID() == id);
 
         try {
-            inventoryManager.updateInventory(inventoryManager.inventoryItems, customer);
+            inventoryManager.updateInventory(inventoryItem, customer);
             System.out.println("✅ Item rimosso!");
         } catch (Exception e) {
             System.err.println("❌ Errore update: " + e.getMessage());

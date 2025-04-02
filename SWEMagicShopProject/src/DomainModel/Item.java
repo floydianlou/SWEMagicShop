@@ -34,7 +34,7 @@ public class Item {
         this.copperValue = copperValue;
     }
 
-    // contructor without attribute quantity for DAO
+    // contructor without attribute quantity
     public Item(int itemID, String itemName, String itemDescription, String itemCategory, boolean isArcane, int CPprice, String imagePath) {
         this.itemID = itemID;
         this.itemName = itemName;
