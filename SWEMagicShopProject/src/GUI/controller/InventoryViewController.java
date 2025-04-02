@@ -1,4 +1,5 @@
 package GUI.controller;
+
 import BusinessLogic.InventoryManager;
 import BusinessLogic.Utilities;
 import DomainModel.Customer;
@@ -12,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-
 import java.util.ArrayList;
 
 

@@ -1,6 +1,5 @@
 package GUI.controller;
 
-
 import BusinessLogic.CartManager;
 import DomainModel.Customer;
 import DomainModel.Person;
@@ -16,8 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-
 import java.io.IOException;
 
 public class MainViewController {

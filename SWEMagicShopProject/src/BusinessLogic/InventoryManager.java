@@ -2,7 +2,6 @@ package BusinessLogic;
 
 import Exceptions.InventoryExceptions;
 import ORM.InventoryDAO;
-import DomainModel.Person;
 import DomainModel.Customer;
 import DomainModel.Item;
 

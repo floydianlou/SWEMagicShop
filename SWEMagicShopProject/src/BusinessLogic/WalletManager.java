@@ -6,8 +6,7 @@ import DomainModel.Wallet;
 
 public class WalletManager {
 
-    public WalletManager() {
-    }
+    public WalletManager() {}
 
     //function to see balance
     public int viewBalance(int id) {

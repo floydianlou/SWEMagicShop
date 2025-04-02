@@ -17,7 +17,6 @@ public class StoreManager {
     }
 
     public StoreManager() {
-
     }
 
     public ArrayList<Item> listProducts() {

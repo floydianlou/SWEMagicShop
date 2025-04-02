@@ -3,7 +3,6 @@ package GUI.controller;
 import BusinessLogic.CustomerOrderManager;
 import BusinessLogic.Utilities;
 import DomainModel.Customer;
-import DomainModel.Item;
 import DomainModel.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,17 +16,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static BusinessLogic.Utilities.createRoundedImageBox;
 
 public class OrderHistoryController {
 

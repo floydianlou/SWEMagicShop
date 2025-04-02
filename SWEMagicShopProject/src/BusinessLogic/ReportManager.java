@@ -12,7 +12,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 

@@ -2,7 +2,6 @@ package BusinessLogic;
 
 import DomainModel.Species;
 import ORM.CategoryDAO;
-import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
