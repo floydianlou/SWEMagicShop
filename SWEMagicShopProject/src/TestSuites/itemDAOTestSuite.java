@@ -23,7 +23,6 @@ public class itemDAOTestSuite {
             System.out.println("7. Ricerca un prodotto del negozio tramite categoria");
             System.out.println("8. Ricerca un prodotto del negozio tramite arcane");
             System.out.println("9. Ricerca un prodotto del negozio tramite prezzo");
-            System.out.println("10. Ricerca un prodotto del negozio");
             System.out.println("0. Esci");
             System.out.print("Scelta: ");
 
@@ -40,7 +39,6 @@ public class itemDAOTestSuite {
                 case 7 -> searchByCategory(scanner, storeManager);
                 case 8 -> searchByArcane(scanner, storeManager);
                 case 9 -> searchByPrice(scanner, storeManager);
-                case 10 -> search(scanner, storeManager);
                 case 0 -> {
                     System.out.println("👋 Uscita dal programma.");
                     scanner.close();
@@ -236,23 +234,4 @@ public class itemDAOTestSuite {
             }
         }
     }
-
-    private static void search(Scanner scanner, StoreManager storeManager) {
-        System.out.println("\n--- Ricerca Prodotto ---");
-
-        System.out.print("Inserisci per quale criterio vuoi effettuare la tua ricerca (lowercase): ");
-        String option = scanner.nextLine();
-        System.out.print("Inserisci " + option + " del prodotto: ");
-        String search = scanner.nextLine();
-        ArrayList<Item> items = storeManager.searchProductsBy(option, search);
-        if (items.isEmpty()) { System.out.println("❌ Nessun prodotto trovato."); }
-        else {
-            System.out.println("✅ Prodotto trovato:\n");
-            for (Item item : items) {
-                System.out.println(item.getData());
-                System.out.println("------------------------");
-            }
-        }
-    }
-
 }
