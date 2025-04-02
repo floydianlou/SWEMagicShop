@@ -28,27 +28,21 @@
             <HBox spacing="5" prefWidth="250" styleClass="cart-box" alignment="CENTER_LEFT">
                 <Region prefWidth="10"/>
                 <ImageView fx:id="penIcon1" fitWidth="27" fitHeight="27" visible="false"/>
-                <StackPane>
-                    <TextField fx:id="accountName" promptText="Enter your new name..." maxWidth="350" styleClass="input-field"/>
-                </StackPane>
+                <TextField fx:id="accountName" promptText="Enter your new name..." maxWidth="350" styleClass="input-field"/>
             </HBox>
 
             <Label text="SURNAME" styleClass="instructions-label"/>
             <HBox spacing="5" prefWidth="250" styleClass="cart-box" alignment="CENTER_LEFT">
                 <Region prefWidth="10"/>
                 <ImageView fx:id="penIcon2" fitWidth="27" fitHeight="27" visible="false"/>
-                <StackPane>
-                    <TextField fx:id="accountSurname" promptText="Enter your new surname..." maxWidth="350" styleClass="input-field"/>
-                </StackPane>
+                <TextField fx:id="accountSurname" promptText="Enter your new surname..." maxWidth="350" styleClass="input-field"/>
             </HBox>
 
             <Label text="EMAIL ADDRESS" styleClass="instructions-label"/>
             <HBox spacing="5" prefWidth="250" styleClass="cart-box" alignment="CENTER_LEFT">
                 <Region prefWidth="10"/>
                 <ImageView fx:id="penIcon3" fitWidth="27" fitHeight="27" visible="false"/>
-                <StackPane>
-                    <TextField fx:id="accountEmail" promptText="Enter your new e-mail..." prefWidth="200" styleClass="input-field"/>
-                </StackPane>
+                <TextField fx:id="accountEmail" promptText="Enter your new e-mail..." HBox.hgrow="ALWAYS" styleClass="input-field"/>
             </HBox>
 
             <Label text="PASSWORD" styleClass="instructions-label"/>
@@ -71,9 +65,7 @@
             <HBox spacing="5" prefWidth="250" styleClass="cart-box" alignment="CENTER_LEFT">
                 <Region prefWidth="10"/>
                 <ImageView fx:id="penIcon5" fitWidth="27" fitHeight="27" visible="false"/>
-                <StackPane>
-                    <TextField fx:id="accountPhone" promptText="Enter your new phone number..." maxWidth="500" styleClass="input-field"/>
-                </StackPane>
+                <TextField fx:id="accountPhone" promptText="Enter your new phone number..." maxWidth="500" styleClass="input-field"/>
             </HBox>
 
             <HBox spacing="50">
