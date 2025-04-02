@@ -5,7 +5,6 @@ import DomainModel.Customer;
 import DomainModel.Manager;
 import DomainModel.Person;
 import DomainModel.Species;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 

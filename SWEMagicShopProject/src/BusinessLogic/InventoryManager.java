@@ -4,7 +4,6 @@ import Exceptions.InventoryExceptions;
 import ORM.InventoryDAO;
 import DomainModel.Customer;
 import DomainModel.Item;
-
 import java.util.ArrayList;
 
 // would likely need to be created as soon as login is made just like cartManager and load all inventory items with constructor

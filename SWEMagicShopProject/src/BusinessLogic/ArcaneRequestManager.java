@@ -1,7 +1,7 @@
 package BusinessLogic;
+
 import DomainModel.ArcaneRequest;
 import DomainModel.Customer;
-
 import java.util.ArrayList;
 
 public class ArcaneRequestManager {
