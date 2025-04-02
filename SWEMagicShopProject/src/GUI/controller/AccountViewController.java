@@ -215,7 +215,8 @@ public class AccountViewController {
 
     @FXML
     private void goToInventory(){
-        SceneController.loadScene("inventory-view.fxml");
+        mainViewController.loadContent("inventory-view.fxml");
+        mainViewController.updateTopBar("inventory");
     }
 
     @FXML

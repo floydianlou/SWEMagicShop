@@ -38,7 +38,6 @@ public class WalletController {
 
     private WalletManager walletManager;
 
-    private MainViewController mainViewController;
 
     @FXML
     public void initialize() {
@@ -127,11 +126,6 @@ public class WalletController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-
-    public void setMainViewController(MainViewController mainViewController) {
-        this.mainViewController = mainViewController;
     }
 
 }

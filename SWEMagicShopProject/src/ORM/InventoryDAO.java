@@ -26,7 +26,7 @@ public class InventoryDAO {
     }
 
     public ArrayList<Item> getInventory(int customerID) {
-        //TODO to be modified it misses join with category name and other things
+        // TODO to be modified it misses join with category name and other things
         ArrayList<Item> items = new ArrayList<>();
         String query = "SELECT i.itemID, i.name, i.description, i.categoryid, inv.quantity, i.arcane, i.cpprice " +
                 "FROM \"Inventory\" inv " +

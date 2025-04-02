@@ -18,6 +18,9 @@ public class InventoryManager {
         this.inventoryItems = loadInventory(customer);
     }
 
+    public InventoryManager() {
+    }
+
     public ArrayList<Item> loadInventory(Customer customer) {
         // TODO NOT YET TESTED
         InventoryDAO inventoryDAO = new InventoryDAO();
@@ -26,7 +29,6 @@ public class InventoryManager {
 
     public ArrayList<Item> viewInventory(int clientID) {
         if (customer == null || customer.getPersonID() != clientID) {
-
             return new ArrayList<>();
         }
         return new ArrayList<>(inventoryItems);
