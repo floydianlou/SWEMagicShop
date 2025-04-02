@@ -1,4 +1,5 @@
 package BusinessLogic;
+
 import Exceptions.OrderExceptions;
 import ORM.OrderDAO;
 import DomainModel.Customer;
@@ -8,8 +9,7 @@ import java.util.ArrayList;
 
 public class CustomerOrderManager {
 
-    public CustomerOrderManager() {
-    }
+    public CustomerOrderManager() {}
 
     public ArrayList<Order> viewAllOrders() {
         OrderDAO orderDAO = new OrderDAO();

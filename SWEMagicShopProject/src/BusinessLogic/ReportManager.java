@@ -16,14 +16,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class ReportManager {
-    InventoryDAO inventoryDAO;
 
-    public ReportManager(InventoryDAO inventoryDAO) {
-        this.inventoryDAO = inventoryDAO;
-    }
-
-    public ReportManager() {
-    }
+    public ReportManager() {}
 
     public String hotCategory(){
         InventoryDAO inventoryDAO = new InventoryDAO();
