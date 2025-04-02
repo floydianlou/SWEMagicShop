@@ -19,9 +19,11 @@
                 <Label fx:id="productName" style="-fx-font-size: 40px;"/>
                 <Label text="Description:" styleClass="order-writing" style="-fx-font-size: 20px;"/>
                 <Label fx:id="productDescription" style="-fx-font-size: 16px;"/>
-                <Label fx:id="productCategory" style="-fx-font-size: 20px;"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label fx:id="productCategory" style="-fx-font-size: 20px;"/>
+                    <HBox fx:id="arcaneBox"/>
+                </HBox>
                 <Label fx:id="productPrice" style="-fx-font-size: 20px;"/>
-                <HBox fx:id="arcaneBox"/>
                 <Button text="Add to Cart" fx:id="addToCartButton" styleClass="add-to-cart-button"/>
             </VBox>
 

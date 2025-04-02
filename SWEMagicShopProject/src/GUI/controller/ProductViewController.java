@@ -58,14 +58,10 @@ public class ProductViewController {
 
         if (selectedProduct.isArcane()) {
             ImageView arcaneIcon = new ImageView(new Image(getClass().getResource("/images/arcaneItem.png").toExternalForm()));
-            arcaneIcon.setFitWidth(20);
-            arcaneIcon.setFitHeight(20);
+            arcaneIcon.setFitWidth(40);
+            arcaneIcon.setFitHeight(40);
 
-            Label arcaneLabel = new Label("Arcane");
-            arcaneLabel.getStyleClass().add("order-writing");
-            arcaneLabel.setStyle("-fx-font-size: 20px;");
-
-            arcaneBox.getChildren().addAll(arcaneIcon, arcaneLabel);
+            arcaneBox.getChildren().addAll(arcaneIcon);
             arcaneBox.setAlignment(Pos.CENTER_LEFT);
         }
 
@@ -74,8 +70,8 @@ public class ProductViewController {
         productPrice.getStyleClass().add("item-price");
 
         productImage.setImage(new Image(getClass().getResource(selectedProduct.getImagePath()).toExternalForm()));
-        productImage.setFitWidth(400);
-        productImage.setFitHeight(400);
+        productImage.setFitWidth(550);
+        productImage.setFitHeight(450);
 
         // TODO temporary fix for mistaken quantity when added to cart
         addToCartButton.setOnAction(event -> {

@@ -67,21 +67,20 @@ public class InventoryViewController {
             arcaneIcon.setFitWidth(18);
             arcaneIcon.setFitHeight(18);
 
-            Label arcaneLabel = new Label("Arcane");
-            arcaneLabel.getStyleClass().add("order-writing");
-
-            arcaneRow = new HBox(5, arcaneIcon, arcaneLabel);
+            arcaneRow = new HBox(5, arcaneIcon);
             arcaneRow.setAlignment(Pos.CENTER_LEFT);
+        }
+
+        HBox arcaneCategoryBox = new HBox(5, category);
+        if(arcaneRow != null) {
+            arcaneCategoryBox.getChildren().add(arcaneRow);
         }
 
         int[] price = Utilities.normalizeCurrencyArray(item.getCopperValue());
         Label total = new Label(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
         total.getStyleClass().add("item-price");
 
-        VBox textBox = new VBox(5, itemName, itemDescripion, category, total);
-        if (arcaneRow != null) {
-            textBox.getChildren().add(arcaneRow);
-        }
+        VBox textBox = new VBox(5, itemName, itemDescripion, arcaneCategoryBox, total);
         textBox.setAlignment(Pos.CENTER_LEFT);
 
         HBox leftBox = new HBox(20, icon, textBox);
