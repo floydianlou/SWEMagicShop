@@ -30,3 +30,8 @@ bin/
 
 ### extra ###
 /.idea/
+/.iml/
+/.bin/
+SWEMagicShopProject/.idea/misc.xml
+SWEMagicShopProject/.idea/workspace.xml
+*.iml
