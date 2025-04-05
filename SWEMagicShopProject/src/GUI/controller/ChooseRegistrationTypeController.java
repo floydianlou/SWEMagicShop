@@ -12,10 +12,7 @@ public class ChooseRegistrationTypeController {
         shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm())); }
 
     @FXML
-    private void handleClientRegistration() {
-        SceneController.loadScene("user-registration-view.fxml");
-        System.out.println("handleClientRegistration called");
-    }
+    private void handleClientRegistration() { SceneController.loadScene("user-registration-view.fxml"); }
 
 
     @FXML
@@ -29,5 +26,3 @@ public class ChooseRegistrationTypeController {
     }
 
 }
-
-
