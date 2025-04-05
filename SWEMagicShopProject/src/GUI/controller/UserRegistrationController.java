@@ -7,7 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import BusinessLogic.AccountManager;
 import DomainModel.Species;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
 
@@ -20,7 +24,18 @@ public class UserRegistrationController {
     @FXML private TextField ageField;
     @FXML private TextField phoneField;
     @FXML private ComboBox<String> speciesDropdown;
+
+    // images
+
+    @FXML private ImageView penIcon;
+    @FXML private ImageView penIcon2;
+    @FXML private ImageView emailIcon;
+    @FXML private ImageView passwordIcon;
+    @FXML private ImageView speciesIcon;
+    @FXML private ImageView ageIcon;
+    @FXML private ImageView phoneIcon;
     @FXML private Button registerButton;
+    @FXML private ImageView shopIcon;
     @FXML private Label errorLabel;
     private ArrayList<Species> allSpecies;
 
@@ -32,8 +47,18 @@ public class UserRegistrationController {
 
     @FXML
     public void initialize() {
+        // IMAGE LOADING
+        Image pen = new Image(getClass().getResource("/images/penIcon.png").toExternalForm());
+        penIcon.setImage(pen);
+        penIcon2.setImage(pen);
+        shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm()));
+        emailIcon.setImage(new Image(getClass().getResource("/images/emailIcon.png").toExternalForm()));
+        passwordIcon.setImage(new Image(getClass().getResource("/images/passwordIcon.png").toExternalForm()));
+        speciesIcon.setImage(new Image(getClass().getResource("/images/speciesIcon.png").toExternalForm()));
+        ageIcon.setImage(new Image(getClass().getResource("/images/ageIcon.png").toExternalForm()));
+        phoneIcon.setImage(new Image(getClass().getResource("/images/phoneIcon.png").toExternalForm()));
+
         loadSpeciesInDropdown();
-        speciesDropdown.getSelectionModel().selectFirst();
         ageField.setTextFormatter(new TextFormatter<>(change ->
                 (change.getControlNewText().matches("\\d*")) ? change : null));
     }
@@ -103,18 +128,26 @@ public class UserRegistrationController {
             Parent root = loader.load();
 
             PopupController popupController = loader.getController();
-            popupController.setPopupContent("Account Created", "Your account has been created successfully.");
+            popupController.setPopupContent("Account Created", "Your account has been created successfully.", "Back to welcome page");
 
             Stage popupStage = new Stage();
-            popupStage.setTitle("Account Created");
-            popupStage.setScene(new Scene(root));
+            popupStage.initStyle(StageStyle.TRANSPARENT);
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+            popupStage.setScene(scene);
             popupStage.setResizable(false);
+            popupStage.setTitle("Account Created");
             popupStage.showAndWait();
-            SceneController.loadScene("main-view.fxml");
+            SceneController.loadScene("welcome-view.fxml");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleBack() {
+        SceneController.loadScene("choose-registration-type.fxml");
     }
 
 }

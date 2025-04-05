@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+
+<?import javafx.scene.image.ImageView?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="GUI.controller.CartController"
+           stylesheets="@../styles/cart-styles.css" style="-fx-padding: 40;">
+
+    <VBox spacing="20" alignment="TOP_CENTER">
+
+        <HBox alignment="CENTER" spacing="15">
+            <ImageView fx:id="leftStar"
+                fitHeight="50" fitWidth="50"
+                preserveRatio="true"
+                pickOnBounds="true"/>
+
+            <Label text="Shopping Cart" styleClass="cart-title"/>
+
+            <ImageView fx:id="rightStar"
+                       fitHeight="50" fitWidth="50"
+                       preserveRatio="true"
+                       pickOnBounds="true"/>
+        </HBox>
+
+        <HBox spacing="30" alignment="CENTER">
+
+            <!-- this is the box containing order items -->
+            <VBox styleClass="cart-box" prefWidth="900" prefHeight="600" spacing="15" alignment="TOP_CENTER">
+
+                <HBox style="-fx-padding: 16 0 0 20;">
+                    <Label text="Your current order:" styleClass="cart-text"/>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" prefHeight="550">
+                    <VBox fx:id="cartContainer" spacing="15" alignment="TOP_LEFT" prefWidth="680">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                    </VBox>
+                </ScrollPane>
+            </VBox>
+
+
+            <VBox alignment="CENTER" prefHeight="500">
+                <VBox spacing="20" alignment="CENTER" prefWidth="400" prefHeight="250" styleClass="cart-box">
+                    <Label text="ORDER TOTAL:" styleClass="cart-text"/>
+
+                    <Label fx:id="totalLabel" text="0g" styleClass="cart-text"/>
+
+                    <Button fx:id="payButton" text="Place Order" onAction="#handlePlaceOrder"
+                            styleClass="choice-button" prefWidth="300" prefHeight="50"/>
+
+                    <Label fx:id="errorLabel" text="" visible="false" styleClass="error-label"
+                           wrapText="true" maxWidth="200" style="-fx-padding: 0 20 0 0"/>
+                </VBox>
+            </VBox>
+
+        </HBox>
+    </VBox>
+</StackPane>
