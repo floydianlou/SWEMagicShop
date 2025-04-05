@@ -20,7 +20,7 @@ public class Utilities {
 
     public static boolean checkPassword (String password) {
         String notAllowedChars = "[!#$%^&*()+=\\[\\]{};:'\",<>?/\\\\|]";
-        return !password.matches(".*" + notAllowedChars + ".*");
+        return !password.matches("." + notAllowedChars + ".");
     }
 
     public static boolean checkAgeLimit (Species species, int age) {
@@ -52,6 +52,17 @@ public class Utilities {
         SPbalance = SPbalance % 10;
 
         return ("GP:" + GPbalance + "\n SP:" + SPbalance + "\n CP:" + copperAmount);
+    }
+
+    public static int[] normalizeCurrencyArray(int copperAmount) {
+        int SPbalance = copperAmount / 10;
+        copperAmount = copperAmount % 10;
+
+        int GPbalance = SPbalance / 10;
+        SPbalance = SPbalance % 10;
+
+        return new int[]{GPbalance, SPbalance, copperAmount};
+
     }
 
     // to check if the category selected is inside the database

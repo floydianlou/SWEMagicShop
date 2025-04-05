@@ -8,10 +8,8 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 public class PopupController {
-    @FXML
-    private Label titleLabel;
-    @FXML
-    private TextFlow messageLabel;
+    @FXML private Label titleLabel;
+    @FXML private TextFlow messageLabel;
     @FXML private Button closeButton;
     public MainViewController mainViewController;
     boolean toolbarNeeded = false;

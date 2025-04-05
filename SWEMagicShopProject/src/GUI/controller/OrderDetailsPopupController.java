@@ -22,8 +22,7 @@ public class OrderDetailsPopupController {
     @FXML private Label statusLabel;
     @FXML private Label dateLabel;
     @FXML private Label priceLabel;
-    @FXML
-    private ScrollPane itemsScrollPane;
+    @FXML private ScrollPane itemsScrollPane;
 
     private Stage stage;
 

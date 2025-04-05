@@ -78,7 +78,21 @@ public class AccountDAO {
             } catch (SQLException rollbackException) {
                 System.err.println("Error while doing rollback: " + rollbackException.getMessage());
             }
-            throw exception;
+
+            if ("23505".equals(exception.getSQLState())) {
+                String msg = exception.getMessage();
+
+                if (msg.contains("unique_email")) {
+                    throw new SQLException("This email is already in use.");
+                } else if (msg.contains("unique_phone")) {
+                    throw new SQLException("This phone number is already in use.");
+                } else {
+                    throw new SQLException("A unique constraint was violated.");
+                }
+            } else {
+                throw new SQLException("Customer account creation failed due to a database error.");
+            }
+
         } finally {
             try {
                 connection.setAutoCommit(true);
@@ -86,6 +100,7 @@ public class AccountDAO {
                 System.err.println("Error while reactivating auto commit: " + e.getMessage());
             }
         }
+
         return false;
     }
 
@@ -114,11 +129,11 @@ public class AccountDAO {
         try (Statement stmt = connection.createStatement()) {
 
             try (ResultSet set = stmt.executeQuery(sqlManager)) {
-            if (set.next()) {
-                int ID = set.getInt("managerID");
-                String name = set.getString("name");
-                String surname = set.getString("surname");
-                return new Manager(ID, name, surname, email, password); }
+                if (set.next()) {
+                    int ID = set.getInt("managerID");
+                    String name = set.getString("name");
+                    String surname = set.getString("surname");
+                    return new Manager(ID, name, surname, email, password); }
             }
 
             String sqlCustomer = String.format(
@@ -158,13 +173,13 @@ public class AccountDAO {
         // TODO CHECK PREPARED STATEMENT POSSIBILITY
         ArrayList<Customer> customers = new ArrayList<>();
         String sqlCustomer = String.format("SELECT c.customerID, c.name AS customerName, c.surname, c.email, c.password, c.age, c.arcanemembership, c.phone, s.speciesID, s.name AS speciesName, w.cpBalance " +
-                        "FROM \"Customer\" c " +
-                        "JOIN \"Wallet\" w ON c.customerID = w.customerID " +
-                        "JOIN \"Species\" s ON c.speciesID = s.speciesID " +
-                        "ORDER BY customerID ASC;");
+                "FROM \"Customer\" c " +
+                "JOIN \"Wallet\" w ON c.customerID = w.customerID " +
+                "JOIN \"Species\" s ON c.speciesID = s.speciesID " +
+                "ORDER BY customerID ASC;");
 
         try (Statement prp = connection.createStatement();
-            ResultSet set = prp.executeQuery(sqlCustomer)) {
+             ResultSet set = prp.executeQuery(sqlCustomer)) {
             while (set.next()) {
                 int ID = set.getInt("customerID");
                 String name = set.getString("customerName");
@@ -223,7 +238,7 @@ public class AccountDAO {
     public void updateCustomerAccount(Customer customer) throws RuntimeException {
         //TODO CHECK PREPARED STATEMENT POSSIBILITY
         String sqlUpdate = String.format("UPDATE \"Customer\" SET name = '%s', surname = '%s', email = '%s', password = '%s', phone = '%s' " +
-                "WHERE customerID = %d", customer.getName(), customer.getSurname(), customer.getEmail(), customer.getPassword(), customer.getPhoneNumber(),
+                        "WHERE customerID = %d", customer.getName(), customer.getSurname(), customer.getEmail(), customer.getPassword(), customer.getPhoneNumber(),
                 customer.getPersonID());
 
         try (Statement stmt = connection.createStatement()) {
@@ -252,7 +267,7 @@ public class AccountDAO {
     public boolean updateManagerAccount(Manager manager) {
         // TODO CHECK PREPARED STATEMENT POSSIBILITY
         String sqlUpdate = String.format("UPDATE \"Manager\" SET name = '%s', surname = '%s', email = '%s', password = '%s' " +
-                        "WHERE managerID = %d", manager.getName(), manager.getSurname(), manager.getEmail(), manager.getPassword(), manager.getPersonID());
+                "WHERE managerID = %d", manager.getName(), manager.getSurname(), manager.getEmail(), manager.getPassword(), manager.getPersonID());
 
         try (Statement stmt = connection.createStatement()) {
             int affected = stmt.executeUpdate(sqlUpdate);

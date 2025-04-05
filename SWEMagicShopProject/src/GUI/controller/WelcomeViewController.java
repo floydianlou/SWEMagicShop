@@ -6,8 +6,7 @@ import javafx.scene.image.ImageView;
 
 public class WelcomeViewController {
 
-    @FXML
-    private ImageView iconImageView;
+    @FXML private ImageView iconImageView;
 
     @FXML
     public void initialize() {

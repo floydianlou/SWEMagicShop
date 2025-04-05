@@ -162,7 +162,7 @@ public class ManagerShopController {
                         errorLabel.setText("Enter product name.");
                         return;
                     }
-                    allProductsSearched = storeManager.searchProducsByName(name.trim());
+                    allProductsSearched = storeManager.searchProductsByName(name.trim());
                     break;
                 case "Description":
                     String description = searchBar.getText();

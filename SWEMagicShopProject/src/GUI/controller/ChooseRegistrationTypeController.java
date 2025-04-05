@@ -8,24 +8,21 @@ public class ChooseRegistrationTypeController {
 
     @FXML private ImageView shopIcon;
 
-    public void initialize() {
-        shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm())); }
+    public void initialize() { shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm())); }
 
     @FXML
     private void handleClientRegistration() {
-        SceneController.loadScene("user-registration.fxml");
+        SceneController.loadScene("user-registration-view.fxml");
     }
 
     @FXML
     private void handleManagerRegistration() {
-        SceneController.loadScene("manager-registration.fxml");
+        SceneController.loadScene("manager-authentication-view.fxml");
     }
 
     @FXML
-    private void handleBackToMenu() {
-        SceneController.loadScene("main-view.fxml");
+    private void handleBack() {
+        SceneController.loadScene("welcome-view.fxml");
     }
 
 }
-
-
