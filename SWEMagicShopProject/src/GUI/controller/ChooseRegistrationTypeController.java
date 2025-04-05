@@ -13,19 +13,17 @@ public class ChooseRegistrationTypeController {
 
     @FXML
     private void handleClientRegistration() {
-        SceneController.loadScene("user-registration-view.fxml");
-        System.out.println("handleClientRegistration called");
+        SceneController.loadScene("user-registration.fxml");
     }
-
 
     @FXML
     private void handleManagerRegistration() {
-        SceneController.loadScene("manager-authentication-view.fxml");
+        SceneController.loadScene("manager-registration.fxml");
     }
 
     @FXML
-    private void handleBack() {
-        SceneController.loadScene("welcome-view.fxml");
+    private void handleBackToMenu() {
+        SceneController.loadScene("main-view.fxml");
     }
 
 }

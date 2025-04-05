@@ -97,4 +97,5 @@ public class AccountManager {
             throw new RuntimeException("A database error occured.");
         }
     }
+
 }

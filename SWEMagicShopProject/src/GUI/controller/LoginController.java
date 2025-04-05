@@ -1,7 +1,6 @@
 package GUI.controller;
 
 import BusinessLogic.AccountManager;
-import BusinessLogic.CartManager;
 import DomainModel.Customer;
 import DomainModel.Manager;
 import DomainModel.Person;
@@ -55,16 +54,19 @@ public class LoginController {
 
         try {
             Person loggedUser = accountManager.login(email, password);
-            LoggedUserManager.getInstance().setLoggedUser(loggedUser);
+
             if (loggedUser != null) {
+                System.out.println("Login completed."); //TODO this is only on console not GUI
+
                 if (loggedUser instanceof Manager) {
+                    System.out.println("Accesso come Manager.");
                     SceneController.loadScene("manager-shop-view.fxml"); //TODO
                 } else if (loggedUser instanceof Customer) {
-                    CartManager.init((Customer) loggedUser);
-                    SceneController.loadScene("main-view.fxml");
+                    System.out.println("Accesso come Cliente.");
+                    SceneController.loadScene("customer-shop-view.fxml"); //TODO
                 }
             } else {
-                errorLabel.setText("Email or password doesn't match!");
+                errorLabel.setText("Email or password doesn't match!"); //TODO with exceptions
             }
         } catch (RuntimeException e) {
             errorLabel.setText(e.getMessage());
@@ -91,6 +93,6 @@ public class LoginController {
 
     @FXML
     private void handleBack() {
-        SceneController.loadScene("welcome-view.fxml");
+        SceneController.loadScene("main-view.fxml");
     }
 }

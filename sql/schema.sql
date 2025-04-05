@@ -5,10 +5,10 @@ CREATE TABLE IF NOT EXISTS "Manager" (
   name VARCHAR(50) NOT NULL,
   surname VARCHAR(50) NOT NULL,
   email VARCHAR(80) UNIQUE NOT NULL,
-  password VARCHAR(50) NOT NULL
+  password VARCHAR(50) NOT NULL 
   );
 
-CREATE TABLE IF NOT EXISTS "Species" (
+  CREATE TABLE IF NOT EXISTS "Species" (
   speciesID SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   adultAge INT NOT NULL,
@@ -19,24 +19,22 @@ CREATE TABLE IF NOT EXISTS "Customer" (
   customerID SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   surname VARCHAR(50) NOT NULL,
-  email VARCHAR(80) NOT NULL,
+  email VARCHAR(80) UNIQUE NOT NULL,
   password VARCHAR(50) NOT NULL,
   age INTEGER CONSTRAINT agePositive CHECK (age >= 0),
   arcaneMembership BOOLEAN DEFAULT FALSE,
-  phone VARCHAR(10),
+  phone VARCHAR(10) UNIQUE,
   speciesID INT,
-  CONSTRAINT unique_email UNIQUE (email),
-  CONSTRAINT unique_phone UNIQUE (phone),
   FOREIGN KEY (speciesID) REFERENCES "Species"(speciesID) ON UPDATE CASCADE
   );
 
-CREATE TABLE IF NOT EXISTS "Wallet" (
+  CREATE TABLE IF NOT EXISTS "Wallet" (
   customerID INT PRIMARY KEY,
   CPbalance INT DEFAULT 0 CONSTRAINT positiveBalance CHECK (CPbalance >= 0),
   FOREIGN KEY (customerID) REFERENCES "Customer"(customerID) ON UPDATE CASCADE ON DELETE CASCADE
   );
 
-CREATE TABLE IF NOT EXISTS "OrderStatus" (
+  CREATE TABLE IF NOT EXISTS "OrderStatus" (
   statusID SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL
   );
@@ -50,21 +48,20 @@ CREATE TABLE IF NOT EXISTS "Order" (
   FOREIGN KEY (customerID) REFERENCES "Customer"(customerID) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (statusID) REFERENCES "OrderStatus"(statusID) ON UPDATE CASCADE
   );
-
+  
 CREATE TABLE IF NOT EXISTS "Category" (
   categoryID SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   description VARCHAR(100)
   );
 
-CREATE TABLE IF NOT EXISTS "Item" (
+  CREATE TABLE IF NOT EXISTS "Item" (
   itemID SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   description VARCHAR(100),
   CPprice INT NOT NULL,
   categoryID INT,
   arcane BOOLEAN NOT NULL,
-  imagePath VARCHAR(100) NOT NULL,
   FOREIGN KEY (categoryID) REFERENCES "Category"(categoryID) ON UPDATE CASCADE
   );
 
@@ -87,7 +84,7 @@ CREATE TABLE IF NOT EXISTS "Inventory" (
   FOREIGN KEY (itemID) REFERENCES "Item"(itemID) ON UPDATE CASCADE ON DELETE CASCADE
   );
 
-
+  
 CREATE TABLE IF NOT EXISTS "RequestStatus" (
   statusID SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL

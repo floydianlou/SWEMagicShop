@@ -13,7 +13,7 @@ public class main extends Application {
         try {
             main.primaryStage = primaryStage;
             SceneController.setPrimaryStage(primaryStage);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/welcome-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/main-view.fxml"));
             Scene scene = new Scene(loader.load());
             primaryStage.setScene(scene);
             primaryStage.setTitle("Otari's Magic Shop");

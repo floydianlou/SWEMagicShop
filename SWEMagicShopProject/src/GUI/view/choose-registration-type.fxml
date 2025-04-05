@@ -5,53 +5,45 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.StackPane?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="GUI.controller.ChooseRegistrationTypeController"
+      alignment="CENTER" spacing="20"
+      stylesheets="@../styles/styles.css">
 
-<?import javafx.scene.shape.Rectangle?>
-<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="GUI.controller.ChooseRegistrationTypeController"
-           stylesheets="@../styles/styles.css">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
 
-    <VBox alignment="CENTER" spacing="20"
-          style="-fx-padding: 30;">
+    <!-- Titolo -->
+    <HBox alignment="CENTER" spacing="10">
+        <ImageView fx:id="shopIcon" fitHeight="50" fitWidth="50"/>
+        <Label text="Welcome to Otari's Magic Shop!"
+               styleClass="main-title"/>
+    </HBox>
 
-        <HBox alignment="CENTER" spacing="10">
-            <ImageView fx:id="shopIcon" fitHeight="50" fitWidth="50"/>
-            <Label text="Welcome to Otari's Magic Shop!"
-                   styleClass="main-title"/>
-        </HBox>
+    <!-- Sottotitolo -->
+    <Label text="CHOOSE REGISTRATION TYPE"
+           styleClass="subtitle-label"/>
 
-        <HBox alignment="CENTER" spacing="10">
-            <Rectangle width="150" height="3" styleClass="divider"/>
-            <Label text="✦" styleClass="divider-star"/>
-            <Rectangle width="150" height="3" styleClass="divider"/>
-        </HBox>
+    <Region prefHeight="20"/>
 
-        <Label text="REGISTRATION" styleClass="subtitle-label"/>
 
-        <Label text="Please select which kind of account you would like to create."
-               wrapText="true" maxWidth="500"
-               alignment="CENTER"
-               styleClass="instructions-label"/>
+    <HBox alignment="CENTER" spacing="30">
+        <Button text="CLIENT"
+                onAction="#handleClientRegistration"
+                styleClass="choice-button"
+                prefWidth="150" prefHeight="60"/>
+        <Button text="MANAGER"
+                onAction="#handleManagerRegistration"
+                styleClass="choice-button"
+                prefWidth="150" prefHeight="60"/>
+    </HBox>
 
-        <HBox alignment="CENTER" spacing="30">
-            <Button text="CUSTOMER"
-                    onAction="#handleClientRegistration"
-                    styleClass="choice-button"
-                    prefWidth="160" prefHeight="60"/>
-            <Button text="MANAGER"
-                    onAction="#handleManagerRegistration"
-                    styleClass="choice-button"
-                    prefWidth="160" prefHeight="60"/>
-        </HBox>
+    <Region prefHeight="30"/>
 
-        <Region prefHeight="40"/>
-
-        <Button text="Back to Welcome Menu"
-                onAction="#handleBack"
-                styleClass="back-button"
-                prefHeight="40"/>
-    </VBox>
-
-</StackPane>
+    <Button text="Back to Welcome Menu"
+            onAction="#handleBackToMenu"
+            styleClass="back-button"
+    />
+</VBox>

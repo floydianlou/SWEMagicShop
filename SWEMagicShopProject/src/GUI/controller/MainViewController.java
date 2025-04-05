@@ -22,7 +22,7 @@ public class MainViewController {
     public HBox toolBar;
     public Label shoplabel;
     @FXML
-    private AnchorPane contentArea;
+    protected AnchorPane contentArea;
     @FXML
     private ImageView shopIcon;
     @FXML
@@ -109,7 +109,7 @@ public class MainViewController {
                     handleLogout();
                 });
 
-                toolBar.getChildren().addAll(createWelcomeLabel(), accountButton, logoutButton);
+                toolBar.getChildren().addAll(createWelcomeLabel(), accountButton, logoutButton);//TODO change this
             }
 
             case "cart" -> {
@@ -178,6 +178,8 @@ public class MainViewController {
 
                 toolBar.getChildren().addAll(backButton, logoutButton);
             }
+
+            //TODO
 
         }
         updateCartIcon();
