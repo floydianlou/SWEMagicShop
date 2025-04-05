@@ -57,12 +57,9 @@ public class LoginController {
             Person loggedUser = accountManager.login(email, password);
             LoggedUserManager.getInstance().setLoggedUser(loggedUser);
             if (loggedUser != null) {
-                if (loggedUser instanceof Manager) {
-                    SceneController.loadScene("manager-shop-view.fxml"); //TODO
-                } else if (loggedUser instanceof Customer) {
-                    CartManager.init((Customer) loggedUser);
+                if (loggedUser instanceof Customer) {
+                    CartManager.init((Customer) loggedUser); }
                     SceneController.loadScene("main-view.fxml");
-                }
             } else {
                 errorLabel.setText("Email or password doesn't match!");
             }

@@ -35,9 +35,18 @@ public class MainViewController {
     @FXML
     public void initialize() {
         shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm()));
-        loadContent("customer-shop-view.fxml");
-        updateTopBar("customer");
 
+        Person loggedUser = LoggedUserManager.getInstance().getLoggedUser();
+
+        if (loggedUser != null) {
+            if (loggedUser instanceof Customer) {
+                loadContent("customer-shop-view.fxml");
+                updateTopBar("customer");
+            } else {
+                loadContent("manager-shop-view.fxml");
+                updateTopBar("manager");
+            }
+        }
     }
 
     // TODO when all pages are connected, better make this function work without all these ifs
@@ -99,9 +108,9 @@ public class MainViewController {
                 toolBar.getChildren().addAll(createWelcomeLabel(), cartButton, accountButton, logoutButton);
             }
 
-            case "manager" -> { // TODO
+            case "manager" -> {
                 Button accountButton = createButton("/images/accountIcon.png", "Account", _ -> {
-                    loadContent("manager-account-view.fxml"); // TODO
+                    loadContent("manager-account-view.fxml");
                     updateTopBar("account");
                 });
 
@@ -180,7 +189,8 @@ public class MainViewController {
             }
 
         }
-        updateCartIcon();
+        if (LoggedUserManager.getInstance().getLoggedUser() instanceof Customer) {
+            updateCartIcon(); }
     }
 
     // to add red dot on cart icon
