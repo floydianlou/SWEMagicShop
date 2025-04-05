@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.image.ImageView?>
 
 <VBox xmlns="http://javafx.com/javafx/8.0.171"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="GUI.controller.CustomerShopViewController"
-      stylesheets="@../styles/styles.css"
+      stylesheets="@../styles/styles.css, @../styles/cart-styles.css"
       spacing="10" prefHeight="Infinity" prefWidth="Infinity">
 
 
     <HBox spacing="5" alignment="CENTER_LEFT" style="-fx-background-color: #460E56; -fx-padding: 10;">
         <ComboBox fx:id="filterDropDown" promptText="Filter" styleClass="transparent-combobox"/>
-        <HBox styleClass="search-bar">
+        <HBox styleClass="search-bar" prefWidth="500">
             <Button style="-fx-background-color: transparent;" onAction="#handleSearch">
                 <graphic>
                     <ImageView fx:id="searchIcon" fitHeight="27" fitWidth="27"/>
                 </graphic>
             </Button>
-            <TextField fx:id="searchBar" promptText="Search products..." styleClass="search-bar-input"/>
+            <TextField fx:id="searchBar" promptText="Search products..." prefWidth="500" styleClass="search-bar-input"/>
         </HBox>
-        <ComboBox fx:id="filterCategory" promptText="Category" visible="false" styleClass="transparent-combobox"/>
-        <ComboBox fx:id="filterArcane" promptText="Arcane" visible="false" styleClass="transparent-combobox"/>
-        <TextField fx:id="minpriceGP" promptText="Min GP" visible="false" maxWidth="100" styleClass="input-field-2"/>
-        <TextField fx:id="maxpriceGP" promptText="Max GP" visible="false" maxWidth="100" styleClass="input-field-2"/>
-        <Region HBox.hgrow="ALWAYS"/>
+        <StackPane>
+            <ComboBox fx:id="filterCategory" promptText="Category" visible="false" styleClass="transparent-combobox"/>
+            <ComboBox fx:id="filterArcane" promptText="Arcane" visible="false" styleClass="transparent-combobox"/>
+            <VBox spacing="8">
+                <TextField fx:id="minpriceGP" promptText="Min GP" visible="false" maxWidth="100" styleClass="input-field-2"/>
+                <TextField fx:id="maxpriceGP" promptText="Max GP" visible="false" maxWidth="100" styleClass="input-field-2"/>
+            </VBox>
+        </StackPane>
     </HBox>
 
     <HBox alignment="BOTTOM_CENTER">

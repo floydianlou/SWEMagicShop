@@ -25,12 +25,11 @@ public class InventoryDAO {
         }
     }
 
-    public ArrayList<Item> getInventory(int customerID) {
-        //TODO to be modified it misses join with category name and other things
+    public ArrayList<Item> getInventory(int customerID) throws RuntimeException {
         ArrayList<Item> items = new ArrayList<>();
-        String query = "SELECT i.itemID, i.name, i.description, i.categoryid, inv.quantity, i.arcane, i.cpprice " +
+        String query = "SELECT i.itemID, i.name, i.description, c.name as categoryName, i.arcane, i.cpprice, i.imagepath, inv.quantity " +
                 "FROM \"Inventory\" inv " +
-                "JOIN \"Item\" i ON inv.itemID = i.itemID " +
+                "JOIN \"Item\" i ON inv.itemID = i.itemID JOIN \"Category\" c ON i.categoryid = c.categoryid " +
                 "WHERE inv.customerID = ?;";
 
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
@@ -42,18 +41,20 @@ public class InventoryDAO {
                 int itemID = rs.getInt("itemID");
                 String name = rs.getString("name");
                 String description = rs.getString("description");
-                String category = rs.getString("categoryid");
-                int quantity = rs.getInt("quantity");
+                String category = rs.getString("categoryName");
                 boolean isArcane = rs.getBoolean("arcane");
                 int copperValue = rs.getInt("cpprice");
+                int quantity = rs.getInt("quantity");
+                String imagePath = rs.getString("imagepath");
 
-                items.add(new Item(itemID, name, description, category, quantity, isArcane, copperValue));
+                items.add(new Item(itemID, name, description, category, quantity, isArcane, copperValue, imagePath));
             }
-
         } catch (SQLException e) {
             System.out.println("Error loading inventory: " + e.getMessage());
+            if (e.getMessage().contains("failed to connect")) {
+                throw new RuntimeException("Database is offline, please try again later.");
+            }
         }
-
         return items;
     }
 
@@ -109,10 +110,10 @@ public class InventoryDAO {
     public String categoryMostSold() {
         String query = "SELECT c.name AS category " +
                 "FROM \"Inventory\" ivt JOIN \"Item\" i ON ivt.itemID = i.itemID " +
-            "JOIN \"Category\" c ON i.categoryID = c.categoryID " +
-            "GROUP BY c.name " +
-            "ORDER BY SUM(ivt.quantity) DESC " +
-            "LIMIT 1";
+                "JOIN \"Category\" c ON i.categoryID = c.categoryID " +
+                "GROUP BY c.name " +
+                "ORDER BY SUM(ivt.quantity) DESC " +
+                "LIMIT 1";
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet set = stmt.executeQuery()) {
@@ -263,11 +264,11 @@ public class InventoryDAO {
     public Customer biggestSpender() {
         String query = "SELECT c.customerID, c.name, c.surname, c.email, SUM(i.quantity * it.CPprice) AS total_spent " +
                 "FROM \"Inventory\" i " +
-            "JOIN \"Item\" it ON i.itemID = it.itemID " +
-            "JOIN \"Customer\" c ON i.customerID = c.customerID " +
-            "GROUP BY c.customerID, c.name, c.surname, c.email " +
-            "ORDER BY total_spent DESC " +
-            "LIMIT 1";
+                "JOIN \"Item\" it ON i.itemID = it.itemID " +
+                "JOIN \"Customer\" c ON i.customerID = c.customerID " +
+                "GROUP BY c.customerID, c.name, c.surname, c.email " +
+                "ORDER BY total_spent DESC " +
+                "LIMIT 1";
 
         try(PreparedStatement stmt = connection.prepareStatement(query)){
             try(ResultSet set = stmt.executeQuery()){

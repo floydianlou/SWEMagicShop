@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="GUI.controller.WalletController"
+            stylesheets="@../styles/styles.css, @../styles/cart-styles.css">
+
+    <VBox spacing="20" alignment="CENTER">
+        <padding>
+            <Insets top="10"/>
+        </padding>
+        <VBox spacing="20" alignment="TOP_CENTER">
+            <HBox spacing="15" alignment="CENTER">
+                <ImageView fx:id="coinIcon1"
+                           fitHeight="50" fitWidth="50"
+                           preserveRatio="true"
+                           pickOnBounds="true"/>
+
+                <Label text="Wallet" styleClass="cart-title"/>
+
+                <ImageView fx:id="coinIcon2"
+                           fitHeight="50" fitWidth="50"
+                           preserveRatio="true"
+                           pickOnBounds="true"/>
+            </HBox>
+
+            <Label text="You can recharge your wallet with GP, SP, and CP. You can also check your current balance." styleClass="instructions-label"/>
+
+            <Label text="Your current balance:" styleClass="account-title-lable"/>
+
+            <HBox styleClass="balance-rettangle" spacing="20" alignment="CENTER">
+                <Label text="GP:" styleClass="main-title" maxWidth="100"/>
+                <Label fx:id="GPwallet" styleClass="main-title"/>
+                <Label text="SP:" styleClass="main-title" maxWidth="100"/>
+                <Label fx:id="SPwallet" styleClass="main-title"/>
+                <Label text="CP:" styleClass="main-title" maxWidth="100"/>
+                <Label fx:id="CPwallet" styleClass="main-title"/>
+            </HBox>
+
+        </VBox>
+
+        <HBox alignment="CENTER" spacing="10">
+            <Rectangle width="500" height="3"
+                       styleClass="divider"/>
+
+            <Label text="✦"
+                   styleClass="divider-star"/>
+
+            <Rectangle width="500" height="3"
+                       styleClass="divider"/>
+        </HBox>
+
+        <VBox alignment="CENTER">
+            <HBox alignment="CENTER" spacing="60">
+                <VBox spacing="20">
+                    <Label text="Charge your wallet:" styleClass="account-title-lable"/>
+                    <VBox styleClass="cart-box" spacing="10">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        <HBox spacing="100" alignment="CENTER">
+                            <Label text="GP" styleClass="main-title" style="-fx-font-size: 20px;"/>
+                            <TextField fx:id="GPwalletInput" promptText="Input GP here..." styleClass="input-field" editable="false"/>
+                        </HBox>
+
+                        <Rectangle width="300" height="3"
+                                   styleClass="divider"/>
+
+                        <HBox spacing="100" alignment="CENTER">
+                            <Label text="SP" styleClass="main-title" style="-fx-font-size: 20px;"/>
+                            <TextField fx:id="SPwalletInput" promptText="Input SP here..." styleClass="input-field" editable="false"/>
+                        </HBox>
+
+                        <Rectangle width="300" height="3"
+                                   styleClass="divider"/>
+
+                        <HBox spacing="100" alignment="CENTER">
+                            <Label text="CP" styleClass="main-title" style="-fx-font-size: 20px;"/>
+                            <TextField fx:id="CPwalletInput" promptText="Input CP here..." styleClass="input-field" editable="false"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <Region maxWidth="60"/>
+
+                <VBox spacing="20" alignment="CENTER_RIGHT">
+                    <StackPane>
+                        <Button fx:id="topUpButton" text="TOP UP" styleClass="choice-button" onAction="#topUpWallet"/>
+                        <Button fx:id="rechargeButton" text="RECHARGE" styleClass="choice-button" onAction="#rechargeWallet" visible="false"/>
+                    </StackPane>
+                    <Label fx:id="errorLabel" styleClass="error-label" visible="false"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </VBox>
+</StackPane>

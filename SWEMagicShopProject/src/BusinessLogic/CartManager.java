@@ -2,7 +2,6 @@ package BusinessLogic;
 
 import DomainModel.Customer;
 import DomainModel.Item;
-import Exceptions.OrderExceptions;
 import Exceptions.OrderExceptions.ItemNotInCartException;
 import java.io.File;
 import java.io.FileReader;
@@ -26,8 +25,7 @@ public class CartManager {
     }
 
     public static void init(Customer customer) {
-        if (instance == null)
-            instance = new CartManager(customer);
+      instance = new CartManager(customer);
     }
 
     public static CartManager getInstance() {
@@ -70,6 +68,7 @@ public class CartManager {
                 }
             }
         }
+        cartItems.clear();
     }
 
     public ArrayList<Item> getCartItems() {

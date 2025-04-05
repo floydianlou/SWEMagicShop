@@ -1,14 +1,12 @@
 package GUI.controller;
+
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-// TODO complete with register page actions
-
 public class WelcomeViewController {
 
-    @FXML
-    private ImageView iconImageView;
+    @FXML private ImageView iconImageView;
 
     @FXML
     public void initialize() {

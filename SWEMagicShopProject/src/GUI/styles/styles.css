@@ -8,7 +8,7 @@
 .main-title-white {
     -fx-font-size: 60px;
     -fx-font-weight: 900;
-    -fx-font-family: 'Arimo';
+    -fx-font-family: 'Belwe Bd BT';
     -fx-text-fill: white;
 }
 
@@ -40,7 +40,7 @@
     -fx-font-size: 50px;
     -fx-text-fill: #460E56;
     -fx-font-weight: 900;
-    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-font-family: 'Belwe Bd BT';
 }
 
 /* line divider */
@@ -61,6 +61,7 @@
     -fx-font-size: 45px;
     -fx-text-fill: #460E56;
     -fx-font-weight: bold;
+    -fx-font-family: 'Compacta Black', sans-serif;
 }
 
 /* to give instructions */
@@ -68,7 +69,6 @@
     -fx-text-fill: #460E56;
     -fx-font-size: 16px;
     -fx-font-weight: 900;
-    -fx-font-family: 'Arimo', Arial, sans-serif;
 }
 
 /* for back to home buttons */
@@ -109,7 +109,7 @@
     -fx-text-fill: white;
     -fx-font-weight: 900;
     -fx-padding: 12px 20px;
-    -fx-min-width: 150px;
+    -fx-min-width: 160px;
     -fx-min-height: 45px;
     -fx-cursor: hand;
 }
@@ -161,6 +161,8 @@
     -fx-max-width: 260px;
 }
 
+/* END REGISTRATION CONTAINERS AND FIELDS */
+
 /* ITEMS SCROLL PANE */
 
 .scroll-pane {
@@ -181,7 +183,7 @@
 }
 
 .search-bar {
-    -fx-max-width: 300px;
+    -fx-max-width: 500px;
     -fx-background-color: transparent;
     -fx-background-radius: 10px;
     -fx-border-radius: 10;
@@ -207,6 +209,8 @@
     -fx-effect: dropshadow(gaussian, gray, 8, 0.2, 0, 2);
 }
 
+/* END ITEMS SCROLL PANE */
+
 /* TOOLBAR ITEMS, BUTTONS, TEXT */
 
 .tool-bar {
@@ -219,7 +223,7 @@
     -fx-text-fill: #F6E9FF;
     -fx-font-size: 22px;
     -fx-font-weight: 900;
-    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-font-family: 'Belwe Bd BT';
 }
 
 .welcome-label {
@@ -338,34 +342,6 @@
     -fx-text-fill: #460E56;
 }
 
-/* CART PAGE STYLES */
-
-.cart-text {
-    -fx-font-weight: 900;
-    -fx-font-family: 'Arimo', Arial, sans-serif;
-    -fx-text-fill: #460E56;
-    -fx-font-size: 25px;
-    -fx-padding: 20 0 0 0;
-}
-
-.cart-box {
-    -fx-background-color: #D9C3E7;
-    -fx-border-width: 1px;
-    -fx-border-color: #6C3483;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-}
-
-.cart-item-box {
-    -fx-background-color: transparent;
-    -fx-border-color: #D9C3E7;
-    -fx-border-width: 1px;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-}
-
-/* END CART PAGE STYLES */
-
 /* PRODUCT VIEW STYLES */
 
 .add-to-cart-button {
@@ -385,13 +361,70 @@
     -fx-background-color: transparent;
     -fx-text-fill: #6C3483;
     -fx-font-size: 30px;
-    -fx-font-weight: 100;
-    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-font-weight: 900;
+    -fx-font-family: 'Belwe Bd BT';
 }
 
 .product-name:hover {
     -fx-text-fill:#25072D;
+    -fx-cursor: hand;
 }
 
 /* END PRODUCT VIEW STYLES */
 
+/* ACCOUNT VIEW STYLES */
+.account-title-lable {
+    -fx-text-fill: #460E56;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+}
+
+.small-text{
+    -fx-text-fill: #696969;
+    -fx-font-size: 12px;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+}
+
+.confirm-button {
+    -fx-background-color: #4CAF50; /* Verde */
+    -fx-text-fill: white; /* Testo bianco */
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.confirm-button:hover {
+    -fx-background-color: #45a049; /* Verde scuro */
+}
+
+.cancel-button {
+    -fx-background-color: #f44336; /* Rosso */
+    -fx-text-fill: white; /* Testo bianco */
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #d32f2f; /* Rosso scuro */
+}
+
+/* END ACCOUNT VIEW STYLES */
+
+/* WALLET VIEW STYLES */
+.balance-rettangle {
+    -fx-background-color: transparent;
+    -fx-background-radius: 20;
+    -fx-padding: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #460E56;
+    -fx-border-width: 2px;
+    -fx-max-width: 700px;
+    -fx-pref-width: 700px;
+    -fx-alignment: center;
+}
+
+/* END WALLET VIEW STYLES */

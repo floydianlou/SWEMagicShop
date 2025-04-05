@@ -7,14 +7,12 @@ import DomainModel.Item;
 import BusinessLogic.Utilities;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 import java.util.ArrayList;
 
 public class CustomerShopViewController {
@@ -92,6 +90,7 @@ public class CustomerShopViewController {
                 minpriceGP.setVisible(false);
                 maxpriceGP.setVisible(false);
                 filterCategory.setVisible(true);
+                filterCategory.toFront();
                 filterArcane.setVisible(false);
                 break;
             case "Name":
@@ -125,6 +124,7 @@ public class CustomerShopViewController {
                 maxpriceGP.setVisible(false);
                 filterCategory.setVisible(false);
                 filterArcane.setVisible(true);
+                filterArcane.toFront();
                 break;
             case "All":
                 searchBar.setPromptText("All products...");
@@ -140,7 +140,11 @@ public class CustomerShopViewController {
 
     private void loadProducts() {
         try{
-            allProducts = storeManager.listProducts();
+            if(loggedCustomer.isArcaneMember()){
+                allProducts = storeManager.listProducts();
+            }else{
+                allProducts = storeManager.searchProductsByArcane("false");
+            }
         } catch (RuntimeException e) {
             errorLabel.setText(e.getMessage());
         }
@@ -162,7 +166,11 @@ public class CustomerShopViewController {
                         errorLabel.setText("Please select a category.");
                         return;
                     }
-                    allProductsSearched = storeManager.searchProductsByCategory(filterCategory.getValue());
+                    if(loggedCustomer.isArcaneMember()){
+                        allProductsSearched = storeManager.searchProductsByCategory(filterCategory.getValue());
+                    }else{
+                        allProductsSearched = storeManager.searchProductsByCategoryNonArcane(filterCategory.getValue());
+                    }
                     break;
                 case "Name":
                     String name = searchBar.getText();
@@ -171,7 +179,11 @@ public class CustomerShopViewController {
                         return;
                     }
                     try{
-                        allProductsSearched = storeManager.searchProducsByName(searchBar.getText().trim());
+                        if(loggedCustomer.isArcaneMember()){
+                            allProductsSearched = storeManager.searchProductsByName(searchBar.getText().trim());
+                        } else{
+                            allProductsSearched = storeManager.searchProductsByNameNonArcane(searchBar.getText().trim());
+                        }
                     }catch (RuntimeException e) {
                         errorLabel.setText(e.getMessage());
                     }
@@ -183,7 +195,11 @@ public class CustomerShopViewController {
                         return;
                     }
                     try{
-                        allProductsSearched = storeManager.searchProductsByDescription(searchBar.getText().trim());
+                        if(loggedCustomer.isArcaneMember()){
+                            allProductsSearched = storeManager.searchProductsByDescription(searchBar.getText().trim());
+                        } else{
+                            allProductsSearched = storeManager.searchProductsByDescriptionNonArcane(searchBar.getText().trim());
+                        }
                     }catch (RuntimeException e) {
                         errorLabel.setText(e.getMessage());
                     }
@@ -206,7 +222,11 @@ public class CustomerShopViewController {
                         return;
                     }
                     try{
-                        allProductsSearched = storeManager.searchProductsByPrice(minPriceValue, maxPriceValue);
+                        if(loggedCustomer.isArcaneMember()){
+                            allProductsSearched = storeManager.searchProductsByPrice(minPriceValue, maxPriceValue);
+                        } else{
+                            allProductsSearched = storeManager.searchProductsByPriceNonArcane(minPriceValue, maxPriceValue);
+                        }
                     }catch (IllegalArgumentException e){
                         errorLabel.setText(e.getMessage());
                         return;
@@ -220,12 +240,23 @@ public class CustomerShopViewController {
                         errorLabel.setText("Please select an arcane.");
                         return;
                     }
-                    allProductsSearched = storeManager.searchProductsByArcane(filterArcane.getValue().trim());
+                    if(loggedCustomer.isArcaneMember()){
+                        allProductsSearched = storeManager.searchProductsByArcane(filterArcane.getValue().trim());
+                    }else if(filterArcane.getValue().equals("true")){
+                        errorLabel.setText("Arcane Items cannot be seen by a non-Arcane member.");
+                        return;
+                    }else{
+                        allProductsSearched = storeManager.searchProductsByArcane("false");
+                    }
                     break;
                 case "All":
                     try{
-                        allProductsSearched = storeManager.listProducts();
-                    }catch (RuntimeException e) {
+                        if(loggedCustomer.isArcaneMember()) {
+                            allProductsSearched = storeManager.listProducts();
+                        } else {
+                            allProductsSearched = storeManager.searchProductsByArcane("false");
+                        }
+                    } catch (RuntimeException e) {
                         errorLabel.setText(e.getMessage());
                     }
                     break;
@@ -271,8 +302,19 @@ public class CustomerShopViewController {
             Button addToCartButton = new Button("Add to Cart");
             addToCartButton.getStyleClass().add("add-to-cart-button");
             addToCartButton.setOnMouseClicked(_ -> {
-                product.setItemQuantity(1);
-                CartManager.getInstance().addItemToCart(product);});
+                //TODO: temporary fix for mistaken quantity when added to cart
+                Item itemToAdd = new Item(
+                        product.getItemID(),
+                        product.getItemName(),
+                        product.getItemDescription(),
+                        product.getItemCategory(),
+                        1,
+                        product.isArcane(),
+                        product.getCopperValue(),
+                        product.getImagePath()
+                );
+                CartManager.getInstance().addItemToCart(itemToAdd);
+                mainViewController.updateCartIcon();});
 
             HBox buttonContainer = new HBox(addToCartButton);
             buttonContainer.setAlignment(Pos.BOTTOM_RIGHT);
@@ -291,7 +333,6 @@ public class CustomerShopViewController {
 
     @FXML
     private void viewProductButton(Item selectedProduct) {
-        selectedProduct.setItemQuantity(1);
         ItemViewManager.getInstance().setProductSelected(selectedProduct);
         mainViewController.loadContent("product-view.fxml");
         mainViewController.updateTopBar("product");

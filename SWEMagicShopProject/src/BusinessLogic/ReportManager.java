@@ -12,20 +12,12 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
 public class ReportManager {
-    InventoryDAO inventoryDAO;
 
-    public ReportManager(InventoryDAO inventoryDAO) {
-        this.inventoryDAO = inventoryDAO;
-    }
-
-    public ReportManager() {
-        //FOR TESTING
-    }
+    public ReportManager() {}
 
     public String hotCategory(){
         InventoryDAO inventoryDAO = new InventoryDAO();

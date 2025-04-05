@@ -20,8 +20,12 @@ public class LoginController {
     @FXML private ImageView emailIcon;
     @FXML private ImageView passwordIcon;
     @FXML private PasswordField passwordField;
+    @FXML private Label password;
     @FXML private Label errorLabel;
     @FXML private ImageView shopIcon;
+    @FXML private ImageView eyeIcon;
+    @FXML private Image openEyeIcon;
+    @FXML private Image closedEyeIcon;
     private AccountManager accountManager = new AccountManager();
 
     @FXML
@@ -29,6 +33,9 @@ public class LoginController {
         shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm()));
         emailIcon.setImage(new Image(getClass().getResource("/images/emailIcon.png").toExternalForm()));
         passwordIcon.setImage(new Image(getClass().getResource("/images/passwordIcon.png").toExternalForm()));
+        openEyeIcon = new Image(getClass().getResource("/images/openEyeIcon.png").toExternalForm());
+        closedEyeIcon = new Image(getClass().getResource("/images/closedEyeIcon.png").toExternalForm());
+        eyeIcon.setImage(closedEyeIcon);
     }
 
     @FXML
@@ -68,7 +75,22 @@ public class LoginController {
     }
 
     @FXML
+    private void togglePassword(){
+        if (passwordField.isVisible()) {
+            password.setText(passwordField.getText());
+            password.setVisible(true);
+            passwordField.setVisible(false);
+            eyeIcon.setImage(openEyeIcon);
+        } else {
+            passwordField.setText(password.getText());
+            passwordField.setVisible(true);
+            password.setVisible(false);
+            eyeIcon.setImage(closedEyeIcon);
+        }
+    }
+
+    @FXML
     private void handleBack() {
         SceneController.loadScene("welcome-view.fxml");
-    }
+}
 }

@@ -233,13 +233,7 @@ public class accountDAOTestSuite {
                 existingCustomer.getOwnWallet(), existingCustomer.getOwnSpecies()
         );
 
-        boolean success = accountManager.updateCustomerAccount(updatedCustomer);
-        if (success) {
-            System.out.println("✅ Profilo aggiornato con successo!");
-            return accountManager.getCustomerByID(updatedCustomer.getPersonID());
-        } else {
-            System.out.println("❌ Errore durante l'aggiornamento del profilo.");
-        }
+        accountManager.updateCustomerAccount(updatedCustomer);
         return existingCustomer;
     }
 

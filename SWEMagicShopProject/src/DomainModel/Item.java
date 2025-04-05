@@ -12,6 +12,18 @@ public class Item {
     private String imagePath;
 
     // contructor with attribute quantity for classes Cart and Inventory
+    public Item(int itemID, String itemName, String itemDescription, String itemCategory, int itemQuantity, boolean isArcane, int copperValue, String imagePath) {
+        this.itemID = itemID;
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
+        this.itemCategory = itemCategory;
+        this.itemQuantity = itemQuantity;
+        this.isArcane = isArcane;
+        this.copperValue = copperValue;
+        this.imagePath = imagePath;
+    }
+
+    // constructor without image path
     public Item(int itemID, String itemName, String itemDescription, String itemCategory, int itemQuantity, boolean isArcane, int copperValue) {
         this.itemID = itemID;
         this.itemName = itemName;
@@ -22,7 +34,7 @@ public class Item {
         this.copperValue = copperValue;
     }
 
-    // contructor without attribute quantity for DAO
+    // contructor without attribute quantity
     public Item(int itemID, String itemName, String itemDescription, String itemCategory, boolean isArcane, int CPprice, String imagePath) {
         this.itemID = itemID;
         this.itemName = itemName;

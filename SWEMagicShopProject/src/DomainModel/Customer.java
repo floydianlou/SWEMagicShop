@@ -20,8 +20,14 @@ public class Customer extends Person {
         this.ownSpecies = ownSpecies;
     }
 
+
+
     public Customer(int id, String name, String surname, String email) {
         super(id, name, surname, email);
+    }
+
+    public Customer(int personID) {
+        super(personID);
     }
 
 

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
-
 <?import javafx.scene.image.ImageView?>
+
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="GUI.controller.LoginController"
             stylesheets="@../styles/styles.css">
@@ -64,8 +63,17 @@
 
                 <Region prefWidth="5"/>
                 <ImageView fx:id="passwordIcon" fitHeight="27" fitWidth="27"/>
-                <PasswordField fx:id="passwordField" promptText="Password"
-                               maxWidth="260" styleClass="input-field"/>
+                <StackPane>
+                    <PasswordField fx:id="passwordField" promptText="Password"
+                                   maxWidth="260" styleClass="input-field"/>
+                    <Label fx:id="password" maxWidth="260" styleClass="input-field" visible="false"/>
+                </StackPane>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button style="-fx-background-color: transparent" onAction="#togglePassword" >
+                    <graphic>
+                        <ImageView fx:id="eyeIcon" fitHeight="20" fitWidth="20"/>
+                    </graphic>
+                </Button>
             </HBox>
 
             <Button text="Login" onAction="#handleLogin"

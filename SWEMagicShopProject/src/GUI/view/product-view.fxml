@@ -3,31 +3,36 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.geometry.Pos?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171"
+<StackPane xmlns="http://javafx.com/javafx/8.0.171"
             xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@../styles/styles.css"
+            stylesheets="@../styles/styles.css, @../styles/cart-styles.css"
             fx:controller="GUI.controller.ProductViewController">
 
-    <center>
-        <HBox spacing="20" alignment="CENTER">
+    <VBox alignment="CENTER">
+        <padding>
+            <Insets top="50" right="50" bottom="50" left="50"/>
+        </padding>
+        <HBox fx:id="itemBox">
             <VBox spacing="10" alignment="CENTER_LEFT" >
-                <Label fx:id="productName"/>
-                <Label fx:id="productDescription" maxWidth="1000" wrapText="true"/>
-                <Label fx:id="productCategory"/>
-                <Label fx:id="productArcane"/>
-                <Label fx:id="productPrice"/>
+                <Label fx:id="productName" style="-fx-font-size: 40px;"/>
+                <Label text="Description:" styleClass="order-writing" style="-fx-font-size: 20px;"/>
+                <Label fx:id="productDescription" style="-fx-font-size: 16px;"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label fx:id="productCategory" style="-fx-font-size: 20px;"/>
+                    <HBox fx:id="arcaneBox"/>
+                </HBox>
+                <Label fx:id="productPrice" style="-fx-font-size: 20px;"/>
                 <Button text="Add to Cart" fx:id="addToCartButton" styleClass="add-to-cart-button"/>
             </VBox>
 
-            <Region prefHeight="800"/>
+            <Region prefWidth="250"/>
 
             <VBox alignment="CENTER_RIGHT">
-                <ImageView fx:id="productImage" fitWidth="400" fitHeight="400"/>
+                <ImageView fx:id="productImage"/>
             </VBox>
         </HBox>
-    </center>
+    </VBox>
 
-</BorderPane>
+</StackPane>
