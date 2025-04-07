@@ -17,6 +17,5 @@
 
     <HBox spacing="10">
         <Button text="Save" onAction="#handleSave" styleClass="choice-button"/>
-        <Button text="Cancel" onAction="#handleCancel" styleClass="choice-button"/>
     </HBox>
 </VBox>

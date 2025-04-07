@@ -33,7 +33,7 @@ public class ManagerShopController {
     private ArrayList<Item> allProducts;
 
     private StoreManager storeManager;
-    private ManagerMainViewController mainViewController;
+    private MainViewController mainViewController;
 
     public ManagerShopController() {
         storeManager = new StoreManager();
@@ -240,10 +240,10 @@ public class ManagerShopController {
     private void editProductButton(Item selectedProduct) {
         ItemViewManager.getInstance().setProductSelected(selectedProduct);
         mainViewController.loadContent("item-edit-view.fxml");
-        mainViewController.updateTopBar("product");
+        mainViewController.updateTopBar("managerProduct");
     }
 
-    public void setMainViewController(ManagerMainViewController mainViewController) {
+    public void setMainViewController(MainViewController mainViewController) {
         this.mainViewController = mainViewController;
     }
 }

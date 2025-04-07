@@ -1,5 +1,7 @@
+import BusinessLogic.CartManager;
 import GUI.controller.SceneController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,6 +22,16 @@ public class main extends Application {
             primaryStage.setMaximized(true);
             primaryStage.setWidth(1200);
             primaryStage.setHeight(800);
+
+            // cart thread for autosave closure
+            primaryStage.setOnCloseRequest(event -> {
+                if (CartManager.getInstance() != null) {
+                    CartManager.getInstance().closeCartSession();
+                }
+                Platform.exit();
+                System.exit(0);
+            });
+
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();

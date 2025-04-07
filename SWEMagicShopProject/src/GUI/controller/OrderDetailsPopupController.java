@@ -57,6 +57,7 @@ public class OrderDetailsPopupController {
             ImageView itemIcon = new ImageView(new Image(getClass().getResource(item.getImagePath()).toExternalForm()));
             itemIcon.setFitWidth(75);
             itemIcon.setFitHeight(100);
+            itemIcon.getStyleClass().add("cart-image");
 
             // order info
             Label name = new Label(item.getItemName());

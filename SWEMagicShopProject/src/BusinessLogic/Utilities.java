@@ -97,46 +97,6 @@ public class Utilities {
         else return 0;
     }
 
-    public static StackPane createRoundedImageBox(String imagePath, double width, double height) {
-        StackPane container = new StackPane();
-        container.setPrefSize(width, height);
-        container.getStyleClass().add("item-image-box");
-
-        Image image = null;
-        try {
-            image = new Image(Utilities.class.getResource(imagePath).toExternalForm());
-        } catch (Exception e) {
-            System.err.println("Errore caricamento immagine: " + e.getMessage());
-        }
-
-        ImageView imageView = new ImageView(image);
-        imageView.setSmooth(true);
-        imageView.setPreserveRatio(false);
-
-        double imageWidth = image.getWidth();
-        double imageHeight = image.getHeight();
-
-        double cropWidth = Math.min(imageWidth, imageHeight * (width / height));
-        double cropHeight = Math.min(imageHeight, imageWidth * (height / width));
-
-        double x = (imageWidth - cropWidth) / 2;
-        double y = (imageHeight - cropHeight) / 2;
-
-        Rectangle2D viewport = new Rectangle2D(x, y, cropWidth, cropHeight);
-        imageView.setViewport(viewport);
-        imageView.setFitWidth(width);
-        imageView.setFitHeight(height);
-
-        container.getChildren().add(imageView);
-
-        Rectangle clip = new Rectangle(width, height);
-        clip.setArcWidth(15);
-        clip.setArcHeight(15);
-        container.setClip(clip);
-
-        return container;
-    }
-
     public static String formatOrderDate(String rawDate) {
         try {
             DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss[.SSSSSS][.SSSSS][.SSSS][.SSS][.SS][.S]");

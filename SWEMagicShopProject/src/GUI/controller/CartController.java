@@ -59,12 +59,17 @@ public class CartController {
 
         public HBox createItemBox(Item cartItem) {
             HBox itemBox = new HBox(20);
-            itemBox.setPadding(new Insets(15));
+            itemBox.setPadding(new Insets(10));
             itemBox.setPrefHeight(100);
             itemBox.getStyleClass().add("cart-item-box");
 
-            // ITEM IMAGE CONTAINER AND LOADING
-            StackPane imageContainer = Utilities.createRoundedImageBox(cartItem.getImagePath(), 60, 80);
+            // image view section
+            ImageView itemIcon = new ImageView(new Image(getClass().getResource(cartItem.getImagePath()).toExternalForm()));
+            itemIcon.setFitWidth(80);
+            itemIcon.setFitHeight(100);
+            itemIcon.getStyleClass().add("cart-image");
+
+            StackPane imageContainer = new StackPane(itemIcon);
 
             Label name = new Label(cartItem.getItemName());
             name.getStyleClass().add("item-name");

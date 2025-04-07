@@ -9,6 +9,7 @@ public class ItemEditController {
     @FXML private TextField itemNameField;
     @FXML private TextField itemPriceField;
     @FXML private Label errorLabel;
+    private MainViewController mainViewController;
 
     @FXML
     public void initialize() {
@@ -23,9 +24,10 @@ public class ItemEditController {
         System.out.println("Saving item: " + itemName + " with price: " + itemPrice);
     }
 
-    @FXML
-    private void handleCancel() {
-        // Navigate back to the manager shop view
-        SceneController.loadScene("manager-shop-view.fxml");
+
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
     }
+
+
 }
