@@ -166,7 +166,7 @@ public class MainViewController {
                 toolBar.getChildren().addAll(createWelcomeLabel(), backButton, cartButton, accountButton, logoutButton);
             }
 
-            case "orderhistory", "wallet", "inventory" -> {
+            case "orderhistory", "wallet", "inventory", "arcane" -> {
                 Button backButton = createButton("/images/accountIcon.png", "Back to Account", _ -> {
                     loadContent("account-view.fxml");
                     updateTopBar("account");
