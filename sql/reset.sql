@@ -86,24 +86,30 @@ CREATE TABLE "Category" (
   description VARCHAR(100)
   );
 
-CREATE TABLE "Inventory" (
-  customerID INT,
-  itemID INT,
-  quantity INT CONSTRAINT positiveInventory CHECK (quantity > 0),
-  PRIMARY KEY (customerID, itemID),
-  FOREIGN KEY (customerID) REFERENCES "Customer"(customerID) ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY (itemID) REFERENCES "Item"(itemID) ON UPDATE CASCADE ON DELETE CASCADE
-  );
+CREATE TABLE "Inventory"
+(
+    customerID INT,
+    itemID     INT,
+    quantity   INT
+        CONSTRAINT positiveInventory CHECK (quantity > 0),
+    PRIMARY KEY (customerID, itemID),
+    FOREIGN KEY (customerID) REFERENCES "Customer" (customerID) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (itemID) REFERENCES "Item" (itemID) ON UPDATE CASCADE ON DELETE CASCADE
+);
 
-CREATE TABLE "ArcaneRequest" (
-  requestID SERIAL PRIMARY KEY,
-  customerID INT,
-  statusID INT DEFAULT 1,
-  FOREIGN KEY (customerID) REFERENCES "Customer"(customerID) ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY (statusID) REFERENCES "RequestStatus"(statusID) ON UPDATE CASCADE
-  );
+CREATE TABLE "ArcaneRequest"
+(
+    requestID   SERIAL PRIMARY KEY,
+    customerID  INT,
 
-CREATE TABLE "RequestStatus" (
-  statusID SERIAL PRIMARY KEY,
-  name VARCHAR(50) NOT NULL
-  );
+    requestDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    statusID    INT       DEFAULT 1,
+    FOREIGN KEY (customerID) REFERENCES "Customer" (customerID) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (statusID) REFERENCES "RequestStatus" (statusID) ON UPDATE CASCADE
+);
+
+CREATE TABLE "RequestStatus"
+(
+    statusID SERIAL PRIMARY KEY,
+    name     VARCHAR(50) NOT NULL
+);

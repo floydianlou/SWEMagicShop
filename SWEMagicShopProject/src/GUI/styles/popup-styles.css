@@ -105,3 +105,12 @@
 .scroll-bar .decrement-button {
     -fx-background-color: transparent;
 }
+
+.info-text {
+    -fx-font-family: "Belwe Bd BT";
+    -fx-font-size: 40;
+    -fx-font-weight: 900;
+    -fx-text-fill: #460E56;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}

@@ -15,11 +15,10 @@
     <Label fx:id="dateLabel" styleClass="order-writing"/>
     <Label fx:id="priceLabel" styleClass="item-price"/>
 
-    <ScrollPane fx:id="itemsScrollPane" fitToWidth="true" prefHeight="650" styleClass="popup-item-box"/>
+    <ScrollPane fx:id="objectsScrollPane" fitToWidth="true" prefHeight="650" styleClass="popup-item-box"/>
 
     <HBox alignment="CENTER">
         <Button fx:id="backButton"
-                text="Back to orders"
                 onAction="#handleClosePopup"
                 styleClass="popup-close-button"/>
     </HBox>

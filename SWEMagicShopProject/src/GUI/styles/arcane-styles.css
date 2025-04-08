@@ -26,7 +26,72 @@
     -fx-spacing: 20;
 }
 
-/* TO BE MODIFIED */
+/* REQUEST FORM STYLES */
+
+.arcane-form-title {
+    -fx-font-size: 25;
+    -fx-font-weight: 900;
+    -fx-text-fill: #460E56;
+    -fx-font-family: "Belwe Bd BT";
+}
+
+.arcane-form-description {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-text-fill: #460E56;
+    -fx-font-family: Arimo, sans-serif;
+    -fx-font-style: italic;
+}
+
+.arcane-button {
+    -fx-font-family: "Arimo", Arial, sans-serif;
+    -fx-background-color: #460E56;
+    -fx-background-radius: 10;
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-min-height: 45px;
+    -fx-font-weight: 900;
+    -fx-cursor: hand;
+}
+
+.arcane-button:hover {
+    -fx-background-color: #320A3E;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.arcane-button:pressed {
+    -fx-background-color: #25072D;
+}
+
+.progress-indicator {
+    -fx-progress-color: #320A3E;
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(gaussian, #ce93d8, 10, 0.5, 0, 0);
+}
+
+.arcane-icon {
+    -fx-effect: dropshadow(gaussian, #b39ddb, 20, 0.5, 0, 0);
+}
+
+.requests-remaining {
+    -fx-font-size: 16;
+    -fx-font-weight: 900;
+    -fx-text-fill: #460E56;
+    -fx-font-family: Arimo, sans-serif;
+}
+
+.requests-remaining-one {
+    -fx-font-size: 16;
+    -fx-font-weight: 900;
+    -fx-text-fill: #8B1E3F;
+    -fx-font-family: Arimo, sans-serif;
+}
+
+/* END REQUEST FORM STYLES */
+
+/* FAQ SECTION */
 
 .faq-scroll {
     -fx-background-color: transparent;
@@ -60,8 +125,10 @@
 
 .faq-answer-label {
     -fx-wrap-text: true;
-    -fx-text-fill: #4a148c;
+    -fx-text-fill: #460E56;
     -fx-font-size: 17px;
     -fx-font-weight: bold;
     -fx-font-family: Arimo, sans-serif;
 }
+
+/* END FAQ SECTION */
