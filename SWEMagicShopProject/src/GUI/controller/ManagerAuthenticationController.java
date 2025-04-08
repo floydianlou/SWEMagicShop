@@ -45,8 +45,8 @@ public class ManagerAuthenticationController {
             ex.printStackTrace();
         }
     }
-        @FXML
-        private void handleBack () {
-            SceneController.loadScene("choose-registration-type.fxml");
-        }
+    @FXML
+    private void handleBack () {
+        SceneController.loadScene("choose-registration-type.fxml");
+    }
 }

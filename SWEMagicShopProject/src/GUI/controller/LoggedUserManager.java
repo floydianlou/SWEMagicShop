@@ -28,6 +28,6 @@ public class LoggedUserManager {
 
     // called when logging out and going back to welcome view
     public void clearSession() {
-        loggedUser = null;
-    }
+        loggedUser=null;
+}
 }

@@ -203,7 +203,6 @@ public class AccountViewController {
         mainViewController.updateTopBar("orderhistory");
     }
 
-    // TODO add MainViewController
     @FXML
     private void goToWallet(){
         mainViewController.loadContent("wallet-view.fxml");
@@ -218,7 +217,8 @@ public class AccountViewController {
 
     @FXML
     private void goToArcaneRequest(){
-        SceneController.loadScene("arcane-request-view.fxml");
+        mainViewController.loadContent("customer-arcane-view.fxml");
+        mainViewController.updateTopBar("arcane");
     }
 
     public void setMainViewController(MainViewController controller) {

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="GUI.controller.CustomerArcaneController"
+      alignment="TOP_CENTER" spacing="30" stylesheets="@../styles/cart-styles.css, @../styles/arcane-styles.css"
+      style="-fx-padding: 40;"> <!-- TODO -->
+
+
+    <VBox spacing="20" alignment="TOP_CENTER">
+
+        <HBox alignment="CENTER" spacing="15">
+            <ImageView fx:id="arcaneItem"
+                       fitHeight="50" fitWidth="50"
+                       preserveRatio="true"
+                       pickOnBounds="true"/>
+
+            <Label text="Arcane Membership" styleClass="cart-title"/>
+
+            <ImageView fx:id="reversedArcaneItem"
+                       fitHeight="50" fitWidth="50"
+                       preserveRatio="true"
+                       pickOnBounds="true"/>
+        </HBox>
+
+        <Label text="Manage and make your requests to join our exclusive membership here." styleClass="arcane-subtitle"/>
+
+        <!-- dynamic view -->
+        <HBox fx:id="outerContentBox"
+              alignment="TOP_CENTER"
+              prefWidth="700"
+              prefHeight="850"
+              styleClass="arcane-container">
+
+            <VBox fx:id="contentBox"
+                  alignment="TOP_CENTER"
+                  spacing="20"
+                  prefHeight="850"
+                  prefWidth="700"
+                  maxWidth="700"
+                  minWidth="700"
+                  VBox.vgrow="ALWAYS"
+                  styleClass="column-box"/>
+
+            <Separator orientation="VERTICAL" prefHeight="300"/>
+
+        <VBox fx:id="faqBox" alignment="TOP_CENTER" spacing="10">
+
+            <Label text="FAQ" styleClass="arcane-subtitle"/>
+
+            <ScrollPane fx:id="faqScrollPane"
+                        fitToWidth="true"
+                        hbarPolicy="NEVER"
+                        vbarPolicy="AS_NEEDED"
+                        prefHeight="850"
+                        maxHeight="850"
+                        prefWidth="700"
+                        maxWidth="700"
+                        styleClass="faq-scroll">
+
+                <VBox fx:id="questionsBox" spacing="10">
+                    <VBox spacing="5">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="What is an Arcane Membership?" fx:id="question1" wrapText="true"
+                            styleClass="faq-question-label"/>
+                            <Button text="+" fx:id="toggle1" onAction="#toggleAnswer1"
+                            styleClass="faq-toggle-button"/>
+                        </HBox>
+
+                        <VBox fx:id="answerBox1" visible="false" managed="false"
+                              styleClass="faq-answer-box">
+                            <Label text="An Arcane Membership is an exclusive title given only to the most loyal and frequent customers of our shop. Requesting a Membership is an action that should be taken seriously, as your personal profile (including the items you buy and your history with our shop) will be reviewed and judged accordingly by one of our shop managers." wrapText="true"
+                            styleClass="faq-answer-label"/>
+                        </VBox>
+                    </VBox>
+
+                    <VBox spacing="5">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="What does an Arcane Membership entail?" fx:id="question2" wrapText="true"
+                            styleClass="faq-question-label"/>
+                            <Button text="+" fx:id="toggle2" onAction="#toggleAnswer2"
+                            styleClass="faq-toggle-button"/>
+                        </HBox>
+
+                        <VBox fx:id="answerBox2" visible="false" managed="false"
+                              styleClass="faq-answer-box">
+                            <Label text="Answer 2." wrapText="true"
+                            styleClass="faq-answer-label"/>
+                        </VBox>
+                    </VBox>
+
+                    <VBox spacing="5">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="How can I request a Membership?" fx:id="question3" wrapText="true"
+                            styleClass="faq-question-label"/>
+                            <Button text="+" fx:id="toggle3" onAction="#toggleAnswer3"
+                            styleClass="faq-toggle-button"/>
+                        </HBox>
+
+                        <VBox fx:id="answerBox3" visible="false" managed="false"
+                              styleClass="faq-answer-box">
+                            <Label text="Answer 3." wrapText="true"
+                            styleClass="faq-answer-label"/>
+                        </VBox>
+                    </VBox>
+                </VBox>
+
+            </ScrollPane>
+
+        </VBox>
+
+        </HBox>
+
+    </VBox>
+
+</VBox>

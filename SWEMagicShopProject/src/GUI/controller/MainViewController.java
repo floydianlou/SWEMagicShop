@@ -35,32 +35,32 @@ public class MainViewController {
     @FXML
     public void initialize() {
         shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm()));
-        loadContent("customer-shop-view.fxml");
-        updateTopBar("customer");
 
+        Person loggedUser = LoggedUserManager.getInstance().getLoggedUser();
+
+        if (loggedUser != null) {
+            if (loggedUser instanceof Customer) {
+                loadContent("customer-shop-view.fxml");
+                updateTopBar("customer");
+            } else {
+                loadContent("manager-shop-view.fxml");
+                updateTopBar("manager");
+            }
+        }
     }
 
-    // TODO when all pages are connected, better make this function work without all these ifs
     public void loadContent(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/" + fxmlFile));
             Node content = loader.load();
 
-            if (fxmlFile.equals("customer-shop-view.fxml")) {
-                CustomerShopViewController controller = loader.getController();
-                controller.setMainViewController(this);
-            }
-            if (fxmlFile.equals("cart-view.fxml")) {
-                CartController cartController = loader.getController();
-                cartController.setMainViewController(this);
-            }
-            if (fxmlFile.equals("product-view.fxml")) {
-                ProductViewController productController = loader.getController();
-                productController.setMainViewController(this);
-            }
-            if (fxmlFile.equals("account-view.fxml")) {
-                AccountViewController controller = loader.getController();
-                controller.setMainViewController(this);
+            switch (fxmlFile) {
+                case "customer-shop-view.fxml" -> ((CustomerShopViewController) loader.getController()).setMainViewController(this);
+                case "cart-view.fxml" -> ((CartController) loader.getController()).setMainViewController(this);
+                case "product-view.fxml" -> ((ProductViewController) loader.getController()).setMainViewController(this);
+                case "account-view.fxml" -> ((AccountViewController) loader.getController()).setMainViewController(this);
+                case "manager-shop-view.fxml" -> ((ManagerShopController) loader.getController()).setMainViewController(this);
+                // case "item-edit-view" -> ((ItemEditController) loader.getController()).setMainViewController(this);
             }
 
             AnchorPane wrapper = new AnchorPane(content);
@@ -99,9 +99,9 @@ public class MainViewController {
                 toolBar.getChildren().addAll(createWelcomeLabel(), cartButton, accountButton, logoutButton);
             }
 
-            case "manager" -> { // TODO
+            case "manager" -> {
                 Button accountButton = createButton("/images/accountIcon.png", "Account", _ -> {
-                    loadContent("manager-account-view.fxml"); // TODO
+                    loadContent("manager-account-view.fxml");
                     updateTopBar("account");
                 });
 
@@ -166,7 +166,7 @@ public class MainViewController {
                 toolBar.getChildren().addAll(createWelcomeLabel(), backButton, cartButton, accountButton, logoutButton);
             }
 
-            case "orderhistory", "wallet", "inventory" -> {
+            case "orderhistory", "wallet", "inventory", "arcane" -> {
                 Button backButton = createButton("/images/accountIcon.png", "Back to Account", _ -> {
                     loadContent("account-view.fxml");
                     updateTopBar("account");
@@ -179,8 +179,28 @@ public class MainViewController {
                 toolBar.getChildren().addAll(backButton, logoutButton);
             }
 
+            case "managerProduct" -> {
+                Button backButton = createButton("/images/homeIcon.png", "Shop home", _ -> {
+                    loadContent("manager-shop-view.fxml");
+                    updateTopBar("manager");
+                });
+
+                Button accountButton = createButton("/images/accountIcon.png", "Account", _ -> {
+                    loadContent("manager-account-view.fxml");
+                    updateTopBar("managerAccount"); //TODO
+                });
+
+                Button logoutButton = createButton("/images/logoutIcon.png", "Logout", _ -> {
+                    handleLogout();
+                });
+
+                toolBar.getChildren().addAll(backButton, accountButton, logoutButton);
+
+            }
+
         }
-        updateCartIcon();
+        if (LoggedUserManager.getInstance().getLoggedUser() instanceof Customer) {
+            updateCartIcon(); }
     }
 
     // to add red dot on cart icon

@@ -25,7 +25,8 @@ public class ArcaneDAO {
         String arcanesql = "SELECT a.requestid, c.customerid, c.name as customername, r.name as status " +
                 "FROM \"ArcaneRequest\" a JOIN \"Customer\" c on a.customerid = c.customerid " +
                 "JOIN \"RequestStatus\" r on a.statusid = r.statusid " +
-                "WHERE a.customerid = ?;";
+                "WHERE a.customerid = ? " +
+                "ORDER BY a.requestid DESC;";
         ArrayList<ArcaneRequest> arcaneRequests = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(arcanesql)) {
             stmt.setInt(1, customerID);

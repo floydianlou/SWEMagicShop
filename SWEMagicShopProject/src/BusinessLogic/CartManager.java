@@ -8,12 +8,21 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 public class CartManager {
+
+    // to automatically save cart
+    private ScheduledExecutorService scheduler;
+    private boolean cartModified = false;
+
     private static CartManager instance;
     ArrayList<Item> cartItems;
     String cartSavePath;
@@ -22,6 +31,7 @@ public class CartManager {
         Utilities.initialiseSavesFolder();
         this.cartSavePath = "data/cart_" + customer.getPersonID() + ".json";
         this.cartItems = loadCartItems(cartSavePath);
+        startAutoSave();
     }
 
     public static void init(Customer customer) {
@@ -52,22 +62,10 @@ public class CartManager {
     }
 
     public void closeCartSession() {
-        if (cartItems.isEmpty()) {
-            File checking = new File(cartSavePath);
-            if (checking.exists())
-                checking.delete(); // Checks if file already existed and deletes it since cart is empty
-        } else {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            try (FileWriter writer = new FileWriter(cartSavePath)) {
-                gson.toJson(cartItems, writer);
-            } catch (IOException cartError) {
-                System.err.println("Something went wrong while saving your cart...");
-                File cartFile = new File(cartSavePath);
-                if (cartFile.exists()) {
-                    cartFile.delete(); // Checks if file already existed and if so, deletes it to avoid corrupt files
-                }
-            }
+        if (scheduler != null && !scheduler.isShutdown()) {
+            scheduler.shutdownNow();
         }
+        saveCart();
         cartItems.clear();
     }
 
@@ -77,21 +75,25 @@ public class CartManager {
 
     public void clearCart() {
         cartItems.clear();
+        cartModified = true;
     }
 
     public void addItemToCart (Item item) {
         for (Item i : cartItems) {
             if (i.getItemID() == item.getItemID()) {
                 i.setItemQuantity(i.getItemQuantity() + item.getItemQuantity());
+                cartModified = true;
                 return; }
         }
         cartItems.add(item);
+        cartModified = true;
     }
 
     public void increaseItemQuantity (Item item) {
         for (Item i : cartItems) {
             if (i.getItemID() == item.getItemID()) {
                 i.setItemQuantity(i.getItemQuantity() + 1);
+                cartModified = true;
                 return; }
         }
     }
@@ -103,16 +105,17 @@ public class CartManager {
                 currentItem.setItemQuantity(currentItem.getItemQuantity() - 1);
                 if (currentItem.getItemQuantity() <= 0)
                     cartItems.remove(i);
+                cartModified = true;
                 break;
             }
         }
     }
 
     public void removeItemFromCart (Item item) throws ItemNotInCartException {
-        // TODO add check if product is in cart
         for (int i = 0; i < cartItems.size(); i++) {
             if (cartItems.get(i).getItemID() == item.getItemID()) {
                 cartItems.remove(i);
+                cartModified = true;
                 return;
             }
         } throw new ItemNotInCartException("There was no such item in your cart!");
@@ -122,7 +125,39 @@ public class CartManager {
         for (Item i : cartItems) {
             if (i.getItemID() == item.getItemID()) {
                 i.setItemQuantity(quantity);
+                cartModified = true;
                 return; }
         }
     }
+
+    public void saveCart() {
+        if (cartItems.isEmpty()) {
+            File checking = new File(cartSavePath);
+            if (checking.exists())
+                checking.delete(); // checks if file already existed and deletes it since cart is empty
+        } else {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            try (FileWriter writer = new FileWriter(cartSavePath)) {
+                gson.toJson(cartItems, writer);
+            } catch (IOException cartError) {
+                System.err.println("Something went wrong while saving your cart...");
+                File cartFile = new File(cartSavePath);
+                if (cartFile.exists()) {
+                    cartFile.delete(); // checks if file already existed and if so, deletes it to avoid corrupt files
+                }
+            }
+        }
+    }
+
+    private void startAutoSave() {
+        scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleAtFixedRate(() -> {
+            if (cartModified) {
+                saveCart();
+                cartModified = false;
+            }
+        }, 10, 15, TimeUnit.SECONDS);
+        System.out.println("Cart auto saved.");
+    }
+
 }

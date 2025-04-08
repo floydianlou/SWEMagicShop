@@ -1,0 +1,67 @@
+/* ARCANE STYLES */
+
+.arcane-subtitle {
+    -fx-font-size: 20px;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-text-fill: #460E56;
+    -fx-font-family: Arimo, sans-serif;
+    -fx-translate-y: -10;
+}
+
+.arcane-container {
+    -fx-background-color: #D9C3E7;
+    -fx-border-width: 1px;
+    -fx-border-color: #6C3483;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 30;
+    -fx-alignment: center;
+    -fx-spacing: 20;
+}
+
+.column-box {
+    -fx-alignment: center;
+    -fx-padding: 20;
+    -fx-spacing: 20;
+}
+
+/* TO BE MODIFIED */
+
+.faq-scroll {
+    -fx-background-color: transparent;
+}
+
+.faq-question-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: 900;
+    -fx-text-fill: #460E56;
+    -fx-font-family: "Belwe Bd BT";
+    -fx-wrap-text: true;
+}
+
+.faq-toggle-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #460E56;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 0 5 0 5;
+}
+
+.faq-answer-box {
+    -fx-background-color: #ede7f6;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-border-color: #6C3483;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 10;
+}
+
+.faq-answer-label {
+    -fx-wrap-text: true;
+    -fx-text-fill: #4a148c;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-font-family: Arimo, sans-serif;
+}

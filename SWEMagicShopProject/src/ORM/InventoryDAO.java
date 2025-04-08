@@ -110,10 +110,10 @@ public class InventoryDAO {
     public String categoryMostSold() {
         String query = "SELECT c.name AS category " +
                 "FROM \"Inventory\" ivt JOIN \"Item\" i ON ivt.itemID = i.itemID " +
-            "JOIN \"Category\" c ON i.categoryID = c.categoryID " +
-            "GROUP BY c.name " +
-            "ORDER BY SUM(ivt.quantity) DESC " +
-            "LIMIT 1";
+                "JOIN \"Category\" c ON i.categoryID = c.categoryID " +
+                "GROUP BY c.name " +
+                "ORDER BY SUM(ivt.quantity) DESC " +
+                "LIMIT 1";
 
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet set = stmt.executeQuery()) {
@@ -264,11 +264,11 @@ public class InventoryDAO {
     public Customer biggestSpender() {
         String query = "SELECT c.customerID, c.name, c.surname, c.email, SUM(i.quantity * it.CPprice) AS total_spent " +
                 "FROM \"Inventory\" i " +
-            "JOIN \"Item\" it ON i.itemID = it.itemID " +
-            "JOIN \"Customer\" c ON i.customerID = c.customerID " +
-            "GROUP BY c.customerID, c.name, c.surname, c.email " +
-            "ORDER BY total_spent DESC " +
-            "LIMIT 1";
+                "JOIN \"Item\" it ON i.itemID = it.itemID " +
+                "JOIN \"Customer\" c ON i.customerID = c.customerID " +
+                "GROUP BY c.customerID, c.name, c.surname, c.email " +
+                "ORDER BY total_spent DESC " +
+                "LIMIT 1";
 
         try(PreparedStatement stmt = connection.prepareStatement(query)){
             try(ResultSet set = stmt.executeQuery()){
