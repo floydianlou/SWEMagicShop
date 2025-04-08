@@ -50,7 +50,7 @@ public class itemDAOTestSuite {
     }
 
     private static void addItemToStore(Scanner scanner, StoreManager storeManager) {
-        System.out.println("\n--- Crea un oggetto da aggiungere al negozio ---");
+        /*System.out.println("\n--- Crea un oggetto da aggiungere al negozio ---");
 
         System.out.print("Nome: ");
         String itemName = scanner.nextLine();
@@ -73,12 +73,12 @@ public class itemDAOTestSuite {
             } else { System.err.println("❌ Errore nella creazione dell'item!");}
         } catch (Exception e) {
             System.err.println("❌ Errore nella creazione dell'item: " + e.getMessage());
-        }
+        }*/
     }
 
 
     private static void updateItemStore(Scanner scanner, StoreManager storeManager) {
-        System.out.println("\n--- Modifica Item ---");
+        /*System.out.println("\n--- Modifica Item ---");
 
         System.out.print("Inserisci l'ID del prodotto che vuoi modificare: ");
         int itemID = scanner.nextInt();
@@ -123,8 +123,9 @@ public class itemDAOTestSuite {
             System.out.println("✅ Prodotto aggiornato con successo!");
         } else {
             System.out.println("❌ Errore durante l'aggiornamento del prodotto.");
-        }
+        }*/
     }
+
     private static void viewAllItems(Scanner scanner, StoreManager storeManager) {
         System.out.println("\n--- Lista Prodotti ---");
         ArrayList<Item> items = storeManager.listProducts();
@@ -138,6 +139,7 @@ public class itemDAOTestSuite {
             }
         }
     }
+
     private static void searchByID(Scanner scanner, StoreManager storeManager) {
         System.out.println("\n--- Ricerca per ID ---");
         System.out.print("Inserisci l'ID del prodotto: ");
@@ -150,6 +152,7 @@ public class itemDAOTestSuite {
             System.out.println("❌ Nessun prodotto trovato con questo ID.");
         }
     }
+
     private static void searchByName(Scanner scanner, StoreManager storeManager) {
         System.out.println("\n--- Ricerca per nome ---");
 
@@ -166,6 +169,7 @@ public class itemDAOTestSuite {
             }
         }
     }
+
     private static void searchByDescription(Scanner scanner, StoreManager storeManager) {
         System.out.println("\n--- Ricerca per descrizione ---");
 
@@ -182,6 +186,7 @@ public class itemDAOTestSuite {
             }
         }
     }
+
     private static void searchByCategory(Scanner scanner, StoreManager storeManager) {
         System.out.println("\n--- Ricerca per categoria ---");
 

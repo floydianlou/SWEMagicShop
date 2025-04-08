@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+
+<VBox fx:controller="GUI.controller.AddItemPopupController"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      spacing="10" alignment="TOP_LEFT"
+      stylesheets="@../styles/popup-styles.css, @../styles/cart-styles.css, @../styles/styles.css"
+      prefWidth="800" prefHeight="700" styleClass="popup-background">
+
+    <Label text="ITEM NAME" styleClass="instructions-label"/>
+    <HBox spacing="5" prefWidth="250" styleClass="cart-box">
+        <Region prefWidth="10"/>
+        <ImageView fx:id="penIcon1" fitWidth="27" fitHeight="27"/>
+        <TextField fx:id="itemName" styleClass="order-writing"/>
+    </HBox>
+
+    <Label text="ITEM DESCRIPTION" styleClass="instructions-label"/>
+    <HBox spacing="5" prefWidth="250" styleClass="cart-box">
+        <Region prefWidth="10"/>
+        <ImageView fx:id="penIcon2" fitWidth="27" fitHeight="27"/>
+        <TextField fx:id="itemDescription" styleClass="order-writing"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <VBox>
+            <Label text="ITEM CATEGORY" styleClass="instructions-label"/>
+            <ComboBox fx:id="itemCategory" />
+        </VBox>
+        <VBox>
+            <Label text="ITEM ARCANE" styleClass="instructions-label"/>
+            <CheckBox fx:id="itemArcane" />
+        </VBox>
+    </HBox>
+
+    <Label text="ITEM PRICE" styleClass="instructions-label"/>
+    <HBox spacing="40" styleClass="cart-box">
+        <Label text="GP: " styleClass="instructions-label"/>
+        <TextField fx:id="itemGP" styleClass="item-price"/>
+
+        <Label text="SP: " styleClass="instructions-label"/>
+        <TextField fx:id="itemSP" styleClass="item-price"/>
+
+        <Label text="CP: " styleClass="instructions-label"/>
+        <TextField fx:id="itemCP" styleClass="item-price"/>
+    </HBox>
+
+
+    <!-- TODO: Aggiungere funzionalità per il caricamento delle immagini -->
+    <TextField fx:id="itemImage"/>
+
+    <HBox alignment="CENTER" spacing="20">
+        <Button
+                text="Back to orders"
+                onAction="#handleClosePopup"
+                styleClass="popup-close-button"/>
+
+        <Button
+                text="Add item"
+                onAction="#addItem"
+                styleClass="popup-close-button"/>
+    </HBox>
+</VBox>

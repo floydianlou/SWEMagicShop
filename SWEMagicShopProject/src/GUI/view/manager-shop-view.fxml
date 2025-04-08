@@ -29,6 +29,7 @@
             </VBox>
         </StackPane>
         <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="addProductButton" text="Add Product" onAction="#handleAddProduct" styleClass="choice-button"/>
     </HBox>
 
 

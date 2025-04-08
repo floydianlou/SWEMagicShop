@@ -6,6 +6,9 @@ import DomainModel.Item;
 import DomainModel.Manager;
 import BusinessLogic.Utilities;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -14,6 +17,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ManagerShopController {
@@ -27,6 +36,7 @@ public class ManagerShopController {
     @FXML private Label errorLabel;
     @FXML private ImageView searchIcon;
     @FXML private GridPane gridPane;
+    @FXML private Button addProductButton;
 
     private ArrayList<String> allCategories;
     private ArrayList<Item> allProductsSearched;
@@ -241,6 +251,35 @@ public class ManagerShopController {
         ItemViewManager.getInstance().setProductSelected(selectedProduct);
         mainViewController.loadContent("item-edit-view.fxml");
         mainViewController.updateTopBar("managerProduct");
+    }
+
+    @FXML
+    private void handleAddProduct() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/add-item-popup.fxml"));
+            Parent root = loader.load();
+
+            AddItemPopupController controller = loader.getController();
+            Stage popupStage = new Stage();
+
+            controller.setStoreManager(storeManager);
+            controller.setStage(popupStage);
+            controller.loadPopUp();
+
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+
+            popupStage.initStyle(StageStyle.TRANSPARENT);
+            popupStage.initModality(Modality.WINDOW_MODAL);
+            popupStage.initOwner(addProductButton.getScene().getWindow());
+            popupStage.setScene(scene);
+            popupStage.setResizable(false);
+            popupStage.setTitle("Add New Product To The Shop");
+            popupStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setMainViewController(MainViewController mainViewController) {
