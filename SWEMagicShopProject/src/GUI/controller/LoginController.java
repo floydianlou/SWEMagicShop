@@ -20,7 +20,7 @@ public class LoginController {
     @FXML private ImageView emailIcon;
     @FXML private ImageView passwordIcon;
     @FXML private PasswordField passwordField;
-    @FXML private Label password;
+    @FXML private TextField password;
     @FXML private Label errorLabel;
     @FXML private ImageView shopIcon;
     @FXML private ImageView eyeIcon;
@@ -76,12 +76,14 @@ public class LoginController {
         if (passwordField.isVisible()) {
             password.setText(passwordField.getText());
             password.setVisible(true);
+            password.setEditable(true);
             passwordField.setVisible(false);
             eyeIcon.setImage(openEyeIcon);
         } else {
             passwordField.setText(password.getText());
             passwordField.setVisible(true);
             password.setVisible(false);
+            password.setEditable(false);
             eyeIcon.setImage(closedEyeIcon);
         }
     }
