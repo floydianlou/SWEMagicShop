@@ -66,7 +66,7 @@
                 <StackPane>
                     <PasswordField fx:id="passwordField" promptText="Password"
                                    maxWidth="260" styleClass="input-field"/>
-                    <Label fx:id="password" maxWidth="260" styleClass="input-field" visible="false"/>
+                    <TextField fx:id="password" maxWidth="260" styleClass="input-field" visible="false"/>
                 </StackPane>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Button style="-fx-background-color: transparent" onAction="#togglePassword" >
