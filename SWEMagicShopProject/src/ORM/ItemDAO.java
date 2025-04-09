@@ -350,10 +350,11 @@ public class ItemDAO {
         return items;
     }
 
-    public void createItem(String itemName, String description, String category, int copperValue, boolean isArcane, String imagePath) throws RuntimeException {
+    public void createItem(String itemName, String description, String category, int copperValue, boolean isArcane, String imagePath) throws RuntimeException, SQLException{
         String query = "INSERT INTO \"Item\" ( name, description, CPprice, categoryID, arcane, imagepath) " +
                 "VALUES ( ?, ?, ?, (SELECT categoryID FROM \"Category\" WHERE name = ?), ?, ?)";
 
+        connection.setAutoCommit(false);
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, itemName);
             stmt.setString(2, description);
@@ -365,13 +366,26 @@ public class ItemDAO {
             int rowsInserted = stmt.executeUpdate();
             if( rowsInserted > 0 ){
                 System.out.println("Item added successfully.");
+                connection.commit();
             } else {
                 throw new RuntimeException("No rows were added.");
             }
         } catch (SQLException e) {
             System.err.println("Error while creating item: " + e.getMessage());
+            try {
+                connection.rollback();
+                System.err.println("Transaction rolled back due to error.");
+            } catch (SQLException rollbackException) {
+                System.err.println("Error while doing rollback: " + rollbackException.getMessage());
+            }
             if (e.getMessage().contains("failed to connect")) {
                 throw new RuntimeException("Database is offline, please try again later.");
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                System.err.println("Error while reactivating auto commit: " + e.getMessage());
             }
         }
     }

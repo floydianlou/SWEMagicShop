@@ -53,6 +53,7 @@ public class ManagerShopController {
     public void initialize() {
         // Fix: cast the logged user to Manager instead of Customer
         Manager loggedManager = (Manager) LoggedUserManager.getInstance().getLoggedUser();
+        storeManager = new StoreManager();
         // LoggedManager can be used if needed in additional logic.
         loadProducts();
         loadCategoryInDropdown();
@@ -276,6 +277,8 @@ public class ManagerShopController {
             popupStage.setResizable(false);
             popupStage.setTitle("Add New Product To The Shop");
             popupStage.showAndWait();
+
+            loadProducts();
 
         } catch (IOException e) {
             e.printStackTrace();

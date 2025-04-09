@@ -17,9 +17,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -32,13 +41,16 @@ public class AddItemPopupController {
     @FXML private TextField itemGP;
     @FXML private TextField itemSP;
     @FXML private TextField itemCP;
+    @FXML private Label imagePathLabel;
 
     @FXML private ImageView penIcon1;
     @FXML private ImageView penIcon2;
+    @FXML private ImageView itemImage;
 
     private Stage stage;
     private StoreManager storeManager;
     private ArrayList<String> allCategories;
+    private String selectedImagePath = "/images/products/default_potion.png"; // Default image
 
 
     public void setStage(Stage stage) {
@@ -86,11 +98,40 @@ public class AddItemPopupController {
         }
 
         try {
-            storeManager.addProduct(name, description, category, copperValue, isArcane, "/images/products/default_potion.png");
+            storeManager.addProduct(name, description, category, copperValue, isArcane, selectedImagePath);
             showAlert("Success", "Item added successfully.");
             handleClosePopup();
-        } catch (RuntimeException e) {
+        } catch (RuntimeException | SQLException e) {
             showAlert("Error", e.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleAddImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select an Image");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            try {
+                File directory = new File("SWEMagicShopProject/src/images/products");
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+
+                File copiedFile = new File(directory, selectedFile.getName());
+
+                Files.copy(selectedFile.toPath(), copiedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                selectedImagePath = "/images/products/" + selectedFile.getName();
+                imagePathLabel.setText(selectedImagePath);
+                itemImage.setImage(new Image(copiedFile.toURI().toString()));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert("Error", "Something went wrong while selecting your image.");
+            }
         }
     }
 
@@ -115,5 +156,4 @@ public class AddItemPopupController {
             e.printStackTrace();
         }
     }
-
 }

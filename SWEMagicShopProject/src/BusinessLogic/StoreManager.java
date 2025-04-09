@@ -3,6 +3,8 @@ package BusinessLogic;
 import DomainModel.Item;
 import ORM.CategoryDAO;
 import ORM.ItemDAO;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StoreManager {
@@ -22,7 +24,7 @@ public class StoreManager {
         return itemDAO.getItemByID(itemID);
     }
 
-    public void addProduct(String itemName, String description, String category, int copperValue, boolean isArcane, String imagePath) throws IllegalArgumentException {
+    public void addProduct(String itemName, String description, String category, int copperValue, boolean isArcane, String imagePath) throws IllegalArgumentException, SQLException {
         ItemDAO itemDAO= new ItemDAO();
         if (copperValue <= 0){
             throw new IllegalArgumentException("Price must be greater than zero!");
