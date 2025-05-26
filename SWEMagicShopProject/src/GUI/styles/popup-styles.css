@@ -105,3 +105,73 @@
 .scroll-bar .decrement-button {
     -fx-background-color: transparent;
 }
+
+/* ADD POPUP STYLES */
+.add-popup-input{
+    -fx-font-size: 15px;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-text-fill: #320A3E;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+    -fx-background-color: transparent;
+    -fx-prompt-text-fill: #320A3E;
+}
+.add-popup-combobox {
+    -fx-background-color: #D9C3E7;
+    -fx-border-color: transparent;
+    -fx-text-fill: #460E56;
+    -fx-prompt-text-fill: #6C3483;
+    -fx-font-size: 16px;
+    -fx-padding: 0 10 0 10;
+    -fx-background-insets: 0;
+}
+
+.add-popup-combobox .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.add-popup-combobox .arrow {
+    -fx-background-color: #460E56;
+}
+
+.add-popup-combobox .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #460E56;
+    -fx-font-size: 14px;
+    -fx-padding: 6px 10px;
+    -fx-background-radius: 8;
+}
+
+.add-popup-combobox .list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-text-fill: #460E56;
+}
+
+.add-popup-checkbox {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #460E56;
+    -fx-font-size: 16px;
+    -fx-padding: 5px 10px;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.add-popup-checkbox .box {
+    -fx-border-color: #460E56;
+    -fx-border-width: 2px;
+    -fx-border-radius: 4;
+    -fx-background-color: #D9C3E7;
+    -fx-padding: 2;
+}
+
+.add-popup-checkbox .box:hover {
+    -fx-background-color: rgba(108, 52, 131, 0.2);
+    -fx-cursor: hand;
+}
+
+.add-popup-checkbox:selected .box {
+    -fx-background-color: #D9C3E7;
+    -fx-border-color: #6C3483;
+}
+/*  END ADD POPUP STYLES */
