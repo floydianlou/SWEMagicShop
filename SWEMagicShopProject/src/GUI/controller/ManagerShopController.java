@@ -22,6 +22,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -229,7 +230,18 @@ public class ManagerShopController {
             VBox productBox = new VBox();
             productBox.setSpacing(5);
             ImageView productImage = new ImageView();
-            productImage.setImage(new Image(getClass().getResource(product.getImagePath()).toExternalForm()));
+            try{
+                File imageFile = new File("SWEMagicShopProject/src" + product.getImagePath());
+                if (!imageFile.exists()) {
+                    System.out.println("Image file does NOT exist!");
+                } else {
+                    Image img = new Image(imageFile.toURI().toString());
+                    productImage.setImage(img);
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Error Image Not Loaded: " + e.getMessage());
+            }
             productImage.setFitWidth(300);
             productImage.setFitHeight(300);
             Button productName = new Button(product.getItemName());
@@ -278,6 +290,7 @@ public class ManagerShopController {
             popupStage.setTitle("Add New Product To The Shop");
             popupStage.showAndWait();
 
+            gridPane.getChildren().clear();
             loadProducts();
 
         } catch (IOException e) {

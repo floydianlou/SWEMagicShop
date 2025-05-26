@@ -50,7 +50,7 @@ public class AddItemPopupController {
     private Stage stage;
     private StoreManager storeManager;
     private ArrayList<String> allCategories;
-    private String selectedImagePath = "/images/products/default_potion.png"; // Default image
+    private String selectedImagePath;
 
 
     public void setStage(Stage stage) {
@@ -84,9 +84,26 @@ public class AddItemPopupController {
         String category = itemCategory.getValue();
         boolean isArcane = itemArcane.isSelected();
 
-        if (name.isEmpty() || description.isEmpty() || itemGP.getText().isEmpty() || itemSP.getText().isEmpty() || itemCP.getText().isEmpty()) {
+        if (name.isEmpty() || description.isEmpty() || itemGP.getText().isEmpty() || itemSP.getText().isEmpty() || itemCP.getText().isEmpty() || category == null) {
             showAlert("Error", "Please fill in all fields.");
             return;
+        }
+
+        if (selectedImagePath == null || selectedImagePath.isEmpty()) {
+            switch (category) {
+                case "Potions":
+                    selectedImagePath = "/images/products/default_potion.png";
+                    break;
+                case "Armor":
+                    selectedImagePath = "/images/products/default_armor.png";
+                    break;
+                case "Weapons":
+                    selectedImagePath = "/images/products/default_weapon.png";
+                    break;
+                default:
+                    showAlert("Error", "Please select a valid category.");
+                    return;
+            }
         }
 
         int copperValue;
@@ -115,6 +132,7 @@ public class AddItemPopupController {
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             try {
+
                 File directory = new File("SWEMagicShopProject/src/images/products");
                 if (!directory.exists()) {
                     directory.mkdirs();
@@ -128,7 +146,7 @@ public class AddItemPopupController {
                 imagePathLabel.setText(selectedImagePath);
                 itemImage.setImage(new Image(copiedFile.toURI().toString()));
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 showAlert("Error", "Something went wrong while selecting your image.");
             }

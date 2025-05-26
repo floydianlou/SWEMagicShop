@@ -13,6 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.io.File;
 import java.util.ArrayList;
 
 public class CustomerShopViewController {
@@ -288,7 +290,18 @@ public class CustomerShopViewController {
             productBox.setSpacing(5);
 
             ImageView productImage = new ImageView();
-            productImage.setImage(new Image(getClass().getResource(product.getImagePath()).toExternalForm()));
+            try{
+                File imageFile = new File("SWEMagicShopProject/src" + product.getImagePath());
+                if (!imageFile.exists()) {
+                    System.out.println("Image file does NOT exist!");
+                } else {
+                    Image img = new Image(imageFile.toURI().toString());
+                    productImage.setImage(img);
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Error Image Not Loaded: " + e.getMessage());
+            }
             productImage.setFitWidth(300);
             productImage.setFitHeight(300);
 
