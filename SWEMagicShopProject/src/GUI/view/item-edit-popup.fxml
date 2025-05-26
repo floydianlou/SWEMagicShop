@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.ImageView?>
 
-<VBox fx:controller="GUI.controller.AddItemPopupController"
+<VBox fx:controller="GUI.controller.EditItemPopUpController"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       spacing="15" alignment="TOP_LEFT"
@@ -15,14 +15,14 @@
     <HBox spacing="5" prefWidth="250" styleClass="cart-box" alignment="CENTER_LEFT">
         <Region prefWidth="10"/>
         <ImageView fx:id="penIcon1" fitWidth="27" fitHeight="27"/>
-        <TextField fx:id="itemName" promptText="Enter the item name..." maxWidth="350" styleClass="add-popup-input"/>
+        <TextField fx:id="itemName" promptText="Enter the item new name..." maxWidth="350" styleClass="add-popup-input"/>
     </HBox>
 
     <Label text="ITEM DESCRIPTION" styleClass="instructions-label"/>
     <HBox spacing="5" prefWidth="250" styleClass="cart-box" alignment="CENTER_LEFT">
         <Region prefWidth="10"/>
         <ImageView fx:id="penIcon2" fitWidth="27" fitHeight="27"/>
-        <TextField fx:id="itemDescription" promptText="Enter the item description... " maxWidth="350" styleClass="add-popup-input"/>
+        <TextField fx:id="itemDescription" promptText="Enter the item new description... " maxWidth="350" styleClass="add-popup-input"/>
     </HBox>
 
     <HBox spacing="50">
@@ -47,19 +47,11 @@
 
     <Label text="ITEM IMAGE" styleClass="instructions-label"/>
     <HBox spacing="10">
-        <StackPane>
-            <Button
-                    fx:id="addImageButton"
-                    text="Add Image"
-                    onAction="#handleAddImage"
-                    styleClass="popup-close-button"/>
-            <Button
-                    fx:id="changeImageButton"
-                    text="Change Image"
-                    onAction="#handleChangeImage"
-                    visible="false"
-                    styleClass="popup-close-button"/>
-        </StackPane>
+        <Button
+                fx:id="changeImageButton"
+                text="Change Image"
+                onAction="#handleChangeImage"
+                styleClass="popup-close-button"/>
         <Region prefWidth="20"/>
         <Label fx:id="imagePathLabel" text="No image selected" styleClass="instructions-label"/>
     </HBox>
@@ -70,12 +62,12 @@
     <HBox alignment="CENTER" spacing="20">
         <Button
                 text="Back to Home"
-                onAction="#handleCloseAddPopup"
+                onAction="#handleClosePopup"
                 styleClass="popup-close-button"/>
 
         <Button
-                text="Add item"
-                onAction="#addItem"
+                text="Modify item"
+                onAction="#editItem"
                 styleClass="popup-close-button"/>
     </HBox>
 </VBox>

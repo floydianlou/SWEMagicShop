@@ -31,8 +31,7 @@ import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
-public class AddItemPopupController {
+public class EditItemPopUpController {
 
     @FXML private TextField itemName;
     @FXML private TextField itemDescription;
@@ -43,7 +42,6 @@ public class AddItemPopupController {
     @FXML private TextField itemCP;
     @FXML private Label imagePathLabel;
 
-    @FXML private Button addImageButton;
     @FXML private Button changeImageButton;
 
     @FXML private ImageView penIcon1;
@@ -52,6 +50,7 @@ public class AddItemPopupController {
 
     private Stage stage;
     private StoreManager storeManager;
+    private Item selectedItem;
     private ArrayList<String> allCategories;
     private String selectedImagePath;
 
@@ -76,12 +75,36 @@ public class AddItemPopupController {
     }
 
     public void loadPopUp() {
+        loadItem();
         loadCategoryInDropdown();
         penIcon1.setImage(new Image(getClass().getResource("/images/penIcon.png").toExternalForm()));
         penIcon2.setImage(new Image(getClass().getResource("/images/penIcon.png").toExternalForm()));
     }
 
-    public void addItem() {
+    public void loadItem() {
+        selectedItem = ItemViewManager.getInstance().getProductSelected();
+        itemName.setText(selectedItem.getItemName());
+        itemDescription.setText(selectedItem.getItemDescription());
+        itemCategory.setValue(selectedItem.getItemCategory());
+        itemArcane.setSelected(selectedItem.isArcane());
+        selectedImagePath = selectedItem.getImagePath();
+        imagePathLabel.setText(selectedImagePath);
+
+        int[] price = Utilities.normalizeCurrencyArray(selectedItem.getCopperValue());
+        itemGP.setText(String.valueOf(price[0]));
+        itemSP.setText(String.valueOf(price[1]));
+        itemCP.setText(String.valueOf(price[2]));
+
+        File imageFile = new File("SWEMagicShopProject/src" + selectedItem.getImagePath());
+        if (!imageFile.exists()) {
+            System.out.println("Image file does NOT exist!");
+        } else {
+            Image img = new Image(imageFile.toURI().toString());
+            itemImage.setImage(img);
+        }
+    }
+
+    public void editItem() {
         String name = itemName.getText();
         String description = itemDescription.getText();
         String category = itemCategory.getValue();
@@ -118,45 +141,15 @@ public class AddItemPopupController {
         }
 
         try {
-            storeManager.addProduct(name, description, category, copperValue, isArcane, selectedImagePath);
-            showAlert("Success", "Item added successfully.");
+            Item updatedItem = new Item(selectedItem.getItemID(), name, description, category, isArcane, copperValue, selectedImagePath);
+            storeManager.updateProduct(updatedItem);
+            showAlert("Success", "Item edited successfully.");
             handleClosePopup();
-        } catch (RuntimeException | SQLException e) {
+        } catch (RuntimeException e) {
             showAlert("Error", e.getMessage());
         }
     }
 
-    @FXML
-    private void handleAddImage() {
-        addImageButton.setVisible(false);
-        changeImageButton.setVisible(true);
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select an Image");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
-
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
-            try {
-
-                File directory = new File("SWEMagicShopProject/src/images/products");
-                if (!directory.exists()) {
-                    directory.mkdirs();
-                }
-
-                File copiedFile = new File(directory, selectedFile.getName());
-
-                Files.copy(selectedFile.toPath(), copiedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-                selectedImagePath = "/images/products/" + selectedFile.getName();
-                imagePathLabel.setText(selectedImagePath);
-                itemImage.setImage(new Image(copiedFile.toURI().toString()));
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                showAlert("Error", "Something went wrong while selecting your image.");
-            }
-        }
-    }
 
     private void showAlert(String title, String s) {
         try {
@@ -178,22 +171,6 @@ public class AddItemPopupController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    private void handleCloseAddPopup() {
-
-        if (selectedImagePath != null) {
-            File imageFile = new File("SWEMagicShopProject/src" + selectedImagePath);
-            if (imageFile.exists()) {
-                boolean deleted = imageFile.delete();
-                if (!deleted) {
-                    System.out.println("Errore: impossibile eliminare il file immagine.");
-                }
-            }
-        }
-
-        if (stage != null) stage.close();
     }
 
     @FXML

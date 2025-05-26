@@ -308,8 +308,8 @@ public class CustomerShopViewController {
             Button productName = new Button(product.getItemName());
             productName.getStyleClass().add("product-name");
             productName.setOnMouseClicked(event -> {viewProductButton(product);});
-            int[] price = Utilities.normalizeCurrencyArray(product.getCopperValue());
 
+            int[] price = Utilities.normalizeCurrencyArray(product.getCopperValue());
             Label productPrice = new Label(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
 
             Button addToCartButton = new Button("Add to Cart");

@@ -1,12 +1,14 @@
 // File: GUI/controller/ManagerShopController.java
 package GUI.controller;
 
+import BusinessLogic.CartManager;
 import BusinessLogic.StoreManager;
 import DomainModel.Item;
 import DomainModel.Manager;
 import BusinessLogic.Utilities;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -45,6 +48,7 @@ public class ManagerShopController {
     @FXML private GridPane gridPane;
 
     @FXML private Button addProductButton;
+    @FXML private Button editProductButton;
 
     private ArrayList<String> allCategories;
     private ArrayList<Item> allProductsSearched;
@@ -253,12 +257,24 @@ public class ManagerShopController {
             }
             productImage.setFitWidth(300);
             productImage.setFitHeight(300);
+
             Button productName = new Button(product.getItemName());
             productName.getStyleClass().add("product-name");
-            productName.setOnMouseClicked(event -> editProductButton(product));
+            productName.setOnMouseClicked(event -> viewProductButton(product));
+
             int[] price = Utilities.normalizeCurrencyArray(product.getCopperValue());
             Label productPrice = new Label(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
-            productBox.getChildren().addAll(productImage, productName, productPrice);
+
+            Button editButton = new Button("Edit Product");
+            editButton.getStyleClass().add("add-to-cart-button");
+            editButton.setOnMouseClicked(_ -> {
+                editProductButton = editButton;
+                handleEditProduct(product);});
+
+            HBox buttonContainer = new HBox(editButton);
+            buttonContainer.setAlignment(Pos.BOTTOM_RIGHT);
+
+            productBox.getChildren().addAll(productImage, productName, productPrice, buttonContainer);
             gridPane.add(productBox, col, row);
             col++;
             if (col == maxCols) {
@@ -269,10 +285,10 @@ public class ManagerShopController {
     }
 
     @FXML
-    private void editProductButton(Item selectedProduct) {
+    private void viewProductButton(Item selectedProduct) {
         ItemViewManager.getInstance().setProductSelected(selectedProduct);
-        mainViewController.loadContent("item-edit-view.fxml");
-        mainViewController.updateTopBar("managerProduct");
+        mainViewController.loadContent("manager-product-view.fxml");
+        mainViewController.updateTopBar("managerProduct"); //TODO:controllare
     }
 
     @FXML
@@ -297,6 +313,39 @@ public class ManagerShopController {
             popupStage.setScene(scene);
             popupStage.setResizable(false);
             popupStage.setTitle("Add New Product To The Shop");
+            popupStage.showAndWait();
+
+            gridPane.getChildren().clear();
+            loadProducts();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleEditProduct(Item selectedProduct) {
+        try {
+            ItemViewManager.getInstance().setProductSelected(selectedProduct);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/item-edit-popup.fxml"));
+            Parent root = loader.load();
+
+            EditItemPopUpController controller = loader.getController();
+            Stage popupStage = new Stage();
+
+            controller.setStoreManager(storeManager);
+            controller.setStage(popupStage);
+            controller.loadPopUp();
+
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+
+            popupStage.initStyle(StageStyle.TRANSPARENT);
+            popupStage.initModality(Modality.WINDOW_MODAL);
+            popupStage.initOwner(editProductButton.getScene().getWindow());
+            popupStage.setScene(scene);
+            popupStage.setResizable(false);
+            popupStage.setTitle("Edit Product To The Shop");
             popupStage.showAndWait();
 
             gridPane.getChildren().clear();

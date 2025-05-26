@@ -60,6 +60,7 @@ public class MainViewController {
                 case "product-view.fxml" -> ((ProductViewController) loader.getController()).setMainViewController(this);
                 case "account-view.fxml" -> ((AccountViewController) loader.getController()).setMainViewController(this);
                 case "manager-shop-view.fxml" -> ((ManagerShopController) loader.getController()).setMainViewController(this);
+                case "manager-product-view.fxml" -> ((ManagerProductViewController) loader.getController()).setMainViewController(this);
                 // case "item-edit-view" -> ((ItemEditController) loader.getController()).setMainViewController(this);
             }
 

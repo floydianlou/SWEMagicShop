@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.171"
+           xmlns:fx="http://javafx.com/fxml/1"
+           stylesheets="@../styles/styles.css, @../styles/cart-styles.css"
+           fx:controller="GUI.controller.ManagerProductViewController">
+
+    <VBox alignment="CENTER">
+        <padding>
+            <Insets top="50" right="50" bottom="50" left="50"/>
+        </padding>
+        <HBox fx:id="itemBox">
+            <VBox spacing="10" alignment="CENTER_LEFT" >
+                <Label fx:id="productName" style="-fx-font-size: 40px;"/>
+                <Label text="Description:" styleClass="order-writing" style="-fx-font-size: 20px;"/>
+                <Label fx:id="productDescription" style="-fx-font-size: 16px;"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label fx:id="productCategory" style="-fx-font-size: 20px;"/>
+                    <HBox fx:id="arcaneBox"/>
+                </HBox>
+                <Label fx:id="productPrice" style="-fx-font-size: 20px;"/>
+                <Button text="Edit Product" fx:id="editProductButton" styleClass="add-to-cart-button"/>
+            </VBox>
+
+            <Region prefWidth="250"/>
+
+            <VBox alignment="CENTER_RIGHT">
+                <ImageView fx:id="productImage"/>
+            </VBox>
+        </HBox>
+    </VBox>
+
+</StackPane>
