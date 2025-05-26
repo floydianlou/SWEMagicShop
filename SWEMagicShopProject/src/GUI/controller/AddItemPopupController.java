@@ -174,4 +174,20 @@ public class AddItemPopupController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void handleCloseAddPopup() {
+
+        if (selectedImagePath != null) {
+            File imageFile = new File("SWEMagicShopProject/src" + selectedImagePath);
+            if (imageFile.exists()) {
+                boolean deleted = imageFile.delete();
+                if (!deleted) {
+                    System.out.println("Errore: impossibile eliminare il file immagine.");
+                }
+            }
+        }
+
+        if (stage != null) stage.close();
+    }
 }
