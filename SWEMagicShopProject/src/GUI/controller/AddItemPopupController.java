@@ -43,6 +43,9 @@ public class AddItemPopupController {
     @FXML private TextField itemCP;
     @FXML private Label imagePathLabel;
 
+    @FXML private Button addImageButton;
+    @FXML private Button changeImageButton;
+
     @FXML private ImageView penIcon1;
     @FXML private ImageView penIcon2;
     @FXML private ImageView itemImage;
@@ -125,6 +128,8 @@ public class AddItemPopupController {
 
     @FXML
     private void handleAddImage() {
+        addImageButton.setVisible(false);
+        changeImageButton.setVisible(true);
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select an Image");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
@@ -189,5 +194,44 @@ public class AddItemPopupController {
         }
 
         if (stage != null) stage.close();
+    }
+
+    @FXML
+    private void handleChangeImage(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select an Image");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+
+        File newselectedFile = fileChooser.showOpenDialog(null);
+        if (newselectedFile != null) {
+            try {
+
+                File directory = new File("SWEMagicShopProject/src/images/products");
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+
+                File newcopiedFile = new File(directory, newselectedFile.getName());
+
+                Files.copy(newselectedFile.toPath(), newcopiedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                if (selectedImagePath != null) {
+                    File oldImageFile = new File("SWEMagicShopProject/src" + selectedImagePath);
+                    if (oldImageFile.exists()) {
+                        boolean deleted = oldImageFile.delete();
+                        if (!deleted) {
+                            System.out.println("Error: unable to delete the old image file.");
+                        }
+                    }
+                }
+
+                selectedImagePath = "/images/products/" + newselectedFile.getName();
+                imagePathLabel.setText(selectedImagePath);
+                itemImage.setImage(new Image(newcopiedFile.toURI().toString()));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert("Error", "Something went wrong while selecting your image.");
+            }
+        }
     }
 }

@@ -47,10 +47,19 @@
 
     <Label text="ITEM IMAGE" styleClass="instructions-label"/>
     <HBox spacing="10">
-        <Button
-                text="Add Image"
-                onAction="#handleAddImage"
-                styleClass="popup-close-button"/>
+        <StackPane>
+            <Button
+                    fx:id="addImageButton"
+                    text="Add Image"
+                    onAction="#handleAddImage"
+                    styleClass="popup-close-button"/>
+            <Button
+                    fx:id="changeImageButton"
+                    text="Change Image"
+                    onAction="#handleChangeImage"
+                    visible="false"
+                    styleClass="popup-close-button"/>
+        </StackPane>
         <Region prefWidth="20"/>
         <Label fx:id="imagePathLabel" text="No image selected" styleClass="instructions-label"/>
     </HBox>
