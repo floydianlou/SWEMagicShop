@@ -28,15 +28,22 @@ import java.util.ArrayList;
 
 public class ManagerShopController {
 
+    private Manager loggedManager;
+
     @FXML private TextField searchBar;
     @FXML private TextField minpriceGP;
     @FXML private TextField maxpriceGP;
+
     @FXML private ComboBox<String> filterDropDown;
     @FXML private ComboBox<String> filterArcane;
     @FXML private ComboBox<String> filterCategory;
+
     @FXML private Label errorLabel;
+
     @FXML private ImageView searchIcon;
+
     @FXML private GridPane gridPane;
+
     @FXML private Button addProductButton;
 
     private ArrayList<String> allCategories;
@@ -53,7 +60,7 @@ public class ManagerShopController {
     @FXML
     public void initialize() {
         // Fix: cast the logged user to Manager instead of Customer
-        Manager loggedManager = (Manager) LoggedUserManager.getInstance().getLoggedUser();
+        loggedManager = (Manager) LoggedUserManager.getInstance().getLoggedUser();
         storeManager = new StoreManager();
         // LoggedManager can be used if needed in additional logic.
         loadProducts();
@@ -97,6 +104,7 @@ public class ManagerShopController {
                 minpriceGP.setVisible(false);
                 maxpriceGP.setVisible(false);
                 filterCategory.setVisible(true);
+                filterCategory.toFront();
                 filterArcane.setVisible(false);
                 break;
             case "Name":
@@ -130,6 +138,7 @@ public class ManagerShopController {
                 maxpriceGP.setVisible(false);
                 filterCategory.setVisible(false);
                 filterArcane.setVisible(true);
+                filterArcane.toFront();
                 break;
             case "All":
                 searchBar.setPromptText("All products...");

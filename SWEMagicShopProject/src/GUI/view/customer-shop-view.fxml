@@ -22,8 +22,8 @@
             <TextField fx:id="searchBar" promptText="Search products..." prefWidth="500" styleClass="search-bar-input"/>
         </HBox>
         <StackPane>
-            <ComboBox fx:id="filterCategory" promptText="Category" visible="false" styleClass="transparent-combobox"/>
-            <ComboBox fx:id="filterArcane" promptText="Arcane" visible="false" styleClass="transparent-combobox"/>
+            <ComboBox fx:id="filterCategory" promptText="Category" visible="false" prefWidth="150" styleClass="transparent-combobox"/>
+            <ComboBox fx:id="filterArcane" promptText="Arcane" visible="false" prefWidth="100" styleClass="transparent-combobox"/>
             <VBox spacing="8">
                 <TextField fx:id="minpriceGP" promptText="Min GP" visible="false" maxWidth="100" styleClass="input-field-2"/>
                 <TextField fx:id="maxpriceGP" promptText="Max GP" visible="false" maxWidth="100" styleClass="input-field-2"/>
