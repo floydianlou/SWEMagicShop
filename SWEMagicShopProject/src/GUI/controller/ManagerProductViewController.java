@@ -1,6 +1,7 @@
 package GUI.controller;
 
 import BusinessLogic.CartManager;
+import BusinessLogic.StoreManager;
 import BusinessLogic.Utilities;
 import DomainModel.Item;
 import javafx.fxml.FXML;
@@ -36,11 +37,13 @@ public class ManagerProductViewController {
 
     private Item selectedProduct;
     private MainViewController mainViewController;
+    private StoreManager storeManager;
 
 
     @FXML
     public void initialize() {
         selectedProduct = ItemViewManager.getInstance().getProductSelected();
+        storeManager = new StoreManager();
         ItemViewManager.getInstance().clearProductSelected();
         loadItem();
         double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
@@ -92,20 +95,23 @@ public class ManagerProductViewController {
         productImage.setFitWidth(550);
         productImage.setFitHeight(450);
 
-        editProductButton.setOnAction(event -> {
-            handleEditProduct();
+        editProductButton.setOnMouseClicked(event -> {
+            handleEditProduct(selectedProduct);
         });
     }
 
     @FXML
-    private void handleEditProduct() {
-        /*try {
+    private void handleEditProduct(Item item) {
+        try {
+
+            ItemViewManager.getInstance().setProductSelected(item);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/item-edit-popup.fxml"));
             Parent root = loader.load();
 
-            AddItemPopupController controller = loader.getController();
+            EditItemPopUpController controller = loader.getController();
             Stage popupStage = new Stage();
+
 
             controller.setStoreManager(storeManager);
             controller.setStage(popupStage);
@@ -116,18 +122,18 @@ public class ManagerProductViewController {
 
             popupStage.initStyle(StageStyle.TRANSPARENT);
             popupStage.initModality(Modality.WINDOW_MODAL);
-            popupStage.initOwner(addProductButton.getScene().getWindow());
+            popupStage.initOwner(editProductButton.getScene().getWindow());
             popupStage.setScene(scene);
             popupStage.setResizable(false);
-            popupStage.setTitle("Add New Product To The Shop");
+            popupStage.setTitle("Edit Product To The Shop");
             popupStage.showAndWait();
 
-            gridPane.getChildren().clear();
-            loadProducts();
+            selectedProduct = storeManager.getProductByID(item.getItemID());
+            loadItem();
 
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     public void setMainViewController(MainViewController mainViewController) {
