@@ -288,7 +288,7 @@ public class ManagerShopController {
     private void viewProductButton(Item selectedProduct) {
         ItemViewManager.getInstance().setProductSelected(selectedProduct);
         mainViewController.loadContent("manager-product-view.fxml");
-        mainViewController.updateTopBar("managerProduct"); //TODO:controllare
+        mainViewController.updateTopBar("managerProduct");
     }
 
     @FXML

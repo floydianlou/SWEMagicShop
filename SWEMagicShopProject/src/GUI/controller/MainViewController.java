@@ -61,7 +61,7 @@ public class MainViewController {
                 case "account-view.fxml" -> ((AccountViewController) loader.getController()).setMainViewController(this);
                 case "manager-shop-view.fxml" -> ((ManagerShopController) loader.getController()).setMainViewController(this);
                 case "manager-product-view.fxml" -> ((ManagerProductViewController) loader.getController()).setMainViewController(this);
-                // case "item-edit-view" -> ((ItemEditController) loader.getController()).setMainViewController(this);
+                case "manager-account-view" -> ((ManagerAccountViewController) loader.getController()).setMainViewController(this);
             }
 
             AnchorPane wrapper = new AnchorPane(content);
@@ -103,7 +103,7 @@ public class MainViewController {
             case "manager" -> {
                 Button accountButton = createButton("/images/accountIcon.png", "Account", _ -> {
                     loadContent("manager-account-view.fxml");
-                    updateTopBar("account");
+                    updateTopBar("managerAccount"); //TODO: managerAccount
                 });
 
                 Button logoutButton = createButton("/images/logoutIcon.png", "Logout", _ -> {
@@ -135,6 +135,19 @@ public class MainViewController {
                 Button backButton = createButton("/images/homeIcon.png", "Shop home", _ -> {
                     loadContent("customer-shop-view.fxml");
                     updateTopBar("customer");
+                });
+
+                Button logoutButton = createButton("/images/logoutIcon.png", "Logout", _ -> {
+                    handleLogout();
+                });
+
+                toolBar.getChildren().addAll(backButton, logoutButton);
+            }
+
+            case "managerAccount" -> {
+                Button backButton = createButton("/images/homeIcon.png", "Shop home", _ -> {
+                    loadContent("manager-shop-view.fxml");
+                    updateTopBar("manager");
                 });
 
                 Button logoutButton = createButton("/images/logoutIcon.png", "Logout", _ -> {
