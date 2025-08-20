@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.canvas.Canvas?>
+
+<?import javafx.scene.shape.Rectangle?>
+<SplitPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           orientation="HORIZONTAL"
+           dividerPositions="0.2"
+           fx:controller="GUI.controller.ManagerStatisticsViewController"
+           stylesheets="@../styles/styles.css, @../styles/cart-styles.css, @../styles/statistics-style.css">
+
+    <!-- Colonna sinistra -->
+    <VBox styleClass="purple-background" prefWidth="200" spacing="20" alignment="CENTER">
+        <Button text="Revenue" onAction="#showRevenue" styleClass="section-button" />
+        <Button text="Clients" onAction="#showClients" styleClass="section-button" />
+        <Button text="Products" onAction="#showProducts" styleClass="section-button" />
+        <Button text="Category" onAction="#showCategory" styleClass="section-button" />
+    </VBox>
+
+    <!-- Area destra -->
+    <StackPane styleClass="pink-background">
+
+        <!-- Contenitore Revenue -->
+        <VBox fx:id="revenueContainer" spacing="10" alignment="CENTER" visible="true">
+            <Label text="Revenue Section" styleClass="section-title"/>
+            <Label text="Total Revenue:" styleClass="item-name"/>
+            <HBox styleClass="text-background, gap-box">
+                <Label text="GP: " styleClass="main-title"/>
+                <Label fx:id="totalRevenueGP" styleClass="main-title"/>
+                <Label text=" SP: " styleClass="main-title"/>
+                <Label fx:id="totalRevenueSP" styleClass="main-title"/>
+                <Label text=" CP: " styleClass="main-title"/>
+                <Label fx:id="totalRevenueCP" styleClass="main-title"/>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="10">
+                <Rectangle width="150" height="3"
+                           styleClass="divider"/>
+
+                <Label text="✦"
+                       styleClass="divider-star"/>
+
+                <Rectangle width="150" height="3"
+                           styleClass="divider"/>
+            </HBox>
+
+            <Label text="Charts:" styleClass="item-name"/>
+            <!-- Grafici -->
+            <HBox alignment="CENTER">
+                <Canvas fx:id="categoryChartCanvas" layoutX="50" layoutY="400" width="400" height="300" />
+                <Region prefWidth="150"/>
+                <Canvas fx:id="productChartCanvas" layoutX="500" layoutY="400" width="400" height="300" />
+            </HBox>
+
+        </VBox>
+
+        <!-- Contenitore Clients -->
+        <VBox fx:id="clientsContainer" spacing="10" alignment="CENTER" visible="false">
+            <Label text="Clients Section" styleClass="section-title"/>
+            <HBox alignment="CENTER">
+                <VBox>
+                    <Label text="Biggest Spender:" styleClass="item-name"/>
+                    <HBox styleClass="cart-box, gap-box" alignment="CENTER">
+                        <Label fx:id="biggestSpenderName" styleClass="box-text"/>
+                        <Label text=" "/>
+                        <Label fx:id="biggestSpenderSurname" styleClass="box-text"/>
+                    </HBox>
+                    <Region prefHeight="50"/>
+                    <Label text="Total Spent:" styleClass="item-name"/>
+                    <HBox styleClass="cart-box, gap-box" alignment="CENTER">
+                        <Label text="GP: " styleClass="box-text"/>
+                        <Label fx:id="biggestSpenderMoneyGP" styleClass="box-text"/>
+                        <Label text=" - SP: " styleClass="box-text"/>
+                        <Label fx:id="biggestSpenderMoneySP" styleClass="box-text"/>
+                        <Label text=" - CP: " styleClass="box-text"/>
+                        <Label fx:id="biggestSpenderMoneyCP" styleClass="box-text"/>
+                    </HBox>
+                </VBox>
+                <Region prefWidth="150"/>
+                <VBox>
+                    <Label text="Smallest Spender:" styleClass="item-name"/>
+                    <HBox styleClass="cart-box, gap-box" alignment="CENTER">
+                        <Label fx:id="smallestSpenderName" styleClass="box-text"/>
+                        <Label text=" "/>
+                        <Label fx:id="smallestSpenderSurname" styleClass="box-text"/>
+                    </HBox>
+                    <Region prefHeight="50"/>
+                    <Label text="Total Spent:" styleClass="item-name"/>
+                    <HBox styleClass="cart-box, gap-box" alignment="CENTER">
+                        <Label text="GP: " styleClass="box-text"/>
+                        <Label fx:id="smallestSpenderMoneyGP" styleClass="box-text"/>
+                        <Label text=" - SP: " styleClass="box-text"/>
+                        <Label fx:id="smallestSpenderMoneySP" styleClass="box-text"/>
+                        <Label text=" - CP: " styleClass="box-text"/>
+                        <Label fx:id="smallestSpenderMoneyCP" styleClass="box-text"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="10">
+                <Rectangle width="150" height="3"
+                           styleClass="divider"/>
+
+                <Label text="✦"
+                       styleClass="divider-star"/>
+
+                <Rectangle width="150" height="3"
+                           styleClass="divider"/>
+            </HBox>
+
+            <Label text="General Statistics:" styleClass="item-name"/>
+            <VBox styleClass="text-background, gap-box">
+                <HBox>
+                    <Label text="Total Number of Clients: " styleClass="box-text"/>
+                    <Label fx:id="totalNumberOfClients" styleClass="box-text"/>
+                </HBox>
+                <HBox>
+                    <Label text="Arcane Clients: " styleClass="box-text"/>
+                    <Label fx:id="numberOfArcaneClients" styleClass="box-text"/>
+                    <Label text=" - ( " styleClass="box-text"/>
+                    <Label fx:id="percentageOfArcaneClients" styleClass="box-text"/>
+                    <Label text=" percent of total clients)" styleClass="box-text"/>
+                </HBox>
+                <HBox>
+                    <Label text="Non-Arcane Clients: " styleClass="box-text"/>
+                    <Label fx:id="numberOfNonArcaneClients" styleClass="box-text"/>
+                    <Label text=" - ( " styleClass="box-text"/>
+                    <Label fx:id="percentageOfNonArcaneClients" styleClass="box-text"/>
+                    <Label text=" percent of total clients)" styleClass="box-text"/>
+                </HBox>
+            </VBox>
+
+        </VBox>
+
+        <!-- Contenitore Products -->
+        <VBox fx:id="productsContainer" spacing="10" alignment="CENTER" visible="false">
+            <Label text="Products Section" styleClass="section-title"/>
+            <HBox alignment="CENTER">
+                <VBox>
+                    <Label text="Most Sold Product:" styleClass="item-name"/>
+                    <HBox styleClass="cart-box, gap-box" alignment="CENTER">
+                        <Label fx:id="hotProduct" styleClass="box-text"/>
+                    </HBox>
+                    <Region prefHeight="50"/>
+                    <Label text="Number of Item Sold per Product:" styleClass="item-name"/>
+                    <HBox alignment="CENTER" styleClass="cart-box, gap-box">
+                        <Label fx:id="hotProductNumber" styleClass="box-text"/>
+                    </HBox>
+                </VBox>
+                <Region prefWidth="150"/>
+                <VBox>
+                    <Label text="Least Sold Product:" styleClass="item-name"/>
+                    <HBox styleClass="cart-box, gap-box" alignment="CENTER">
+                        <Label fx:id="uglyProduct" styleClass="box-text"/>
+                    </HBox>
+                    <Region prefHeight="50"/>
+                    <Label text="Number of Item Sold per Product:" styleClass="item-name"/>
+                    <HBox alignment="CENTER" styleClass="cart-box, gap-box">
+                        <Label fx:id="uglyProductNumber" styleClass="box-text"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="10">
+                <Rectangle width="150" height="3"
+                           styleClass="divider"/>
+
+                <Label text="✦"
+                       styleClass="divider-star"/>
+
+                <Rectangle width="150" height="3"
+                           styleClass="divider"/>
+            </HBox>
+
+            <Label text="Chart:" styleClass="item-name"/>
+            <Canvas fx:id="productChartCanvas2" layoutX="50" layoutY="400" width="400" height="300" />
+        </VBox>
+
+        <!-- Contenitore Category -->
+        <VBox fx:id="categoryContainer" spacing="10" alignment="CENTER" visible="false">
+            <Label text="Category Section" styleClass="section-title"/>
+            <HBox alignment="CENTER">
+                <VBox>
+                    <Label text="Most Sold Category:" styleClass="item-name"/>
+                    <HBox styleClass="cart-box, gap-box" alignment="CENTER">
+                        <Label fx:id="hotCategory" styleClass="box-text"/>
+                    </HBox>
+                    <Region prefHeight="50"/>
+                    <Label text="Number of Item Sold per Category:" styleClass="item-name"/>
+                    <HBox alignment="CENTER" styleClass="cart-box, gap-box">
+                        <Label fx:id="hotCategoryNumberSold" styleClass="box-text"/>
+                    </HBox>
+                </VBox>
+                <Region prefWidth="150"/>
+                <VBox>
+                    <Label text="Least Sold Category:" styleClass="item-name"/>
+                    <HBox styleClass="cart-box, gap-box" alignment="CENTER">
+                        <Label fx:id="uglyCategory" styleClass="box-text"/>
+                    </HBox>
+                    <Region prefHeight="50"/>
+                    <Label text="Number of Item Sold per Category:" styleClass="item-name"/>
+                    <HBox alignment="CENTER" styleClass="cart-box, gap-box">
+                        <Label fx:id="uglyCategoryNumberSold" styleClass="box-text"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="10">
+                <Rectangle width="150" height="3"
+                           styleClass="divider"/>
+
+                <Label text="✦"
+                       styleClass="divider-star"/>
+
+                <Rectangle width="150" height="3"
+                           styleClass="divider"/>
+            </HBox>
+
+            <Label text="Chart:" styleClass="item-name"/>
+            <Canvas fx:id="categoryChartCanvas2" layoutX="50" layoutY="400" width="400" height="300" />
+        </VBox>
+    </StackPane>
+</SplitPane>

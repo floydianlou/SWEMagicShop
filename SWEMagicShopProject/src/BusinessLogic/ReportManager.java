@@ -135,14 +135,16 @@ public class ReportManager {
         return customers.size();
     }
 
-    public void persentageOfArcane(){
+    public int[] percentageOfArcane(){
         int arcane = numberOfArcaneMembers();
         int nonArcane = numberOfNonArcaneMembers();
         int total = numberOfCustomers();
         int arcanePercent = arcane * 100 / total;
         int nonArcanePercent = nonArcane * 100 / total;
-        System.out.println("Percentage of Arcane Members: " + arcanePercent);
-        System.out.println("Percentage of Non Arcane Members: " + nonArcanePercent);
+        int [] percentages = new int[2];
+        percentages[0] = arcanePercent;
+        percentages[1] = nonArcanePercent;
+        return percentages;
     }
 
     //FOR GRAPH

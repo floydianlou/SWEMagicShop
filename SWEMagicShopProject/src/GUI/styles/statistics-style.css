@@ -1,0 +1,42 @@
+.purple-background {
+    -fx-background-color: #460E56;
+}
+.pink-background {
+    -fx-background-color: linear-gradient(to bottom, #D2B4DE, #8E44AD);
+}
+.section-button {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-background-color: transparent;
+}
+.section-button:hover {
+    -fx-background-color: #6A1B9A;
+}
+.section-title {
+    -fx-font-size: 60px;
+    -fx-font-weight: 900;
+    -fx-font-family: 'Belwe Bd BT';
+    -fx-text-fill: #460E56;
+    -fx-padding: 0 0 5 0;
+}
+.box-text {
+    -fx-font-size: 18px;
+    -fx-font-weight: 900;
+    -fx-font-family: 'Arimo', Arial, sans-serif;
+    -fx-text-fill: #320A3E;
+}
+.gap-box {
+    -fx-padding: 10px;
+}
+.text-background {
+    -fx-background-color: #D9C3E7;
+    -fx-border-width: 2px;
+    -fx-border-color: #6C3483;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 20;
+    -fx-alignment: center;
+    -fx-max-width: 700px;
+    -fx-pref-width: 700px;
+}
