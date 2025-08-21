@@ -14,6 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.File;
 import java.util.ArrayList;
 
 public class OrderDetailsPopupController {
@@ -53,8 +55,19 @@ public class OrderDetailsPopupController {
             itemRow.setAlignment(Pos.CENTER_LEFT);
             itemRow.getStyleClass().add("cart-item-box");
 
-
-            ImageView itemIcon = new ImageView(new Image(getClass().getResource(item.getImagePath()).toExternalForm()));
+            ImageView itemIcon = new ImageView();
+            try{
+                File imageFile = new File("SWEMagicShopProject/src" + item.getImagePath());
+                if (!imageFile.exists()) {
+                    System.out.println("Image file does NOT exist!");
+                } else {
+                    Image img = new Image(imageFile.toURI().toString());
+                    itemIcon.setImage(img);
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Error Image Not Loaded: " + e.getMessage());
+            }
             itemIcon.setFitWidth(75);
             itemIcon.setFitHeight(100);
             itemIcon.getStyleClass().add("cart-image");
