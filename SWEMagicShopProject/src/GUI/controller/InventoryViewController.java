@@ -13,6 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -47,7 +49,19 @@ public class InventoryViewController {
         itemBox.setPrefHeight(100);
         itemBox.getStyleClass().add("cart-item-box");
 
-        ImageView icon = new ImageView(new Image(getClass().getResource(item.getImagePath()).toExternalForm()));
+        ImageView icon = new ImageView();
+        try{
+            File imageFile = new File("SWEMagicShopProject/src" + item.getImagePath());
+            if (!imageFile.exists()) {
+                System.out.println("Image file does NOT exist!");
+            } else {
+                Image img = new Image(imageFile.toURI().toString());
+                icon.setImage(img);
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Error Image Not Loaded: " + e.getMessage());
+        }
         icon.setFitWidth(75);
         icon.setFitHeight(100);
 

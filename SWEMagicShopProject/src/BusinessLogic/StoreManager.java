@@ -3,6 +3,8 @@ package BusinessLogic;
 import DomainModel.Item;
 import ORM.CategoryDAO;
 import ORM.ItemDAO;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StoreManager {
@@ -22,7 +24,7 @@ public class StoreManager {
         return itemDAO.getItemByID(itemID);
     }
 
-    public boolean addProduct(String itemName, String description, String category, int copperValue, boolean isArcane, String imagePath) throws IllegalArgumentException {
+    public void addProduct(String itemName, String description, String category, int copperValue, boolean isArcane, String imagePath) throws IllegalArgumentException, SQLException {
         ItemDAO itemDAO= new ItemDAO();
         if (copperValue <= 0){
             throw new IllegalArgumentException("Price must be greater than zero!");
@@ -33,10 +35,10 @@ public class StoreManager {
         if(Utilities.checkBooleanArcane(isArcane) == 0){
             throw new IllegalArgumentException("Arcane must be true or false!");
         }
-        return itemDAO.createItem(itemName, description, category, copperValue, isArcane, imagePath);
+        itemDAO.createItem(itemName, description, category, copperValue, isArcane, imagePath);
     }
 
-    public boolean updateProduct(Item updatedItem) throws IllegalArgumentException {
+    public void updateProduct(Item updatedItem) throws IllegalArgumentException {
         ItemDAO itemDAO= new ItemDAO();
         if (updatedItem.getCopperValue() <= 0){
             throw new IllegalArgumentException("Price must be greater than zero!");
@@ -47,7 +49,7 @@ public class StoreManager {
         if(Utilities.checkBooleanArcane(updatedItem.isArcane()) == 0){
             throw new IllegalArgumentException("Arcane must be true or false!");
         }
-        return itemDAO.updateItem(updatedItem);
+        itemDAO.updateItem(updatedItem);
     }
 
     //single function to do the searching in StoreManager

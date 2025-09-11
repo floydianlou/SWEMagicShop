@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS "Category" (
   CPprice INT NOT NULL,
   categoryID INT,
   arcane BOOLEAN NOT NULL,
+  imagePath VARCHAR(100),
   FOREIGN KEY (categoryID) REFERENCES "Category"(categoryID) ON UPDATE CASCADE
   );
 

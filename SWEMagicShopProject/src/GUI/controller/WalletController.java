@@ -116,7 +116,7 @@ public class WalletController {
 
             Stage popupStage = new Stage();
             popupStage.initStyle(StageStyle.TRANSPARENT);
-            popupStage.setTitle("Account Updated");
+            popupStage.setTitle("Wallet Updated");
             Scene scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);
             popupStage.setScene(scene);

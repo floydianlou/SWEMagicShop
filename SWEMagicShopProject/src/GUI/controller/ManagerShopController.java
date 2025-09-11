@@ -1,11 +1,16 @@
 // File: GUI/controller/ManagerShopController.java
 package GUI.controller;
 
+import BusinessLogic.CartManager;
 import BusinessLogic.StoreManager;
 import DomainModel.Item;
 import DomainModel.Manager;
 import BusinessLogic.Utilities;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -13,20 +18,37 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ManagerShopController {
 
+    private Manager loggedManager;
+
     @FXML private TextField searchBar;
     @FXML private TextField minpriceGP;
     @FXML private TextField maxpriceGP;
+
     @FXML private ComboBox<String> filterDropDown;
     @FXML private ComboBox<String> filterArcane;
     @FXML private ComboBox<String> filterCategory;
+
     @FXML private Label errorLabel;
+
     @FXML private ImageView searchIcon;
+
     @FXML private GridPane gridPane;
+
+    @FXML private Button addProductButton;
+    @FXML private Button editProductButton;
 
     private ArrayList<String> allCategories;
     private ArrayList<Item> allProductsSearched;
@@ -42,7 +64,8 @@ public class ManagerShopController {
     @FXML
     public void initialize() {
         // Fix: cast the logged user to Manager instead of Customer
-        Manager loggedManager = (Manager) LoggedUserManager.getInstance().getLoggedUser();
+        loggedManager = (Manager) LoggedUserManager.getInstance().getLoggedUser();
+        storeManager = new StoreManager();
         // LoggedManager can be used if needed in additional logic.
         loadProducts();
         loadCategoryInDropdown();
@@ -85,6 +108,7 @@ public class ManagerShopController {
                 minpriceGP.setVisible(false);
                 maxpriceGP.setVisible(false);
                 filterCategory.setVisible(true);
+                filterCategory.toFront();
                 filterArcane.setVisible(false);
                 break;
             case "Name":
@@ -118,6 +142,7 @@ public class ManagerShopController {
                 maxpriceGP.setVisible(false);
                 filterCategory.setVisible(false);
                 filterArcane.setVisible(true);
+                filterArcane.toFront();
                 break;
             case "All":
                 searchBar.setPromptText("All products...");
@@ -218,15 +243,38 @@ public class ManagerShopController {
             VBox productBox = new VBox();
             productBox.setSpacing(5);
             ImageView productImage = new ImageView();
-            productImage.setImage(new Image(getClass().getResource(product.getImagePath()).toExternalForm()));
+            try{
+                File imageFile = new File("SWEMagicShopProject/src" + product.getImagePath());
+                if (!imageFile.exists()) {
+                    System.out.println("Image file does NOT exist!");
+                } else {
+                    Image img = new Image(imageFile.toURI().toString());
+                    productImage.setImage(img);
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Error Image Not Loaded: " + e.getMessage());
+            }
             productImage.setFitWidth(300);
             productImage.setFitHeight(300);
+
             Button productName = new Button(product.getItemName());
             productName.getStyleClass().add("product-name");
-            productName.setOnMouseClicked(event -> editProductButton(product));
+            productName.setOnMouseClicked(event -> viewProductButton(product));
+
             int[] price = Utilities.normalizeCurrencyArray(product.getCopperValue());
             Label productPrice = new Label(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
-            productBox.getChildren().addAll(productImage, productName, productPrice);
+
+            Button editButton = new Button("Edit Product");
+            editButton.getStyleClass().add("add-to-cart-button");
+            editButton.setOnMouseClicked(_ -> {
+                editProductButton = editButton;
+                handleEditProduct(product);});
+
+            HBox buttonContainer = new HBox(editButton);
+            buttonContainer.setAlignment(Pos.BOTTOM_RIGHT);
+
+            productBox.getChildren().addAll(productImage, productName, productPrice, buttonContainer);
             gridPane.add(productBox, col, row);
             col++;
             if (col == maxCols) {
@@ -237,10 +285,75 @@ public class ManagerShopController {
     }
 
     @FXML
-    private void editProductButton(Item selectedProduct) {
+    private void viewProductButton(Item selectedProduct) {
         ItemViewManager.getInstance().setProductSelected(selectedProduct);
-        mainViewController.loadContent("item-edit-view.fxml");
+        mainViewController.loadContent("manager-product-view.fxml");
         mainViewController.updateTopBar("managerProduct");
+    }
+
+    @FXML
+    private void handleAddProduct() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/add-item-popup.fxml"));
+            Parent root = loader.load();
+
+            AddItemPopupController controller = loader.getController();
+            Stage popupStage = new Stage();
+
+            controller.setStoreManager(storeManager);
+            controller.setStage(popupStage);
+            controller.loadPopUp();
+
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+
+            popupStage.initStyle(StageStyle.TRANSPARENT);
+            popupStage.initModality(Modality.WINDOW_MODAL);
+            popupStage.initOwner(addProductButton.getScene().getWindow());
+            popupStage.setScene(scene);
+            popupStage.setResizable(false);
+            popupStage.setTitle("Add New Product To The Shop");
+            popupStage.showAndWait();
+
+            gridPane.getChildren().clear();
+            loadProducts();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleEditProduct(Item selectedProduct) {
+        try {
+            ItemViewManager.getInstance().setProductSelected(selectedProduct);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/item-edit-popup.fxml"));
+            Parent root = loader.load();
+
+            EditItemPopUpController controller = loader.getController();
+            Stage popupStage = new Stage();
+
+            controller.setStoreManager(storeManager);
+            controller.setStage(popupStage);
+            controller.loadPopUp();
+
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+
+            popupStage.initStyle(StageStyle.TRANSPARENT);
+            popupStage.initModality(Modality.WINDOW_MODAL);
+            popupStage.initOwner(editProductButton.getScene().getWindow());
+            popupStage.setScene(scene);
+            popupStage.setResizable(false);
+            popupStage.setTitle("Edit Product To The Shop");
+            popupStage.showAndWait();
+
+            gridPane.getChildren().clear();
+            loadProducts();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setMainViewController(MainViewController mainViewController) {
