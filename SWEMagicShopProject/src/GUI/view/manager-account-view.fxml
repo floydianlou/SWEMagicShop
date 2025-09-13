@@ -5,10 +5,111 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="GUI.controller.ManagerAccountViewController"
-            prefHeight="400.0" prefWidth="600.0">
+            stylesheets="@../styles/styles.css, @../styles/cart-styles.css">
+
+    <HBox spacing="40">
+
+        <VBox alignment="CENTER_LEFT" spacing="10" >
+            <padding>
+                <Insets top="40" right="10" bottom="10" left="100"/>
+            </padding>
+            <VBox alignment="CENTER">
+                <Label text="ACCOUNT DETAILS"  styleClass="item-name"/>
+            </VBox>
+
+            <Label text="NAME" styleClass="instructions-label"/>
+            <HBox spacing="5" prefWidth="400" styleClass="cart-box" alignment="CENTER_LEFT">
+                <Region prefWidth="10"/>
+                <ImageView fx:id="penIcon1" fitWidth="27" fitHeight="27" visible="false"/>
+                <TextField fx:id="accountName" promptText="Enter your new name..." maxWidth="400" styleClass="input-field"/>
+            </HBox>
+
+            <Label text="SURNAME" styleClass="instructions-label"/>
+            <HBox spacing="5" prefWidth="400" styleClass="cart-box" alignment="CENTER_LEFT">
+                <Region prefWidth="10"/>
+                <ImageView fx:id="penIcon2" fitWidth="27" fitHeight="27" visible="false"/>
+                <TextField fx:id="accountSurname" promptText="Enter your new surname..." maxWidth="400" styleClass="input-field"/>
+            </HBox>
+
+            <Label text="EMAIL ADDRESS" styleClass="instructions-label"/>
+            <HBox spacing="5" prefWidth="400" styleClass="cart-box" alignment="CENTER_LEFT">
+                <Region prefWidth="10"/>
+                <ImageView fx:id="penIcon3" fitWidth="27" fitHeight="27" visible="false"/>
+                <TextField fx:id="accountEmail" promptText="Enter your new e-mail..." HBox.hgrow="ALWAYS" prefWidth="400" styleClass="input-field"/>
+            </HBox>
+
+            <Label text="PASSWORD" styleClass="instructions-label"/>
+            <HBox spacing="5" prefWidth="400" styleClass="cart-box" alignment="CENTER_LEFT">
+                <Region prefWidth="10"/>
+                <ImageView fx:id="penIcon4" fitWidth="27" fitHeight="27" visible="false"/>
+                <StackPane>
+                    <PasswordField fx:id="accountPasswordField" styleClass="input-field"/>
+                    <TextField fx:id="accountPassword" promptText="Enter your new password..." maxWidth="400" styleClass="input-field" visible="false"/>
+                </StackPane>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button style="-fx-background-color: transparent" onAction="#togglePassword" >
+                    <graphic>
+                        <ImageView fx:id="eyeIcon" fitHeight="20" fitWidth="20"/>
+                    </graphic>
+                </Button>
+            </HBox>
+        </VBox>
+
+        <Region prefWidth="250"/>
+
+        <VBox alignment="CENTER_RIGHT" spacing="20">
+            <padding>
+                <Insets top="20" right="40"/>
+            </padding>
+            <VBox alignment="TOP_RIGHT">
+                <Button fx:id="edit" styleClass="choice-button" onAction="#handleEditAccount" text="Edit"/>
+                <HBox spacing="20" alignment="TOP_RIGHT">
+                    <Button fx:id="confirmEdit" styleClass="confirm-button" onAction="#editAccount" text="Confirm" visible="false"/>
+                    <Button fx:id="cancelEdit" styleClass="cancel-button" onAction="#cancelEdit" text="Cancel" visible="false"/>
+                </HBox>
+            </VBox>
+
+            <HBox alignment="CENTER_RIGHT" spacing="20">
+                <VBox alignment="CENTER" spacing="10" prefHeight="270" prefWidth="270" styleClass="cart-box" style="-fx-padding: 10;">
+                    <Button styleClass="tool-bar-button" onAction="#goToManageArcaneRequest">
+                        <graphic>
+                            <ImageView fx:id="arcaneIcon" fitHeight="100" fitWidth="100"/>
+                        </graphic>
+                        <tooltip>
+                            <Tooltip text="Go to Manage Arcane Request"/>
+                        </tooltip>
+                    </Button>
+                    <Label text="Manage Arcane Membership" styleClass="item-name"/>
+                    <Label text="Decide for yourself whose worthy of becoming your patron!"
+                           styleClass="small-text" wrapText="true" textAlignment="CENTER"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="10" prefHeight="270" prefWidth="270" styleClass="cart-box" style="-fx-padding: 10;">
+                    <Button styleClass="tool-bar-button" onAction="#goToStatistics">
+                        <graphic>
+                            <ImageView fx:id="orderIcon" fitHeight="100" fitWidth="100"/>
+                        </graphic>
+                        <tooltip>
+                            <Tooltip text="Go to Statistics"/>
+                        </tooltip>
+                    </Button>
+                    <Label text="Statistics" styleClass="item-name"/>
+                    <Label text="Here you'll be able to see all the information regarding the income of your shop!"
+                           styleClass="small-text" wrapText="true" textAlignment="CENTER"/>
+                </VBox>
+
+            </HBox>
+
+            <Label fx:id="errorLabel" styleClass="error-label" />
+
+        </VBox>
+
+    </HBox>
 
 </AnchorPane>
