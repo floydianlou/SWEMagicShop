@@ -67,12 +67,15 @@ public class ManagerProductViewController {
         productCategory.getStyleClass().add("order-writing");
 
         if (selectedProduct.isArcane()) {
+            arcaneBox.getChildren().clear();
             ImageView arcaneIcon = new ImageView(new Image(getClass().getResource("/images/arcaneItem.png").toExternalForm()));
             arcaneIcon.setFitWidth(40);
             arcaneIcon.setFitHeight(40);
 
-            arcaneBox.getChildren().addAll(arcaneIcon);
+            arcaneBox.getChildren().add(arcaneIcon);
             arcaneBox.setAlignment(Pos.CENTER_LEFT);
+        }else{
+            arcaneBox.getChildren().clear();
         }
 
         int[] price = Utilities.normalizeCurrencyArray(selectedProduct.getCopperValue());
