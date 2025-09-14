@@ -9,15 +9,21 @@ import java.util.ArrayList;
 
 public class StoreManager {
 
-    public StoreManager() {}
+    ItemDAO itemDAO;
+
+    public StoreManager(ItemDAO itemDAO) {
+        this.itemDAO = itemDAO;
+    }
+
+    public StoreManager() {
+        this.itemDAO = new ItemDAO();
+    }
 
     public ArrayList<Item> listProducts() {
-        ItemDAO itemDAO= new ItemDAO();
         return itemDAO.getAllItems();
     }
 
     public Item getProductByID(int itemID) throws IllegalArgumentException {
-        ItemDAO itemDAO= new ItemDAO();
         if(itemID <= 0){
             throw new IllegalArgumentException("Invalid item ID!");
         }
@@ -25,7 +31,6 @@ public class StoreManager {
     }
 
     public void addProduct(String itemName, String description, String category, int copperValue, boolean isArcane, String imagePath) throws IllegalArgumentException, SQLException {
-        ItemDAO itemDAO= new ItemDAO();
         if (copperValue <= 0){
             throw new IllegalArgumentException("Price must be greater than zero!");
         }
@@ -39,7 +44,6 @@ public class StoreManager {
     }
 
     public void updateProduct(Item updatedItem) throws IllegalArgumentException {
-        ItemDAO itemDAO= new ItemDAO();
         if (updatedItem.getCopperValue() <= 0){
             throw new IllegalArgumentException("Price must be greater than zero!");
         }
@@ -54,22 +58,18 @@ public class StoreManager {
 
     //single function to do the searching in StoreManager
     public ArrayList<Item> searchProductsByName(String itemName) {
-        ItemDAO itemDAO= new ItemDAO();
         return itemDAO.getItemsByName(itemName);
     }
 
     public ArrayList<Item> searchProductsByNameNonArcane(String itemName) {
-        ItemDAO itemDAO= new ItemDAO();
         return itemDAO.getItemsByNameNonArcane(itemName);
     }
 
     public ArrayList<Item> searchProductsByDescription(String itemDescription) {
-        ItemDAO itemDAO= new ItemDAO();
         return itemDAO.getItemsByDescription(itemDescription);
     }
 
     public ArrayList<Item> searchProductsByDescriptionNonArcane(String itemName) {
-        ItemDAO itemDAO= new ItemDAO();
         return itemDAO.getItemsByDescriptionNonArcane(itemName);
     }
 
@@ -77,7 +77,6 @@ public class StoreManager {
         if(!Utilities.checkCategory(itemCategory)){
             throw new IllegalArgumentException("Invalid category!");
         }
-        ItemDAO itemDAO= new ItemDAO();
         return itemDAO.getItemsByCategory(itemCategory);
     }
 
@@ -85,12 +84,10 @@ public class StoreManager {
         if(!Utilities.checkCategory(itemCategory)){
             throw new IllegalArgumentException("Invalid category!");
         }
-        ItemDAO itemDAO= new ItemDAO();
         return itemDAO.getItemsByCategoryNonArcane(itemCategory);
     }
 
     public ArrayList<Item> searchProductsByArcane(String arcane) throws IllegalArgumentException {
-        ItemDAO itemDAO = new ItemDAO();
         boolean isArcane;
 
         if (arcane.equalsIgnoreCase("true")) {
@@ -109,7 +106,6 @@ public class StoreManager {
             throw new IllegalArgumentException("Invalid price range!");
         }
 
-        ItemDAO itemDAO = new ItemDAO();
         return itemDAO.getItemsByPriceRange(minPrice, maxPrice);
     }
 
@@ -118,7 +114,6 @@ public class StoreManager {
             throw new IllegalArgumentException("Invalid price range!");
         }
 
-        ItemDAO itemDAO = new ItemDAO();
         return itemDAO.getItemsByPriceRangeNonArcane(minPrice, maxPrice);
     }
 

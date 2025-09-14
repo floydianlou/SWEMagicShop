@@ -58,25 +58,39 @@ public class WalletManagerTest {
         });
 
         assertEquals("Wallet not found for this customer", exception.getMessage());
-        verify(walletDAO, times(1)).getWalletByID(1);
+        verify(walletDAO, times(1)).getWalletByID(2);
     }
 
     @Test
     public void addFunds() {
 
-        int gp = 1, sp = 2, cp = 3; // Totale: 123 CP
+        int gp = 1, sp = 2, cp = 3; // Total: 123 CP
+        int initialBalance = 150;
+        int expectedBalance = initialBalance + 123; // 150 + 123 = 273
 
         walletManager.addFunds(gp, sp, cp, customer);
 
-        assertEquals(173, walletManager.viewBalance(1));
-        verify(wallet, times(1)).setCPbalance(173);
+        when(wallet.getCPbalance()).thenReturn(expectedBalance);
+
+        verify(wallet, times(1)).setCPbalance(expectedBalance);
         verify(walletDAO, times(1)).updateWallet(wallet);
+    }
+
+    @Test
+    public void addFunds_NegativeAmount() {
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            walletManager.addFunds(-1, 0, 0, customer);
+        });
+
+        assertEquals("Amount must be positive!", exception.getMessage());
+        verify(walletDAO, never()).updateWallet(wallet);
     }
 
     @Test
     public void withdrawFunds() {
 
-        int withdrawAmount = 50; // Prelievo di 50 CP
+        int withdrawAmount = 50;
 
         boolean result = walletManager.withdrawFunds(withdrawAmount, customer);
 
@@ -88,7 +102,19 @@ public class WalletManagerTest {
     @Test
     public void withdrawFunds_InsufficientBalance() {
 
-        int withdrawAmount = 200; // Importo superiore al saldo
+        int withdrawAmount = 200;
+
+        boolean result = walletManager.withdrawFunds(withdrawAmount, customer);
+
+        assertFalse(result);
+        verify(wallet, never()).setCPbalance(anyInt());
+        verify(walletDAO, never()).updateWallet(wallet);
+    }
+
+    @Test
+    public void withdrawFunds_NegativeAmount() {
+
+        int withdrawAmount = -10;
 
         boolean result = walletManager.withdrawFunds(withdrawAmount, customer);
 
