@@ -31,4 +31,16 @@ public class ConnectionManager {
         }
         return connection;
     }
+
+    public void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                connection = null;
+            }
+        }
+    }
 }

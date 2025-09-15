@@ -1,8 +1,7 @@
-package tests.BusinessLogicTest;
+package tests.BusinessLogic_and_ORM_Test;
 
 
 import BusinessLogic.ReportManager;
-import Exceptions.InventoryExceptions;
 import ORM.InventoryDAO;
 import ORM.AccountDAO;
 import DomainModel.Customer;
@@ -12,7 +11,6 @@ import org.jfree.chart.JFreeChart;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 
 import java.util.ArrayList;
 

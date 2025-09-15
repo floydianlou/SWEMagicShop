@@ -1,6 +1,7 @@
-package tests.BusinessLogicTest;
+package tests.BusinessLogic_and_ORM_Test;
 
 import BusinessLogic.StoreManager;
+import ORM.ConnectionManager;
 import ORM.ItemDAO;
 import DomainModel.Item;
 
@@ -78,6 +79,14 @@ public class StoreManagerTest {
         itemDAO = null;
         arcaneItem = null;
         nonArcaneItem = null;
+
+        // chiudiamo la connessione statica per sicurezza dato che con i metodi statici Utilities
+        // checkCategory il categoryDAO fa accesso al database
+        try {
+            ConnectionManager.getInstance().closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

@@ -1,4 +1,4 @@
-package tests.BusinessLogicTest;
+package tests.BusinessLogic_and_ORM_Test;
 
 import BusinessLogic.WalletManager;
 import DomainModel.Customer;
