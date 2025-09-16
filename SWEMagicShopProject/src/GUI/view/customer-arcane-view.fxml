@@ -39,82 +39,116 @@
               prefHeight="850"
               styleClass="arcane-container">
 
-            <VBox fx:id="contentBox"
+            <VBox fx:id="statusBox"
                   alignment="TOP_CENTER"
                   spacing="20"
                   prefHeight="850"
                   prefWidth="700"
                   maxWidth="700"
                   minWidth="700"
-                  VBox.vgrow="ALWAYS"
-                  styleClass="column-box"/>
+                  styleClass="column-box">
+
+                <Label text="Your Arcane Membership status" styleClass="arcane-subtitle"/>
+
+                <VBox fx:id="contentBox"
+                      alignment="TOP_CENTER"
+                      spacing="20"
+                      prefHeight="850"
+                      prefWidth="700"
+                      maxWidth="700"
+                      minWidth="700"
+                      VBox.vgrow="ALWAYS"
+                      styleClass="column-box"/>
+
+                <Button text="View my Arcane Requests"
+                        fx:id="viewArcaneRequestsButton"
+                        onAction="#viewArcaneRequests"
+                        styleClass="arcane-button"/>
+
+            </VBox>
 
             <Separator orientation="VERTICAL" prefHeight="300"/>
 
-        <VBox fx:id="faqBox" alignment="TOP_CENTER" spacing="10">
+            <VBox fx:id="faqBox" alignment="TOP_CENTER" spacing="10">
 
-            <Label text="FAQ" styleClass="arcane-subtitle"/>
+                <Label text="FAQ" styleClass="arcane-subtitle"/>
 
-            <ScrollPane fx:id="faqScrollPane"
-                        fitToWidth="true"
-                        hbarPolicy="NEVER"
-                        vbarPolicy="AS_NEEDED"
-                        prefHeight="850"
-                        maxHeight="850"
-                        prefWidth="700"
-                        maxWidth="700"
-                        styleClass="faq-scroll">
+                <ScrollPane fx:id="faqScrollPane"
+                            fitToWidth="true"
+                            hbarPolicy="NEVER"
+                            vbarPolicy="AS_NEEDED"
+                            prefHeight="850"
+                            maxHeight="850"
+                            prefWidth="700"
+                            maxWidth="700"
+                            styleClass="faq-scroll">
 
-                <VBox fx:id="questionsBox" spacing="10">
-                    <VBox spacing="5">
-                        <HBox spacing="10" alignment="CENTER_LEFT">
-                            <Label text="What is an Arcane Membership?" fx:id="question1" wrapText="true"
-                            styleClass="faq-question-label"/>
-                            <Button text="+" fx:id="toggle1" onAction="#toggleAnswer1"
-                            styleClass="faq-toggle-button"/>
-                        </HBox>
+                    <VBox fx:id="questionsBox" spacing="10">
+                        <VBox spacing="5">
+                            <HBox spacing="10" alignment="CENTER_LEFT">
+                                <Label text="What is an Arcane Membership?" fx:id="question1" wrapText="true"
+                                       styleClass="faq-question-label"/>
+                                <Button text="+" fx:id="toggle1" onAction="#toggleAnswer1"
+                                        styleClass="faq-toggle-button"/>
+                            </HBox>
 
-                        <VBox fx:id="answerBox1" visible="false" managed="false"
-                              styleClass="faq-answer-box">
-                            <Label text="An Arcane Membership is an exclusive title given only to the most loyal and frequent customers of our shop. Requesting a Membership is an action that should be taken seriously, as your personal profile (including the items you buy and your history with our shop) will be reviewed and judged accordingly by one of our shop managers." wrapText="true"
-                            styleClass="faq-answer-label"/>
+                            <VBox fx:id="answerBox1" visible="false" managed="false"
+                                  styleClass="faq-answer-box">
+                                <Label text="An Arcane Membership is an exclusive title given only to the most loyal and frequent customers of our shop. Requesting a Membership is an action that should be taken seriously as your personal profile - including the items you buy and your history with our shop - will be reviewed and judged accordingly by one of our shop managers." wrapText="true"
+                                       styleClass="faq-answer-label"/>
+                            </VBox>
                         </VBox>
+
+                        <VBox spacing="5">
+                            <HBox spacing="10" alignment="CENTER_LEFT">
+                                <Label text="What are the benefits of becoming an Arcane Member?"
+                                       fx:id="question2" wrapText="true" styleClass="faq-question-label"/>
+                                <Button text="+" fx:id="toggle2" onAction="#toggleAnswer2"
+                                        styleClass="faq-toggle-button"/>
+                            </HBox>
+
+                            <VBox fx:id="answerBox2" visible="false" managed="false"
+                                  styleClass="faq-answer-box">
+                                <Label text="Becoming an Arcane Member is the only way in Otari to access 'peculiar' items which cannot be found elsewhere. Please refrain from asking our staff what items are included in our membership. The shop reserves the right to terminate your account if such questions arise. (See Kortos Guild Regulation §625-C: “Mind your business.”)"
+                                       wrapText="true" styleClass="faq-answer-label"/>
+                            </VBox>
+                        </VBox>
+
+                        <VBox spacing="5">
+                            <HBox spacing="10" alignment="CENTER_LEFT">
+                                <Label text="Can anyone request a Membership?" fx:id="question3" wrapText="true"
+                                       styleClass="faq-question-label"/>
+                                <Button text="+" fx:id="toggle3" onAction="#toggleAnswer3"
+                                        styleClass="faq-toggle-button"/>
+                            </HBox>
+
+                            <VBox fx:id="answerBox3" visible="false" managed="false"
+                                  styleClass="faq-answer-box">
+                                <Label text="Golarion's Regional Arcana Code §17-H strictly obliges us to accept Membership requests from any and all citizens of our province, regardless of magical lineage, planar origin, or amount of gold spent in our store. However, as clearly stated in the Kortos Guild Manual (Annex FPE, page 151), the final decision rests with our shop Managers. In accordance with Magical Fair Access Statute §13-A, denial of a request shall not be construed as discrimination, but rather as the result of comprehensive, mystically-informed judgement." wrapText="true"
+                                       styleClass="faq-answer-label"/>
+                            </VBox>
+                        </VBox>
+
+                        <VBox spacing="5">
+                            <HBox spacing="10" alignment="CENTER_LEFT">
+                                <Label text="How many times can I request a Membership?" fx:id="question4" wrapText="true"
+                                       styleClass="faq-question-label"/>
+                                <Button text="+" fx:id="toggle4" onAction="#toggleAnswer4"
+                                        styleClass="faq-toggle-button"/>
+                            </HBox>
+
+                            <VBox fx:id="answerBox4" visible="false" managed="false"
+                                  styleClass="faq-answer-box">
+                                <Label text="We allow our dear customers to submit a total of five Arcane Membership requests. Once this limit is reached, the account will be permanently excluded from making requests, though it will still retain access to all mundane items in our shop. After all, we wouldn’t want potentially dangerous individuals flooding our post with futile applications." wrapText="true"
+                                       styleClass="faq-answer-label"/>
+                            </VBox>
+                        </VBox>
+
                     </VBox>
 
-                    <VBox spacing="5">
-                        <HBox spacing="10" alignment="CENTER_LEFT">
-                            <Label text="What does an Arcane Membership entail?" fx:id="question2" wrapText="true"
-                            styleClass="faq-question-label"/>
-                            <Button text="+" fx:id="toggle2" onAction="#toggleAnswer2"
-                            styleClass="faq-toggle-button"/>
-                        </HBox>
+                </ScrollPane>
 
-                        <VBox fx:id="answerBox2" visible="false" managed="false"
-                              styleClass="faq-answer-box">
-                            <Label text="Answer 2." wrapText="true"
-                            styleClass="faq-answer-label"/>
-                        </VBox>
-                    </VBox>
-
-                    <VBox spacing="5">
-                        <HBox spacing="10" alignment="CENTER_LEFT">
-                            <Label text="How can I request a Membership?" fx:id="question3" wrapText="true"
-                            styleClass="faq-question-label"/>
-                            <Button text="+" fx:id="toggle3" onAction="#toggleAnswer3"
-                            styleClass="faq-toggle-button"/>
-                        </HBox>
-
-                        <VBox fx:id="answerBox3" visible="false" managed="false"
-                              styleClass="faq-answer-box">
-                            <Label text="Answer 3." wrapText="true"
-                            styleClass="faq-answer-label"/>
-                        </VBox>
-                    </VBox>
-                </VBox>
-
-            </ScrollPane>
-
-        </VBox>
+            </VBox>
 
         </HBox>
 

@@ -9,7 +9,7 @@ class ArcaneRequestTest {
 
     @Test
     void testFullConstructor() {
-        ArcaneRequest request = new ArcaneRequest(1, "Pending", 100, "John Doe");
+        ArcaneRequest request = new ArcaneRequest(1, "Pending", 100, "John Doe", "2024-10-01");
         assertEquals(1, request.getRequestID());
         assertEquals("Pending", request.getRequestStatus());
         assertEquals(100, request.getCustomerID());
@@ -36,7 +36,7 @@ class ArcaneRequestTest {
 
     @Test
     void testSettersAndGetters() {
-        ArcaneRequest request = new ArcaneRequest(1, "Pending", 100, "John Doe");
+        ArcaneRequest request = new ArcaneRequest(1, "Pending", 100, "John Doe", "2024-10-01");
 
         request.setRequestID(10);
         request.setCustomerID(200);
@@ -47,13 +47,4 @@ class ArcaneRequestTest {
         assertEquals("Approved", request.getRequestStatus());
     }
 
-    @Test
-    void testGetArcaneRequestData() {
-        ArcaneRequest request = new ArcaneRequest(1, "Pending", 100, "John Doe");
-        String data = request.getArcaneRequestData();
-
-        assertTrue(data.contains("ArcaneRequestID: 1"));
-        assertTrue(data.contains("ArcaneRequestCustomer: 100"));
-        assertTrue(data.contains("ArcaneRequestStatus: Pending"));
-    }
 }

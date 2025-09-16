@@ -22,7 +22,7 @@ public class ArcaneDAO {
     }
 
     public ArrayList<ArcaneRequest> viewRequestsByCustomer(int customerID) {
-        String arcanesql = "SELECT a.requestid, c.customerid, c.name as customername, r.name as status " +
+        String arcanesql = "SELECT a.requestid, c.customerid, c.name as customername, r.name as status, a.requestDate " +
                 "FROM \"ArcaneRequest\" a JOIN \"Customer\" c on a.customerid = c.customerid " +
                 "JOIN \"RequestStatus\" r on a.statusid = r.statusid " +
                 "WHERE a.customerid = ? " +
@@ -36,7 +36,8 @@ public class ArcaneDAO {
                     int customerid = set.getInt("customerid");
                     String customername = set.getString("customername");
                     String status = set.getString ("status");
-                    arcaneRequests.add(new ArcaneRequest(requestid, status, customerid, customername));
+                    String date = set.getString ("requestDate");
+                    arcaneRequests.add(new ArcaneRequest(requestid, status, customerid, customername, date));
                 }
             }
         } catch (SQLException e) {
@@ -87,7 +88,7 @@ public class ArcaneDAO {
                 if (!set.next()) {
                     throw new SQLException("Failed to create new request: no ID returned.");
                 }
-          return set.getInt("requestid"); // returns request id to GUI.view in gui
+                return set.getInt("requestid"); // returns request id to GUI.view in gui
             }
         } catch (SQLException e) {
             throw new ArcaneExceptions.ArcaneCreationException("Something went wrong while creating your request.");
@@ -96,7 +97,7 @@ public class ArcaneDAO {
 
 
     public ArrayList<ArcaneRequest> viewAllArcaneRequests() {
-        String allsql = "SELECT a.requestid, c.customerid, c.name as customername, r.name as status " +
+        String allsql = "SELECT a.requestid, c.customerid, c.name as customername, r.name as status, a.requestDate " +
                 "FROM \"ArcaneRequest\" a JOIN \"Customer\" c on a.customerid = c.customerid " +
                 "JOIN \"RequestStatus\" r on a.statusid = r.statusid;";
         ArrayList<ArcaneRequest> arcaneRequests = new ArrayList<>();
@@ -107,7 +108,8 @@ public class ArcaneDAO {
                     int customerid = set.getInt("customerid");
                     String customername = set.getString("customername");
                     String status = set.getString ("status");
-                    arcaneRequests.add(new ArcaneRequest(requestid, status, customerid, customername));
+                    String date = set.getString ("requestDate");
+                    arcaneRequests.add(new ArcaneRequest(requestid, status, customerid, customername, date));
                 }
             }
         } catch (SQLException e) {
@@ -117,7 +119,7 @@ public class ArcaneDAO {
     }
 
     public ArrayList<ArcaneRequest> viewPendingRequests() {
-        String pendingsql = "SELECT a.requestid, c.customerid, c.name as customername, r.name as status " +
+        String pendingsql = "SELECT a.requestid, c.customerid, c.name as customername, r.name as status, a.requestDate " +
                 "FROM \"ArcaneRequest\" a JOIN \"Customer\" c on a.customerid = c.customerid " +
                 "JOIN \"RequestStatus\" r on a.statusid = r.statusid " +
                 "WHERE a.statusid = 1;";
@@ -129,7 +131,8 @@ public class ArcaneDAO {
                     int customerid = set.getInt("customerid");
                     String customername = set.getString("customername");
                     String status = set.getString ("status");
-                    arcaneRequests.add(new ArcaneRequest(requestid, status, customerid, customername));
+                    String date = set.getString ("requestDate");
+                    arcaneRequests.add(new ArcaneRequest(requestid, status, customerid, customername, date));
                 }
             }
         } catch (SQLException e) {
@@ -161,19 +164,19 @@ public class ArcaneDAO {
             }
             if (usetransaction) { connection.commit(); }
             return true;
-            } catch (SQLException e) {
-                if (usetransaction) {
+        } catch (SQLException e) {
+            if (usetransaction) {
                 try {
                     connection.rollback();
                 } catch (SQLException e1) {
                     System.out.println("Error while doing rollback: " + e1.getMessage());
-                    }
                 }
-                throw new ArcaneExceptions.ArcaneCreationException("There was an error in managing the database: " + e.getMessage());
-            } finally {
-                if (usetransaction) {
-                    try {
-                        connection.setAutoCommit(true);
+            }
+            throw new ArcaneExceptions.ArcaneCreationException("There was an error in managing the database: " + e.getMessage());
+        } finally {
+            if (usetransaction) {
+                try {
+                    connection.setAutoCommit(true);
                 } catch (SQLException e2) {
                     System.out.println("Error while reactivating auto commit: " + e2.getMessage());
                 }

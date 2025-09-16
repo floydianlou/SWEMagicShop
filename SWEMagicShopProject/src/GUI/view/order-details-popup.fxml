@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
 
 <VBox fx:controller="GUI.controller.OrderDetailsPopupController"
       xmlns="http://javafx.com/javafx"
@@ -15,11 +18,10 @@
     <Label fx:id="dateLabel" styleClass="order-writing"/>
     <Label fx:id="priceLabel" styleClass="item-price"/>
 
-    <ScrollPane fx:id="itemsScrollPane" fitToWidth="true" prefHeight="650" styleClass="popup-item-box"/>
+    <ScrollPane fx:id="objectsScrollPane" fitToWidth="true" prefHeight="650" styleClass="popup-item-box"/>
 
     <HBox alignment="CENTER">
         <Button fx:id="backButton"
-                text="Back to orders"
                 onAction="#handleClosePopup"
                 styleClass="popup-close-button"/>
     </HBox>

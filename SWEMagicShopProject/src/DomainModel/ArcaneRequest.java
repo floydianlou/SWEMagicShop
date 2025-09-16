@@ -2,14 +2,15 @@ package DomainModel;
 
 public class ArcaneRequest {
     private int requestID, customerID;
-    private String requestStatus, customerName;
+    private String requestStatus, customerName, requestDate;
 
     // VIEW CONSRUCTOR
-    public ArcaneRequest (int requestID, String requestStatus, int customerID,  String customerName) {
+    public ArcaneRequest (int requestID, String requestStatus, int customerID,  String customerName, String requestDate) {
         this.customerID = customerID;
         this.requestID = requestID;
         this.requestStatus = requestStatus;
         this.customerName = customerName;
+        this.requestDate = requestDate;
     }
 
     public ArcaneRequest (int requestID, String requestStatus, int customerID) {
@@ -21,10 +22,6 @@ public class ArcaneRequest {
     // CUSTOMER CONSTRUCTOR
     public ArcaneRequest (int customerID) {
         this.customerID = customerID;
-    }
-
-    public String getArcaneRequestData() {
-        return "ArcaneRequestID: " + requestID + "\n ArcaneRequestCustomer: "+ customerID + "\n ArcaneRequestStatus: "+ requestStatus;
     }
 
     //GETTER AND SETTER
@@ -55,5 +52,9 @@ public class ArcaneRequest {
 
     public void setRequestStatus(String requestStatus) {
         this.requestStatus = requestStatus;
+    }
+
+    public String getRequestDate() {
+        return requestDate;
     }
 }
