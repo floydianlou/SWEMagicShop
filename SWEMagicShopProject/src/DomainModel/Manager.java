@@ -7,4 +7,7 @@ public class Manager extends Person {
         super(personID, name, surname, email, password);
     }
 
+    public Manager(int personID) {
+        super(personID);
+    }
 }
