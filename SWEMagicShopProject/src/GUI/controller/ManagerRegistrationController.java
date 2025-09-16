@@ -2,11 +2,17 @@ package GUI.controller;
 
 import BusinessLogic.AccountManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ManagerRegistrationController {
 
@@ -53,7 +59,6 @@ public class ManagerRegistrationController {
         try {
             accountManager.createManagerAccount(name, surname, email, password);
             showConfirmation();
-            SceneController.loadScene("choose-registration-type.fxml");
         } catch (RuntimeException e) {
             errorLabel.setText(e.getMessage());
         } catch (Exception ex) {
@@ -63,6 +68,26 @@ public class ManagerRegistrationController {
     }
 
     private void showConfirmation() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/popup.fxml"));
+            Parent root = loader.load();
+
+            PopupController popupController = loader.getController();
+            popupController.setPopupContent("Account Created", "Your account has been created successfully.", "Back to welcome page");
+
+            Stage popupStage = new Stage();
+            popupStage.initStyle(StageStyle.TRANSPARENT);
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+            popupStage.setScene(scene);
+            popupStage.setResizable(false);
+            popupStage.setTitle("Account Created");
+            popupStage.showAndWait();
+            SceneController.loadScene("welcome-view.fxml");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("Manager account created successfully.");
     }
 

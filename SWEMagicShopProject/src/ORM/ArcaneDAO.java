@@ -88,7 +88,7 @@ public class ArcaneDAO {
                 if (!set.next()) {
                     throw new SQLException("Failed to create new request: no ID returned.");
                 }
-          return set.getInt("requestid"); // returns request id to GUI.view in gui
+                return set.getInt("requestid"); // returns request id to GUI.view in gui
             }
         } catch (SQLException e) {
             throw new ArcaneExceptions.ArcaneCreationException("Something went wrong while creating your request.");
@@ -164,19 +164,19 @@ public class ArcaneDAO {
             }
             if (usetransaction) { connection.commit(); }
             return true;
-            } catch (SQLException e) {
-                if (usetransaction) {
+        } catch (SQLException e) {
+            if (usetransaction) {
                 try {
                     connection.rollback();
                 } catch (SQLException e1) {
                     System.out.println("Error while doing rollback: " + e1.getMessage());
-                    }
                 }
-                throw new ArcaneExceptions.ArcaneCreationException("There was an error in managing the database: " + e.getMessage());
-            } finally {
-                if (usetransaction) {
-                    try {
-                        connection.setAutoCommit(true);
+            }
+            throw new ArcaneExceptions.ArcaneCreationException("There was an error in managing the database: " + e.getMessage());
+        } finally {
+            if (usetransaction) {
+                try {
+                    connection.setAutoCommit(true);
                 } catch (SQLException e2) {
                     System.out.println("Error while reactivating auto commit: " + e2.getMessage());
                 }

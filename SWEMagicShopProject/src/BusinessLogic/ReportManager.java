@@ -17,20 +17,28 @@ import java.util.Map;
 
 public class ReportManager {
 
-    public ReportManager() {}
+    InventoryDAO inventoryDAO;
+    AccountDAO accountDAO;
+
+    public ReportManager(InventoryDAO inventoryDAO, AccountDAO accountDAO) {
+        this.inventoryDAO = inventoryDAO;
+        this.accountDAO = accountDAO;
+    }
+
+    public ReportManager() {
+        this.inventoryDAO = new InventoryDAO();
+        this.accountDAO = new AccountDAO();
+    }
 
     public String hotCategory(){
-        InventoryDAO inventoryDAO = new InventoryDAO();
         return inventoryDAO.categoryMostSold();
     }
 
     public String uglyCategory(){
-        InventoryDAO inventoryDAO = new InventoryDAO();
         return inventoryDAO.categoryLeastSold();
     }
 
     public int categoryNum(String category){
-        InventoryDAO inventoryDAO = new InventoryDAO();
         if(!Utilities.checkCategory(category)){
             throw new IllegalArgumentException("Invalid category!");
         }
@@ -38,7 +46,6 @@ public class ReportManager {
     }
 
     public Item hotProduct(){
-        InventoryDAO inventoryDAO = new InventoryDAO();
         Item item = inventoryDAO.productMostSold();
         if(item == null){
             throw new IllegalArgumentException("Item not found!");
@@ -47,7 +54,6 @@ public class ReportManager {
     }
 
     public Item uglyProduct(){
-        InventoryDAO inventoryDAO = new InventoryDAO();
         Item item = inventoryDAO.productLeastSold();
         if(item == null){
             throw new IllegalArgumentException("Item not found!");
@@ -56,7 +62,6 @@ public class ReportManager {
     }
 
     public int productNumById(int itemid){
-        InventoryDAO inventoryDAO = new InventoryDAO();
         if( itemid <= 0 ){
             throw new IllegalArgumentException("ItemID not valid!");
         }
@@ -68,7 +73,6 @@ public class ReportManager {
     }
 
     public Customer viewBiggestSpender(){
-        InventoryDAO inventoryDAO = new InventoryDAO();
         Customer customer = inventoryDAO.biggestSpender();
         if(customer == null){
             throw new IllegalArgumentException("Customer not found.");
@@ -77,7 +81,6 @@ public class ReportManager {
     }
 
     public int viewTotalSpentByCustomerId(int customerid){
-        InventoryDAO inventoryDAO = new InventoryDAO();
         if(customerid <= 0){
             throw new IllegalArgumentException("CustomerID not valid!");
         }
@@ -89,7 +92,6 @@ public class ReportManager {
     }
 
     public Customer viewSmallestSpender(){
-        InventoryDAO inventoryDAO = new InventoryDAO();
         Customer customer = inventoryDAO.smallestSpender();
         if(customer == null){
             throw new IllegalArgumentException("Customer not found.");
@@ -97,7 +99,6 @@ public class ReportManager {
     }
 
     public int revenue(){
-        InventoryDAO inventoryDAO = new InventoryDAO();
         int revenue = inventoryDAO.totalRevenue();
         if(revenue == -1){
             throw new IllegalArgumentException("Revenue not found!");
@@ -106,7 +107,6 @@ public class ReportManager {
     }
 
     public int numberOfArcaneMembers(){
-        AccountDAO accountDAO = new AccountDAO();
         ArrayList<Customer> customers = accountDAO.viewAllCustomers();
         int arcane = 0;
         for (Customer c : customers) {
@@ -118,7 +118,6 @@ public class ReportManager {
     }
 
     public int numberOfNonArcaneMembers(){
-        AccountDAO accountDAO = new AccountDAO();
         ArrayList<Customer> customers = accountDAO.viewAllCustomers();
         int nonArcane = 0;
         for (Customer c : customers) {
@@ -130,7 +129,6 @@ public class ReportManager {
     }
 
     public int numberOfCustomers() {
-        AccountDAO accountDAO = new AccountDAO();
         ArrayList<Customer> customers = accountDAO.viewAllCustomers();
         return customers.size();
     }

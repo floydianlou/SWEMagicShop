@@ -21,6 +21,19 @@ CREATE TABLE "Manager" (
   password VARCHAR(50) NOT NULL 
   );
 
+CREATE TABLE "Species"(
+  speciesID SERIAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  adultAge  INT NOT NULL,
+  limitAge  INT NOT NULL
+);
+
+CREATE TABLE "Category" (
+  categoryID SERIAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  description VARCHAR(100)
+);
+
 CREATE TABLE "Customer" (
   customerID SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
@@ -40,35 +53,21 @@ CREATE TABLE "Wallet" (
   FOREIGN KEY (customerID) REFERENCES "Customer"(customerID) ON UPDATE CASCADE ON DELETE CASCADE
   );
 
-CREATE TABLE "Species" (
-  speciesID SERIAL PRIMARY KEY,
-  name VARCHAR(50) NOT NULL,
-  adultAge INT NOT NULL,
-  limitAge INT NOT NULL
-  );
+CREATE TABLE IF NOT EXISTS "OrderStatus" (
+  statusID SERIAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL
+);
 
-CREATE TABLE "Order" (
+CREATE TABLE IF NOT EXISTS "Order" (
   orderID SERIAL PRIMARY KEY,
   customerID INT,
   orderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  orderStatus INT,
+  statusID INT,
   totalCP INT NOT NULL,
-  FOREIGN KEY (customerID) REFERENCES "Customer"(customerID) ON UPDATE CASCADE ON DELETE CASCADE
-  );
+  FOREIGN KEY (customerID) REFERENCES "Customer"(customerID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (statusID) REFERENCES "OrderStatus"(statusID) ON UPDATE CASCADE
+);
 
-CREATE TABLE IF NOT EXISTS "OrderStatus" (
-  orderStatusID SERIAL PRIMARY KEY,
-  name VARCHAR(50) NOT NULL
-  );
-
-CREATE TABLE "OrderItems" (
-  orderID INT,
-  itemID INT,
-  quantity INT CONSTRAINT positiveQuantity CHECK (quantity > 0),
-  PRIMARY KEY (orderID, itemID),
-  FOREIGN KEY (orderID) REFERENCES "Order"(orderID) ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY (itemID) REFERENCES "Item"(itemID) ON UPDATE CASCADE ON DELETE CASCADE
-  );
 
 CREATE TABLE "Item" (
   itemID SERIAL PRIMARY KEY,
@@ -81,36 +80,36 @@ CREATE TABLE "Item" (
   FOREIGN KEY (categoryID) REFERENCES "Category"(categoryID) ON UPDATE CASCADE
   );
 
-CREATE TABLE "Category" (
-  categoryID SERIAL PRIMARY KEY,
-  name VARCHAR(50) NOT NULL,
-  description VARCHAR(100)
+CREATE TABLE "OrderItems" (
+  orderID INT,
+  itemID INT,
+  quantity INT CONSTRAINT positiveQuantity CHECK (quantity > 0),
+  PRIMARY KEY (orderID, itemID),
+  FOREIGN KEY (orderID) REFERENCES "Order"(orderID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (itemID) REFERENCES "Item"(itemID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
+CREATE TABLE "Inventory" (
+  customerID INT,
+  itemID INT,
+  quantity INT CONSTRAINT positiveInventory CHECK (quantity > 0),
+  PRIMARY KEY (customerID, itemID),
+  FOREIGN KEY (customerID) REFERENCES "Customer"(customerID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (itemID) REFERENCES "Item"(itemID) ON UPDATE CASCADE ON DELETE CASCADE
   );
 
-CREATE TABLE "Inventory"
-(
-    customerID INT,
-    itemID     INT,
-    quantity   INT
-        CONSTRAINT positiveInventory CHECK (quantity > 0),
-    PRIMARY KEY (customerID, itemID),
-    FOREIGN KEY (customerID) REFERENCES "Customer" (customerID) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (itemID) REFERENCES "Item" (itemID) ON UPDATE CASCADE ON DELETE CASCADE
+CREATE TABLE "RequestStatus" (
+  statusID SERIAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE "ArcaneRequest"
-(
-    requestID   SERIAL PRIMARY KEY,
-    customerID  INT,
+CREATE TABLE "ArcaneRequest" (
+  requestID SERIAL PRIMARY KEY,
+  customerID INT,
+  requestDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  statusID INT DEFAULT 1,
+  FOREIGN KEY (customerID) REFERENCES "Customer"(customerID) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (statusID) REFERENCES "RequestStatus"(statusID) ON UPDATE CASCADE
+  );
 
-    requestDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    statusID    INT       DEFAULT 1,
-    FOREIGN KEY (customerID) REFERENCES "Customer" (customerID) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (statusID) REFERENCES "RequestStatus" (statusID) ON UPDATE CASCADE
-);
-
-CREATE TABLE "RequestStatus"
-(
-    statusID SERIAL PRIMARY KEY,
-    name     VARCHAR(50) NOT NULL
-);

@@ -22,21 +22,20 @@ public class InventoryManager {
         this.inventoryDAO = inventoryDAO;
     }
 
-    public InventoryManager() {}
+    public InventoryManager() {
+        this.inventoryDAO = new InventoryDAO();
+    }
 
     public ArrayList<Item> loadInventory(Customer customer) {
         // TODO NOT YET TESTED
-        InventoryDAO inventoryDAO = new InventoryDAO();
         return inventoryDAO.getInventory(customer.getPersonID());
     }
 
     public ArrayList<Item> viewInventory(Customer customer) {
-        InventoryDAO inventoryDAO = new InventoryDAO();
         return inventoryDAO.getInventory(customer.getPersonID());
     }
 
     public boolean updateInventory(ArrayList<Item> cartItems, Customer customer) throws InventoryExceptions.InventoryUpdateException {
-        InventoryDAO inventoryDAO = new InventoryDAO();
         return inventoryDAO.updateInventory(customer.getPersonID(), cartItems);
     }
 

@@ -6,11 +6,18 @@ import DomainModel.Wallet;
 
 public class WalletManager {
 
-    public WalletManager() {}
+    WalletDAO walletDAO;
+
+    public WalletManager(WalletDAO walletDAO) {
+        this.walletDAO = walletDAO;
+    }
+
+    public WalletManager() {
+        this.walletDAO = new WalletDAO();
+    }
 
     //function to see balance
     public int viewBalance(int id) {
-        WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(id);
 
         if (wallet == null) {
@@ -22,7 +29,6 @@ public class WalletManager {
 
     //function to get wallet by customer
     public Wallet getWalletByCustomer(Customer customer) throws IllegalArgumentException {
-        WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(customer.getPersonID());
 
         if (wallet == null) {
@@ -34,7 +40,6 @@ public class WalletManager {
 
     //function to add and widthdraw money from the wallet
     public void addFunds(int amountGP, int amountSP, int amountCP, Customer customer) throws IllegalArgumentException {
-        WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(customer.getPersonID());
 
         if(amountGP < 0 || amountSP < 0 || amountCP < 0){
@@ -54,7 +59,6 @@ public class WalletManager {
 
 
     public boolean withdrawFunds(int amountCP, Customer customer) throws IllegalArgumentException {
-        WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(customer.getPersonID());
 
         try{
@@ -83,7 +87,6 @@ public class WalletManager {
 
     //functions for testing
     public void addFunds(int amountGP, int amountSP, int amountCP, int id) throws IllegalArgumentException {
-        WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(id);
 
         if(amountGP < 0 || amountSP < 0 || amountCP < 0){
@@ -102,7 +105,6 @@ public class WalletManager {
 
 
     public void withdrawFunds(int amountCP, int id) throws IllegalArgumentException {
-        WalletDAO walletDAO = new WalletDAO();
         Wallet wallet = walletDAO.getWalletByID(id);
 
         if( amountCP < 0){

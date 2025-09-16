@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 
 public class ItemEditController {
 
+    //TODO: DELETE THIS CLASS IF NOT NEEDED
     @FXML private TextField itemNameField;
     @FXML private TextField itemPriceField;
     @FXML private Label errorLabel;
