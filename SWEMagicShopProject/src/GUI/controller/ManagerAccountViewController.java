@@ -186,7 +186,7 @@ public class ManagerAccountViewController {
 
 
     @FXML
-    private void goToManageArcaneRequest(){ //TODO
+    private void goToManageArcaneRequest() {
         mainViewController.loadContent("manager-arcane-view.fxml");
         mainViewController.updateTopBar("manageArcaneRequest");
     }

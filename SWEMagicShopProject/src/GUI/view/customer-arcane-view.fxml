@@ -94,7 +94,8 @@
 
                             <VBox fx:id="answerBox1" visible="false" managed="false"
                                   styleClass="faq-answer-box">
-                                <Label text="An Arcane Membership is an exclusive title given only to the most loyal and frequent customers of our shop. Requesting a Membership is an action that should be taken seriously as your personal profile - including the items you buy and your history with our shop - will be reviewed and judged accordingly by one of our shop managers." wrapText="true"
+                                <Label text="An Arcane Membership is an exclusive title given only to the most loyal and frequent customers of our shop. Requesting a Membership is an action that should be taken seriously as your personal profile - including the items you buy and your history with our shop - will be reviewed and judged accordingly by one of our shop managers."
+                                       wrapText="true"
                                        styleClass="faq-answer-label"/>
                             </VBox>
                         </VBox>
@@ -124,14 +125,16 @@
 
                             <VBox fx:id="answerBox3" visible="false" managed="false"
                                   styleClass="faq-answer-box">
-                                <Label text="Golarion's Regional Arcana Code §17-H strictly obliges us to accept Membership requests from any and all citizens of our province, regardless of magical lineage, planar origin, or amount of gold spent in our store. However, as clearly stated in the Kortos Guild Manual (Annex FPE, page 151), the final decision rests with our shop Managers. In accordance with Magical Fair Access Statute §13-A, denial of a request shall not be construed as discrimination, but rather as the result of comprehensive, mystically-informed judgement." wrapText="true"
+                                <Label text="Golarion's Regional Arcana Code §17-H strictly obliges us to accept Membership requests from any and all citizens of our province, regardless of magical lineage, planar origin, or amount of gold spent in our store. However, as clearly stated in the Kortos Guild Manual (Annex FPE, page 151), the final decision rests with our shop Managers. In accordance with Magical Fair Access Statute §13-A, denial of a request shall not be construed as discrimination, but rather as the result of comprehensive, mystically-informed judgement."
+                                       wrapText="true"
                                        styleClass="faq-answer-label"/>
                             </VBox>
                         </VBox>
 
                         <VBox spacing="5">
                             <HBox spacing="10" alignment="CENTER_LEFT">
-                                <Label text="How many times can I request a Membership?" fx:id="question4" wrapText="true"
+                                <Label text="How many times can I request a Membership?" fx:id="question4"
+                                       wrapText="true"
                                        styleClass="faq-question-label"/>
                                 <Button text="+" fx:id="toggle4" onAction="#toggleAnswer4"
                                         styleClass="faq-toggle-button"/>
@@ -139,7 +142,8 @@
 
                             <VBox fx:id="answerBox4" visible="false" managed="false"
                                   styleClass="faq-answer-box">
-                                <Label text="We allow our dear customers to submit a total of five Arcane Membership requests. Once this limit is reached, the account will be permanently excluded from making requests, though it will still retain access to all mundane items in our shop. After all, we wouldn’t want potentially dangerous individuals flooding our post with futile applications." wrapText="true"
+                                <Label text="We allow our dear customers to submit a total of five Arcane Membership requests. Once this limit is reached, the account will be permanently excluded from making requests, though it will still retain access to all mundane items in our shop. After all, we wouldn’t want potentially dangerous individuals flooding our post with futile applications."
+                                       wrapText="true"
                                        styleClass="faq-answer-label"/>
                             </VBox>
                         </VBox>

@@ -86,7 +86,7 @@
                         </tooltip>
                     </Button>
                     <Label text="Manage Arcane Membership" styleClass="item-name"/>
-                    <Label text="Decide for yourself whose worthy of becoming your patron!"
+                    <Label text="Decide for yourself who's worthy of becoming your patron!"
                            styleClass="small-text" wrapText="true" textAlignment="CENTER"/>
                 </VBox>
 
