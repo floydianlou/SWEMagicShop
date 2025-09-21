@@ -36,6 +36,7 @@ public class LoginController {
         openEyeIcon = new Image(getClass().getResource("/images/openEyeIcon.png").toExternalForm());
         closedEyeIcon = new Image(getClass().getResource("/images/closedEyeIcon.png").toExternalForm());
         eyeIcon.setImage(closedEyeIcon);
+        password.textProperty().bindBidirectional(passwordField.textProperty());
     }
 
     @FXML
@@ -74,13 +75,11 @@ public class LoginController {
     @FXML
     private void togglePassword(){
         if (passwordField.isVisible()) {
-            password.setText(passwordField.getText());
             password.setVisible(true);
             password.setEditable(true);
             passwordField.setVisible(false);
             eyeIcon.setImage(openEyeIcon);
         } else {
-            passwordField.setText(password.getText());
             passwordField.setVisible(true);
             password.setVisible(false);
             password.setEditable(false);
