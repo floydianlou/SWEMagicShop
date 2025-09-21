@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AccountManager {
-    // TODO: after GUI consider creating specific exceptions
     public Person login (String email, String password) {
         AccountDAO accountDAO = new AccountDAO();
         try {

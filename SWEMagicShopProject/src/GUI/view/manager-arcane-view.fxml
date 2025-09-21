@@ -7,7 +7,8 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="GUI.controller.ManagerArcaneViewController"
-      alignment="TOP_CENTER" spacing="30" stylesheets="@../styles/cart-styles.css, @../styles/arcane-styles.css"
+      alignment="TOP_CENTER" spacing="30"
+      stylesheets="@../styles/cart-styles.css, @../styles/arcane-styles.css, @../styles/popup-styles.css"
       style="-fx-padding: 40;">
 
     <VBox spacing="20" alignment="TOP_CENTER">
@@ -45,7 +46,7 @@
 
                 <Label text="Pending requests" styleClass="arcane-subtitle"/>
 
-                <ScrollPane fx:id="pendingScrollPane"
+                <ScrollPane fx:id="pendingRequestsPane"
                             fitToWidth="true"
                             hbarPolicy="NEVER"
                             vbarPolicy="AS_NEEDED"

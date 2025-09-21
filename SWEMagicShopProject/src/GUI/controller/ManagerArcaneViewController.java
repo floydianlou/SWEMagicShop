@@ -4,9 +4,12 @@ import BusinessLogic.ArcaneRequestManager;
 import BusinessLogic.Utilities;
 import DomainModel.ArcaneRequest;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,7 +17,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -29,8 +38,9 @@ public class ManagerArcaneViewController {
     @FXML
     private ImageView reversedArcaneItem;
     @FXML
-    private VBox pendingList;
-    @FXML private ScrollPane handledScrollPane;
+    private ScrollPane pendingRequestsPane;
+    @FXML
+    private ScrollPane handledScrollPane;
 
     private ArcaneRequestManager arcaneManager = new ArcaneRequestManager();
 
@@ -38,28 +48,20 @@ public class ManagerArcaneViewController {
     public void initialize() {
         arcaneItem.setImage(new Image(getClass().getResource("/images/arcaneItem.png").toExternalForm()));
         reversedArcaneItem.setImage(new Image(getClass().getResource("/images/arcaneItemReversed.png").toExternalForm()));
+        pendingRequestsPane.setFitToWidth(true);
+        handledScrollPane.setFitToWidth(true);
         loadPending();
         loadAll();
     }
 
     private void loadPending() {
         ArrayList<ArcaneRequest> pending = arcaneManager.viewPendingRequests();
-        pendingList.getChildren().clear();
-
-        if (pending == null || pending.isEmpty()) {
-            pendingList.getChildren().add(emptyBox("No pending requests"));
-            return;
-        }
-        for (ArcaneRequest r : pending) {
-            pendingList.getChildren().add(createPendingCard(r));
-        }
+        loadRequests(pending, pendingRequestsPane, "There are no current pending requests.");
     }
 
-    private void loadAll() {
-        ArrayList<ArcaneRequest> requests = arcaneManager.viewAllRequests(); // 👈 tutte, nessun filtro
-
+    private void loadRequests(ArrayList<ArcaneRequest> requests, ScrollPane currentPane, String message) {
         if (requests == null || requests.isEmpty()) {
-            handledScrollPane.setContent(makeEmptyBox("No requests yet."));
+            currentPane.setContent(makeEmptyBox(message));
             return;
         }
 
@@ -68,10 +70,15 @@ public class ManagerArcaneViewController {
         list.setPadding(new Insets(10));
 
         for (ArcaneRequest r : requests) {
-            list.getChildren().add(createHandledCard(r));
+            list.getChildren().add(createCard(r));
         }
 
-        handledScrollPane.setContent(list);
+        currentPane.setContent(list);
+    }
+
+    private void loadAll() {
+        ArrayList<ArcaneRequest> requests = arcaneManager.viewAllRequests();
+        loadRequests(requests, handledScrollPane, "No customer made any requests yet.");
     }
 
     private Node makeEmptyBox(String msg) {
@@ -83,72 +90,38 @@ public class ManagerArcaneViewController {
         return wrapper;
     }
 
-    private Node createPendingCard(ArcaneRequest r) {
+    private Node createCard(ArcaneRequest r) {
         VBox card = new VBox(6);
         card.getStyleClass().add("cart-box");
         card.setPadding(new Insets(12));
 
-        Label title = new Label("Request #" + r.getRequestID() + " — " + formatClient(r));
-        title.getStyleClass().add("popup-title");
-
-        Label status = new Label("Status: " + r.getRequestStatus());
-        status.getStyleClass().add("order-writing");
-
-        Label date = new Label("Submitted: " + Utilities.formatOrderDate(r.getRequestDate()));
-        date.getStyleClass().add("order-writing");
-
-        Button viewBtn = new Button("View");
-        viewBtn.getStyleClass().add("choice-button");
-        viewBtn.setOnAction(e -> showInfo(r)); // TODO create manage popup
-
-        HBox actions = new HBox(8, new Region(), viewBtn);
-        HBox.setHgrow(actions.getChildren().get(0), Priority.ALWAYS);
-
-        card.getChildren().addAll(title, status, date, actions);
-        return card;
-    }
-
-    private Node createHandledCard(ArcaneRequest r) {
-        VBox card = new VBox(6);
-        card.getStyleClass().add("cart-box");
-        card.setPadding(new Insets(12));
-
-        Label title = new Label("Request #" + r.getRequestID() + " — " + formatClient(r));
-        title.getStyleClass().add("popup-title");
-
+        Label title = new Label("N." + r.getRequestID() + " - from " + r.getCustomerName());
+        title.getStyleClass().add("request-title");
 
         Label status = new Label(r.getRequestStatus());
         status.getStyleClass().add("order-writing");
 
-
         String st = r.getRequestStatus().toUpperCase();
         if ("APPROVED".equals(st)) {
-            status.setStyle("-fx-background-color: #b3e5c5; -fx-padding: 2 8; -fx-background-radius: 12;");
+            status.setStyle("-fx-background-color: #9791c9; -fx-padding: 2 8; -fx-background-radius: 12;");
         } else if ("REJECTED".equals(st)) {
-            status.setStyle("-fx-background-color: #f5c2c7; -fx-padding: 2 8; -fx-background-radius: 12;");
+            status.setStyle("-fx-background-color: #caaae3; -fx-padding: 2 8; -fx-background-radius: 12;");
+        } else if ("PENDING".equals(st)) {
+            status.setStyle("-fx-background-color: #e3aae1; -fx-padding: 2 8; -fx-background-radius: 12;");
         }
 
-        Label date = new Label("Decision date: " + r.getRequestDate());
+        Label date = new Label("Last update: " + Utilities.formatOrderDate(r.getRequestDate()));
         date.getStyleClass().add("order-writing");
 
-        Button viewBtn = new Button("View");
+        Button viewBtn = new Button("View details");
         viewBtn.getStyleClass().add("choice-button");
-        viewBtn.setOnAction(e -> showInfo(r));
+        viewBtn.setOnAction(e -> showInfo(r)); // TODO popup
 
         HBox actions = new HBox(8, new Region(), viewBtn);
         HBox.setHgrow(actions.getChildren().get(0), Priority.ALWAYS);
 
         card.getChildren().addAll(title, status, date, actions);
         return card;
-    }
-
-    private Node emptyBox(String message) {
-        VBox box = new VBox(6);
-        box.setPadding(new Insets(12));
-        Label l = new Label(message);
-        l.getStyleClass().add("order-writing");
-        box.getChildren().add(l);
-        return box;
     }
 
     private String formatClient(ArcaneRequest r) {
@@ -159,14 +132,68 @@ public class ManagerArcaneViewController {
     }
 
     private void showInfo(ArcaneRequest r) {
-        Alert a = new Alert(Alert.AlertType.INFORMATION);
-        a.setHeaderText("Arcane Request #" + r.getRequestID());
-        a.setContentText(
-                "Client: " + formatClient(r) +
-                        "\nStatus: " + r.getRequestStatus() +
-                        "\nDate: " + r.getRequestDate()
-        );
-        a.showAndWait();
+        try {
+            // 1) carica FXML del popup
+            var url = getClass().getResource("/GUI/view/manager-arcane-popup.fxml");
+            if (url == null) {
+                showError("FXML non trovato: /GUI/view/manager-arcane-popup.fxml");
+                return;
+            }
+            FXMLLoader fx = new FXMLLoader(url);
+            Parent root = fx.load();
+
+            // 2) controller del popup
+            ManagerArcanePopup c = fx.getController();
+
+            // 3) scena/stage trasparenti (niente bottoni di Windows)
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+            // (opzionale) se vuoi forzare il CSS anche da Java:
+            var css = getClass().getResource("/css/popup-styles.css");
+            if (css != null && !scene.getStylesheets().contains(css.toExternalForm())) {
+                scene.getStylesheets().add(css.toExternalForm());
+            }
+
+            Stage popup = new Stage(StageStyle.TRANSPARENT);
+            popup.initModality(Modality.APPLICATION_MODAL);
+            // owner = qualsiasi nodo già visibile, uso la contentBox
+            if (contentBox != null && contentBox.getScene() != null) {
+                popup.initOwner(contentBox.getScene().getWindow());
+            }
+            popup.setScene(scene);
+
+            // 4) passaggio dati al popup
+            c.setStage(popup);
+            c.setRequest(r);
+
+            // 5) callback per refresh UI dopo Approve/Reject
+            c.setOnResult(success -> {
+                // ricarica pannelli come già fai
+                loadPending();
+                loadAll();
+            });
+
+            // 6) trascinabilità prendendo la card del popup
+            var card = root.lookup(".popup-card");
+            final double[] d = new double[2];
+            if (card != null) {
+                card.setOnMousePressed(e -> {
+                    d[0] = e.getScreenX() - popup.getX();
+                    d[1] = e.getScreenY() - popup.getY();
+                });
+                card.setOnMouseDragged(e -> {
+                    popup.setX(e.getScreenX() - d[0]);
+                    popup.setY(e.getScreenY() - d[1]);
+                });
+            }
+
+            // 7) mostra
+            popup.show();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            showError("Impossibile aprire il popup: " + ex.getMessage());
+        }
     }
 
     private void showError(String msg) {

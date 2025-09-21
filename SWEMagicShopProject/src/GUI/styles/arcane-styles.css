@@ -132,3 +132,23 @@
 }
 
 /* END FAQ SECTION */
+
+/* MANAGER ARCANE SECTION */
+.request-title {
+    -fx-font-family: "Belwe Bd BT";
+    -fx-font-size: 23px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #460E56;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+.request-name {
+     -fx-font-family: "Belwe Bd BT";
+     -fx-font-size: 23px;
+     -fx-font-weight: 900;
+     -fx-text-fill: #460E56;
+     -fx-alignment: center;
+     -fx-text-alignment: center;
+    -fx-text-decoration: underline;
+ }
