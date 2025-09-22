@@ -123,11 +123,6 @@ public class OrderDAO {
         }
     }
 
-    public void deleteOrder(int orderID) {
-        String deletsql = "DELETE FROM \"Order\" WHERE orderid = ?";
-        //TODO is this necessary? should we implement this function?
-    }
-
     public ArrayList<Item> viewOrderItems(int orderID) {
         ArrayList<Item> orderItems = new ArrayList<>();
         String itemsquery = "SELECT i.itemid, i.name as itemname, i.description, i.cpprice, c.name as category, i.arcane, i.imagepath, o.quantity " +
@@ -155,4 +150,14 @@ public class OrderDAO {
         return orderItems;
     }
 
+    public void updateOrderStatus (int orderID, int newStatus) {
+        String query = "UPDATE \"Order\" SET statusid = ? WHERE orderid = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, newStatus);
+            stmt.setInt(2, orderID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Something happened while updating your order status: " + e.getMessage());
+        }
+    }
 }

@@ -35,7 +35,8 @@ public class CartManager {
     }
 
     public static void init(Customer customer) {
-      instance = new CartManager(customer);
+        resetInstance();
+        instance = new CartManager(customer);
     }
 
     public static CartManager getInstance() {
@@ -67,6 +68,13 @@ public class CartManager {
         }
         saveCart();
         cartItems.clear();
+    }
+
+    public static void resetInstance() {
+        if (instance != null) {
+            instance.closeCartSession();
+            instance = null;
+        }
     }
 
     public ArrayList<Item> getCartItems() {
@@ -157,7 +165,6 @@ public class CartManager {
                 cartModified = false;
             }
         }, 10, 15, TimeUnit.SECONDS);
-        System.out.println("Cart auto saved.");
     }
 
 }

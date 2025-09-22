@@ -9,6 +9,8 @@ import BusinessLogic.AccountManager;
 import DomainModel.Species;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -35,6 +37,7 @@ public class UserRegistrationController {
     @FXML private ImageView phoneIcon;
     @FXML private Button registerButton;
     @FXML private ImageView shopIcon;
+    @FXML private ImageView shopIcon2;
     @FXML private Label errorLabel;
     private ArrayList<Species> allSpecies;
 
@@ -48,9 +51,11 @@ public class UserRegistrationController {
     public void initialize() {
         // IMAGE LOADING
         Image pen = new Image(getClass().getResource("/images/penIcon.png").toExternalForm());
+        Image icon = new Image(getClass().getResource("/images/shop-icon.png").toExternalForm());
         penIcon.setImage(pen);
         penIcon2.setImage(pen);
-        shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm()));
+        shopIcon.setImage(icon);
+        shopIcon2.setImage(icon);
         emailIcon.setImage(new Image(getClass().getResource("/images/emailIcon.png").toExternalForm()));
         passwordIcon.setImage(new Image(getClass().getResource("/images/passwordIcon.png").toExternalForm()));
         speciesIcon.setImage(new Image(getClass().getResource("/images/speciesIcon.png").toExternalForm()));
@@ -60,6 +65,27 @@ public class UserRegistrationController {
         loadSpeciesInDropdown();
         ageField.setTextFormatter(new TextFormatter<>(change ->
                 (change.getControlNewText().matches("\\d*")) ? change : null));
+
+        // enter functionalities
+        nameField.setOnAction(e -> surnameField.requestFocus());
+        surnameField.setOnAction(e -> emailField.requestFocus());
+        emailField.setOnAction(e -> passwordField.requestFocus());
+        passwordField.setOnAction(e -> ageField.requestFocus());
+        ageField.setOnAction(e -> phoneField.requestFocus());
+        phoneField.setOnAction(e -> {
+            speciesDropdown.requestFocus();
+            speciesDropdown.show();
+        });
+        speciesDropdown.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                if (speciesDropdown.getValue() == null) {
+                    speciesDropdown.show();
+                } else {
+                    handleRegistration();
+                }
+                e.consume();
+            }
+        });
     }
 
     public void loadSpeciesInDropdown() {

@@ -7,11 +7,13 @@ import javafx.scene.image.ImageView;
 public class WelcomeViewController {
 
     @FXML private ImageView iconImageView;
+    @FXML private ImageView iconImageView2;
 
     @FXML
     public void initialize() {
         Image icon = new Image(getClass().getResource("/images/shop-icon.png").toExternalForm());
         iconImageView.setImage(icon);
+        iconImageView2.setImage(icon);
     }
 
     @FXML

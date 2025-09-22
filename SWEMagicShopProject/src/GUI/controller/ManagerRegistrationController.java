@@ -22,6 +22,7 @@ public class ManagerRegistrationController {
     @FXML private PasswordField passwordField;
     @FXML private Label errorLabel;
     @FXML private ImageView shopIcon;
+    @FXML private ImageView shopIcon2;
     @FXML private ImageView penIcon;
     @FXML private ImageView penIcon2;
     @FXML private ImageView emailIcon;
@@ -37,11 +38,19 @@ public class ManagerRegistrationController {
     public void initialize() {
         // Load images
         Image pen = new Image(getClass().getResource("/images/penIcon.png").toExternalForm());
+        Image icon = new Image(getClass().getResource("/images/shop-icon.png").toExternalForm());
         penIcon.setImage(pen);
         penIcon2.setImage(pen);
-        shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm()));
+        shopIcon.setImage(icon);
+        shopIcon2.setImage(icon);
         emailIcon.setImage(new Image(getClass().getResource("/images/emailIcon.png").toExternalForm()));
         passwordIcon.setImage(new Image(getClass().getResource("/images/passwordIcon.png").toExternalForm()));
+
+        nameField.setOnAction(e -> surnameField.requestFocus());
+        surnameField.setOnAction(e -> emailField.requestFocus());
+        emailField.setOnAction(e -> passwordField.requestFocus());
+        passwordField.setOnAction(e -> handleRegistration());
+
     }
 
     @FXML

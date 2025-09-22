@@ -15,10 +15,16 @@ public class ManagerAuthenticationController {
     private Label errorLabel;
     @FXML
     private ImageView shopIcon;
+    @FXML
+    private ImageView shopIcon2;
 
     @FXML
     public void initialize() {
-        shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm()));
+        Image icon = new Image(getClass().getResource("/images/shop-icon.png").toExternalForm());
+        shopIcon.setImage(icon);
+        shopIcon2.setImage(icon);
+
+        authPasswordField.setOnAction(e -> handleAuth());
     }
 
     @FXML

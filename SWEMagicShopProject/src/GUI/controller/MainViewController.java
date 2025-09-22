@@ -47,6 +47,18 @@ public class MainViewController {
                 updateTopBar("manager");
             }
         }
+
+        shoplabel.setCursor(javafx.scene.Cursor.HAND);
+        shoplabel.setFocusTraversable(true);
+        shoplabel.setOnMouseClicked(e -> {
+            if (e.getButton() == javafx.scene.input.MouseButton.PRIMARY) goHomeForLoggedUser();
+        });
+        shoplabel.setOnKeyPressed(e -> {
+            if (e.getCode() == javafx.scene.input.KeyCode.ENTER || e.getCode() == javafx.scene.input.KeyCode.SPACE) {
+                goHomeForLoggedUser();
+            }
+        });
+
     }
 
     public void loadContent(String fxmlFile) {
@@ -282,15 +294,20 @@ public class MainViewController {
     }
 
     private void handleLogout() {
-        Person loggedUser = LoggedUserManager.getInstance().getLoggedUser();
-        if (loggedUser instanceof Customer) {
-            CartManager.getInstance().closeCartSession();
-        }
-
+        CartManager.resetInstance();
         LoggedUserManager.getInstance().clearSession();
-
-
         SceneController.loadScene("welcome-view.fxml");
+    }
+
+    private void goHomeForLoggedUser() {
+        Person currentUser = LoggedUserManager.getInstance().getLoggedUser();
+        if (currentUser instanceof Customer) {
+            loadContent("customer-shop-view.fxml");
+            updateTopBar("customer");
+        } else if (currentUser != null) {
+            loadContent("manager-shop-view.fxml");
+            updateTopBar("manager");
+        }
     }
 
 }

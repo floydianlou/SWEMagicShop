@@ -19,6 +19,7 @@
             <ImageView fx:id="shopIcon" fitHeight="50" fitWidth="50"/>
             <Label text="Welcome to Otari's Magic Shop!"
                    styleClass="main-title"/>
+            <ImageView fx:id="shopIcon2" fitHeight="50" fitWidth="50"/>
         </HBox>
 
 

@@ -4,16 +4,17 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class main extends Application {
+public class Main extends Application {
 
     private static Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            main.primaryStage = primaryStage;
+            Main.primaryStage = primaryStage;
             SceneController.setPrimaryStage(primaryStage);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/view/welcome-view.fxml"));
             Scene scene = new Scene(loader.load());
@@ -23,19 +24,18 @@ public class main extends Application {
             primaryStage.setWidth(1200);
             primaryStage.setHeight(800);
 
-            // cart thread for autosave closure
-            primaryStage.setOnCloseRequest(event -> {
-                if (CartManager.getInstance() != null) {
-                    CartManager.getInstance().closeCartSession();
-                }
-                Platform.exit();
-                System.exit(0);
-            });
+            primaryStage.getIcons().add(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm()));
 
             primaryStage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop() {
+        CartManager.resetInstance();
     }
 
     public static Stage getPrimaryStage() {

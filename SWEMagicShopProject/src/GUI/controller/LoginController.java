@@ -23,6 +23,7 @@ public class LoginController {
     @FXML private TextField password;
     @FXML private Label errorLabel;
     @FXML private ImageView shopIcon;
+    @FXML private ImageView shopIcon2;
     @FXML private ImageView eyeIcon;
     @FXML private Image openEyeIcon;
     @FXML private Image closedEyeIcon;
@@ -30,13 +31,24 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        shopIcon.setImage(new Image(getClass().getResource("/images/shop-icon.png").toExternalForm()));
+        Image icon = new Image(getClass().getResource("/images/shop-icon.png").toExternalForm());
+        shopIcon.setImage(icon);
+        shopIcon2.setImage(icon);
         emailIcon.setImage(new Image(getClass().getResource("/images/emailIcon.png").toExternalForm()));
         passwordIcon.setImage(new Image(getClass().getResource("/images/passwordIcon.png").toExternalForm()));
         openEyeIcon = new Image(getClass().getResource("/images/openEyeIcon.png").toExternalForm());
         closedEyeIcon = new Image(getClass().getResource("/images/closedEyeIcon.png").toExternalForm());
         eyeIcon.setImage(closedEyeIcon);
         password.textProperty().bindBidirectional(passwordField.textProperty());
+
+        emailField.setOnAction(e -> {
+            if (passwordField.isVisible()) passwordField.requestFocus();
+            else password.requestFocus();
+        });
+
+        passwordField.setOnAction(e -> handleLogin());
+        password.setOnAction(e -> handleLogin());
+
     }
 
     @FXML
@@ -57,6 +69,7 @@ public class LoginController {
         try {
             Person loggedUser = accountManager.login(email, password);
             LoggedUserManager.getInstance().setLoggedUser(loggedUser);
+            CartManager.resetInstance();
             if (loggedUser != null) {
                 if (loggedUser instanceof Customer) {
                     CartManager.init((Customer) loggedUser); }

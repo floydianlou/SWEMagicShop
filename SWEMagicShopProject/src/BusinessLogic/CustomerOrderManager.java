@@ -5,15 +5,35 @@ import ORM.OrderDAO;
 import DomainModel.Customer;
 import DomainModel.Item;
 import DomainModel.Order;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 
 public class CustomerOrderManager {
+
+    private static final long statusToShipped = 20;
+    private static final long statusToDelivered = 50;
+    private static final ZoneId ZONE = ZoneId.of("Europe/Rome");
+    private static final DateTimeFormatter PG_TS = new DateTimeFormatterBuilder()
+            .appendPattern("yyyy-MM-dd HH:mm:ss")
+            .optionalStart().appendFraction(ChronoField.NANO_OF_SECOND, 1, 6, true).optionalEnd()
+            .toFormatter();
+
 
     public CustomerOrderManager() {}
 
     public ArrayList<Order> viewAllOrders() {
         OrderDAO orderDAO = new OrderDAO();
-        return orderDAO.viewAllOrders();
+        ArrayList<Order> orders = orderDAO.viewAllOrders();
+        for (Order order : orders) {
+            checkOrderStatus(order);
+        }
+        return orders;
     }
 
     public ArrayList<Item> viewOrderItems(int orderID) {
@@ -23,7 +43,11 @@ public class CustomerOrderManager {
 
     public ArrayList<Order> viewCustomerOrders(Customer customer) {
         OrderDAO orderDAO = new OrderDAO();
-        return orderDAO.getCustomerOrders(customer.getPersonID());
+        ArrayList<Order> orders = orderDAO.getCustomerOrders(customer.getPersonID());
+        for (Order order : orders) {
+            checkOrderStatus(order);
+        }
+        return orders;
     }
 
     public int createOrder(Customer customer, CartManager cartManager, WalletManager walletManager) throws OrderExceptions.OrderSaveException, OrderExceptions.EmptyCartException, OrderExceptions.MissingFundsException {
@@ -50,6 +74,27 @@ public class CustomerOrderManager {
             total = total + item.getCopperValue()*item.getItemQuantity();
         }
         return total;
+    }
+
+    public void checkOrderStatus(Order order) {
+        long now = Instant.now().getEpochSecond();
+        long created = LocalDateTime.parse(order.getOrderDate(), PG_TS)
+                .atZone(ZONE).toEpochSecond();
+        long elapsed = now - created;
+
+        if ("Delivered".equalsIgnoreCase(order.getOrderStatus())) return;
+
+        OrderDAO orderDao = new OrderDAO();
+
+        if ("In progress".equalsIgnoreCase(order.getOrderStatus()) && elapsed >= statusToShipped) {
+            order.setOrderStatus("Shipping");
+            orderDao.updateOrderStatus(order.getOrderID(), 2);
+        } else if ("Shipping".equalsIgnoreCase(order.getOrderStatus()) && elapsed >= statusToDelivered) {
+            order.setOrderStatus("Delivered");
+            orderDao.updateOrderStatus(order.getOrderID(),3);
+        } else {
+            return;
+        }
     }
 
 }

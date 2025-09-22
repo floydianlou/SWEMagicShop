@@ -35,8 +35,8 @@ VALUES
 INSERT INTO "OrderStatus" (name)
 VALUES
     ('In progress'),
-    ('Delivered'),
-    ('Cancelled');
+    ('Shipping'),
+    ('Delivered');
 
 -- Data Category
 INSERT INTO "Category" (name, description)
