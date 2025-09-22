@@ -16,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 
 import java.util.ArrayList;
 import java.util.function.Consumer;
@@ -109,21 +110,14 @@ public class ManagerArcanePopup {
         customerAge.setText(customer.getAge() + " years");
     }
 
-    public static Stage openPopup(Parent root, Node ownerForPos) {
+    public static Stage openPopup(Parent root, Window owner) {
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
 
         Stage popup = new Stage(StageStyle.TRANSPARENT);
         popup.initModality(Modality.APPLICATION_MODAL);
-        if (ownerForPos != null) popup.initOwner(ownerForPos.getScene().getWindow());
+        if (owner != null) popup.initOwner(owner);
         popup.setScene(scene);
-
-        Node card = root.lookup(".popup-card");
-        final double[] d = new double[2];
-        if (card != null) {
-            card.setOnMousePressed(e -> { d[0] = e.getScreenX() - popup.getX(); d[1] = e.getScreenY() - popup.getY(); });
-            card.setOnMouseDragged(e -> { popup.setX(e.getScreenX() - d[0]); popup.setY(e.getScreenY() - d[1]); });
-        }
         popup.show();
         return popup;
     }

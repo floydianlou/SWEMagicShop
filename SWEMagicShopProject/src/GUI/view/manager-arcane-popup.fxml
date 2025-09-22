@@ -7,7 +7,7 @@
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="GUI.controller.ManagerArcanePopup"
            alignment="TOP_LEFT"  stylesheets="@../styles/popup-styles.css, @../styles/cart-styles.css"
-           prefWidth="800" prefHeight="700"  styleClass="arcane-popup-root">
+           prefWidth="800" prefHeight="500"  styleClass="arcane-popup-root">
 
     <VBox spacing="16" alignment="TOP_LEFT" maxWidth="740"
           StackPane.alignment="CENTER"
@@ -23,14 +23,14 @@
                 <ColumnConstraints halignment="LEFT"  hgrow="ALWAYS"/>
             </columnConstraints>
 
-            <Label text="Request ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <Label text="Request ID:" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="arcane-data"/>
             <Label fx:id="requestID" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="popup-message-text"/>
 
-            <Label text="Status:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-            <Label fx:id="statusLabel" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="popup-message-text"/>
+            <Label text="Current status:" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="arcane-data"/>
+            <Label fx:id="statusLabel" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="popup-message-text"/>
 
-            <Label text="Date:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-            <Label fx:id="dateLabel" GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="popup-message-text"/>
+            <Label text="Date requested:" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="arcane-data"/>
+            <Label fx:id="dateLabel" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="popup-message-text"/>
         </GridPane>
 
         <VBox spacing="10" styleClass="info-card">
@@ -42,24 +42,24 @@
                     <ColumnConstraints halignment="LEFT"  hgrow="ALWAYS"/>
                 </columnConstraints>
 
-                <Label text="Name:"     GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <Label fx:id="customerName"    GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="Name:"     GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="arcane-data"/>
+                <Label fx:id="customerName"    GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="arcane-text"/>
 
-                <Label text="Email:"    GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <Label fx:id="customerEmail"   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label text="Email:"    GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="arcane-data"/>
+                <Label fx:id="customerEmail"   GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="arcane-text"/>
 
-                <Label text="Age:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <Label fx:id="customerAge" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <Label text="Age:" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="arcane-data"/>
+                <Label fx:id="customerAge" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="arcane-text"/>
 
-                <Label text="Phone:"    GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                <Label fx:id="customerPhone"   GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                <Label text="Phone:"    GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="arcane-data"/>
+                <Label fx:id="customerPhone"   GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="arcane-text"/>
 
-                <Label text="Species:"  GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                <Label fx:id="customerSpecies" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                <Label text="Species:"  GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="arcane-data"/>
+                <Label fx:id="customerSpecies" GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="arcane-text"/>
             </GridPane>
         </VBox>
 
-        <HBox spacing="10" alignment="CENTER_RIGHT">
+        <HBox spacing="10" alignment="BOTTOM_CENTER">
             <Region HBox.hgrow="ALWAYS"/>
             <Button fx:id="rejectButton" text="Reject" onAction="#handleReject"
                     styleClass="popup-close-button"/>
@@ -67,7 +67,7 @@
                     styleClass="popup-close-button"/>
         </HBox>
 
-        <HBox alignment="CENTER">
+        <HBox alignment="BOTTOM_CENTER">
             <Button fx:id="backButton"
                     onAction="#handleClosePopup"
                     styleClass="popup-close-button"/>
