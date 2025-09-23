@@ -100,13 +100,13 @@ public class AccountViewController {
 
     @FXML
     private void handleEditAccount() {
-        accountName.setEditable(true);  //therefore i make everything edible
+        accountName.setEditable(true);
         accountSurname.setEditable(true);
         accountEmail.setEditable(true);
         accountPhone.setEditable(true);
         accountPassword.setEditable(true);
-        accountPassword.setVisible(true); //i make visible the password text field
-        accountPasswordField.setVisible(false); //i make invisible the password field and eyeicon
+        accountPassword.setVisible(true);
+        accountPasswordField.setVisible(false);
         eyeIcon.setVisible(false);
 
         edit.setVisible(false);
@@ -125,7 +125,7 @@ public class AccountViewController {
         errorLabel.setText("");
         Customer updatedCustomer = new Customer(loggedCustomer.getPersonID());
         if(accountName.getText().isEmpty() || accountSurname.getText().isEmpty() || accountEmail.getText().isEmpty() || accountPhone.getText().isEmpty() || accountPassword.getText().isEmpty()){
-            errorLabel.setText("Please fill all the fields");
+            errorLabel.setText("Please fill in all fields!");
             return;
         }
         updatedCustomer.setName(accountName.getText());

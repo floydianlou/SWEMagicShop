@@ -315,7 +315,6 @@ public class CustomerShopViewController {
             Button addToCartButton = new Button("Add to Cart");
             addToCartButton.getStyleClass().add("add-to-cart-button");
             addToCartButton.setOnMouseClicked(_ -> {
-                //TODO: temporary fix for mistaken quantity when added to cart
                 Item itemToAdd = new Item(
                         product.getItemID(),
                         product.getItemName(),

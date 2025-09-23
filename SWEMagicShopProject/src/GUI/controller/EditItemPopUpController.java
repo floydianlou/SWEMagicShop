@@ -97,7 +97,7 @@ public class EditItemPopUpController {
 
         File imageFile = new File("SWEMagicShopProject/src" + selectedItem.getImagePath());
         if (!imageFile.exists()) {
-            System.out.println("Image file does NOT exist!");
+            System.out.println("Image file does not exist!");
         } else {
             Image img = new Image(imageFile.toURI().toString());
             itemImage.setImage(img);

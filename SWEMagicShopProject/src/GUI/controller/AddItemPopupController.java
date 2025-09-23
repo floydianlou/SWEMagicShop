@@ -88,7 +88,7 @@ public class AddItemPopupController {
         boolean isArcane = itemArcane.isSelected();
 
         if (name.isEmpty() || description.isEmpty() || itemGP.getText().isEmpty() || itemSP.getText().isEmpty() || itemCP.getText().isEmpty() || category == null) {
-            showAlert("Error", "Please fill in all fields.");
+            showAlert("Error", "Please fill in all fields");
             return;
         }
 
@@ -113,7 +113,7 @@ public class AddItemPopupController {
         try {
             copperValue = (Integer.parseInt(itemGP.getText()) * 100) + (Integer.parseInt(itemSP.getText()) * 10) + Integer.parseInt(itemCP.getText());
         } catch (NumberFormatException e) {
-            showAlert("Error", "Please enter valid numeric values for the price.");
+            showAlert("Error", "Please enter valid values for the price");
             return;
         }
 
@@ -131,7 +131,7 @@ public class AddItemPopupController {
         addImageButton.setVisible(false);
         changeImageButton.setVisible(true);
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select an Image");
+        fileChooser.setTitle("Select an image");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 
         File selectedFile = fileChooser.showOpenDialog(null);
@@ -188,7 +188,7 @@ public class AddItemPopupController {
             if (imageFile.exists()) {
                 boolean deleted = imageFile.delete();
                 if (!deleted) {
-                    System.out.println("Errore: impossibile eliminare il file immagine.");
+                    System.out.println("Cannot delete image file.");
                 }
             }
         }
@@ -199,7 +199,7 @@ public class AddItemPopupController {
     @FXML
     private void handleChangeImage(){
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select an Image");
+        fileChooser.setTitle("Select an ìmage");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 
         File newselectedFile = fileChooser.showOpenDialog(null);
