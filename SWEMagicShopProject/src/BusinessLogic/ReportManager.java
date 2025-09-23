@@ -191,8 +191,4 @@ public class ReportManager {
         return chart;
     }
 
-    public static ChartPanel createChartPanel(JFreeChart chart) {
-        return new ChartPanel(chart);
-    }
-
 }

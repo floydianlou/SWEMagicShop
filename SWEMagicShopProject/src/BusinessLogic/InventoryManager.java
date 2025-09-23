@@ -12,21 +12,12 @@ public class InventoryManager {
     public ArrayList<Item> inventoryItems;
     public Customer customer;
 
-    public InventoryManager(Customer customer) {
-        this.customer = customer;
-        this.inventoryItems = loadInventory(customer);
-    }
-
     public InventoryManager(InventoryDAO inventoryDAO) {
         this.inventoryDAO = inventoryDAO;
     }
 
     public InventoryManager() {
         this.inventoryDAO = new InventoryDAO();
-    }
-
-    public ArrayList<Item> loadInventory(Customer customer) {
-        return inventoryDAO.getInventory(customer.getPersonID());
     }
 
     public ArrayList<Item> viewInventory(Customer customer) {
