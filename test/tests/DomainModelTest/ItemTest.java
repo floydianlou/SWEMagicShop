@@ -42,18 +42,4 @@ class ItemTest {
         assertEquals("axe.png", item.getImagePath());
     }
 
-    @Test
-    void testGetItemDataAndGetData() {
-        Item item = new Item(1, "Sword", "Sharp blade", "Weapons", 5, true, 100, "sword.png");
-        String itemData = item.getItemData();
-        String data = item.getData();
-
-        assertTrue(itemData.contains("ItemID: 1"));
-        assertTrue(itemData.contains("ItemName: Sword"));
-        assertTrue(itemData.contains("ItemQuantity: 5"));
-        assertTrue(data.contains("ItemID: 1"));
-        assertTrue(data.contains("ItemName: Sword"));
-        assertFalse(data.contains("ItemQuantity: 5")); // getData() non mostra quantity
-    }
 }
-

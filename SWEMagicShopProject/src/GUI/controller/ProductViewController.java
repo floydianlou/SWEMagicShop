@@ -49,14 +49,14 @@ public class ProductViewController {
 
     private void loadItem(){
         productName.setText(selectedProduct.getItemName());
-        productName.getStyleClass().add("item-name");
+        productName.getStyleClass().add("product-title");
 
         productDescription.setText(selectedProduct.getItemDescription());
-        productDescription.getStyleClass().add("order-writing");
+        productDescription.getStyleClass().add("product-description");
         productDescription.wrapTextProperty().setValue(true);
 
         productCategory.setText(selectedProduct.getItemCategory());
-        productCategory.getStyleClass().add("order-writing");
+        productCategory.getStyleClass().add("product-category");
 
         if (selectedProduct.isArcane()) {
             ImageView arcaneIcon = new ImageView(new Image(getClass().getResource("/images/arcaneItem.png").toExternalForm()));
@@ -69,12 +69,12 @@ public class ProductViewController {
 
         int[] price = Utilities.normalizeCurrencyArray(selectedProduct.getCopperValue());
         productPrice.setText(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
-        productPrice.getStyleClass().add("item-price");
+        productPrice.getStyleClass().add("product-price-detailed");
 
         try{
             File imageFile = new File("SWEMagicShopProject/src" + selectedProduct.getImagePath());
             if (!imageFile.exists()) {
-                System.out.println("Image file does NOT exist!");
+                System.out.println("Image file does not exist!");
             } else {
                 Image img = new Image(imageFile.toURI().toString());
                 productImage.setImage(img);
@@ -83,11 +83,9 @@ public class ProductViewController {
         catch (Exception e) {
             System.out.println("Error Image Not Loaded: " + e.getMessage());
         }
-        //productImage.setImage(new Image(getClass().getResource(selectedProduct.getImagePath()).toExternalForm()));
         productImage.setFitWidth(550);
-        productImage.setFitHeight(450);
+        productImage.setFitHeight(550);
 
-        // TODO temporary fix for mistaken quantity when added to cart
         addToCartButton.setOnAction(event -> {
             Item i = new Item(
                     selectedProduct.getItemID(),

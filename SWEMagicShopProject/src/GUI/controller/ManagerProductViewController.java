@@ -57,14 +57,14 @@ public class ManagerProductViewController {
 
     private void loadItem(){
         productName.setText(selectedProduct.getItemName());
-        productName.getStyleClass().add("item-name");
+        productName.getStyleClass().add("product-title");
 
         productDescription.setText(selectedProduct.getItemDescription());
-        productDescription.getStyleClass().add("order-writing");
+        productDescription.getStyleClass().add("product-description");
         productDescription.wrapTextProperty().setValue(true);
 
         productCategory.setText(selectedProduct.getItemCategory());
-        productCategory.getStyleClass().add("order-writing");
+        productCategory.getStyleClass().add("product-category");
 
         if (selectedProduct.isArcane()) {
             arcaneBox.getChildren().clear();
@@ -74,13 +74,13 @@ public class ManagerProductViewController {
 
             arcaneBox.getChildren().add(arcaneIcon);
             arcaneBox.setAlignment(Pos.CENTER_LEFT);
-        }else{
+        } else {
             arcaneBox.getChildren().clear();
         }
 
         int[] price = Utilities.normalizeCurrencyArray(selectedProduct.getCopperValue());
         productPrice.setText(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
-        productPrice.getStyleClass().add("item-price");
+        productPrice.getStyleClass().add("product-price-detailed");
 
         try{
             File imageFile = new File("SWEMagicShopProject/src" + selectedProduct.getImagePath());
@@ -94,9 +94,8 @@ public class ManagerProductViewController {
         catch (Exception e) {
             System.out.println("Error Image Not Loaded: " + e.getMessage());
         }
-        //productImage.setImage(new Image(getClass().getResource(selectedProduct.getImagePath()).toExternalForm()));
         productImage.setFitWidth(550);
-        productImage.setFitHeight(450);
+        productImage.setFitHeight(550);
 
         editProductButton.setOnMouseClicked(event -> {
             handleEditProduct(selectedProduct);

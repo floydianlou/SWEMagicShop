@@ -7,12 +7,11 @@ import DomainModel.Item;
 import BusinessLogic.Utilities;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -287,7 +286,10 @@ public class CustomerShopViewController {
 
         for (Item product : products) {
             VBox productBox = new VBox();
-            productBox.setSpacing(5);
+            productBox.setSpacing(8);
+            productBox.getStyleClass().add("product-card");
+            productBox.setPrefWidth(300);
+            productBox.setMinHeight(430);
 
             ImageView productImage = new ImageView();
             try{
@@ -304,6 +306,8 @@ public class CustomerShopViewController {
             }
             productImage.setFitWidth(300);
             productImage.setFitHeight(300);
+            productImage.setCursor(Cursor.HAND);
+            productImage.setOnMouseClicked(e -> viewProductButton(product));
 
             Button productName = new Button(product.getItemName());
             productName.getStyleClass().add("product-name");
@@ -311,6 +315,10 @@ public class CustomerShopViewController {
 
             int[] price = Utilities.normalizeCurrencyArray(product.getCopperValue());
             Label productPrice = new Label(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
+            productPrice.getStyleClass().add("product-price");
+
+            Region spacer = new Region();
+            VBox.setVgrow(spacer, Priority.ALWAYS);
 
             Button addToCartButton = new Button("Add to Cart");
             addToCartButton.getStyleClass().add("add-to-cart-button");
@@ -331,7 +339,7 @@ public class CustomerShopViewController {
             HBox buttonContainer = new HBox(addToCartButton);
             buttonContainer.setAlignment(Pos.BOTTOM_RIGHT);
 
-            productBox.getChildren().addAll(productImage, productName, productPrice, buttonContainer);
+            productBox.getChildren().addAll(productImage, productName, productPrice, spacer, buttonContainer);
 
             gridPane.add(productBox, col, row);
 

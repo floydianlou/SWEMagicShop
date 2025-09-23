@@ -15,6 +15,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+
 import java.io.IOException;
 
 public class MainViewController {
@@ -58,6 +61,8 @@ public class MainViewController {
                 goHomeForLoggedUser();
             }
         });
+
+        toolBar.prefWidthProperty().bind(contentArea.widthProperty());
 
     }
 
@@ -109,7 +114,7 @@ public class MainViewController {
                     handleLogout();
                 });
 
-                toolBar.getChildren().addAll(createWelcomeLabel(), cartButton, accountButton, logoutButton);
+                toolBar.getChildren().addAll(spacer(), createWelcomeLabel(), cartButton, accountButton, logoutButton);
             }
 
             case "manager" -> {
@@ -122,7 +127,7 @@ public class MainViewController {
                     handleLogout();
                 });
 
-                toolBar.getChildren().addAll(createWelcomeLabel(), accountButton, logoutButton);
+                toolBar.getChildren().addAll(spacer(), createWelcomeLabel(), accountButton, logoutButton);
             }
 
             case "cart" -> {
@@ -140,7 +145,7 @@ public class MainViewController {
                     handleLogout();
                 });
 
-                toolBar.getChildren().addAll(backButton, accountButton, logoutButton);
+                toolBar.getChildren().addAll(spacer(), backButton, accountButton, logoutButton);
             }
 
             case "account" -> {
@@ -153,7 +158,7 @@ public class MainViewController {
                     handleLogout();
                 });
 
-                toolBar.getChildren().addAll(backButton, logoutButton);
+                toolBar.getChildren().addAll(spacer(), backButton, logoutButton);
             }
 
             case "managerAccount" -> {
@@ -166,7 +171,7 @@ public class MainViewController {
                     handleLogout();
                 });
 
-                toolBar.getChildren().addAll(backButton, logoutButton);
+                toolBar.getChildren().addAll(spacer(), backButton, logoutButton);
             }
 
             case "product" -> {
@@ -189,7 +194,7 @@ public class MainViewController {
                     handleLogout();
                 });
 
-                toolBar.getChildren().addAll(createWelcomeLabel(), backButton, cartButton, accountButton, logoutButton);
+                toolBar.getChildren().addAll(spacer(), createWelcomeLabel(), backButton, cartButton, accountButton, logoutButton);
             }
 
             case "orderhistory", "wallet", "inventory", "arcane" -> {
@@ -202,7 +207,7 @@ public class MainViewController {
                     handleLogout();
                 });
 
-                toolBar.getChildren().addAll(backButton, logoutButton);
+                toolBar.getChildren().addAll(spacer(), backButton, logoutButton);
             }
 
             case "manageStatistics", "manageArcaneRequest" -> {
@@ -215,7 +220,7 @@ public class MainViewController {
                     handleLogout();
                 });
 
-                toolBar.getChildren().addAll(backButton, logoutButton);
+                toolBar.getChildren().addAll(spacer(), backButton, logoutButton);
             }
 
             case "managerProduct" -> {
@@ -233,7 +238,7 @@ public class MainViewController {
                     handleLogout();
                 });
 
-                toolBar.getChildren().addAll(backButton, accountButton, logoutButton);
+                toolBar.getChildren().addAll(spacer(), backButton, accountButton, logoutButton);
 
             }
 
@@ -259,7 +264,6 @@ public class MainViewController {
         return button;
     }
 
-    // TODO check if it can be made an if-case
     private Button createButton(ImageView icon, String hoverText, EventHandler<ActionEvent> handler) {
         icon.setFitWidth(30);
         icon.setFitHeight(30);
@@ -308,6 +312,12 @@ public class MainViewController {
             loadContent("manager-shop-view.fxml");
             updateTopBar("manager");
         }
+    }
+
+    private Region spacer() {
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        return spacer;
     }
 
 }

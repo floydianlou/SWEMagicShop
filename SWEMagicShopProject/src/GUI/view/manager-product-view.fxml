@@ -16,15 +16,15 @@
         </padding>
         <HBox fx:id="itemBox">
             <VBox spacing="10" alignment="CENTER_LEFT" >
-                <Label fx:id="productName" style="-fx-font-size: 40px;"/>
-                <Label text="Description:" styleClass="order-writing" style="-fx-font-size: 20px;"/>
-                <Label fx:id="productDescription" style="-fx-font-size: 16px;"/>
+                <Label fx:id="productName"/>
+                <Label text="Description:" styleClass="product-description"/>
+                <Label fx:id="productDescription"/>
                 <HBox spacing="10" alignment="CENTER_LEFT">
-                    <Label fx:id="productCategory" style="-fx-font-size: 20px;"/>
+                    <Label fx:id="productCategory"/>
                     <HBox fx:id="arcaneBox"/>
                 </HBox>
-                <Label fx:id="productPrice" style="-fx-font-size: 20px;"/>
-                <Button text="Edit Product" fx:id="editProductButton" styleClass="add-to-cart-button"/>
+                <Label fx:id="productPrice"/>
+                <Button text="Edit Product" fx:id="editProductButton" styleClass="add-to-cart-detailed" alignment="CENTER"/>
             </VBox>
 
             <Region prefWidth="250"/>

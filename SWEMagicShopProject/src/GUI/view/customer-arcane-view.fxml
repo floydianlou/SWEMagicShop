@@ -11,7 +11,7 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="GUI.controller.CustomerArcaneController"
       alignment="TOP_CENTER" spacing="30" stylesheets="@../styles/cart-styles.css, @../styles/arcane-styles.css"
-      style="-fx-padding: 40;"> <!-- TODO -->
+      style="-fx-padding: 40;">
 
 
     <VBox spacing="20" alignment="TOP_CENTER">

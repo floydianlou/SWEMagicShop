@@ -73,7 +73,7 @@ public class OrderDetailsPopupController {
             catch (Exception e) {
                 System.out.println("Error Image Not Loaded: " + e.getMessage());
             }
-            itemIcon.setFitWidth(75);
+            itemIcon.setFitWidth(100);
             itemIcon.setFitHeight(100);
             itemIcon.getStyleClass().add("cart-image");
 

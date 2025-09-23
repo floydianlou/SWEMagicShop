@@ -27,8 +27,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-// TODO FINISH THIS DO NOT TOUCH IT'S INCOMPLETE FOR A LOT OF REASONS
-
 public class ManagerArcaneViewController {
 
     @FXML
@@ -156,20 +154,6 @@ public class ManagerArcaneViewController {
                 loadAll();
             });
 
-            var card = root.lookup(".popup-card");
-            final double[] d = new double[2];
-            if (card != null) {
-                card.setOnMousePressed(e -> {
-                    d[0] = e.getScreenX() - popup.getX();
-                    d[1] = e.getScreenY() - popup.getY();
-                });
-                card.setOnMouseDragged(e -> {
-                    popup.setX(e.getScreenX() - d[0]);
-                    popup.setY(e.getScreenY() - d[1]);
-                });
-            }
-
-            // 7) mostra
             popup.show();
 
         } catch (Exception ex) {

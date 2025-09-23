@@ -23,7 +23,7 @@ public class ManagerStatisticsViewController {
     @FXML private Label totalRevenueSP;
     @FXML private Label totalRevenueCP;
 
-    // Client statistics
+    // customer statistics
     @FXML private Label biggestSpenderName;
     @FXML private Label biggestSpenderSurname;
     @FXML private Label smallestSpenderName;
@@ -135,20 +135,18 @@ public class ManagerStatisticsViewController {
     }
 
     private void drawChartOnCanvas(JFreeChart chart, Canvas canvas) {
-        // Converte il grafico in un'immagine
         BufferedImage bufferedImage = chart.createBufferedImage(
                 (int) canvas.getWidth(),
                 (int) canvas.getHeight()
         );
         Image fxImage = SwingFXUtils.toFXImage(bufferedImage, null);
 
-        // Disegna l'immagine sul Canvas
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         gc.drawImage(fxImage, 0, 0);
     }
 
-    // Containers view methods
+
     @FXML
     private void showClients() {
         setVisibility(clientsContainer);

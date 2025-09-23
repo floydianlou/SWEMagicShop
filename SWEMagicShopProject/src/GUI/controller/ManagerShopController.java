@@ -9,6 +9,7 @@ import BusinessLogic.Utilities;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,9 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -239,9 +238,15 @@ public class ManagerShopController {
         int row = 0;
         int col = 0;
         int maxCols = 4;
+
+
         for (Item product : products) {
             VBox productBox = new VBox();
-            productBox.setSpacing(5);
+            productBox.setSpacing(10);
+            productBox.getStyleClass().add("product-card");
+            productBox.setPrefWidth(300);
+
+
             ImageView productImage = new ImageView();
             try{
                 File imageFile = new File("SWEMagicShopProject/src" + product.getImagePath());
@@ -257,6 +262,8 @@ public class ManagerShopController {
             }
             productImage.setFitWidth(300);
             productImage.setFitHeight(300);
+            productImage.setCursor(Cursor.HAND);
+            productImage.setOnMouseClicked(e -> viewProductButton(product));
 
             Button productName = new Button(product.getItemName());
             productName.getStyleClass().add("product-name");
@@ -264,6 +271,10 @@ public class ManagerShopController {
 
             int[] price = Utilities.normalizeCurrencyArray(product.getCopperValue());
             Label productPrice = new Label(String.format("%d GP, %d SP, %d CP", price[0], price[1], price[2]));
+            productPrice.getStyleClass().add("product-price");
+
+            Region spacer = new Region();
+            VBox.setVgrow(spacer, Priority.ALWAYS);
 
             Button editButton = new Button("Edit Product");
             editButton.getStyleClass().add("add-to-cart-button");
@@ -274,7 +285,7 @@ public class ManagerShopController {
             HBox buttonContainer = new HBox(editButton);
             buttonContainer.setAlignment(Pos.BOTTOM_RIGHT);
 
-            productBox.getChildren().addAll(productImage, productName, productPrice, buttonContainer);
+            productBox.getChildren().addAll(productImage, productName, productPrice, spacer, buttonContainer);
             gridPane.add(productBox, col, row);
             col++;
             if (col == maxCols) {

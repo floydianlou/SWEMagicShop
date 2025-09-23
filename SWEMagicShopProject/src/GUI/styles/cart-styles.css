@@ -139,3 +139,84 @@
     -fx-effect: dropshadow(gaussian, #c084fc, 20, 0.6, 0, 0);
 }
 /* END CART STYLES PAGE */
+
+/* PRODUCT CARDS */
+
+.product-card {
+    -fx-background-color: #b88ef0;
+    -fx-background-radius: 16;
+    -fx-border-width: 2;
+    -fx-border-radius: 15px;
+    -fx-border-color: #6C3483;
+    -fx-padding: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 14, 0.24, 0, 3);
+}
+
+.button.product-name {
+    -fx-background-color: transparent;
+    -fx-text-fill: #460E56;
+    -fx-font-size: 24px;
+    -fx-font-weight: 900;
+    -fx-padding: 2 0 2 0;
+}
+
+.button.product-name:hover {
+    -fx-text-fill: #320A3E;
+}
+
+
+.product-price {
+    -fx-text-fill: #460E56;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.button.add-to-cart-button {
+    -fx-background-color: #8b4cc7;
+    -fx-text-fill: white;
+    -fx-font-weight: 900;
+    -fx-padding: 8 14 8 14;
+    -fx-background-radius: 12;
+}
+
+.button.add-to-cart-button:hover, .add-to-cart-detailed:hover {
+    -fx-background-color: #460E56;
+    -fx-effect: dropshadow(gaussian, rgba(185, 142, 240, 0.6), 8, 0.3, 0, 2);
+    -fx-cursor: hand; }
+
+.button.add-to-cart-button:pressed, .add-to-cart-detailed:pressed {
+    -fx-background-color: #320A3E;
+
+}
+
+.product-title {
+    -fx-padding: 10 10 10 0;
+    -fx-font-size: 50;
+    -fx-font-weight: 900;
+    -fx-font-family: 'Belwe Bd BT';
+    -fx-text-fill: #460E56;
+}
+
+.product-description, .product-category {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-font-family: Arimo, Arial, sans-serif;
+    -fx-text-fill: #320A3E;
+}
+
+.product-price-detailed {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-font-family: Arimo, Arial, sans-serif;
+    -fx-text-fill: #320A3E;
+}
+
+.add-to-cart-detailed {
+    -fx-background-color: #8b4cc7;
+    -fx-text-fill: white;
+    -fx-font-family: "Belwe Bd BT";
+    -fx-font-weight: 900;
+    -fx-font-size: 30px;
+    -fx-padding: 10 16 10 16;
+    -fx-background-radius: 12;
+}

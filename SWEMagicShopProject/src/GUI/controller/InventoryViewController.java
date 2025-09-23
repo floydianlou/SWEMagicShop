@@ -62,7 +62,7 @@ public class InventoryViewController {
         catch (Exception e) {
             System.out.println("Error Image Not Loaded: " + e.getMessage());
         }
-        icon.setFitWidth(75);
+        icon.setFitWidth(100);
         icon.setFitHeight(100);
 
         Label itemName = new Label(item.getItemName());

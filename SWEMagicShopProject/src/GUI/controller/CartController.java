@@ -65,7 +65,7 @@ public class CartController {
 
             // image view section
             ImageView itemIcon = new ImageView(new Image(getClass().getResource(cartItem.getImagePath()).toExternalForm()));
-            itemIcon.setFitWidth(80);
+            itemIcon.setFitWidth(100);
             itemIcon.setFitHeight(100);
             itemIcon.getStyleClass().add("cart-image");
 

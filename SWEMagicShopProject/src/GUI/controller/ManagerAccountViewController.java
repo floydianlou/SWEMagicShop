@@ -88,12 +88,12 @@ public class ManagerAccountViewController {
 
     @FXML
     private void handleEditAccount() {
-        accountName.setEditable(true);  //therefore i make everything edible
+        accountName.setEditable(true);
         accountSurname.setEditable(true);
         accountEmail.setEditable(true);
         accountPassword.setEditable(true);
-        accountPassword.setVisible(true); //i make visible the password text field
-        accountPasswordField.setVisible(false); //i make invisible the password field and eyeicon
+        accountPassword.setVisible(true);
+        accountPasswordField.setVisible(false);
         eyeIcon.setVisible(false);
 
         edit.setVisible(false);

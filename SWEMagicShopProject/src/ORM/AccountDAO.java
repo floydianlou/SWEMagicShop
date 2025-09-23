@@ -26,7 +26,7 @@ public class AccountDAO {
         try {
             connection.setAutoCommit(false);
 
-            // Check if email already exists
+            // check if email already exists
             try (PreparedStatement checkEmailStmt = connection.prepareStatement(checkEmailSql)) {
                 checkEmailStmt.setString(1, email);
                 try (ResultSet emailSet = checkEmailStmt.executeQuery()) {
@@ -36,7 +36,7 @@ public class AccountDAO {
                 }
             }
 
-            // Check if phone number already exists
+            // check if phone number already exists
             try (PreparedStatement checkPhoneStmt = connection.prepareStatement(checkPhoneSql)) {
                 checkPhoneStmt.setString(1, phoneNumber);
                 try (ResultSet phoneSet = checkPhoneStmt.executeQuery()) {
@@ -46,7 +46,7 @@ public class AccountDAO {
                 }
             }
 
-            // Insert new customer
+            // insert new customer
             try (PreparedStatement stmt = connection.prepareStatement(sqlCustomer)) {
                 stmt.setString(1, name);
                 stmt.setString(2, surname);
@@ -104,7 +104,6 @@ public class AccountDAO {
         return false;
     }
 
-    // TODO put number of exception and manage exceptions
     public boolean createManagerAccount(String name, String surname, String email, String password) {
         String sqlManager = String.format("INSERT INTO \"Manager\" (name, surname, email, password) " +
                 "VALUES ('%s', '%s', '%s', '%s');", name, surname, email, password);
@@ -170,7 +169,6 @@ public class AccountDAO {
     }
 
     public ArrayList<Customer> viewAllCustomers() {
-        // TODO CHECK PREPARED STATEMENT POSSIBILITY
         ArrayList<Customer> customers = new ArrayList<>();
         String sqlCustomer = String.format("SELECT c.customerID, c.name AS customerName, c.surname, c.email, c.password, c.age, c.arcanemembership, c.phone, s.speciesID, s.name AS speciesName, w.cpBalance " +
                 "FROM \"Customer\" c " +
@@ -203,7 +201,6 @@ public class AccountDAO {
     }
 
     public Customer getCustomerByID(int customerID) {
-        // TODO CHECK PREPARED STATEMENT POSSIBILITY
         Customer customer = null;
         String sqlCustomer = String.format("SELECT c.customerID, c.name AS customerName, c.surname, c.email, c.password, c.age, c.arcanemembership, c.phone, s.speciesID, s.name AS speciesName, w.cpBalance " +
                 "FROM \"Customer\" c " +
@@ -236,7 +233,6 @@ public class AccountDAO {
     }
 
     public void updateCustomerAccount(Customer customer) throws RuntimeException {
-        //TODO CHECK PREPARED STATEMENT POSSIBILITY
         String sqlUpdate = String.format("UPDATE \"Customer\" SET name = '%s', surname = '%s', email = '%s', password = '%s', phone = '%s' " +
                         "WHERE customerID = %d", customer.getName(), customer.getSurname(), customer.getEmail(), customer.getPassword(), customer.getPhoneNumber(),
                 customer.getPersonID());
@@ -265,7 +261,6 @@ public class AccountDAO {
     }
 
     public boolean updateManagerAccount(Manager manager) {
-        // TODO CHECK PREPARED STATEMENT POSSIBILITY
         String sqlUpdate = String.format("UPDATE \"Manager\" SET name = '%s', surname = '%s', email = '%s', password = '%s' " +
                 "WHERE managerID = %d", manager.getName(), manager.getSurname(), manager.getEmail(), manager.getPassword(), manager.getPersonID());
 

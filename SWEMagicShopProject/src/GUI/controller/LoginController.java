@@ -75,7 +75,7 @@ public class LoginController {
                     CartManager.init((Customer) loggedUser); }
                     SceneController.loadScene("main-view.fxml");
             } else {
-                errorLabel.setText("Email or password doesn't match!");
+                errorLabel.setText("Email or password don't match!");
             }
         } catch (RuntimeException e) {
             errorLabel.setText(e.getMessage());
