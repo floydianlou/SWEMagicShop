@@ -146,55 +146,51 @@ public class ReportManager {
     }
 
     //FOR GRAPH
-    // Metodo che crea il grafico delle vendite per categoria
+    // category sales
     public static JFreeChart createCategorySalesChart() {
-        // Dataset per il grafico a barre
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         InventoryDAO inventoryDAO = new InventoryDAO();
         Map<String, Integer> categorySales = inventoryDAO.getCategorySales();
 
-        // Aggiungi i dati al dataset
         for (Map.Entry<String, Integer> entry : categorySales.entrySet()) {
-            dataset.addValue(entry.getValue(), "Vendite", entry.getKey());
+            dataset.addValue(entry.getValue(), "Sales", entry.getKey());
         }
 
-        // Crea il grafico a barre
         JFreeChart chart = ChartFactory.createBarChart(
-                "Vendite per Categoria",  // Titolo del grafico
-                "Categoria",              // Asse X
-                "Numero di Vendite",      // Asse Y
-                dataset                   // Dataset
-        );
+                "Sales by category",
+                "Category",
+                "Number of sales",
+                dataset);
 
+        if (chart.getLegend() != null) chart.removeLegend();
+        Utilities.stylePlot(chart);
         return chart;
     }
 
-    // Metodo che crea il grafico delle vendite per prodotto
+    //  product sales
     public static JFreeChart createProductSalesChart() {
-        // Dataset per il grafico a barre
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         InventoryDAO inventoryDAO = new InventoryDAO();
         Map<String, Integer> itemSales = inventoryDAO.getItemSales();
 
-        // Aggiungi i dati al dataset
         for (Map.Entry<String, Integer> entry : itemSales.entrySet()) {
-            dataset.addValue(entry.getValue(), "Vendite", entry.getKey());
+            dataset.addValue(entry.getValue(), "Sales", entry.getKey());
         }
 
-        // Crea il grafico a barre
         JFreeChart chart = ChartFactory.createBarChart(
-                "Vendite per Prodotto",  // Titolo del grafico
-                "Prodotto",              // Asse X
-                "Numero di Vendite",      // Asse Y
-                dataset                   // Dataset
+                "Sales by product",
+                "Product",
+                "No. of sales",
+                dataset
         );
 
+        if (chart.getLegend() != null) chart.removeLegend();
+        Utilities.stylePlot(chart);
         return chart;
     }
 
-    // Metodo che crea il pannello per il grafico
     public static ChartPanel createChartPanel(JFreeChart chart) {
         return new ChartPanel(chart);
     }

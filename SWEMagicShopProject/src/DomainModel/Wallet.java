@@ -26,11 +26,4 @@ public class Wallet {
     public void setCPbalance(int CPbalance) {
         this.CPbalance = CPbalance;
     }
-
-
-    // Don't know if it will ever be useful, maybe for testing later
-    public void printBalance() {
-        System.out.println("Wallet ID: " + walletID);
-        System.out.println("Copper Pieces: " + CPbalance);
-    }
 }

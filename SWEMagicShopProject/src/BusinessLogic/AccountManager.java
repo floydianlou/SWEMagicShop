@@ -48,13 +48,11 @@ public class AccountManager {
         return accountDAO.createManagerAccount(name, surname, email, password);
     }
 
-    // used by SuperUser only
     public ArrayList<Customer> showAllCustomers() {
         AccountDAO accountDAO = new AccountDAO();
         return accountDAO.viewAllCustomers();
     }
 
-    // usage in ArcaneRequest viewing by SuperUser only
     public Customer getCustomerByID(int customerID) {
         if (customerID <= 0) {
             System.out.println("Invalid customer ID.");

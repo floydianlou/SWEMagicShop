@@ -22,7 +22,6 @@ public class ArcaneRequestManager {
         return arcaneDAO.countCustomerRequests(customerID);
     }
 
-    // both for manager and customer, to see specific customer requests and their statuses.
     public ArrayList<ArcaneRequest> viewRequestsByCustomer (int customerID) {
         ORM.ArcaneDAO arcaneDAO = new ORM.ArcaneDAO();
         return arcaneDAO.viewRequestsByCustomer(customerID);
@@ -33,8 +32,6 @@ public class ArcaneRequestManager {
         return arcaneDAO.viewPendingRequests();
     }
 
-
-    // to allow manager to GUI.view all requests, including refused and accepted ones.
     public ArrayList<ArcaneRequest> viewAllRequests() {
         ORM.ArcaneDAO arcaneDAO = new ORM.ArcaneDAO();
         return arcaneDAO.viewAllArcaneRequests();

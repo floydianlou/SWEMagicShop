@@ -6,7 +6,6 @@ import DomainModel.Customer;
 import DomainModel.Item;
 import java.util.ArrayList;
 
-// would likely need to be created as soon as login is made just like cartManager and load all inventory items with constructor
 public class InventoryManager {
     InventoryDAO inventoryDAO;
 
@@ -27,7 +26,6 @@ public class InventoryManager {
     }
 
     public ArrayList<Item> loadInventory(Customer customer) {
-        // TODO NOT YET TESTED
         return inventoryDAO.getInventory(customer.getPersonID());
     }
 

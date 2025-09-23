@@ -45,14 +45,6 @@ public class Item {
         this.imagePath = imagePath;
     }
 
-    public String getItemData(){
-        return "ItemID: " + itemID + "\n ItemName: " + itemName + "\n ItemDescription: " + itemDescription + "\n ItemCategory: " + itemCategory + "\n ItemQuantity: " + itemQuantity +  "\n IsArcane: " + isArcane + "\n CopperValue: " + copperValue;
-    }
-
-    public String getData(){
-        return "ItemID: " + itemID + "\n ItemName: " + itemName + "\n ItemDescription: " + itemDescription + "\n ItemCategory: " + itemCategory +  "\n IsArcane: " + isArcane + "\n CopperValue: " + copperValue;
-    }
-
     //GETTER AND SETTER
 
     public int getItemID() {

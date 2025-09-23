@@ -16,7 +16,7 @@ public class WalletManager {
         this.walletDAO = new WalletDAO();
     }
 
-    //function to see balance
+    // function to see balance
     public int viewBalance(int id) {
         Wallet wallet = walletDAO.getWalletByID(id);
 
@@ -27,7 +27,7 @@ public class WalletManager {
         return wallet.getCPbalance();
     }
 
-    //function to get wallet by customer
+    // function to get wallet by customer
     public Wallet getWalletByCustomer(Customer customer) throws IllegalArgumentException {
         Wallet wallet = walletDAO.getWalletByID(customer.getPersonID());
 
@@ -38,7 +38,7 @@ public class WalletManager {
         return wallet;
     }
 
-    //function to add and widthdraw money from the wallet
+    // function to add and widthdraw money from the wallet
     public void addFunds(int amountGP, int amountSP, int amountCP, Customer customer) throws IllegalArgumentException {
         Wallet wallet = walletDAO.getWalletByID(customer.getPersonID());
 
@@ -85,7 +85,7 @@ public class WalletManager {
 
     }
 
-    //functions for testing
+    // functions for testing
     public void addFunds(int amountGP, int amountSP, int amountCP, int id) throws IllegalArgumentException {
         Wallet wallet = walletDAO.getWalletByID(id);
 

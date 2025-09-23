@@ -115,7 +115,7 @@ public class ManagerArcaneViewController {
 
         Button viewBtn = new Button("View details");
         viewBtn.getStyleClass().add("choice-button");
-        viewBtn.setOnAction(e -> showInfo(r)); // TODO popup
+        viewBtn.setOnAction(e -> showInfo(r));
 
         HBox actions = new HBox(8, new Region(), viewBtn);
         HBox.setHgrow(actions.getChildren().get(0), Priority.ALWAYS);
@@ -124,31 +124,18 @@ public class ManagerArcaneViewController {
         return card;
     }
 
-    private String formatClient(ArcaneRequest r) {
-        String name = r.getCustomerName();
-        return (name != null && !name.isBlank())
-                ? name + " (ID " + r.getCustomerID() + ")"
-                : "Client #" + r.getCustomerID();
-    }
-
     private void showInfo(ArcaneRequest r) {
         try {
-            // 1) carica FXML del popup
             var url = getClass().getResource("/GUI/view/manager-arcane-popup.fxml");
-            if (url == null) {
-                showError("FXML non trovato: /GUI/view/manager-arcane-popup.fxml");
-                return;
-            }
+
             FXMLLoader fx = new FXMLLoader(url);
             Parent root = fx.load();
 
-            // 2) controller del popup
             ManagerArcanePopup c = fx.getController();
 
-            // 3) scena/stage trasparenti (niente bottoni di Windows)
             Scene scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);
-            // (opzionale) se vuoi forzare il CSS anche da Java:
+
             var css = getClass().getResource("/css/popup-styles.css");
             if (css != null && !scene.getStylesheets().contains(css.toExternalForm())) {
                 scene.getStylesheets().add(css.toExternalForm());
@@ -156,24 +143,19 @@ public class ManagerArcaneViewController {
 
             Stage popup = new Stage(StageStyle.TRANSPARENT);
             popup.initModality(Modality.APPLICATION_MODAL);
-            // owner = qualsiasi nodo già visibile, uso la contentBox
             if (contentBox != null && contentBox.getScene() != null) {
                 popup.initOwner(contentBox.getScene().getWindow());
             }
             popup.setScene(scene);
 
-            // 4) passaggio dati al popup
             c.setStage(popup);
             c.setRequest(r);
 
-            // 5) callback per refresh UI dopo Approve/Reject
             c.setOnResult(success -> {
-                // ricarica pannelli come già fai
                 loadPending();
                 loadAll();
             });
 
-            // 6) trascinabilità prendendo la card del popup
             var card = root.lookup(".popup-card");
             final double[] d = new double[2];
             if (card != null) {
@@ -192,7 +174,7 @@ public class ManagerArcaneViewController {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            showError("Impossibile aprire il popup: " + ex.getMessage());
+            showError("Cannot open popup: " + ex.getMessage());
         }
     }
 
