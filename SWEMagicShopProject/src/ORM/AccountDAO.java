@@ -300,22 +300,45 @@ public class AccountDAO {
         }
     }
 
-    public boolean updateManagerAccount(Manager manager) {
-        String sqlUpdate = String.format("UPDATE \"Manager\" SET name = '%s', surname = '%s', email = '%s', password = '%s' " +
-                "WHERE managerID = %d", manager.getName(), manager.getSurname(), manager.getEmail(), manager.getPassword(), manager.getPersonID());
+    public void updateManagerAccount(Manager manager) throws SQLException {
+        final String sql = "UPDATE \"Manager\" " +
+                "SET name = ?, surname = ?, email = ?, password = ? " +
+                "WHERE managerID = ?";
 
-        try (Statement stmt = connection.createStatement()) {
-            int affected = stmt.executeUpdate(sqlUpdate);
-            if (affected > 0) {
-                System.out.println("Manager account updated");
-                return true;
-            } else {
-                System.out.println("No rows were affected.");
+        boolean old = connection.getAutoCommit();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            connection.setAutoCommit(false);
+
+            ps.setString(1, manager.getName());
+            ps.setString(2, manager.getSurname());
+            ps.setString(3, manager.getEmail());
+            ps.setString(4, manager.getPassword());
+            ps.setInt(5, manager.getPersonID());
+
+            int updated = ps.executeUpdate();
+            if (updated != 1) {
+                throw new SQLException("Manager not found (id=" + manager.getPersonID() + ").");
             }
-        } catch (SQLException exception) {
-            System.err.println("Failed to update manager account: " + exception.getMessage());
+
+            connection.commit();
+        } catch (SQLException e) {
+            try { connection.rollback(); } catch (SQLException ignore) {}
+
+            if ("23505".equals(e.getSQLState())) {
+                String constraint = null;
+                if (e instanceof org.postgresql.util.PSQLException psql && psql.getServerErrorMessage()!=null) {
+                    constraint = psql.getServerErrorMessage().getConstraint();
+                }
+                if ("unique_email".equals(constraint) || "unique_manager_email".equals(constraint)
+                        || (e.getMessage()!=null && e.getMessage().toLowerCase().contains("(email)"))) {
+                    throw new SQLException("This email is already in use for a manager account.", "23505", e);
+                }
+                throw new SQLException("A unique constraint was violated.", "23505", e);
+            }
+            throw e;
+        } finally {
+            try { connection.setAutoCommit(old); } catch (SQLException ignore) {}
         }
-        return false;
     }
 
     public ArrayList<Species> getAllSpecies () throws SQLException {

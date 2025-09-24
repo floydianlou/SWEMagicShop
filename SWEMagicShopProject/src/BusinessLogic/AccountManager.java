@@ -74,13 +74,13 @@ public class AccountManager {
         return accountDAO.updateCustomerAccount(customerID, name, surname, email, phone, password);
     }
 
-    public boolean updateManagerAccount (Manager updatedManager) {
+    public void updateManagerAccount(Manager updatedManager) throws SQLException {
         if (!Utilities.checkEmail(updatedManager.getEmail()))
             throw new IllegalArgumentException("Invalid email address!");
-        if(!Utilities.checkPassword(updatedManager.getPassword()))
+        if (!Utilities.checkPassword(updatedManager.getPassword()))
             throw new IllegalArgumentException("Password format is incorrect!");
-        AccountDAO accountDAO = new AccountDAO();
-        return accountDAO.updateManagerAccount(updatedManager);
+
+        new AccountDAO().updateManagerAccount(updatedManager);
     }
 
     public ArrayList<Species> getAllSpecies () {

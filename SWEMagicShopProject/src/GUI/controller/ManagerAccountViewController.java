@@ -13,6 +13,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.sql.SQLException;
+
 public class ManagerAccountViewController {
 
     private Manager loggedManager;
@@ -107,28 +109,38 @@ public class ManagerAccountViewController {
     }
 
     @FXML
-    private void editAccount(){
+    private void editAccount() {
         errorLabel.setText("");
-        Manager updatedManager = new Manager(loggedManager.getPersonID());
-        if(accountName.getText().isEmpty() || accountSurname.getText().isEmpty() || accountEmail.getText().isEmpty() || accountPassword.getText().isEmpty()){
+
+        if (accountName.getText().isEmpty() || accountSurname.getText().isEmpty()
+                || accountEmail.getText().isEmpty() || accountPassword.getText().isEmpty()) {
             errorLabel.setText("Please fill all the fields");
             return;
         }
-        updatedManager.setName(accountName.getText());
-        updatedManager.setSurname(accountSurname.getText());
-        updatedManager.setEmail(accountEmail.getText());
-        updatedManager.setPassword(accountPassword.getText());
-        try{
-            accountManager.updateManagerAccount(updatedManager);
-            LoggedUserManager.getInstance().setLoggedUser(updatedManager);
-            loggedManager = (Manager) LoggedUserManager.getInstance().getLoggedUser();
-            popupAccountEdited();
 
-        } catch (RuntimeException e) {
+        Manager updated = new Manager(loggedManager.getPersonID());
+        updated.setName(accountName.getText().trim());
+        updated.setSurname(accountSurname.getText().trim());
+        updated.setEmail(accountEmail.getText().trim());
+        updated.setPassword(accountPassword.getText());
+
+        try {
+            accountManager.updateManagerAccount(updated);
+            LoggedUserManager.getInstance().setLoggedUser(updated);
+            loggedManager = (Manager) LoggedUserManager.getInstance().getLoggedUser();
+
+            popupAccountEdited();
+            loadManager();
+            resetEditButton();
+
+        } catch (SQLException e) {
             errorLabel.setText(e.getMessage());
+        } catch (IllegalArgumentException badInput) {
+            errorLabel.setText(badInput.getMessage());
+        } catch (Exception ex) {
+            errorLabel.setText("Unexpected error. Please try again.");
+            ex.printStackTrace();
         }
-        loadManager();
-        resetEditButton();
     }
 
     @FXML
