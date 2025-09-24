@@ -129,32 +129,35 @@ public class AccountManagerTest {
 
     @Test
     void updateCustomerAccount_Success() {
-        customer.setName("UpdatedName");
-        accountManager.updateCustomerAccount(customer);
+        Customer refreshed = accountManager.getCustomerByID(customerID);
+        refreshed.setName("UpdatedName");
+        accountManager.updateCustomerAccount(refreshed.getPersonID(), refreshed.getName(), refreshed.getSurname(), refreshed.getEmail(), refreshed.getPhoneNumber(), refreshed.getPassword());
         Customer updatedCustomer = accountManager.getCustomerByID(customerID);
         assertEquals("UpdatedName", updatedCustomer.getName());
     }
 
     @Test
     void updateCustomerAccount_InvalidPhone() {
-        customer.setPhoneNumber("123");
+        Customer refreshed = accountManager.getCustomerByID(customerID);
+        refreshed.setPhoneNumber("123");
         Exception ex = assertThrows(IllegalArgumentException.class, () ->
-                accountManager.updateCustomerAccount(customer)
+                accountManager.updateCustomerAccount(refreshed.getPersonID(), refreshed.getName(), refreshed.getSurname(), refreshed.getEmail(), refreshed.getPhoneNumber(), refreshed.getPassword())
         );
         assertTrue(ex.getMessage().contains("Invalid phone number"));
     }
 
     @Test
     void updateCustomerAccount_InvalidEmail() {
-        customer.setEmail("invalidEmail");
+        Customer refreshed = accountManager.getCustomerByID(customerID);
+        refreshed.setEmail("invalidEmail");
         Exception ex = assertThrows(IllegalArgumentException.class, () ->
-                accountManager.updateCustomerAccount(customer)
+                accountManager.updateCustomerAccount(refreshed.getPersonID(), refreshed.getName(), refreshed.getSurname(), refreshed.getEmail(), refreshed.getPhoneNumber(), refreshed.getPassword())
         );
         assertTrue(ex.getMessage().contains("Invalid email address!"));
     }
 
     @Test
-    void updateManagerAccount_Success() {
+    void updateManagerAccount_Success() throws SQLException {
         manager.setName("UpdatedManager");
         accountManager.updateManagerAccount(manager);
         Manager updatedManager = (Manager) accountManager.login(manager.getEmail(), "ManagerPass123!");
