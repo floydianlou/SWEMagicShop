@@ -19,7 +19,7 @@ CREATE TABLE "Manager" (
   surname VARCHAR(50) NOT NULL,
   email VARCHAR(80) NOT NULL,
   password VARCHAR(50) NOT NULL,
-  CONSTRAINT unique_email UNIQUE (email)
+  CONSTRAINT unique_manager_email UNIQUE (email)
   );
 
 CREATE TABLE "Species"(
