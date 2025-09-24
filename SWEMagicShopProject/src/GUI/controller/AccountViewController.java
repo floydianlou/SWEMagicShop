@@ -123,29 +123,36 @@ public class AccountViewController {
     @FXML
     private void editAccount(){
         errorLabel.setText("");
-        Customer updatedCustomer = new Customer(loggedCustomer.getPersonID());
-        if(accountName.getText().isEmpty() || accountSurname.getText().isEmpty() || accountEmail.getText().isEmpty() || accountPhone.getText().isEmpty() || accountPassword.getText().isEmpty()){
+
+        if (accountName.getText().isEmpty() || accountSurname.getText().isEmpty() || accountEmail.getText().isEmpty() || accountPhone.getText().isEmpty() || accountPassword.getText().isEmpty()) {
             errorLabel.setText("Please fill in all fields!");
             return;
         }
-        updatedCustomer.setName(accountName.getText());
-        updatedCustomer.setSurname(accountSurname.getText());
-        updatedCustomer.setEmail(accountEmail.getText());
-        updatedCustomer.setPhoneNumber(accountPhone.getText());
-        updatedCustomer.setPassword(accountPassword.getText());
-        updatedCustomer.setAge(loggedCustomer.getAge());
-        updatedCustomer.setOwnSpecies(loggedCustomer.getOwnSpecies());
-        try{
-            accountManager.updateCustomerAccount(updatedCustomer);
-            LoggedUserManager.getInstance().setLoggedUser(updatedCustomer);
-            loggedCustomer = (Customer) LoggedUserManager.getInstance().getLoggedUser();
-            popupAccountEdited();
 
+        Customer current = (Customer) LoggedUserManager.getInstance().getLoggedUser();
+
+        try {
+            Customer refreshed = accountManager.updateCustomerAccount(
+                    current.getPersonID(),
+                    accountName.getText(),
+                    accountSurname.getText(),
+                    accountEmail.getText(),
+                    accountPhone.getText(),
+                    accountPassword.getText());
+
+            if (refreshed.getOwnSpecies() == null) {
+                refreshed.setOwnSpecies(current.getOwnSpecies());
+            }
+
+            LoggedUserManager.getInstance().setLoggedUser(refreshed);
+            loggedCustomer = refreshed;
+
+            popupAccountEdited();
+            loadCustomer();
+            resetEditButton();
         } catch (RuntimeException e) {
             errorLabel.setText(e.getMessage());
         }
-        loadCustomer();
-        resetEditButton();
     }
 
     @FXML

@@ -14,6 +14,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.sql.SQLException;
+
 public class ManagerRegistrationController {
 
     @FXML private TextField nameField;
@@ -69,6 +71,8 @@ public class ManagerRegistrationController {
             accountManager.createManagerAccount(name, surname, email, password);
             showConfirmation();
         } catch (RuntimeException e) {
+            errorLabel.setText(e.getMessage());
+        } catch (SQLException e) {
             errorLabel.setText(e.getMessage());
         } catch (Exception ex) {
             errorLabel.setText("An unexpected error happened. Please try again.");

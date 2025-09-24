@@ -18,35 +18,14 @@ public class AccountDAO {
     }
 
     public boolean createCustomerAccount(String name, String surname, String email, String password, int age, String phoneNumber, Species species) throws SQLException {
-        String checkEmailSql = "SELECT 1 FROM \"Customer\" WHERE email = ?;";
-        String checkPhoneSql = "SELECT 1 FROM \"Customer\" WHERE phone = ?;";
         String sqlCustomer = "INSERT INTO \"Customer\" (name, surname, email, password, age, phone, speciesID) " +
                 "VALUES (?,?,?,?,?,?,?) RETURNING customerID;";
+        String sqlWallet = "INSERT INTO \"Wallet\" (customerID) VALUES (?);";
 
         try {
             connection.setAutoCommit(false);
 
-            // check if email already exists
-            try (PreparedStatement checkEmailStmt = connection.prepareStatement(checkEmailSql)) {
-                checkEmailStmt.setString(1, email);
-                try (ResultSet emailSet = checkEmailStmt.executeQuery()) {
-                    if (emailSet.next()) {
-                        throw new SQLException("This email is already in use.");
-                    }
-                }
-            }
-
-            // check if phone number already exists
-            try (PreparedStatement checkPhoneStmt = connection.prepareStatement(checkPhoneSql)) {
-                checkPhoneStmt.setString(1, phoneNumber);
-                try (ResultSet phoneSet = checkPhoneStmt.executeQuery()) {
-                    if (phoneSet.next()) {
-                        throw new SQLException("This phone number is already in use.");
-                    }
-                }
-            }
-
-            // insert new customer
+            int newCustomerId;
             try (PreparedStatement stmt = connection.prepareStatement(sqlCustomer)) {
                 stmt.setString(1, name);
                 stmt.setString(2, surname);
@@ -56,69 +35,91 @@ public class AccountDAO {
                 stmt.setString(6, phoneNumber);
                 stmt.setInt(7, species.getSpeciesID());
 
-                try (ResultSet set = stmt.executeQuery()) {
-                    if (set.next()) {
-                        int ID = set.getInt("customerID");
-                        String sqlWallet = "INSERT INTO \"Wallet\" (customerID) VALUES (?);";
-
-                        try (PreparedStatement walletStmt = connection.prepareStatement(sqlWallet)) {
-                            walletStmt.setInt(1, ID);
-                            walletStmt.executeUpdate();
-                        }
-                        connection.commit();
-                        System.out.println("Customer account created");
-                        return true;
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (!rs.next()) {
+                        throw new SQLException("Failed to create customer: no ID returned.");
                     }
+                    newCustomerId = rs.getInt("customerID");
                 }
             }
-        } catch (SQLException exception) {
+
+            try (PreparedStatement w = connection.prepareStatement(sqlWallet)) {
+                w.setInt(1, newCustomerId);
+                w.executeUpdate();
+            }
+
+            connection.commit();
+            System.out.println("Customer account created");
+            return true;
+
+        } catch (SQLException e) {
             try {
                 connection.rollback();
-                System.err.println("Transaction rolled back due to error.");
-            } catch (SQLException rollbackException) {
-                System.err.println("Error while doing rollback: " + rollbackException.getMessage());
+            } catch (SQLException ignore) {
             }
 
-            if ("23505".equals(exception.getSQLState())) {
-                String msg = exception.getMessage();
-
-                if (msg.contains("unique_email")) {
-                    throw new SQLException("This email is already in use.");
-                } else if (msg.contains("unique_phone")) {
-                    throw new SQLException("This phone number is already in use.");
-                } else {
-                    throw new SQLException("A unique constraint was violated.");
+            if ("23505".equals(e.getSQLState())) {
+                String constraint = null;
+                if (e instanceof org.postgresql.util.PSQLException psql) {
+                    var sem = psql.getServerErrorMessage();
+                    if (sem != null) constraint = sem.getConstraint();
                 }
-            } else {
-                throw new SQLException("Customer account creation failed due to a database error.");
+
+                if ("unique_email".equals(constraint) || (e.getMessage() != null && e.getMessage().toLowerCase().contains("(email)"))) {
+                    throw new SQLException("This email is already in use.", "23505", e);
+                } else if ("unique_phone".equals(constraint) || (e.getMessage() != null && e.getMessage().toLowerCase().contains("(phone)"))) {
+                    throw new SQLException("This phone number is already in use.", "23505", e);
+                } else {
+                    throw new SQLException("A unique constraint was violated.", "23505", e);
+                }
             }
+
+            throw e;
 
         } finally {
             try {
                 connection.setAutoCommit(true);
-            } catch (SQLException e) {
-                System.err.println("Error while reactivating auto commit: " + e.getMessage());
+            } catch (SQLException ignore) {
             }
         }
-
-        return false;
     }
 
-    public boolean createManagerAccount(String name, String surname, String email, String password) {
-        String sqlManager = String.format("INSERT INTO \"Manager\" (name, surname, email, password) " +
-                "VALUES ('%s', '%s', '%s', '%s');", name, surname, email, password);
+    public boolean createManagerAccount(String name, String surname, String email, String password) throws SQLException {
+        final String sql = "INSERT INTO \"Manager\" (name, surname, email, password) VALUES (?,?,?,?)";
 
-        try (Statement stmt = connection.createStatement()) {
-            stmt.executeUpdate(sqlManager);
+        boolean oldAutoCommit = connection.getAutoCommit();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            connection.setAutoCommit(false);
+
+            ps.setString(1, name);
+            ps.setString(2, surname);
+            ps.setString(3, email);
+            ps.setString(4, password);
+
+            ps.executeUpdate();
+            connection.commit();
             System.out.println("Manager account created");
             return true;
+
         } catch (SQLException e) {
-            if (e.getMessage().contains("duplicate key value violates unique constraint")) {
-                System.err.println("This mail is already in use for a manager account.");
-            } else {
-                System.err.println("Manager account creation failed: " + e.getMessage());
+            try { connection.rollback(); } catch (SQLException ignore) {}
+
+            if ("23505".equals(e.getSQLState())) {
+                String constraint = null;
+                if (e instanceof org.postgresql.util.PSQLException psql && psql.getServerErrorMessage() != null) {
+                    constraint = psql.getServerErrorMessage().getConstraint();
+                }
+                if ("unique_manager_email".equals(constraint)
+                        || (e.getMessage() != null && e.getMessage().toLowerCase().contains("(email)"))) {
+                    throw new SQLException("This email is already in use for a manager account.", "23505", e);
+                } else {
+                    throw new SQLException("A unique constraint was violated.", "23505", e);
+                }
             }
-            return false;
+            throw e;
+
+        } finally {
+            try { connection.setAutoCommit(oldAutoCommit); } catch (SQLException ignore) {}
         }
     }
 
@@ -232,31 +233,70 @@ public class AccountDAO {
         return customer;
     }
 
-    public void updateCustomerAccount(Customer customer) throws RuntimeException {
-        String sqlUpdate = String.format("UPDATE \"Customer\" SET name = '%s', surname = '%s', email = '%s', password = '%s', phone = '%s' " +
-                        "WHERE customerID = %d", customer.getName(), customer.getSurname(), customer.getEmail(), customer.getPassword(), customer.getPhoneNumber(),
-                customer.getPersonID());
+    public Customer updateCustomerAccount(int customerid, String name, String surname,
+                                          String email, String phone, String password) throws RuntimeException {
+        String sqlUpdate = """
+        UPDATE "Customer"
+        SET name = ?, surname = ?, email = ?, password = ?, phone = ?
+        WHERE customerID = ?
+    """;
 
-        try (Statement stmt = connection.createStatement()) {
-            int affected = stmt.executeUpdate(sqlUpdate);
-            if (affected > 0) {
-                System.out.println("Customer account updated");
-            } else {
-                System.out.println("No rows were affected.");
+        try (PreparedStatement up = connection.prepareStatement(sqlUpdate)) {
+            up.setString(1, name);
+            up.setString(2, surname);
+            up.setString(3, email);
+            up.setString(4, password);
+            up.setString(5, phone);
+            up.setInt(6, customerid);
+
+            int affected = up.executeUpdate();
+            if (affected == 0) {
+                throw new RuntimeException("No rows were affected (invalid personID).");
             }
-        }catch (SQLException e){
-            System.err.println("SQL error while updating the customer : " + e.getMessage());
-            if (e.getMessage().contains("failed to connect")) {
-                throw new RuntimeException("Database is offline, please try again later.");
-            }else if("23505".equals(e.getSQLState())) {
-                if (e.getMessage().contains("unique_email")) {
-                    throw new IllegalArgumentException("Email already in use.");
-                } else if (e.getMessage().contains("unique_phone")) {
-                    throw new IllegalArgumentException("Phone number already in use.");
-                } else {
-                    throw new RuntimeException("A database error occurred.");
+
+            String sqlSelect = """
+            SELECT c.customerID, c.customerid, c.name, c.surname, c.email, c.password, c.phone, c.age,
+                   c.arcanemembership,
+                   s.speciesID, s.name AS species_name
+            FROM "Customer" c
+            LEFT JOIN "Species" s ON s.speciesID = c.speciesID
+            WHERE c.customerid = ?
+        """;
+            try (PreparedStatement sp = connection.prepareStatement(sqlSelect)) {
+                sp.setInt(1, customerid);
+                try (ResultSet rs = sp.executeQuery()) {
+                    if (!rs.next()) return null;
+
+                    Customer refreshed = new Customer(rs.getInt("customerid"));
+                    refreshed.setName(rs.getString("name"));
+                    refreshed.setSurname(rs.getString("surname"));
+                    refreshed.setEmail(rs.getString("email"));
+                    refreshed.setPassword(rs.getString("password"));
+                    refreshed.setPhoneNumber(rs.getString("phone"));
+                    refreshed.setAge(rs.getInt("age"));
+                    refreshed.setArcaneMember(rs.getBoolean("arcanemembership"));
+
+                    int speciesId = rs.getInt("speciesID");
+                    if (!rs.wasNull()) {
+                        Species spc = new Species(speciesId, rs.getString("species_name"));
+                        refreshed.setOwnSpecies(spc);
+                    }
+                    return refreshed;
                 }
             }
+
+        } catch (SQLException e) {
+            if ("23505".equals(e.getSQLState())) {
+                String msg = e.getMessage();
+                if (msg != null) {
+                    if (msg.contains("unique_email"))  throw new IllegalArgumentException("Email already in use.");
+                    if (msg.contains("unique_phone"))  throw new IllegalArgumentException("Phone number already in use.");
+                }
+            }
+            if (e.getMessage() != null && e.getMessage().contains("failed to connect")) {
+                throw new RuntimeException("Database is offline, please try again later.");
+            }
+            throw new RuntimeException("A database error occurred: " + e.getMessage());
         }
     }
 

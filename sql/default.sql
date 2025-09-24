@@ -21,7 +21,7 @@ VALUES
 INSERT INTO "Customer" (name, surname, email, password, age, arcaneMembership, phone, speciesid)
 VALUES
     ('John', 'Doe', 'john.doe@gmail.com', 'mypassword789', 30, FALSE, '1234567890', 1),
-    ('Jane', 'Roe', 'jane.roe@gmail.com', 'mypassword123', 25, FALSE, '0987654321', 2),
+    ('Jane', 'Roe', 'jane.roe@gmail.com', 'mypassword123', 25, TRUE, '0987654321', 2),
     ('Emily', 'Davis', 'emily.davis@gmail.com', 'strongpassword456', 40, FALSE, '1122334455', 3);
 
 -- Data Wallet

@@ -39,7 +39,7 @@ public class AccountManager {
         throw new IllegalArgumentException(e.getMessage()); }
     }
 
-    public boolean createManagerAccount (String name, String surname, String email, String password) throws IllegalArgumentException {
+    public boolean createManagerAccount (String name, String surname, String email, String password) throws IllegalArgumentException, SQLException {
         AccountDAO accountDAO = new AccountDAO();
         if (!Utilities.checkEmail(email))
             throw new IllegalArgumentException("Invalid email address!");
@@ -62,15 +62,16 @@ public class AccountManager {
         return accountDAO.getCustomerByID(customerID);
     }
 
-    public void updateCustomerAccount(Customer updatedCustomer) throws IllegalArgumentException{
-        if (!Utilities.checkEmail(updatedCustomer.getEmail()))
+    public Customer updateCustomerAccount(int customerID, String name, String surname,
+                                          String email, String phone, String password) throws IllegalArgumentException{
+        if (!Utilities.checkEmail(email))
             throw new IllegalArgumentException("Invalid email address!");
-        if(!Utilities.checkPassword(updatedCustomer.getPassword()))
+        if(!Utilities.checkPassword(password))
             throw new IllegalArgumentException("Password format is incorrect!");
-        if (!Utilities.checkPhone(updatedCustomer.getPhoneNumber()))
+        if (!Utilities.checkPhone(phone))
             throw new IllegalArgumentException("Invalid phone number!");
         AccountDAO accountDAO = new AccountDAO();
-        accountDAO.updateCustomerAccount(updatedCustomer);
+        return accountDAO.updateCustomerAccount(customerID, name, surname, email, phone, password);
     }
 
     public boolean updateManagerAccount (Manager updatedManager) {

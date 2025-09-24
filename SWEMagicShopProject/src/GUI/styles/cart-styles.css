@@ -179,12 +179,12 @@
     -fx-background-radius: 12;
 }
 
-.button.add-to-cart-button:hover, .add-to-cart-detailed:hover {
+.button.add-to-cart-button:hover, .add-to-cart-detailed:hover, .rejecting-button:hover, .rejecting-button-reversed:hover {
     -fx-background-color: #460E56;
     -fx-effect: dropshadow(gaussian, rgba(185, 142, 240, 0.6), 8, 0.3, 0, 2);
     -fx-cursor: hand; }
 
-.button.add-to-cart-button:pressed, .add-to-cart-detailed:pressed {
+.button.add-to-cart-button:pressed, .add-to-cart-detailed:pressed, .rejecting-button:pressed, .rejecting-button-reversed:pressed {
     -fx-background-color: #320A3E;
 
 }
@@ -218,5 +218,21 @@
     -fx-font-weight: 900;
     -fx-font-size: 30px;
     -fx-padding: 10 16 10 16;
+    -fx-background-radius: 12;
+}
+
+.rejecting-button {
+    -fx-background-color: #8b4cc7;
+    -fx-text-fill: white;
+    -fx-font-weight: 900;
+    -fx-padding: 8 14 8 14;
+    -fx-background-radius: 12;
+}
+
+.rejecting-button-reversed {
+    -fx-background-color: #460E56;
+    -fx-text-fill: white;
+    -fx-font-weight: 900;
+    -fx-padding: 8 14 8 14;
     -fx-background-radius: 12;
 }
