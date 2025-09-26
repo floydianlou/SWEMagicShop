@@ -70,8 +70,8 @@
             <VBox alignment="TOP_RIGHT">
                 <Button fx:id="edit" styleClass="choice-button" onAction="#handleEditAccount" text="Edit"/>
                 <HBox spacing="20" alignment="TOP_RIGHT">
-                    <Button fx:id="confirmEdit" styleClass="confirm-button" onAction="#editAccount" text="Confirm" visible="false"/>
-                    <Button fx:id="cancelEdit" styleClass="cancel-button" onAction="#cancelEdit" text="Cancel" visible="false"/>
+                    <Button fx:id="confirmEdit" styleClass="rejecting-button" onAction="#editAccount" text="Confirm" visible="false"/>
+                    <Button fx:id="cancelEdit" styleClass="rejecting-button-reversed" onAction="#cancelEdit" text="Cancel" visible="false"/>
                 </HBox>
             </VBox>
 

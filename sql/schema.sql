@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS "Manager" (
   surname VARCHAR(50) NOT NULL,
   email VARCHAR(80) NOT NULL,
   password VARCHAR(50) NOT NULL,
-  CONSTRAINT unique_email UNIQUE (email)
+  CONSTRAINT unique_manager_email UNIQUE (email)
   );
 
   CREATE TABLE IF NOT EXISTS "Species" (
