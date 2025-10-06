@@ -108,6 +108,30 @@ public class AccountManagerTest {
     }
 
     @Test
+    void createCustomerAccount_EmailAlreadyInUse(){
+        Exception ex = assertThrows(IllegalArgumentException.class, () ->
+                accountManager.createCustomerAccount("Test", "Customer", "example@gmail.com", "AnotherPass123!", 30, "2348952358", accountManager.getAllSpecies().get(0))
+        );
+        assertTrue(ex.getMessage().contains("This email is already in use."));
+    }
+
+    @Test
+    void createCustomerAccount_PhoneAlreadyInUse(){
+        Exception ex = assertThrows(IllegalArgumentException.class, () ->
+                accountManager.createCustomerAccount("Test", "Customer", "phone.inuse@gmail.com", "TestPass123!", 25, "4562395017", accountManager.getAllSpecies().get(0))
+                );
+        assertTrue(ex.getMessage().contains("This phone number is already in use."));
+    }
+
+    @Test
+    void createCustomerAccount_InvalidPassword(){
+        Exception ex = assertThrows(IllegalArgumentException.class, () ->
+                accountManager.createCustomerAccount("Test", "Customer", "invalid.password@gmail.com", "a#b", 25, "3452846385", accountManager.getAllSpecies().get(0))
+                );
+        assertTrue(ex.getMessage().contains("Password format is incorrect!"));
+    }
+
+    @Test
     void getAllSpecies_NotEmpty() {
         ArrayList<Species> speciesList = accountManager.getAllSpecies();
         assertNotNull(speciesList);
