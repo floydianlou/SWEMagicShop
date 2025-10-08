@@ -10,7 +10,7 @@ public class ArcaneRequestManager {
         if (customer.isArcaneMember())
             return false; // if they're already a member, no need to make a request.
         // if they have already made 5 requests or have a pending one, no need to make a request.
-        ORM.ArcaneDAO arcaneDAO = new ORM.ArcaneDAO();
+        DAO.ArcaneDAO arcaneDAO = new DAO.ArcaneDAO();
         if (arcaneDAO.canMakeArcaneRequest(customer.getPersonID())) {
             arcaneDAO.createArcaneRequest(customer.getPersonID());
         } else return false;
@@ -18,27 +18,27 @@ public class ArcaneRequestManager {
     }
 
     public int viewNumberOfArcaneRequests(int customerID) { // for customer GUI
-        ORM.ArcaneDAO arcaneDAO = new ORM.ArcaneDAO();
+        DAO.ArcaneDAO arcaneDAO = new DAO.ArcaneDAO();
         return arcaneDAO.countCustomerRequests(customerID);
     }
 
     public ArrayList<ArcaneRequest> viewRequestsByCustomer (int customerID) {
-        ORM.ArcaneDAO arcaneDAO = new ORM.ArcaneDAO();
+        DAO.ArcaneDAO arcaneDAO = new DAO.ArcaneDAO();
         return arcaneDAO.viewRequestsByCustomer(customerID);
     }
 
     public ArrayList<ArcaneRequest> viewPendingRequests() {
-        ORM.ArcaneDAO arcaneDAO = new ORM.ArcaneDAO();
+        DAO.ArcaneDAO arcaneDAO = new DAO.ArcaneDAO();
         return arcaneDAO.viewPendingRequests();
     }
 
     public ArrayList<ArcaneRequest> viewAllRequests() {
-        ORM.ArcaneDAO arcaneDAO = new ORM.ArcaneDAO();
+        DAO.ArcaneDAO arcaneDAO = new DAO.ArcaneDAO();
         return arcaneDAO.viewAllArcaneRequests();
     }
 
     public boolean approveRequest(ArcaneRequest arcaneRequest) {
-        ORM.ArcaneDAO arcaneDAO = new ORM.ArcaneDAO();
+        DAO.ArcaneDAO arcaneDAO = new DAO.ArcaneDAO();
         if (arcaneRequest == null) {
             System.out.println("There was a problem retrieving the request.");
             return false;
@@ -48,7 +48,7 @@ public class ArcaneRequestManager {
     }
 
     public boolean rejectRequest(ArcaneRequest arcaneRequest) {
-        ORM.ArcaneDAO arcaneDAO = new ORM.ArcaneDAO();
+        DAO.ArcaneDAO arcaneDAO = new DAO.ArcaneDAO();
         if (arcaneRequest == null) {
             System.out.println("There was a problem retrieving the request.");
             return false;

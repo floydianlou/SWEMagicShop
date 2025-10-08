@@ -1,6 +1,6 @@
 package BusinessLogic;
 
-import ORM.AccountDAO;
+import DAO.AccountDAO;
 import DomainModel.Customer;
 import DomainModel.Manager;
 import DomainModel.Person;

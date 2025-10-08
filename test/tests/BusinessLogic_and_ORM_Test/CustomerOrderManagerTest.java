@@ -3,7 +3,7 @@ package tests.BusinessLogic_and_ORM_Test;
 import BusinessLogic.*;
 import DomainModel.*;
 import Exceptions.OrderExceptions;
-import ORM.ConnectionManager;
+import DAO.ConnectionManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

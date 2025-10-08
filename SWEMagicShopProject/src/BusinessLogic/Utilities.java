@@ -1,7 +1,7 @@
 package BusinessLogic;
 
 import DomainModel.Species;
-import ORM.CategoryDAO;
+import DAO.CategoryDAO;
 
 import java.io.File;
 import java.time.LocalDateTime;

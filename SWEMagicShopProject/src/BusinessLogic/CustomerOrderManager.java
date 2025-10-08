@@ -1,7 +1,7 @@
 package BusinessLogic;
 
 import Exceptions.OrderExceptions;
-import ORM.OrderDAO;
+import DAO.OrderDAO;
 import DomainModel.Customer;
 import DomainModel.Item;
 import DomainModel.Order;

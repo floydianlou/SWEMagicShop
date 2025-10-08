@@ -1,13 +1,12 @@
 package BusinessLogic;
 
 import DomainModel.Item;
-import ORM.InventoryDAO;
-import ORM.AccountDAO;
+import DAO.InventoryDAO;
+import DAO.AccountDAO;
 import DomainModel.Customer;
 
 //FOR GRAPH
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 

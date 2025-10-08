@@ -1,8 +1,8 @@
 package tests.BusinessLogic_and_ORM_Test;
 
 import BusinessLogic.StoreManager;
-import ORM.ConnectionManager;
-import ORM.ItemDAO;
+import DAO.ConnectionManager;
+import DAO.ItemDAO;
 import DomainModel.Item;
 
 import org.junit.jupiter.api.AfterEach;

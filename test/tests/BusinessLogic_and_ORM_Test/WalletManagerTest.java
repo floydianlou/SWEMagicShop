@@ -3,7 +3,7 @@ package tests.BusinessLogic_and_ORM_Test;
 import BusinessLogic.WalletManager;
 import DomainModel.Customer;
 import DomainModel.Wallet;
-import ORM.WalletDAO;
+import DAO.WalletDAO;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

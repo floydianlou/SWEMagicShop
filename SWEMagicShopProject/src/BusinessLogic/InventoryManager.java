@@ -1,7 +1,7 @@
 package BusinessLogic;
 
 import Exceptions.InventoryExceptions;
-import ORM.InventoryDAO;
+import DAO.InventoryDAO;
 import DomainModel.Customer;
 import DomainModel.Item;
 import java.util.ArrayList;

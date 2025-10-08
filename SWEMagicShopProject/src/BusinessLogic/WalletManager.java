@@ -1,6 +1,6 @@
 package BusinessLogic;
 
-import ORM.WalletDAO;
+import DAO.WalletDAO;
 import DomainModel.Customer;
 import DomainModel.Wallet;
 

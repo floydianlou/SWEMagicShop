@@ -1,5 +1,4 @@
-package ORM;
-import DomainModel.*;
+package DAO;
 
 import java.sql.*;
 import java.util.ArrayList;

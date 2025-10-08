@@ -1,8 +1,8 @@
 package BusinessLogic;
 
 import DomainModel.Item;
-import ORM.CategoryDAO;
-import ORM.ItemDAO;
+import DAO.CategoryDAO;
+import DAO.ItemDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

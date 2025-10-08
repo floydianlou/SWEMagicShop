@@ -2,7 +2,7 @@ package tests.BusinessLogic_and_ORM_Test;
 
 import BusinessLogic.InventoryManager;
 import Exceptions.InventoryExceptions;
-import ORM.InventoryDAO;
+import DAO.InventoryDAO;
 import DomainModel.Customer;
 import DomainModel.Item;
 

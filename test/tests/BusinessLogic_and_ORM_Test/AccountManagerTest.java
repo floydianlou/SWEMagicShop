@@ -4,7 +4,7 @@ import BusinessLogic.AccountManager;
 import DomainModel.Customer;
 import DomainModel.Manager;
 import DomainModel.Species;
-import ORM.ConnectionManager;
+import DAO.ConnectionManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package ORM;
+package DAO;
 
 import DomainModel.Customer;
 import DomainModel.Item;

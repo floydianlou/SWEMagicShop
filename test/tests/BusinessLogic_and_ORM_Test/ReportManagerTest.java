@@ -2,8 +2,8 @@ package tests.BusinessLogic_and_ORM_Test;
 
 
 import BusinessLogic.ReportManager;
-import ORM.InventoryDAO;
-import ORM.AccountDAO;
+import DAO.InventoryDAO;
+import DAO.AccountDAO;
 import DomainModel.Customer;
 import DomainModel.Item;
 
