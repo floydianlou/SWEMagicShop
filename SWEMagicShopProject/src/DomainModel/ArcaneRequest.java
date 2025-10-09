@@ -13,12 +13,6 @@ public class ArcaneRequest {
         this.requestDate = requestDate;
     }
 
-    public ArcaneRequest (int requestID, String requestStatus, int customerID) {
-        this.customerID = customerID;
-        this.requestID = requestID;
-        this.requestStatus = requestStatus;
-    }
-
     // CUSTOMER CONSTRUCTOR
     public ArcaneRequest (int customerID) {
         this.customerID = customerID;

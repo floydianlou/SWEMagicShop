@@ -17,15 +17,6 @@ class ArcaneRequestTest {
     }
 
     @Test
-    void testConstructorWithoutCustomerName() {
-        ArcaneRequest request = new ArcaneRequest(2, "Approved", 101);
-        assertEquals(2, request.getRequestID());
-        assertEquals("Approved", request.getRequestStatus());
-        assertEquals(101, request.getCustomerID());
-        assertNull(request.getCustomerName());
-    }
-
-    @Test
     void testConstructorWithOnlyCustomerID() {
         ArcaneRequest request = new ArcaneRequest(200);
         assertEquals(200, request.getCustomerID());
