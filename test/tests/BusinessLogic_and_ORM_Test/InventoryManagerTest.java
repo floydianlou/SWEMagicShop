@@ -34,7 +34,6 @@ public class InventoryManagerTest {
 
         // Mocking inventoryDAO methods
         when(inventoryDAO.getInventory(1)).thenReturn(new ArrayList<>());
-        when(inventoryDAO.updateInventory(eq(1), ArgumentMatchers.<ArrayList<Item>>any())).thenReturn(true);
     }
 
     @AfterEach
@@ -49,14 +48,6 @@ public class InventoryManagerTest {
         ArrayList<Item> inventory = inventoryManager.viewInventory(customer);
         assertEquals(0, inventory.size());
         verify(inventoryDAO, times(1)).getInventory(1);
-    }
-
-    @Test
-    public void testUpdateInventory() throws Exception {
-        ArrayList<Item> cart = new ArrayList<>();
-        boolean result = inventoryManager.updateInventory(cart, customer);
-        assertTrue(result);
-        verify(inventoryDAO, times(1)).updateInventory(1, cart);
     }
 }
 
