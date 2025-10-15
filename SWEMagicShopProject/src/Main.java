@@ -1,4 +1,5 @@
 import BusinessLogic.CartManager;
+import DAO.ConnectionManager;
 import GUI.controller.SceneController;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -36,6 +37,7 @@ public class Main extends Application {
     @Override
     public void stop() {
         CartManager.resetInstance();
+        ConnectionManager.getInstance().closeConnection();
     }
 
     public static Stage getPrimaryStage() {
