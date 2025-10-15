@@ -24,6 +24,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
+
 public class CartController {
 
     @FXML private VBox cartContainer;
@@ -64,7 +66,17 @@ public class CartController {
             itemBox.getStyleClass().add("cart-item-box");
 
             // image view section
-            ImageView itemIcon = new ImageView(new Image(getClass().getResource(cartItem.getImagePath()).toExternalForm()));
+            ImageView itemIcon = new ImageView();
+            try {
+                File imageFile = new File("SWEMagicShopProject/src" + cartItem.getImagePath());
+                if (imageFile.exists()) {
+                    itemIcon.setImage(new Image(imageFile.toURI().toString()));
+                } else {
+                    System.err.println("Image not found: " + imageFile.getAbsolutePath());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             itemIcon.setFitWidth(100);
             itemIcon.setFitHeight(100);
             itemIcon.getStyleClass().add("cart-image");

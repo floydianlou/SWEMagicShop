@@ -24,8 +24,4 @@ public class InventoryManager {
         return inventoryDAO.getInventory(customer.getPersonID());
     }
 
-    public boolean updateInventory(ArrayList<Item> cartItems, Customer customer) throws InventoryExceptions.InventoryUpdateException {
-        return inventoryDAO.updateInventory(customer.getPersonID(), cartItems);
-    }
-
 }
