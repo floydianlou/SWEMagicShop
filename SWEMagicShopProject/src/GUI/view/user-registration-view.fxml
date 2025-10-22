@@ -107,15 +107,15 @@
             </HBox>
 
         </VBox>
-        </HBox>
+    </HBox>
 
 
-<Label fx:id="errorLabel" text=""
-       styleClass="error-label"/>
+    <Label fx:id="errorLabel" text=""
+           styleClass="error-label"/>
 
     <HBox alignment="BOTTOM_CENTER">
-    <Button text="Back to choice menu" onAction="#handleBack"
-            styleClass="back-button"/>
-</HBox>
+        <Button text="Back to choice menu" onAction="#handleBack"
+                styleClass="back-button"/>
+    </HBox>
 
-        </VBox>
+</VBox>
